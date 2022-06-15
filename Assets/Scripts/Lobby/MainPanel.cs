@@ -39,6 +39,8 @@ public class MainPanel : MonoBehaviourPunCallbacks
     private Dictionary<string, GameObject> roomListEntries;
     private Dictionary<int, GameObject> playerListEntries;
 
+    private Queue<int> playerColorList = new Queue<int>();
+
     #region UNITY
 
     private void Start()
@@ -47,8 +49,14 @@ public class MainPanel : MonoBehaviourPunCallbacks
 
         cachedRoomList = new Dictionary<string, RoomInfo>();
         roomListEntries = new Dictionary<string, GameObject>();
-
         playerNameInput.text = "Player " + Random.Range(1000, 10000);
+
+
+        for(int i =0;i < (int)YSM.PlayerColorType.COUNT;i++)
+        {
+            playerColorList.Enqueue(i);
+        }
+
     }
 
     public enum PANEL { Login, Connect, Lobby, Room, CreateRoom }
@@ -238,6 +246,12 @@ public class MainPanel : MonoBehaviourPunCallbacks
         if (playerListEntries == null)
         {
             playerListEntries = new Dictionary<int, GameObject>();
+        }
+
+        for(int i = 0; i < PhotonNetwork.PlayerList.Length; ++i )
+        {
+            if(PhotonNetwork.PlayerList[i].ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
+                Debug.Log(i);
         }
 
         foreach (Player p in PhotonNetwork.PlayerList)

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System;
 namespace YSM
 {
     //룸에서 채팅 , 귓속말, 길드채팅등 추가할 수 있으니 따로 나누었다.
@@ -27,18 +27,23 @@ namespace YSM
                 return;
             photonView.RPC("ChatMessage",
                            RpcTarget.All,
-                            PhotonNetwork.LocalPlayer.NickName,
-                           inputfield.text);
+                           PhotonNetwork.LocalPlayer.NickName,
+                           inputfield.text
+                           
+                           );
             inputfield.text = "";
         }
 
         [PunRPC]
-        public void ChatMessage(string a, string b)
+        public void ChatMessage(string a, string b,PlayerColorType colorIdx)
         {
             
             chat = string.Format("{0} : {1}", a, b);
-            text.text += "\n"+ "<color=#999922>" + chat + "</color>";
+            text.text += "\n"+ "<color=#"+ ColorTransform.EnumToTextString(colorIdx) +">" + chat + "</color>"; //채팅 색상 변경
+
             chat = "";
+
         }
+        
     }
 }
