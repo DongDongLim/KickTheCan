@@ -8,7 +8,9 @@ public class GameData : MonoBehaviour
 
     public const string PLAYER_READY = "Ready";
     public const string PLAYER_LOAD = "Load";
-    
+    // ToDo : ¹Ù²ñ
+    public const string OBJ_INDEX = "ObjIndex";
+
     public static Color GetColor(int playerNumber)
     {
         switch(playerNumber)

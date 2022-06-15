@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 // 싱글톤을 사용할때 이 클래스를 상속받게 하고 T안에 스크립트 이름을 넣어주면 됩니다
 // 처음에 빨간줄이 뜨는 이유는 OnAwake를 재정의 하지 않아서 입니다
@@ -8,7 +9,7 @@ using UnityEngine;
 // OnAwake()는 반드시 정의해야하며 여기에 사용된 내용이 Awake라고 보시면 됩니다
 // protected override void OnAwake() { 안의 내용은 비워도셔도 됩니다 }
 // 상속받은 자식만 접근이 가능하도록 protected로 만들었습니다
-public abstract class Singleton<T> : MonoBehaviour
+public abstract class Singleton<T> : MonoBehaviourPunCallbacks
 {
     private static T _instance;
     public static T instance
