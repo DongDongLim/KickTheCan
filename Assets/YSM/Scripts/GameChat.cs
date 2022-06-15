@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameChat : MonoBehaviour
+namespace YSM
 {
-    // Start is called before the first frame update
-    void Start()
+
+    enum GameChatType //게임 내에서 채팅
     {
-        
+        ALL, //전체 채팅
+        TEAM_RUNNER, //러너 채팅
+        TEAM_TAGGER, //술래 채팅
+        DEAD //죽은사람 채팅
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public class GameChat : MonoBehaviour
     {
-        
+
     }
 }
