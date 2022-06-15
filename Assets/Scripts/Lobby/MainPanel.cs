@@ -248,11 +248,7 @@ public class MainPanel : MonoBehaviourPunCallbacks
             playerListEntries = new Dictionary<int, GameObject>();
         }
 
-        for(int i = 0; i < PhotonNetwork.PlayerList.Length; ++i )
-        {
-            if(PhotonNetwork.PlayerList[i].ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
-                Debug.Log(i);
-        }
+
 
         foreach (Player p in PhotonNetwork.PlayerList)
         {

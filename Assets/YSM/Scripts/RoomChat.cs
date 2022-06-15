@@ -20,16 +20,26 @@ namespace YSM
 
 
 
-
+        [PunRPC]
         public void ClickChatMessage()
         {
+            int idx = 9999999;
+            for (int i = 0; i < PhotonNetwork.PlayerList.Length; ++i)
+            {
+                if (PhotonNetwork.PlayerList[i].ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
+                {
+                    idx = i;
+                    break;
+                }
+
+            }
             if (inputfield.text == "")
                 return;
             photonView.RPC("ChatMessage",
                            RpcTarget.All,
                            PhotonNetwork.LocalPlayer.NickName,
-                           inputfield.text
-                           
+                           inputfield.text,
+                           (PlayerColorType)idx
                            );
             inputfield.text = "";
         }
@@ -37,11 +47,29 @@ namespace YSM
         [PunRPC]
         public void ChatMessage(string a, string b,PlayerColorType colorIdx)
         {
-            
-            chat = string.Format("{0} : {1}", a, b);
+            int idx = 9999999;
+            for (int i = 0; i < PhotonNetwork.PlayerList.Length; ++i)
+            {
+                if (PhotonNetwork.PlayerList[i].ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
+                {
+                    idx = i;
+                    break;
+                }
+
+            }
+
+
+            chat = string.Format("({0}){1} : {2}",idx, a, b);
             text.text += "\n"+ "<color=#"+ ColorTransform.EnumToTextString(colorIdx) +">" + chat + "</color>"; //채팅 색상 변경
 
             chat = "";
+
+            for (int i = 0; i < PhotonNetwork.PlayerList.Length; ++i)
+            {
+                if (PhotonNetwork.PlayerList[i].ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
+                    Debug.Log(i);
+
+            }
 
         }
         
