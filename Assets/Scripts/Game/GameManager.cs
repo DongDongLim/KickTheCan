@@ -68,7 +68,14 @@ public class GameManager : MonoBehaviourPunCallbacks
         PrintInfo("Start Game!");
 
         int playerNumber = PhotonNetwork.LocalPlayer.GetPlayerNumber();
-        PhotonNetwork.Instantiate("PlayerModel", spawnPos[playerNumber].position, spawnPos[playerNumber].rotation, 0);
+        // ToDo : ¹Ù²ñ
+        if (PhotonNetwork.IsMasterClient)
+        {
+            StartCoroutine(DH.MapSettingMng.instance.Setting());
+        }
+        // ToDo : ¹Ù²ñ
+        DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
+        //PhotonNetwork.Instantiate("PlayerModel", spawnPos[playerNumber].position, spawnPos[playerNumber].rotation, 0);
     }
 
     private bool CheckAllPlayerLoadLevel()

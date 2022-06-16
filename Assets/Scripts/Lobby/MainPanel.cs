@@ -131,8 +131,8 @@ public class MainPanel : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
-
-        PhotonNetwork.LoadLevel("GameScene");
+        // ToDo : ¹Ù²ñ
+        PhotonNetwork.LoadLevel(1);
     }
 
     private void ClearRoomListView()

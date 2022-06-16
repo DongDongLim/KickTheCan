@@ -8,7 +8,7 @@ public class GameData : MonoBehaviour
 
     public const string PLAYER_READY = "Ready";
     public const string PLAYER_LOAD = "Load";
-    
+
     public static Color GetColor(int playerNumber)
     {
         switch(playerNumber)
@@ -23,5 +23,13 @@ public class GameData : MonoBehaviour
             case 7: return Color.black;
             default: return Color.grey;
         }
+    }
+}
+
+namespace DH
+{
+    public class GameData : MonoBehaviour
+    {
+        public const string PLAYER_OBJECT = "PlayerObj";
     }
 }
