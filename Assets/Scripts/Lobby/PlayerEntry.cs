@@ -15,6 +15,12 @@ public class PlayerEntry : MonoBehaviour
     private int ownerId;
     private bool isPlayerReady;
 
+    // 제가 원하는건
+    // 고유 컬러를 줘야함.
+    // 이 컬러는 겹치면 안되고 ,
+    // 나갔다 들어왔을때 문제 
+
+
     public void Start()
     {
         if (PhotonNetwork.LocalPlayer.ActorNumber != ownerId)
@@ -47,4 +53,7 @@ public class PlayerEntry : MonoBehaviour
     {
         playerReadyImage.color = playerReady ? Color.green : Color.red;
     }
+
+
+
 }
