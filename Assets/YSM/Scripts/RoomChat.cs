@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+
+
 namespace YSM
 {
     //룸에서 채팅 , 귓속말, 길드채팅등 추가할 수 있으니 따로 나누었다.
@@ -20,29 +22,47 @@ namespace YSM
 
 
 
-
         public void ClickChatMessage()
         {
+            //int idx = 9999999;
+            //for (int i = 0; i < PhotonNetwork.PlayerList.Length; ++i)
+            //{
+            //    if (PhotonNetwork.PlayerList[i].ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
+            //    {
+            //        idx = i;
+            //        break;
+            //    }
+
+            //}
             if (inputfield.text == "")
                 return;
             photonView.RPC("ChatMessage",
                            RpcTarget.All,
                            PhotonNetwork.LocalPlayer.NickName,
-                           inputfield.text
-                           
-                           );
+                           inputfield.text,
+                           YSM.YSMGameManager.instance.GetLocalPlayerNumbering()
+                           ) ;
             inputfield.text = "";
         }
 
         [PunRPC]
         public void ChatMessage(string a, string b,PlayerColorType colorIdx)
         {
-            
-            chat = string.Format("{0} : {1}", a, b);
-            text.text += "\n"+ "<color=#"+ ColorTransform.EnumToTextString(colorIdx) +">" + chat + "</color>"; //채팅 색상 변경
+            int idx = 9999999;
+            for (int i = 0; i < PhotonNetwork.PlayerList.Length; ++i)
+            {
+                if (PhotonNetwork.PlayerList[i].ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
+                {
+                    idx = i;
+                    break;
+                }
+            }
 
+
+            //chat = string.Format("{1} : {2}", a, b);
+            text.text += "\n"+ "<color=#"+ ColorTransform.EnumToTextString(colorIdx) +">" + a+ " : " + "</color>"; //채팅 색상 변경
+            text.text += b;
             chat = "";
-
         }
         
     }
