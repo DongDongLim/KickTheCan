@@ -57,6 +57,13 @@ public class GameManager : MonoBehaviourPunCallbacks
                 PrintInfo("wait players " + PlayersLoadLevel() + " / " + PhotonNetwork.PlayerList.Length);
             }
         }
+        else if (changedProps.ContainsKey(GameData.PLAYER_TAGGER))
+        {
+            // TODO : 다시확인 할것 
+            // TODO : 술래 선정이 바꼈으니 다들 술래인지 확인
+            Debug.Log(targetPlayer.NickName + " 플레이어가 술래가 바뀐걸 확인했다.");
+            player.GetComponent<PlayerController>().CheckTagger();
+        }
     }
 
     #endregion PHOTON CALLBACK
@@ -76,7 +83,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         int playerNumber = PhotonNetwork.LocalPlayer.GetPlayerNumber();      
 
-        PhotonNetwork.Instantiate("PlayerModel", spawnPos[playerNumber].position, spawnPos[playerNumber].rotation, 0);
+        player = PhotonNetwork.Instantiate("PlayerModel", spawnPos[playerNumber].position, spawnPos[playerNumber].rotation, 0);
 
         SetTagger();
     }
@@ -122,9 +129,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         Debug.Log("방장임");
         // 술래 정하기 
         // [비율] 1:3 - 술래:러너
-        // 술래 MAX : 5명
-
-        // TODO : 술래 랜덤 설정      
+        // 술래 MAX : 5명          
 
         List<int> playerList = new List<int>() { };
 
@@ -136,45 +141,43 @@ public class GameManager : MonoBehaviourPunCallbacks
         Shuffle_List(playerList);
 
         maxTagger = PhotonNetwork.PlayerList.Length / 4;
-        Debug.Log("술래 숫자 : " + maxTagger);
+        maxTagger = (int)Mathf.Clamp(maxTagger, 1, Mathf.Infinity);
 
         for (int i = 0; i < maxTagger; i++)
         {
             int taggerNumber = playerList[i];
+            Debug.Log("술래 숫자 : " + taggerNumber);
 
             foreach (Player p in PhotonNetwork.PlayerList)
             {
-               if (p.ActorNumber + 1 == taggerNumber)
+                Debug.Log("ActorNumber : " + p.ActorNumber);
+                if (p.ActorNumber == taggerNumber)
                 {
                     isTagger = true;
-                    ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { Tagger.PLAYER_TAGGER, isTagger } };
-                    PhotonNetwork.LocalPlayer.SetCustomProperties(props);
-                    Debug.Log("술래임");
-                }
-                Debug.Log("플레이어 넘버" + p.GetPlayerNumber());
+                    ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
+                    p.SetCustomProperties(props);
+                    Debug.Log("술래 : " + p.ActorNumber);
+                    break;
+                }                
             }     
         }
 
         for (int i = 0; i < playerList.Count; i++)
         {
-            Debug.Log("선택된 " + playerList[i]);
+            Debug.Log("셔플된 리스트 " + playerList[i]);
         }
     }
 
     public static void Shuffle_List<T>(List<T> list)
-    {
-        int random1;
-        int random2;
-        T tmp;
-
-        for (int index = 0; index < list.Count; ++index)
+    {     
+        int n = list.Count;
+        while (n > 1)
         {
-            random1 = UnityEngine.Random.Range(1, list.Count);
-            random2 = UnityEngine.Random.Range(1, list.Count);
-
-            tmp = list[random1];
-            list[random1] = list[random2];
-            list[random2] = tmp;
+            n--;
+            int k = UnityEngine.Random.Range(0, n + 1);
+            T value = list[k];
+            list[k] = list[n];
+            list[n] = value;
         }
     }
 
