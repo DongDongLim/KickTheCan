@@ -16,6 +16,8 @@ namespace DH
         private void Awake()
         {
             rigid = GetComponent<Rigidbody>();
+            if (photonView.IsMine)
+                CameraMng.instance.PlayerCamSetting(transform);
         }
 
         public void ControllerSetting()
