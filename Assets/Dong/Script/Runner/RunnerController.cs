@@ -5,14 +5,11 @@ using Photon.Pun;
 
 namespace DH
 {
-    public class RunnerController : Controller, IPunObservable
+    public class RunnerController : Controller
     {
         bool isFreeze = false;
         public override void ControlUpdate()
         {
-            if (Input.GetButtonDown("Fire1"))
-                OnFreezeButton();
-
             if (!isFreeze)
             {
                 move.Move();
@@ -22,22 +19,14 @@ namespace DH
 
         public void OnFreezeButton()
         {
-            isFreeze = !isFreeze;
-            rigid.isKinematic = !rigid.isKinematic;
+            Freeze();
         }
 
-        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        void Freeze()
         {
-            if (stream.IsWriting)
-            {
-                stream.SendNext(isFreeze);
-                stream.SendNext(rigid);
-            }
-            else
-            {
-                isFreeze = (bool)stream.ReceiveNext();
-                rigid = (Rigidbody)stream.ReceiveNext();
-            }
+            isFreeze = !isFreeze;
+            owner.photonView.RPC("FreezeRigid", RpcTarget.All);
         }
+
     }
 }

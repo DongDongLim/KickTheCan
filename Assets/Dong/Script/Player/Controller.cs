@@ -7,12 +7,19 @@ namespace DH
 {
     public abstract class Controller : MonoBehaviourPun
     {
-        protected PlayerScript Aowner;
+        [SerializeField]
+        protected PlayerScript owner;
+
+        [SerializeField]
         protected Rigidbody rigid;
+
+        [SerializeField]
         protected PlayerMove move;
+
+
         public void Setting(Rigidbody r)
         {
-            Aowner = GetComponent<PlayerScript>();
+            owner = GetComponent<PlayerScript>();
             move = GetComponent<PlayerMove>();
             rigid = r;
             move.Setting(rigid);

@@ -20,7 +20,6 @@ namespace DH
                 CameraMng.instance.PlayerCamSetting(transform);
         }
 
-        [PunRPC]
         public void ControllerSetting()
         {
             control = GetComponent<Controller>();
@@ -32,13 +31,13 @@ namespace DH
             if (!photonView.IsMine)
                 return;
 
-            photonView.RPC("Control", RpcTarget.All);
+            control?.ControlUpdate();
         }
 
         [PunRPC]
-        void Control()
+        public void FreezeRigid()
         {
-            control?.ControlUpdate();
+            rigid.isKinematic = !rigid.isKinematic;
         }
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

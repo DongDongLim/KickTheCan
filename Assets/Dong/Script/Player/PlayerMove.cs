@@ -6,7 +6,7 @@ namespace DH
 {
     public class PlayerMove : MonoBehaviour
     {
-        Controller Aowner;
+        Controller owner;
         Rigidbody rigid;
 
         private float hAxis = 0f;
@@ -20,7 +20,7 @@ namespace DH
 
         public void Setting(Rigidbody r)
         {
-            Aowner = GetComponent<Controller>();
+            owner = GetComponent<Controller>();
             rigid = r;
         }
 
