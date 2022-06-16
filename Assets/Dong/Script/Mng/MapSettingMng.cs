@@ -29,12 +29,21 @@ namespace DH
             }
         }
 
+        public void TaggerSetting(Player p)
+        {
+            PhotonNetwork.Instantiate
+                (DH.GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
+        }
+
         public void RunnerSetting(Player p)
         {
             randIndex = Random.Range(0, mapObj.Length);
-            PhotonNetwork.Instantiate
-                (DH.GameData.PLAYER_OBJECT, new Vector3(Random.Range(-25, 26), 10, Random.Range(-25, 26)), Quaternion.identity, 0)
-                .GetComponent<ObjScript>().SetObjIndex(randIndex);
+            GameObject playerObj = PhotonNetwork.Instantiate
+                (DH.GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
+            playerObj.GetComponent<ObjScript>().SetObjIndex(randIndex);
+            playerObj.AddComponent<RunnerController>();
+
+
         }
 
     }

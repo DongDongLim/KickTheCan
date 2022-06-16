@@ -9,7 +9,6 @@ namespace DH
     {
         public int objIndex;
 
-
         public void SetObjIndex(int index)
         {
             photonView.RPC("ChildObjCreate", RpcTarget.All, index);
