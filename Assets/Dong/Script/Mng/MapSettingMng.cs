@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
-
-using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 namespace DH
 {
     public class MapSettingMng : SingletonMini<MapSettingMng>
     {
         public GameObject[] mapObj;
+        int randIndex;
 
         protected override void OnAwake()
         {
@@ -18,8 +18,7 @@ namespace DH
         }
 
         public IEnumerator Setting()
-        {
-            int randIndex;
+        {           
             for (int i = 0; i < 100; ++i)
             {
                 randIndex = Random.Range(0, mapObj.Length);
@@ -28,6 +27,14 @@ namespace DH
                     .GetComponent<ObjScript>().SetObjIndex(randIndex);
                 yield return null;
             }
+        }
+
+        public void RunnerSetting(Player p)
+        {
+            randIndex = Random.Range(0, mapObj.Length);
+            PhotonNetwork.Instantiate
+                (DH.GameData.PLAYER_OBJECT, new Vector3(Random.Range(-25, 26), 10, Random.Range(-25, 26)), Quaternion.identity, 0)
+                .GetComponent<ObjScript>().SetObjIndex(randIndex);
         }
 
     }

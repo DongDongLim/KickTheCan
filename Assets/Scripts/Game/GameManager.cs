@@ -6,105 +6,103 @@ using Photon.Pun;
 using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
 
-namespace DH
+public class GameManager : MonoBehaviourPunCallbacks
 {
-    public class GameManager : MonoBehaviourPunCallbacks
+    public static GameManager Instance { get; private set; }
+
+    public Text infoText;
+    public Transform[] spawnPos;
+
+    private void Awake()
     {
-        public static GameManager Instance { get; private set; }
+        Instance = this;
+    }
 
-        public Text infoText;
-        public Transform[] spawnPos;
+    public void Start()
+    {
+        ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_LOAD, true } };
+        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+    }
 
-        private void Awake()
+    #region PHOTON CALLBACK
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        Debug.Log("Disconnected : " + cause.ToString());
+        SceneManager.LoadScene("LobbyScene");
+    }
+
+    public override void OnLeftRoom()
+    {
+        PhotonNetwork.Disconnect();
+    }
+
+    public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
+    {
+        if (changedProps.ContainsKey(GameData.PLAYER_LOAD))
         {
-            Instance = this;
-        }
-
-        public void Start()
-        {
-            ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_LOAD, true } };
-            PhotonNetwork.LocalPlayer.SetCustomProperties(props);
-        }
-
-        #region PHOTON CALLBACK
-
-        public override void OnDisconnected(DisconnectCause cause)
-        {
-            Debug.Log("Disconnected : " + cause.ToString());
-            SceneManager.LoadScene("LobbyScene");
-        }
-
-        public override void OnLeftRoom()
-        {
-            PhotonNetwork.Disconnect();
-        }
-
-        public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
-        {
-            if (changedProps.ContainsKey(GameData.PLAYER_LOAD))
+            if (CheckAllPlayerLoadLevel())
             {
-                if (CheckAllPlayerLoadLevel())
-                {
-                    StartCoroutine(StartCountDown());
-                }
-                else
-                {
-                    PrintInfo("wait players " + PlayersLoadLevel() + " / " + PhotonNetwork.PlayerList.Length);
-                }
+                StartCoroutine(StartCountDown());
+            }
+            else
+            {
+                PrintInfo("wait players " + PlayersLoadLevel() + " / " + PhotonNetwork.PlayerList.Length);
             }
         }
+    }
 
-        #endregion PHOTON CALLBACK
+    #endregion PHOTON CALLBACK
 
-        private IEnumerator StartCountDown()
+    private IEnumerator StartCountDown()
+    {
+        PrintInfo("All Player Loaded, Start Count Down");
+        yield return new WaitForSeconds(1.0f);
+
+        for (int i = GameData.COUNTDOWN; i > 0; i--)
         {
-            PrintInfo("All Player Loaded, Start Count Down");
+            PrintInfo("Count Down " + i);
             yield return new WaitForSeconds(1.0f);
-
-            for (int i = GameData.COUNTDOWN; i > 0; i--)
-            {
-                PrintInfo("Count Down " + i);
-                yield return new WaitForSeconds(1.0f);
-            }
-
-            PrintInfo("Start Game!");
-
-            int playerNumber = PhotonNetwork.LocalPlayer.GetPlayerNumber();
-            if (PhotonNetwork.IsMasterClient)
-            {
-                StartCoroutine(DH.MapSettingMng.instance.Setting());
-            }
-            //PhotonNetwork.Instantiate("PlayerModel", spawnPos[playerNumber].position, spawnPos[playerNumber].rotation, 0);
         }
 
-        private bool CheckAllPlayerLoadLevel()
+        PrintInfo("Start Game!");
+
+        int playerNumber = PhotonNetwork.LocalPlayer.GetPlayerNumber();
+        // ToDo : ¹Ù²ñ
+        if (PhotonNetwork.IsMasterClient)
         {
-            return PlayersLoadLevel() == PhotonNetwork.PlayerList.Length;
+            StartCoroutine(DH.MapSettingMng.instance.Setting());
         }
+        //PhotonNetwork.Instantiate("PlayerModel", spawnPos[playerNumber].position, spawnPos[playerNumber].rotation, 0);
+    }
 
-        private int PlayersLoadLevel()
+    private bool CheckAllPlayerLoadLevel()
+    {
+        return PlayersLoadLevel() == PhotonNetwork.PlayerList.Length;
+    }
+
+    private int PlayersLoadLevel()
+    {
+        int count = 0;
+        foreach (Player p in PhotonNetwork.PlayerList)
         {
-            int count = 0;
-            foreach (Player p in PhotonNetwork.PlayerList)
-            {
-                object playerLoadedLevel;
+            object playerLoadedLevel;
 
-                if (p.CustomProperties.TryGetValue(GameData.PLAYER_LOAD, out playerLoadedLevel))
+            if (p.CustomProperties.TryGetValue(GameData.PLAYER_LOAD, out playerLoadedLevel))
+            {
+                if ((bool)playerLoadedLevel)
                 {
-                    if ((bool)playerLoadedLevel)
-                    {
-                        count++;
-                    }
+                    count++;
                 }
             }
-
-            return count;
         }
 
-        private void PrintInfo(string info)
-        {
-            Debug.Log(info);
-            infoText.text = info;
-        }
+        return count;
+    }
+
+    private void PrintInfo(string info)
+    {
+        Debug.Log(info);
+        infoText.text = info;
     }
 }
