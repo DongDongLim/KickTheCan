@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using Photon.Realtime;
+
 
 public class PlayerController : MonoBehaviourPun, IPunObservable
 {
@@ -19,9 +23,11 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
 
     public GameObject missile;
     public Transform shootPos;
+    public Light light;
 
     private void Awake()
     {
+        CheckTagger();
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
     }
@@ -88,5 +94,19 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         {
             health = (float)stream.ReceiveNext();
         }
+    }
+
+    private void CheckTagger()
+    {
+        object isTagger;
+        
+        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(Tagger.PLAYER_TAGGER, out isTagger))
+        {          
+            if ((bool)isTagger)
+            {
+                light.enabled = true;
+                Debug.Log("¼ú·¡ÀÓ");
+            }
+        }    
     }
 }

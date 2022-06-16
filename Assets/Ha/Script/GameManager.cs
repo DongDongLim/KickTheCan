@@ -12,7 +12,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     public static GameManager Instance { get; private set; }
 
     public Text infoText;
-    public Transform[] spawnPos;    
+    public Transform[] spawnPos;
+
+    private bool isTagger;
 
     GameObject player;
     
@@ -76,9 +78,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         PhotonNetwork.Instantiate("PlayerModel", spawnPos[playerNumber].position, spawnPos[playerNumber].rotation, 0);
 
-        // TODO : 술래 / 러너 배정 
         SetTagger();
-
     }
 
     private bool CheckAllPlayerLoadLevel()
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         foreach (Player p in PhotonNetwork.PlayerList)
         {
             object playerLoadedLevel;
-
+            
             if (p.CustomProperties.TryGetValue(GameData.PLAYER_LOAD, out playerLoadedLevel))
             {
                 if ((bool)playerLoadedLevel)
@@ -136,6 +136,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         Shuffle_List(playerList);
 
         maxTagger = PhotonNetwork.PlayerList.Length / 4;
+        Debug.Log("술래 숫자 : " + maxTagger);
 
         for (int i = 0; i < maxTagger; i++)
         {
@@ -143,17 +144,20 @@ public class GameManager : MonoBehaviourPunCallbacks
 
             foreach (Player p in PhotonNetwork.PlayerList)
             {
-               if (p.ActorNumber == taggerNumber)
+               if (p.ActorNumber + 1 == taggerNumber)
                 {
-                    ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { Tagger.PLAYER_TAGGER, true } };
+                    isTagger = true;
+                    ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { Tagger.PLAYER_TAGGER, isTagger } };
                     PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+                    Debug.Log("술래임");
                 }
+                Debug.Log("플레이어 넘버" + p.GetPlayerNumber());
             }     
         }
 
         for (int i = 0; i < playerList.Count; i++)
         {
-            Debug.Log(playerList[i]);
+            Debug.Log("선택된 " + playerList[i]);
         }
     }
 
