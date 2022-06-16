@@ -34,12 +34,13 @@ public class MainPanel : MonoBehaviourPunCallbacks
     public Button startGameButton;
     public GameObject playerEntryPrefab;
 
+    
+
 
     private Dictionary<string, RoomInfo> cachedRoomList;
     private Dictionary<string, GameObject> roomListEntries;
     private Dictionary<int, GameObject> playerListEntries;
 
-    private Queue<int> playerColorList = new Queue<int>();
 
     #region UNITY
 
@@ -50,12 +51,6 @@ public class MainPanel : MonoBehaviourPunCallbacks
         cachedRoomList = new Dictionary<string, RoomInfo>();
         roomListEntries = new Dictionary<string, GameObject>();
         playerNameInput.text = "Player " + Random.Range(1000, 10000);
-
-
-        for(int i =0;i < (int)YSM.PlayerColorType.COUNT;i++)
-        {
-            playerColorList.Enqueue(i);
-        }
 
     }
 
