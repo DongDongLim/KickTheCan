@@ -10,6 +10,9 @@ namespace DH
         bool isFreeze = false;
         public override void ControlUpdate()
         {
+            if (Input.GetButtonDown("Fire1"))
+                OnFreezeButton();
+
             if (!isFreeze)
             {
                 move.Move();

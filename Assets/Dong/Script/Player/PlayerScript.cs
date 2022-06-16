@@ -11,7 +11,7 @@ namespace DH
         private Rigidbody rigid;
         private Animator anim;
 
-        Controller control;
+        Controller control = null;
 
         private void Awake()
         {
@@ -20,6 +20,7 @@ namespace DH
                 CameraMng.instance.PlayerCamSetting(transform);
         }
 
+        [PunRPC]
         public void ControllerSetting()
         {
             control = GetComponent<Controller>();
@@ -37,7 +38,7 @@ namespace DH
         [PunRPC]
         void Control()
         {
-            control.ControlUpdate();
+            control?.ControlUpdate();
         }
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

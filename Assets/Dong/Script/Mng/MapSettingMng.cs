@@ -40,10 +40,9 @@ namespace DH
             randIndex = Random.Range(0, mapObj.Length);
             GameObject playerObj = PhotonNetwork.Instantiate
                 (DH.GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
-            playerObj.GetComponent<ObjScript>().SetObjIndex(randIndex);
+            playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex);
             playerObj.AddComponent<RunnerController>();
-
-
+            playerObj.GetComponent<PlayerScript>().photonView.RPC("ControllerSetting", RpcTarget.All);
         }
 
     }

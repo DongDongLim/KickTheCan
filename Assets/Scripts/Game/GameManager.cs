@@ -73,6 +73,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             StartCoroutine(DH.MapSettingMng.instance.Setting());
         }
+        // ToDo : ¹Ù²ñ
+        DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
         //PhotonNetwork.Instantiate("PlayerModel", spawnPos[playerNumber].position, spawnPos[playerNumber].rotation, 0);
     }
 

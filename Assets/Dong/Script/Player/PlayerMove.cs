@@ -42,7 +42,6 @@ namespace DH
 
             if (!Input.GetButtonDown("Jump"))
                 return;
-
             rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
         }
         private void OnCollisionEnter(Collision other)
