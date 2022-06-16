@@ -74,7 +74,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         int playerNumber = PhotonNetwork.LocalPlayer.GetPlayerNumber();      
 
-        int playerNumber = PhotonNetwork.LocalPlayer.GetPlayerNumber();
         // ToDo : ¹Ù²ñ
         if (PhotonNetwork.IsMasterClient)
         {
