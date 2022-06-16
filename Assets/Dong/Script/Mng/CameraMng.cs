@@ -21,6 +21,7 @@ namespace DH
         {
             playerCam.gameObject.SetActive(true);
             playerCam.Follow = transform;
+            playerCam.LookAt = transform;
             skyCam.gameObject.SetActive(false);
         }
     }

@@ -10,6 +10,7 @@ namespace DH
     public class MapSettingMng : SingletonMini<MapSettingMng>
     {
         public GameObject[] mapObj;
+        public GameObject taggerObj;
         int randIndex;
 
         protected override void OnAwake()
@@ -31,8 +32,11 @@ namespace DH
 
         public void TaggerSetting(Player p)
         {
-            PhotonNetwork.Instantiate
+            GameObject playerObj = PhotonNetwork.Instantiate
                 (DH.GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
+            playerObj.AddComponent<TaggerController>();
+            playerObj.GetComponent<TaggerSetScript>().SetObj();
+            playerObj.GetComponent<PlayerScript>().ControllerSetting();
         }
 
         public void RunnerSetting(Player p)

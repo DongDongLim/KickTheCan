@@ -8,6 +8,8 @@ public class GameData : MonoBehaviour
 
     public const string PLAYER_READY = "Ready";
     public const string PLAYER_LOAD = "Load";
+    public const string PLAYER_TAGGER = "Tagger";
+
 
     public static Color GetColor(int playerNumber)
     {

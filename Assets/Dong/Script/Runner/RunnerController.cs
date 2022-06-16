@@ -8,18 +8,15 @@ namespace DH
     public class RunnerController : Controller
     {
         bool isFreeze = false;
-        public override void ControlUpdate()
-        {
-            if (!isFreeze)
-            {
-                move.Move();
-                move.Jump();
-            }
-        }
 
-        public void OnFreezeButton()
+        public override void ControllerAction()
         {
             Freeze();
+        }
+
+        public override void ControlUpdate()
+        {
+            move.GroundChecker();
         }
 
         void Freeze()

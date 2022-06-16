@@ -80,11 +80,15 @@ public class GameManager : MonoBehaviourPunCallbacks
             StartCoroutine(DH.MapSettingMng.instance.Setting());
         }
         // ToDo : 바뀜
-        DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
-        PhotonNetwork.Instantiate("PlayerModel", spawnPos[playerNumber].position, spawnPos[playerNumber].rotation, 0);
+
+        if (PhotonNetwork.IsMasterClient)
+            DH.MapSettingMng.instance.TaggerSetting(PhotonNetwork.LocalPlayer);
+        else
+            DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
+        //PhotonNetwork.Instantiate("PlayerModel", spawnPos[playerNumber].position, spawnPos[playerNumber].rotation, 0);
 
         // TODO : 술래 / 러너 배정 
-        SetTagger();
+        // SetTagger();
     }
 
     private bool CheckAllPlayerLoadLevel()
@@ -151,7 +155,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                if (p.ActorNumber == taggerNumber)
                 {
-                    ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { Tagger.PLAYER_TAGGER, true } };
+                    ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_TAGGER, true } };
                     PhotonNetwork.LocalPlayer.SetCustomProperties(props);
                 }
             }     

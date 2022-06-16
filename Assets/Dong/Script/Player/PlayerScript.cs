@@ -17,7 +17,7 @@ namespace DH
         {
             rigid = GetComponent<Rigidbody>();
             if (photonView.IsMine)
-                CameraMng.instance.PlayerCamSetting(transform);
+                CameraMng.instance.PlayerCamSetting(transform.GetChild(0));
         }
 
         public void ControllerSetting()

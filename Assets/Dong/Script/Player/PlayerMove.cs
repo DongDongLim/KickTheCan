@@ -7,56 +7,112 @@ namespace DH
     public class PlayerMove : MonoBehaviour
     {
         Controller owner;
-        Rigidbody rigid;
 
-        private float hAxis = 0f;
-        private float vAxis = 0f;
-        private float moveSpeed = 5f;
-        private float jumpPower = 5f;
-        private Vector3 moveVec;    // 플레이어 움직이는 방향
+        [SerializeField]
+        private Transform cameraArm;
 
-        private bool isGrounded;                // 땅에 서있는지 체크하기 위한 bool값
-        public float groundDistance = 0.5f;		// Ray를 쏴서 검사하는 거리
+        [SerializeField]
+        private Transform charactorBody;
 
-        public void Setting(Rigidbody r)
+        // 컴포넌트
+        private Animator animator;
+        private Rigidbody rigid;
+
+        // 이동
+        private Vector2 moveInput;
+        private bool isMove;
+        public float moveSpeed;
+
+        // 점프
+        private bool isJump;
+        public float jumpPower;
+
+        // 카메라 이동
+        public float rotateSpeed;
+
+
+        public void Setting(Rigidbody r, Animator anim)
         {
+            UIMng.instance.jumpAction += Jump;
             owner = GetComponent<Controller>();
+            cameraArm = transform.GetChild(0).transform;
+            charactorBody = transform.GetChild(1).transform;
+            animator = anim;
             rigid = r;
         }
 
-        public void Move()
+        public void Move(Vector2 inputDirection)
         {
-            hAxis = Input.GetAxis("Horizontal");
-            vAxis = Input.GetAxis("Vertical");
+            moveInput = inputDirection;
+            isMove = moveInput.magnitude != 0;
 
-            moveVec = new Vector3(hAxis, 0, vAxis).normalized;
-            transform.LookAt(transform.position + moveVec);
+            Vector3 lookForward = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
+            Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
+            Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
 
-            transform.position += moveVec * moveSpeed * Time.deltaTime;
+            animator?.SetBool("isMove", isMove);
+
+            if (!isMove)
+                return;
+
+            charactorBody.forward = moveDir;
+            rigid.MovePosition(transform.position + moveDir * Time.deltaTime * moveSpeed);
+        }
+        public void LookAround(Vector2 inputDirection)
+        {
+            // 마우스 이동 값 검출
+            Vector2 mouseDelta = inputDirection * rotateSpeed;
+            // 카메라의 원래 각도를 오일러 각으로 저장
+            Vector3 camAngle = cameraArm.rotation.eulerAngles;
+            // 카메라의 피치 값 계산
+            float x = camAngle.x - mouseDelta.y;
+
+            // 카메라 피치 값을 위쪽으로 70도 아래쪽으로 25도 이상 움직이지 못하게 제한
+            if (x < 180f)
+            {
+                x = Mathf.Clamp(x, -1f, 70f);
+            }
+            else
+            {
+                x = Mathf.Clamp(x, 335f, 361f);
+            }
+
+            // 카메라 암 회전 시키기
+            cameraArm.rotation = Quaternion.Euler(x, camAngle.y + mouseDelta.x, camAngle.z);
         }
 
         public void Jump()
         {
-            if (!isGrounded)
+            //if (!Input.GetButtonDown("Jump"))
+            //    return;
+
+            if (isJump)
                 return;
 
-            if (!Input.GetButtonDown("Jump"))
-                return;
             rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-        }
-        private void OnCollisionEnter(Collision other)
-        {
-            if (other.gameObject.tag == "Ground")
-            {
-                isGrounded = true;
-            }
+
+            animator?.SetBool("isMove", false);
+
+            isJump = true;
+            animator?.SetBool("isJump", isJump);
         }
 
-        private void OnCollisionExit(Collision other)
+
+        public void GroundChecker()
         {
-            if (other.gameObject.tag == "Ground")
+            // ToDo : 레이캐스트박스나 스페어
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, 1f, LayerMask.GetMask("Ground")))
             {
-                isGrounded = false;
+                isJump = false;
+                animator?.SetBool("isJump", isJump);
+            }
+            else
+            {
+                animator?.SetBool("isMove", false);
+
+                isJump = true;
+                animator?.SetBool("isJump", isJump);
             }
         }
     }
