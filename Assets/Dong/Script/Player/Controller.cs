@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 namespace DH
 {
-    public abstract class Controller : MonoBehaviour
+    public abstract class Controller : MonoBehaviourPun
     {
         protected PlayerScript Aowner;
         protected Rigidbody rigid;
@@ -18,5 +19,6 @@ namespace DH
         }
 
         public abstract void ControlUpdate();
+
     }
 }
