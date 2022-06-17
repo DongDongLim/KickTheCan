@@ -85,21 +85,20 @@ public class GameManager : MonoBehaviourPunCallbacks
         int playerNumber = PhotonNetwork.LocalPlayer.GetPlayerNumber();      
 
         player = PhotonNetwork.Instantiate("PlayerModel", spawnPos[playerNumber].position, spawnPos[playerNumber].rotation, 0);
-       
-        // ToDo : �ٲ�
+              
         if (PhotonNetwork.IsMasterClient)
         {
             StartCoroutine(DH.MapSettingMng.instance.Setting());
-        }
-        // ToDo : �ٲ�
+        }       
 
         if (PhotonNetwork.IsMasterClient)
             DH.MapSettingMng.instance.TaggerSetting(PhotonNetwork.LocalPlayer);
         else
             DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
+        
         //PhotonNetwork.Instantiate("PlayerModel", spawnPos[playerNumber].position, spawnPos[playerNumber].rotation, 0);
 
-        // TODO : ���� / ���� ���� 
+        // TODO : ���� / ���� ����
         // SetTagger();
 
     }
@@ -142,10 +141,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             return;
         }
 
-        Debug.Log("������");
-        // ���� ���ϱ� 
-        // [����] 1:3 - ����:����
-        // ���� MAX : 5��          
+        Debug.Log("������");              
 
         List<int> playerList = new List<int>() { };
 

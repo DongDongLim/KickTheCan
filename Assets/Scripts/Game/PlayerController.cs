@@ -29,8 +29,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
 
 
     private void Awake()
-    {
-        CheckTagger();
+    {        
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         targetPlayer = photonView.Owner;
