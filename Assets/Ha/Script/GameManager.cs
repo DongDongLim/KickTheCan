@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             if (CheckAllPlayerLoadLevel())
             {
+                SetTagger();      
                 StartCoroutine(StartCountDown());
             }
             else
@@ -59,11 +60,10 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
         else if (changedProps.ContainsKey(GameData.PLAYER_TAGGER))
         {
-            // TODO : �ٽ�Ȯ�� �Ұ� 
-            // TODO : ���� ������ �ٲ����� �ٵ� �������� Ȯ��
-            Debug.Log(targetPlayer.NickName + " �÷��̾ ������ �ٲ�� Ȯ���ߴ�.");
-            //player.GetComponent<PlayerController>().CheckTagger();
+            // TODO : 배정 체크
             CheckTagger();
+            // TODO : 플레이어 전부 생성
+            CreatePlayer();
         }
     }
 
@@ -82,25 +82,17 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         PrintInfo("Start Game!");  
 
-        int playerNumber = PhotonNetwork.LocalPlayer.GetPlayerNumber();      
+        int playerNumber = PhotonNetwork.LocalPlayer.GetPlayerNumber();
 
-        player = PhotonNetwork.Instantiate("PlayerModel", spawnPos[playerNumber].position, spawnPos[playerNumber].rotation, 0);
-              
+        //player = PhotonNetwork.Instantiate("PlayerModel", spawnPos[playerNumber].position, spawnPos[playerNumber].rotation, 0);
+        //PhotonNetwork.Instantiate("PlayerModel", spawnPos[playerNumber].position, spawnPos[playerNumber].rotation, 0);
+
         if (PhotonNetwork.IsMasterClient)
         {
             StartCoroutine(DH.MapSettingMng.instance.Setting());
-        }       
+        }
 
-        if (PhotonNetwork.IsMasterClient)
-            DH.MapSettingMng.instance.TaggerSetting(PhotonNetwork.LocalPlayer);
-        else
-            DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
-        
-        //PhotonNetwork.Instantiate("PlayerModel", spawnPos[playerNumber].position, spawnPos[playerNumber].rotation, 0);
-
-        // TODO : ���� / ���� ����
-        // SetTagger();
-
+        CreatePlayer();       
     }
 
     private bool CheckAllPlayerLoadLevel()
@@ -133,15 +125,25 @@ public class GameManager : MonoBehaviourPunCallbacks
         infoText.text = info;
     }
 
+    public static void Shuffle_List<T>(List<T> list)
+    {     
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = UnityEngine.Random.Range(0, n + 1);
+            T value = list[k];
+            list[k] = list[n];
+            list[n] = value;
+        }
+    }
+
     private void SetTagger()
     {
         if (!PhotonNetwork.IsMasterClient)
         {
-            Debug.Log("���� �ƴ�");
             return;
         }
-
-        Debug.Log("������");              
 
         List<int> playerList = new List<int>() { };
 
@@ -154,43 +156,40 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         maxTagger = PhotonNetwork.PlayerList.Length / 4;
         maxTagger = (int)Mathf.Clamp(maxTagger, 1, Mathf.Infinity);
+        // TODO : 3명 이하면 host가 술래
 
         for (int i = 0; i < maxTagger; i++)
         {
             int taggerNumber = playerList[i];
-            Debug.Log("���� ���� : " + taggerNumber);
 
             foreach (Player p in PhotonNetwork.PlayerList)
-            {               
-                Debug.Log("ActorNumber : " + p.ActorNumber);
+            {
                 if (p.ActorNumber == taggerNumber)
                 {
                     isTagger = true;
                     ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
-                    p.SetCustomProperties(props);
-                    Debug.Log("���� : " + p.ActorNumber);
-                    break;
-                }                
-
-            }     
-        }
-
-        for (int i = 0; i < playerList.Count; i++)
-        {
-            Debug.Log("���õ� ����Ʈ " + playerList[i]);
+                    p.SetCustomProperties(props);                 
+                    Debug.Log("술래 설정");
+                }
+                else
+                {                    
+                    Debug.Log("러너 설정");
+                }
+            }
         }
     }
 
-    public static void Shuffle_List<T>(List<T> list)
-    {     
-        int n = list.Count;
-        while (n > 1)
+    private void CreatePlayer()
+    {
+        // TODO : 술래 생성        
+        if (PhotonNetwork.IsMasterClient)
         {
-            n--;
-            int k = UnityEngine.Random.Range(0, n + 1);
-            T value = list[k];
-            list[k] = list[n];
-            list[n] = value;
+            DH.MapSettingMng.instance.TaggerSetting(PhotonNetwork.LocalPlayer);
+        }
+        // TODO : 러너 생성
+        else if ()
+        {
+            DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
         }
     }
 
