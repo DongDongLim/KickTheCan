@@ -31,6 +31,9 @@ namespace DH
         public float rotateSpeed;
 
 
+        Vector3 rayStatePos;
+
+
         public void Setting(Rigidbody r, Animator anim)
         {
             UIMng.instance.jumpAction += Jump;
@@ -101,8 +104,9 @@ namespace DH
         public void GroundChecker()
         {
             // ToDo : 레이캐스트박스나 스페어
+            rayStatePos = new Vector3(transform.position.x, transform.position.y - (charactorBody.GetComponent<Collider>().bounds.size.y * 0.5f), transform.position.z);
             RaycastHit hit;
-            if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, 1f, LayerMask.GetMask("Ground")))
+            if (Physics.Raycast(rayStatePos + (Vector3.up * 1.5f), Vector3.down, out hit, 1.5f, LayerMask.GetMask("Ground")))
             {
                 isJump = false;
                 animator?.SetBool("isJump", isJump);
@@ -114,6 +118,7 @@ namespace DH
                 isJump = true;
                 animator?.SetBool("isJump", isJump);
             }
+            Debug.DrawRay(rayStatePos + Vector3.up, Vector3.down * 1.2f, Color.red, 1f);
         }
     }
 }
