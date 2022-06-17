@@ -62,7 +62,8 @@ public class GameManager : MonoBehaviourPunCallbacks
             // TODO : 다시확인 할것 
             // TODO : 술래 선정이 바꼈으니 다들 술래인지 확인
             Debug.Log(targetPlayer.NickName + " 플레이어가 술래가 바뀐걸 확인했다.");
-            player.GetComponent<PlayerController>().CheckTagger();
+            //player.GetComponent<PlayerController>().CheckTagger();
+            CheckTagger();
         }
     }
 
@@ -149,7 +150,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             Debug.Log("술래 숫자 : " + taggerNumber);
 
             foreach (Player p in PhotonNetwork.PlayerList)
-            {
+            {               
                 Debug.Log("ActorNumber : " + p.ActorNumber);
                 if (p.ActorNumber == taggerNumber)
                 {
@@ -181,4 +182,23 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
     }
 
+    private void CheckTagger()
+    {
+        object isTagger;
+
+        GameObject[] bots = GameObject.FindGameObjectsWithTag("Player");
+        foreach(GameObject bot in bots)
+        {
+            PlayerController controller = bot.GetComponent<PlayerController>();
+            PhotonView pv = controller.GetComponent<PhotonView>();
+
+            if (pv.Owner.CustomProperties.TryGetValue(GameData.PLAYER_TAGGER, out isTagger))
+            {
+                if ((bool)isTagger)
+                {
+                    controller.light.SetActive(true);
+                }
+            }
+        }            
+    }
 }
