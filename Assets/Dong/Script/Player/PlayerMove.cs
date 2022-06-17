@@ -33,12 +33,15 @@ namespace DH
 
         Vector3 rayStatePos;
 
+        private void Start()
+        {
+            cameraArm = transform.GetChild(0).transform;
+        }
 
         public void Setting(Rigidbody r, Animator anim)
         {
             UIMng.instance.jumpAction += Jump;
             owner = GetComponent<Controller>();
-            cameraArm = transform.GetChild(0).transform;
             charactorBody = transform.GetChild(1).transform;
             animator = anim;
             rigid = r;

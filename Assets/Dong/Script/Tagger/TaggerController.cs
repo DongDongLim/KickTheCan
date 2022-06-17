@@ -12,22 +12,10 @@ namespace DH
             move.GroundChecker();
         }
 
-        public void Attack()
-        {
-            attackColl?.SetActive(true);
-            animator?.SetTrigger("isAttack");
-            StartCoroutine("AttackEnd");
-        }
-
-        IEnumerator AttackEnd()
-        {
-            yield return new WaitForSeconds(0.1f);
-            attackColl?.SetActive(false);
-        }
 
         public override void ControllerAction()
         {
-            Attack();
+            //Attack();
         }
     }
 }

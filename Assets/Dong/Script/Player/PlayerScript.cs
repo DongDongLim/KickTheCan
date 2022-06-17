@@ -13,11 +13,17 @@ namespace DH
 
         Controller control = null;
 
+        [SerializeField]
+        protected Animator animator;
+
+        [SerializeField]
+        protected GameObject attackColl;
+
         private void Awake()
         {
             rigid = GetComponent<Rigidbody>();
             if (photonView.IsMine)
-                CameraMng.instance.PlayerCamSetting(transform.GetChild(0));
+                CameraMng.instance.PlayerCamSetting(transform.GetChild(0).gameObject);
         }
 
         public void ControllerSetting()
@@ -38,6 +44,22 @@ namespace DH
         public void FreezeRigid()
         {
             rigid.isKinematic = !rigid.isKinematic;
+        }
+
+
+        [PunRPC]
+        public void Attack()
+        {
+            attackColl?.SetActive(true);
+            animator?.SetTrigger("isAttack");
+            StartCoroutine("AttackEnd");
+        }
+
+        [PunRPC]
+        IEnumerator AttackEnd()
+        {
+            yield return new WaitForSeconds(0.1f);
+            attackColl?.SetActive(false);
         }
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

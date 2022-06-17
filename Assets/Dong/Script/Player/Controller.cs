@@ -16,11 +16,6 @@ namespace DH
         [SerializeField]
         protected PlayerMove move;
 
-        [SerializeField]
-        protected Animator animator;
-
-        [SerializeField]
-        protected GameObject attackColl;
 
         public void Setting(Rigidbody r)
         {
