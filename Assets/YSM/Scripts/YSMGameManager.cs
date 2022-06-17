@@ -15,7 +15,6 @@ namespace YSM
 
         static public YSMGameManager instance { get; private set; }
         public PlayerNumbering playerNumber;
-        
 
         private void Awake()
         {

@@ -58,7 +58,7 @@ public class PlayerEntry : MonoBehaviour
     /// <param name="playerReady"></param>
     public void SetPlayerReady(bool playerReady)
     {
-        playerReadyImage.color = playerReady ?  Color.red: Color.green ;
+        playerReadyImage.color = playerReady ? Color.green : Color.red;
     }
 
 }
