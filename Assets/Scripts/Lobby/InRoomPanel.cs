@@ -4,6 +4,7 @@ using Photon.Pun;
 using System.Collections.Generic;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
+using Photon.Pun.UtilityScripts;
 
 public class InRoomPanel : MonoBehaviour
 {
@@ -13,8 +14,14 @@ public class InRoomPanel : MonoBehaviour
 
     private Dictionary<int, GameObject> playerListEntries;
 
+    private PlayerNumbering playerNumber;
+
+    /// <summary>
+    /// YSM : 2022.06.16 플레이어 입장시 컬러 색상 변경을 위해 수정함
+    /// </summary>
     private void OnEnable()
     {
+        
         if (playerListEntries == null)
         {
             playerListEntries = new Dictionary<int, GameObject>();
@@ -23,6 +30,10 @@ public class InRoomPanel : MonoBehaviour
         foreach (Player p in PhotonNetwork.PlayerList)
         {
             GameObject entry = Instantiate(playerEntryPrefab);
+
+            Image image = entry.GetComponent<Image>(); //ysm
+            image.color = YSM.ColorTransform.EnumToColor(YSM.YSMGameManager.instance.GetPlayerNumberingToEnum(p)); //ysm
+
             entry.transform.SetParent(playerListContent.transform);
             entry.transform.localScale = Vector3.one;
             entry.GetComponent<PlayerEntry>().Initialize(p.ActorNumber, p.NickName);
@@ -43,6 +54,10 @@ public class InRoomPanel : MonoBehaviour
             {GameData.PLAYER_LOAD, false}
         };
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+        playerNumber = GetComponent<PlayerNumbering>();
+
+        PlayerNumbering.OnPlayerNumberingChanged += DetectPlayerNumberringChanged;
+
     }
 
     private void OnDisable()
@@ -54,6 +69,8 @@ public class InRoomPanel : MonoBehaviour
 
         playerListEntries.Clear();
         playerListEntries = null;
+
+        PlayerNumbering.OnPlayerNumberingChanged -= DetectPlayerNumberringChanged;
     }
 
     public void OnLeaveRoomClicked()
@@ -65,8 +82,8 @@ public class InRoomPanel : MonoBehaviour
     {
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
-
-        PhotonNetwork.LoadLevel("GameScene");
+        // ToDo : 바뀜
+        PhotonNetwork.LoadLevel(1);
     }
 
     private bool CheckPlayersReady()
@@ -100,15 +117,16 @@ public class InRoomPanel : MonoBehaviour
         startGameButton.gameObject.SetActive(CheckPlayersReady());
     }
 
+    /// <summary>
+    /// YSM : 2022.06.16 플레이어 입장시 컬러 색상 변경을 위해 수정함
+    /// </summary>
     public void OnPlayerEnteredRoom(Player newPlayer)
     {
         GameObject entry = Instantiate(playerEntryPrefab);
         entry.transform.SetParent(playerListContent.transform);
         entry.transform.localScale = Vector3.one;
         entry.GetComponent<PlayerEntry>().Initialize(newPlayer.ActorNumber, newPlayer.NickName);
-
         playerListEntries.Add(newPlayer.ActorNumber, entry);
-
         startGameButton.gameObject.SetActive(CheckPlayersReady());
     }
 
@@ -116,7 +134,6 @@ public class InRoomPanel : MonoBehaviour
     {
         Destroy(playerListEntries[otherPlayer.ActorNumber].gameObject);
         playerListEntries.Remove(otherPlayer.ActorNumber);
-
         startGameButton.gameObject.SetActive(CheckPlayersReady());
     }
 
@@ -147,4 +164,33 @@ public class InRoomPanel : MonoBehaviour
 
         startGameButton.gameObject.SetActive(CheckPlayersReady());
     }
+
+    public void DetectPlayerNumberringChanged()
+    {
+        //PlayerEntry[] etries = playerListContent.GetComponentsInChildren<PlayerEntry>();
+
+        //foreach(PlayerEntry entry in etries)
+        //{
+        //    entry.RefreshColor();
+        //}
+
+        /*int i = 0;
+        foreach (GameObject entry in playerListEntries.Values)
+        {
+
+            PhotonNetwork.PlayerList[i].GetPlayerNumber();
+        }*/
+
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            GameObject entry;
+            if (playerListEntries.TryGetValue(player.ActorNumber, out entry))
+            {
+                Image image = entry.GetComponent<Image>();
+                image.color = YSM.ColorTransform.EnumToColor((YSM.PlayerColorType)player.GetPlayerNumber());
+            }
+        }
+    }
 }
+
+

@@ -26,3 +26,11 @@ public class GameData : MonoBehaviour
         }
     }
 }
+
+namespace DH
+{
+    public class GameData : MonoBehaviour
+    {
+        public const string PLAYER_OBJECT = "PlayerObj";
+    }
+}

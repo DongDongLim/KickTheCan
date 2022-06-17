@@ -11,9 +11,16 @@ public class PlayerEntry : MonoBehaviour
     public Text playerNameText;
     public Button playerReadyButton;
     public Image playerReadyImage;
-
+    public Image playerFace;
+    public Image playerColor;
     private int ownerId;
     private bool isPlayerReady;
+
+    // 제가 원하는건
+    // 고유 컬러를 줘야함.
+    // 이 컬러는 겹치면 안되고 ,
+    // 나갔다 들어왔을때 문제 
+
 
     public void Start()
     {
@@ -43,8 +50,15 @@ public class PlayerEntry : MonoBehaviour
         playerNameText.text = playerName;
     }
 
+
+    /// <summary>
+    /// YSM 2022.06.16
+    /// Player 준비하고 해제했을 때 색상변경 
+    /// </summary>
+    /// <param name="playerReady"></param>
     public void SetPlayerReady(bool playerReady)
     {
-        playerReadyImage.color = playerReady ? Color.green : Color.red;
+        playerReadyImage.color = playerReady ?  Color.red: Color.green ;
     }
+
 }

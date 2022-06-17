@@ -34,10 +34,13 @@ public class MainPanel : MonoBehaviourPunCallbacks
     public Button startGameButton;
     public GameObject playerEntryPrefab;
 
+    
+
 
     private Dictionary<string, RoomInfo> cachedRoomList;
     private Dictionary<string, GameObject> roomListEntries;
     private Dictionary<int, GameObject> playerListEntries;
+
 
     #region UNITY
 
@@ -47,8 +50,8 @@ public class MainPanel : MonoBehaviourPunCallbacks
 
         cachedRoomList = new Dictionary<string, RoomInfo>();
         roomListEntries = new Dictionary<string, GameObject>();
-
         playerNameInput.text = "Player " + Random.Range(1000, 10000);
+
     }
 
     public enum PANEL { Login, Connect, Lobby, Room, CreateRoom }
@@ -131,8 +134,8 @@ public class MainPanel : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
-
-        PhotonNetwork.LoadLevel("GameScene");
+        // ToDo : ¹Ù²ñ
+        PhotonNetwork.LoadLevel(1);
     }
 
     private void ClearRoomListView()
@@ -239,6 +242,8 @@ public class MainPanel : MonoBehaviourPunCallbacks
         {
             playerListEntries = new Dictionary<int, GameObject>();
         }
+
+
 
         foreach (Player p in PhotonNetwork.PlayerList)
         {
