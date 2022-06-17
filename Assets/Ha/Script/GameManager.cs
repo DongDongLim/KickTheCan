@@ -74,20 +74,20 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         int playerNumber = PhotonNetwork.LocalPlayer.GetPlayerNumber();      
 
-        // ToDo : ¹Ù²ñ
+        // ToDo : ï¿½Ù²ï¿½
         if (PhotonNetwork.IsMasterClient)
         {
-            StartCoroutine(DH.MapSettingMng.instance.Setting());
+            StartCoroutine(KSB.MapSettingMng.instance.Setting());
         }
-        // ToDo : ¹Ù²ñ
+        // ToDo : ï¿½Ù²ï¿½
 
         if (PhotonNetwork.IsMasterClient)
-            DH.MapSettingMng.instance.TaggerSetting(PhotonNetwork.LocalPlayer);
+            KSB.MapSettingMng.instance.TaggerSetting(PhotonNetwork.LocalPlayer);
         else
-            DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
+            KSB.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
         //PhotonNetwork.Instantiate("PlayerModel", spawnPos[playerNumber].position, spawnPos[playerNumber].rotation, 0);
 
-        // TODO : ¼ú·¡ / ·¯³Ê ¹èÁ¤ 
+        // TODO : ï¿½ï¿½ï¿½ï¿½ / ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
         // SetTagger();
     }
 
@@ -125,16 +125,16 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         if (!PhotonNetwork.IsMasterClient)
         {
-            Debug.Log("¹æÀå ¾Æ´Ô");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½");
             return;
         }
 
-        Debug.Log("¹æÀåÀÓ");
-        // ¼ú·¡ Á¤ÇÏ±â 
-        // [ºñÀ²] 1:3 - ¼ú·¡:·¯³Ê
-        // ¼ú·¡ MAX : 5¸í
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½ 
+        // [ï¿½ï¿½ï¿½ï¿½] 1:3 - ï¿½ï¿½ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½
+        // ï¿½ï¿½ï¿½ï¿½ MAX : 5ï¿½ï¿½
 
-        // TODO : ¼ú·¡ ·£´ý ¼³Á¤      
+        // TODO : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½      
 
         List<int> playerList = new List<int>() { };
 
