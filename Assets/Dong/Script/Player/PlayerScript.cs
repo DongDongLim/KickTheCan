@@ -14,10 +14,7 @@ namespace DH
         Controller control = null;
 
         [SerializeField]
-        protected Animator animator;
-
-        [SerializeField]
-        protected GameObject attackColl;
+        GameObject attackColl;
 
         private void Awake()
         {
@@ -26,10 +23,16 @@ namespace DH
                 CameraMng.instance.PlayerCamSetting(transform.GetChild(0).gameObject);
         }
 
+        private void Start()
+        {
+            anim = transform.GetChild(1).GetComponent<Animator>() == null ? null : transform.GetChild(1).GetComponent<Animator>();
+            attackColl = transform.GetChild(1).childCount > 0 ? transform.GetChild(1).GetChild(0).gameObject : null;
+        }
+
         public void ControllerSetting()
         {
             control = GetComponent<Controller>();
-            control.Setting(rigid);
+            control.Setting(rigid, anim);
         }
 
         private void Update()
@@ -51,7 +54,7 @@ namespace DH
         public void Attack()
         {
             attackColl?.SetActive(true);
-            animator?.SetTrigger("isAttack");
+            anim?.SetTrigger("isAttack");
             StartCoroutine("AttackEnd");
         }
 

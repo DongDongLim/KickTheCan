@@ -17,13 +17,11 @@ namespace DH
         protected PlayerMove move;
 
 
-        public void Setting(Rigidbody r)
+        public void Setting(Rigidbody r, Animator animator)
         {
             owner = GetComponent<PlayerScript>();
             move = GetComponent<PlayerMove>();
             rigid = r;
-            animator = transform.GetChild(1).GetComponent<Animator>() == null ? null : transform.GetChild(1).GetComponent<Animator>();
-            attackColl = transform.GetChild(1).childCount > 0 ? transform.GetChild(1).GetChild(0).gameObject : null;
             move.Setting(rigid, animator);
             UIMng.instance.SetMoveUI(move);
             UIMng.instance.actionAction += ControllerAction;

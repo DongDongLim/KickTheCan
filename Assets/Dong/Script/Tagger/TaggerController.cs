@@ -15,7 +15,7 @@ namespace DH
 
         public override void ControllerAction()
         {
-            //Attack();
+            owner.photonView.RPC("Attack", RpcTarget.All);
         }
     }
 }
