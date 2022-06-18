@@ -259,7 +259,9 @@ public class MainPanel : MonoBehaviourPunCallbacks
             object isPlayerReady;
             if (p.CustomProperties.TryGetValue(GameData.PLAYER_READY, out isPlayerReady))
             {
-                entry.GetComponent<PlayerEntry>().SetPlayerReady((bool)isPlayerReady);
+
+                    entry.GetComponent<PlayerEntry>().SetPlayerReady((bool)isPlayerReady);
+                
             }
 
             playerListEntries.Add(p.ActorNumber, entry);

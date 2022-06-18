@@ -12,6 +12,9 @@ public class RoomEntry : MonoBehaviour
 
     private string roomName;
 
+
+
+
     public void Initialize(string name, byte currentPlayers, byte maxPlayers)
     {
         roomName = name;

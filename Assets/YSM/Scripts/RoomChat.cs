@@ -21,10 +21,12 @@ namespace YSM
     {
         [SerializeField] InputField inputfield; // 입력 텍스트
         [SerializeField] private Text text;     // 게임에 보여줄 텍스트
-        [SerializeField] GameObject chatPrefab;
 
 
-
+        private void OnEnable()
+        {
+            text.text = "";
+        }
 
         public void ClickChatMessage()
         {
