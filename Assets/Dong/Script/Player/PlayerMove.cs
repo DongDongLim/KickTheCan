@@ -48,7 +48,8 @@ namespace DH
 
         private void OnDestroy()
         {
-            UIMng.instance.jumpAction -= Jump;
+            if (UIMng.instance != null)
+                UIMng.instance.jumpAction -= Jump;
         }
 
         public void Move(Vector2 inputDirection)

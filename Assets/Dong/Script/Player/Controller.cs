@@ -29,7 +29,8 @@ namespace DH
 
         private void OnDestroy()
         {
-            UIMng.instance.actionAction -= ControllerAction;
+            if (UIMng.instance != null)
+                UIMng.instance.actionAction -= ControllerAction;
         }
 
         public abstract void ControlUpdate();
