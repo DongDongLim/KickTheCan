@@ -22,6 +22,7 @@ namespace DH
         public void Damaged()
         {
             CameraMng.instance.SwitchCam();
+            PlayMng.instance.BeCaught(gameObject);
         }
 
         void Freeze()
