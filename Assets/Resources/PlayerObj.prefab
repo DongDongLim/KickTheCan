@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163d9a33ab322a440b1004de5e780626, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  charactorBody: {fileID: 0}
   attackColl: {fileID: 0}
 --- !u!114 &1211031691728672808
 MonoBehaviour:

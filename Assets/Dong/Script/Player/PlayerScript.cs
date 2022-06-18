@@ -11,10 +11,15 @@ namespace DH
         private Rigidbody rigid;
         private Animator anim;
 
+        [SerializeField]
+        Transform charactorBody = null;
+
         Controller control = null;
 
         [SerializeField]
         GameObject attackColl;
+
+        bool isSettingComplete = false;
 
         private void Awake()
         {
@@ -31,14 +36,20 @@ namespace DH
 
         public void ControllerSetting()
         {
+            charactorBody = transform.GetChild(1).transform;
             control = GetComponent<Controller>();
             control.Setting(rigid, anim);
+            isSettingComplete = true;
         }
 
         private void Update()
         {
             if (!photonView.IsMine)
+            {
+                if(isSettingComplete && null == charactorBody)
+                    charactorBody = transform.GetChild(1).transform;
                 return;
+            }
 
             control?.ControlUpdate();
         }
@@ -81,11 +92,15 @@ namespace DH
         {
             if (stream.IsWriting)
             {
-                //stream.SendNext(health);
+                stream.SendNext(isSettingComplete);
+                if (isSettingComplete)
+                    stream.SendNext(charactorBody.rotation);
             }
             else
             {
-                //health = (float)stream.ReceiveNext();
+                isSettingComplete = (bool)stream.ReceiveNext();
+                if(null != charactorBody)
+                    charactorBody.rotation = (Quaternion)stream.ReceiveNext();
             }
         }
     }
