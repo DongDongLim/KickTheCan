@@ -22,17 +22,12 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     public float health = 100.0f;
 
     public GameObject missile;
-    public Transform shootPos;
-    public GameObject light;    
-
-    Player targetPlayer; 
-
+    public Transform shootPos;   
 
     private void Awake()
     {        
         rigid = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
-        targetPlayer = photonView.Owner;
+        anim = GetComponent<Animator>();        
     }
 
     void Start()
