@@ -6,7 +6,7 @@ namespace DH
 {
     public class PlayerMove : MonoBehaviour
     {
-        Controller owner;
+        PlayerScript owner;
 
         [SerializeField]
         private Transform cameraArm;
@@ -41,7 +41,7 @@ namespace DH
         public void Setting(Rigidbody r, Animator anim)
         {
             UIMng.instance.jumpAction += Jump;
-            owner = GetComponent<Controller>();
+            owner = GetComponent<PlayerScript>();
             charactorBody = transform.GetChild(1).transform;
             animator = anim;
             rigid = r;
@@ -56,7 +56,7 @@ namespace DH
             Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
             Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
 
-            animator?.SetBool("isMove", isMove);
+            owner.photonView.RPC("MoveAnim", Photon.Pun.RpcTarget.All, isMove);
 
             if (!isMove)
                 return;
@@ -97,10 +97,10 @@ namespace DH
 
             rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
 
-            animator?.SetBool("isMove", false);
+            owner.photonView.RPC("MoveAnim", Photon.Pun.RpcTarget.All, isMove);
 
             isJump = true;
-            animator?.SetBool("isJump", isJump);
+            owner.photonView.RPC("JumpAnim", Photon.Pun.RpcTarget.All, isJump);
         }
 
 
@@ -112,16 +112,16 @@ namespace DH
             if (Physics.Raycast(rayStatePos + (Vector3.up * 1.5f), Vector3.down, out hit, 1.5f, LayerMask.GetMask("Ground")))
             {
                 isJump = false;
-                animator?.SetBool("isJump", isJump);
+                owner.photonView.RPC("JumpAnim", Photon.Pun.RpcTarget.All, isJump);
             }
             else
             {
-                animator?.SetBool("isMove", false);
+                // Question : 여기는 왜 isMove가 아니라 false?
+                owner.photonView.RPC("MoveAnim", Photon.Pun.RpcTarget.All, false);
 
                 isJump = true;
-                animator?.SetBool("isJump", isJump);
+                owner.photonView.RPC("JumpAnim", Photon.Pun.RpcTarget.All, isJump);
             }
-            Debug.DrawRay(rayStatePos + Vector3.up, Vector3.down * 1.2f, Color.red, 1f);
         }
     }
 }

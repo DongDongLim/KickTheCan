@@ -65,6 +65,18 @@ namespace DH
             attackColl?.SetActive(false);
         }
 
+        [PunRPC]
+        public void MoveAnim(bool isMove)
+        {
+            anim?.SetBool("isMove", isMove);
+        }
+
+        [PunRPC]
+        public void JumpAnim(bool isJump)
+        {
+            anim?.SetBool("isJump", isJump);
+        }
+
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
             if (stream.IsWriting)

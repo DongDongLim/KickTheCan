@@ -26,7 +26,7 @@ namespace DH
         {
             if(collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
             {
-                GetComponent<Rigidbody>().isKinematic = false;
+                GetComponent<Rigidbody>().isKinematic = true;
             }
         }
     }
