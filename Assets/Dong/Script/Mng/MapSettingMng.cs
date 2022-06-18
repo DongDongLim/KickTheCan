@@ -32,6 +32,7 @@ namespace DH
 
         public void TaggerSetting(Player p)
         {
+            Debug.Log("술래 생성");
             GameObject playerObj = PhotonNetwork.Instantiate
                 (DH.GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
             playerObj.AddComponent<TaggerController>();
@@ -41,6 +42,7 @@ namespace DH
 
         public void RunnerSetting(Player p)
         {
+            Debug.Log("러너 생성");
             randIndex = Random.Range(0, mapObj.Length);
             GameObject playerObj = PhotonNetwork.Instantiate
                 (DH.GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
