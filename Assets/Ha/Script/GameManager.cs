@@ -16,7 +16,9 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private bool isTagger;    
     
-    int m_maxTagger = 0;  
+    int m_maxTagger = 0;
+
+    List<Player> playerList = new List<Player>() { };
 
     private void Awake()
     {
@@ -56,12 +58,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 PrintInfo("wait players " + PlayersLoadLevel() + " / " + PhotonNetwork.PlayerList.Length);
             }
-        }
-        //else if (changedProps.ContainsKey(GameData.PLAYER_TAGGER))
-        //{
-        //    //CheckTagger();
-        //    Debug.Log("참가 인원 : " + PhotonNetwork.PlayerList.Length);
-        //}
+        }      
     }
 
     #endregion PHOTON CALLBACK
@@ -77,17 +74,10 @@ public class GameManager : MonoBehaviourPunCallbacks
             yield return new WaitForSeconds(1.0f);
         }
 
-        PrintInfo("Start Game!");  
+        PrintInfo("Start Game!");
 
         int playerNumber = PhotonNetwork.LocalPlayer.GetPlayerNumber();
-
-        //player = PhotonNetwork.Instantiate("PlayerModel", spawnPos[playerNumber].position, spawnPos[playerNumber].rotation, 0);
-        //PhotonNetwork.Instantiate("PlayerModel", spawnPos[playerNumber].position, spawnPos[playerNumber].rotation, 0);
-
-        //if (PhotonNetwork.IsMasterClient)
-        //{
-        //    StartCoroutine(DH.MapSettingMng.instance.Setting());
-        //}              
+                   
         CreatePlayer();
     }
 
@@ -142,163 +132,120 @@ public class GameManager : MonoBehaviourPunCallbacks
             return;
         }
 
-        List<int> playerList = new List<int>() { };
+        m_maxTagger = PhotonNetwork.PlayerList.Length / 4;
+        m_maxTagger = (int)Mathf.Clamp(m_maxTagger, 1, 5);       
 
-        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        foreach (Player  player in PhotonNetwork.PlayerList)
         {
-            playerList.Add(i + 1);
+            playerList.Add(player);
         }
 
         Shuffle_List(playerList);
-
-        m_maxTagger = PhotonNetwork.PlayerList.Length / 4;
-        m_maxTagger = (int)Mathf.Clamp(m_maxTagger, 2, Mathf.Infinity);       
-
-        int minPlayer = 3;       
-        int index = 0;
-        int taggerNumber = 0;
+        
+        // 테스트용 tagger설정 코드
+        int minPlayer = 3;      
 
         if (minPlayer >= PhotonNetwork.PlayerList.Length)
         {
-            Debug.Log("참가 인원1 : " + PhotonNetwork.PlayerList.Length);
+            Debug.Log("참가 인원 : " + PhotonNetwork.PlayerList.Length);
             foreach (Player p in PhotonNetwork.PlayerList)
             {
                 if (p.IsMasterClient)
                 {
                     isTagger = true;
                     ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
-                    p.SetCustomProperties(props);                   
-                    Debug.Log("3명이하이므로 호스트 술래 자동설정");    
+                    p.SetCustomProperties(props);
+                    Debug.Log("3명 이하 호스트 tagger 자동설정");
                 }
                 else
                 {
                     isTagger = false;
                     ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
-                    p.SetCustomProperties(props);                   
-                    Debug.Log("러너 설정");                   
-                }
-            }
-        }
-        else
-        {           
-            List<int> m_taggerNumberList = new List<int>() { };
-            List<int> m_runnerNumberList = new List<int>() { };
-            
-            List<Player> m_PlayerList = new List<Player>() { };
-            List<Player> m_runnerList = new List<Player>() { };
-            List<Player> m_taggerList = new List<Player>() { };
-
-            for (int i = 0; i < m_maxTagger; i++)
-            {
-                m_taggerNumberList.Add(playerList[i]);                
-            }
-
-            for (int i = 0; i < m_maxTagger; i++)
-            {                
-                playerList.Remove(i);
-            }
-
-            for (int i = 0; i < playerList.Count; i++)
-            {
-                m_runnerNumberList.Add(playerList[i]);
-            }          
-
-            for (int i = 0; i < m_maxTagger; i++)
-            {                         
-                foreach (Player player in PhotonNetwork.PlayerList)
-                {
-                    if (player.ActorNumber == playerList[i])
-                    {
-                        m_taggerList.Add(player);
-                    }
+                    p.SetCustomProperties(props);
+                    Debug.Log("runner 설정");
                 }
             }
 
-            for (int i = 0; i < m_maxTagger; i++)
-            {
-                foreach (Player player in PhotonNetwork.PlayerList)
-                {
-                    if (player.ActorNumber == playerList[i])
-                    {
-                        m_runnerList.Add(player);
-                    }
-                }
-            }
+            return;
+        }                    
 
-            foreach (Player player in m_taggerList)
+        int index = 0;
+
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            if (index < m_maxTagger)
             {
                 isTagger = true;
                 ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
-                player.SetCustomProperties(props);
-                Debug.Log("술래 설정");
-            }
-
-            foreach (Player player in m_runnerList)
-            {
-                isTagger = false;
-                ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
-                player.SetCustomProperties(props);
-                Debug.Log("러너 설정");
-            }
-        }        
-    }
-
-    private void CheckTagger()
-    {
-        Debug.Log("CheckTagger access");
-        object isTagger;
-
-        int countRunner = 0;
-        int countTagger = 0;
-
-        foreach (Player p in PhotonNetwork.PlayerList)
-        {
-            Debug.Log("참가 인원2 : " + PhotonNetwork.PlayerList.Length);
-            if (p.CustomProperties.TryGetValue(GameData.PLAYER_TAGGER, out isTagger))
-            {
-                Debug.Log(isTagger);
-                if ((bool)isTagger)
-                {
-                    countTagger++;
-                }            
+                playerList[i].SetCustomProperties(props);
+                Debug.Log("tagger 설정");
+                index++;
             }
             else
             {
-                Debug.Log(isTagger);
-                countRunner++;
+                isTagger = false;
+                ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
+                playerList[i].SetCustomProperties(props);
+                Debug.Log("runner 설정");                
             }
-        }
-
-        if (countRunner + countTagger == PhotonNetwork.PlayerList.Length)
-        {           
-              return;
-        }
- 
-        Debug.Assert(countRunner + countTagger > PhotonNetwork.PlayerList.Length, "플레이어 구성원 오류");
-        Debug.Log("참가 인원 : " + PhotonNetwork.PlayerList.Length);
-        Debug.Log("술래 : " + countTagger);
-        Debug.Log("러너 : " + countRunner);
-
-        //GameObject[] bots = GameObject.FindGameObjectsWithTag("Player");
-        //foreach (GameObject bot in bots)
-        //{
-        //    PlayerController controller = bot.GetComponent<PlayerController>();
-        //    PhotonView pv = controller.GetComponent<PhotonView>();
-
-        //    if (pv.Owner.CustomProperties.TryGetValue(GameData.PLAYER_TAGGER, out isTagger))
-        //    {
-        //        if ((bool)isTagger)
-        //        {
-        //            controller.light.SetActive(true);
-        //        }
-        //    }
-        //}
+        }              
     }
+
+    //private void CheckTagger()
+    //{
+    //    Debug.Log("CheckTagger access");
+    //    object isTagger;
+
+    //    int countRunner = 0;
+    //    int countTagger = 0;
+
+    //    foreach (Player p in PhotonNetwork.PlayerList)
+    //    {
+    //        Debug.Log("참가 인원2 : " + PhotonNetwork.PlayerList.Length);
+    //        if (p.CustomProperties.TryGetValue(GameData.PLAYER_TAGGER, out isTagger))
+    //        {
+    //            Debug.Log(isTagger);
+    //            if ((bool)isTagger)
+    //            {
+    //                countTagger++;
+    //            }            
+    //        }
+    //        else
+    //        {
+    //            Debug.Log(isTagger);
+    //            countRunner++;
+    //        }
+    //    }
+
+    //    if (countRunner + countTagger == PhotonNetwork.PlayerList.Length)
+    //    {           
+    //          return;
+    //    }
+ 
+    //    Debug.Assert(countRunner + countTagger > PhotonNetwork.PlayerList.Length, "플레이어 구성원 오류");
+    //    Debug.Log("참가 인원 : " + PhotonNetwork.PlayerList.Length);
+    //    Debug.Log("술래 : " + countTagger);
+    //    Debug.Log("러너 : " + countRunner);
+
+    //    //GameObject[] bots = GameObject.FindGameObjectsWithTag("Player");
+    //    //foreach (GameObject bot in bots)
+    //    //{
+    //    //    PlayerController controller = bot.GetComponent<PlayerController>();
+    //    //    PhotonView pv = controller.GetComponent<PhotonView>();
+
+    //    //    if (pv.Owner.CustomProperties.TryGetValue(GameData.PLAYER_TAGGER, out isTagger))
+    //    //    {
+    //    //        if ((bool)isTagger)
+    //    //        {
+    //    //            controller.light.SetActive(true);
+    //    //        }
+    //    //    }
+    //    //}
+    //}
 
     private void CreatePlayer()
     {
-        Debug.Log("CreatePlayer access");
-        // TODO : Test -> 플레이어 생성
+        Debug.Log("CreatePlayer access");        
         object isTagger;
        
         if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(GameData.PLAYER_TAGGER, out isTagger))
@@ -312,7 +259,21 @@ public class GameManager : MonoBehaviourPunCallbacks
                 DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
             }                        
         }
-        Debug.Log("술래 : " + m_maxTagger);
+
+        Debug.Log("총 tagger 인원 : " + m_maxTagger);
+    }     
+
+    private void MoveLobby()
+    {
+        // TODO : 게임 플레이 중 나갔을 때 로비로 이동
+        // 다시 랜덤매칭 하거나 방에 Join했을시 바로 게임 씬으로 이동
+
+        //LoadBalancingClient.OpJoinRoom();
     }
-    
+
+    // 게임 씬 전환 이후로도 방에 접속 가능하게 하는 기능 구현 
+
 }
+
+
+
