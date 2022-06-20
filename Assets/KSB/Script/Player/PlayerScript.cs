@@ -60,6 +60,11 @@ namespace DH
             rigid.isKinematic = !rigid.isKinematic;
         }
 
+        public void JumpAttack()
+        {
+
+        }
+
 
         [PunRPC]
         public void Attack()

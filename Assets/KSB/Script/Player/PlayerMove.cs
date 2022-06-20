@@ -56,6 +56,25 @@ namespace DH
                 UIMng.instance.jumpAction -= Jump;
         }
 
+        // TODO : 테스트용
+        void Update()
+        {
+            TestJump();
+        }
+
+        public void TestJump()
+        {
+            if (!Input.GetButtonDown("Jump"))
+                return;
+                
+            if (isJump)
+                return;
+
+            rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+
+            isJump = true;
+        }
+
         public void Move(Vector2 inputDirection)
         {
             moveInput = inputDirection;
@@ -100,13 +119,6 @@ namespace DH
         {
             if (isJump)
                 return;
-            // if(Time.time < jumpCurTime + jumpCoolDown)
-            //     return;
-            // if(rigid.velocity.y < 0)
-            //     return;
-
-            // jumpCurTime = Time.time;
-            // TODO : 점프공격....후일에
 
             rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
 
