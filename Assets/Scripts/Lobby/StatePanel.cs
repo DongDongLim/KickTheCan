@@ -15,6 +15,6 @@ public class StatePanel : MonoBehaviour
 
         state = PhotonNetwork.NetworkClientState;
         stateText.text = state.ToString();
-        Debug.Log("PhotonNetwork State : " + state.ToString());
+        //Debug.Log("PhotonNetwork State : " + state.ToString());
     }
 }

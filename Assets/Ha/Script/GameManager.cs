@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             if (CheckAllPlayerLoadLevel())
             {
-                SetTagger();                
+                SetTagger();
                 StartCoroutine(StartCountDown());
             }
             else
@@ -131,6 +131,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             return;
         }
+
+        StartCoroutine(DH.MapSettingMng.instance.Setting());
 
         m_maxTagger = PhotonNetwork.PlayerList.Length / 4;
         m_maxTagger = (int)Mathf.Clamp(m_maxTagger, 1, 5);       

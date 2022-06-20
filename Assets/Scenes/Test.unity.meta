@@ -1,5 +1,10 @@
 fileFormatVersion: 2
-guid: 08d5cb07ae7b57d4f86677015eeb1b9e
+<<<<<<<< HEAD:Assets/Scenes/Test.unity.meta
+guid: f7c05148c412c254d8720ccd5c7e5e02
+========
+guid: 3ae739960088ea94882546697aac9c70
+folderAsset: yes
+>>>>>>>> DongHyen:Assets/Dong/Script/Interface.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

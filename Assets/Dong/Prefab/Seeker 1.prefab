@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 790467772378242460}
   - component: {fileID: 790467772378242463}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AttackColl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &790467772378242460
 Transform:
   m_ObjectHideFlags: 0
@@ -39,7 +39,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 790467772378242462}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -379,7 +379,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6936896313073854001}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 5c9d5017425a62446a1de81b22ac2e66, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
