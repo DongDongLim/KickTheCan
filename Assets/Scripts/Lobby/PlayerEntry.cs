@@ -13,6 +13,7 @@ public class PlayerEntry : MonoBehaviour
     public Image playerReadyImage;
     public Image playerFace;
     public Image playerColor;
+    public int numbering;
     private int ownerId;
     private bool isPlayerReady;
 
@@ -28,15 +29,25 @@ public class PlayerEntry : MonoBehaviour
         {
             playerReadyButton.gameObject.SetActive(false);
         }
+
+        Hashtable props = new Hashtable() { { GameData.PLAYER_READY, false } };
+        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+
     }
+
+
 
     public void OnReadyButtonClicked()
     {
-        isPlayerReady = !isPlayerReady;
-        SetPlayerReady(isPlayerReady);
+        Hashtable props = PhotonNetwork.LocalPlayer.CustomProperties;
+        object isReady;
+        props.TryGetValue(GameData.PLAYER_READY, out isReady);
 
-        Hashtable props = new Hashtable() { { GameData.PLAYER_READY, isPlayerReady } };
+        isPlayerReady = !(bool)isReady;
+        SetPlayerReady(isPlayerReady);
+        props = new Hashtable() { { GameData.PLAYER_READY, isPlayerReady } };
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+
 
         if (PhotonNetwork.IsMasterClient)
         {
@@ -50,6 +61,23 @@ public class PlayerEntry : MonoBehaviour
         playerNameText.text = playerName;
     }
 
+    public int GetOwnerID()
+    {
+        return ownerId;
+    }
+
+
+    public void SetNumbering(int number)
+    {
+        numbering = number;
+    }
+
+    public int GetNumbering()
+    {
+        return numbering;
+    }
+
+
 
     /// <summary>
     /// YSM 2022.06.16
@@ -58,7 +86,7 @@ public class PlayerEntry : MonoBehaviour
     /// <param name="playerReady"></param>
     public void SetPlayerReady(bool playerReady)
     {
-        playerReadyImage.color = playerReady ?  Color.red: Color.green ;
+        playerReadyImage.color = playerReady ? Color.green : Color.red;
     }
 
 }
