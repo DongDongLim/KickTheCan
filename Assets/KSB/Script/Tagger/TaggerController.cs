@@ -31,7 +31,7 @@ namespace DH
         }
 
         public void AttackCool(){
-            Debug.Log("공격 가능 횟수 : " + attackCurCount);
+            //Debug.Log("공격 가능 횟수 : " + attackCurCount);
             if (attackCurCount >= attackMaxCount)
                 return;
             

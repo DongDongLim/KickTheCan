@@ -58,11 +58,6 @@ public class InRoomPanel : MonoBehaviour
             entry.transform.localScale = Vector3.one;
             entry.GetComponent<PlayerEntry>().Initialize(p.ActorNumber, p.NickName);
 
-
-
-
-
-
             object isPlayerReady;
             if (p.CustomProperties.TryGetValue(GameData.PLAYER_READY, out isPlayerReady))
             {
@@ -103,17 +98,15 @@ public class InRoomPanel : MonoBehaviour
         object test;
         prop1.TryGetValue(GameData.PLAYER_READY, out test);
         PlayerNumbering.OnPlayerNumberingChanged -= DetectPlayerNumberingChanged;
-
-
     }
 
     public void OnLeaveRoomClicked()
     {
-
         PhotonNetwork.LeaveRoom();
     }
 
     public void OnStartGameButtonClicked()
+<<<<<<< Updated upstream
     {
         // TODO : IsOpen false -> true
         //        IsVisible    -> true
@@ -121,6 +114,11 @@ public class InRoomPanel : MonoBehaviour
         PhotonNetwork.CurrentRoom.IsVisible = true;
         // ToDo : ï¿½Ù²ï¿½
 
+=======
+    {        
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+        PhotonNetwork.CurrentRoom.IsVisible = false;
+>>>>>>> Stashed changes
         PhotonNetwork.LoadLevel(1);
     }
 
@@ -223,12 +221,6 @@ public class InRoomPanel : MonoBehaviour
         startGameButton.interactable = CheckPlayersReady();
     }
 
-
-
-    
-
-
-
     public void SetMasterOrUserCilent()
     {
         startGameButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);
@@ -236,10 +228,14 @@ public class InRoomPanel : MonoBehaviour
         kickGameButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);
     }
 
+<<<<<<< Updated upstream
 
 
 
     //ï¿½ß¹ï¿½
+=======
+    //Ãß¹æ
+>>>>>>> Stashed changes
     public void LocalKickGameButtonClicked()
     {
 

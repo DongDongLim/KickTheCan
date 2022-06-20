@@ -10,7 +10,17 @@ public class InConnectPanel : MonoBehaviour
 
     public void OnRandomMatchingButtonClicked()
     {
-        PhotonNetwork.JoinRandomRoom();
+        // TODO : 로비 재접속시 게임씬으로 이동하기 
+        if (false)
+        {
+            Debug.Log("Go to GameScene");
+            PhotonNetwork.LoadLevel(1);
+            return;
+        }
+        else
+        {
+            PhotonNetwork.JoinRandomRoom();
+        }      
     }
 
     public void OnLobbyButtonClicked()
