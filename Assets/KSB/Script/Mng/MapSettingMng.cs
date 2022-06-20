@@ -13,9 +13,11 @@ namespace DH
         public GameObject taggerObj;
         int randIndex;
 
+        Query dd;
+
         protected override void OnAwake()
         {
-
+dd = new Query();
         }
 
         public IEnumerator Setting()
