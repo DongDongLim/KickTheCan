@@ -102,12 +102,12 @@ namespace YSM
              {
                  case (int)PlayerColorType.BLACK:            return Convert.ToString(0,  16) + Convert.ToString(0,  16) + Convert.ToString(0,  16);
                  case (int)PlayerColorType.GRAY:             return Convert.ToString(127,16) + Convert.ToString(127,16) + Convert.ToString(127,16);
-                 case (int)PlayerColorType.RED_THICK:        return Convert.ToString(136,16) + Convert.ToString(0,  16) + Convert.ToString(21, 16);
+                 case (int)PlayerColorType.RED_THICK:        return Convert.ToString(136,16) + "0" + Convert.ToString(0, 16) + Convert.ToString(21, 16);
                  case (int)PlayerColorType.RED:              return Convert.ToString(237,16) + Convert.ToString(28, 16) + Convert.ToString(36, 16);
                  case (int)PlayerColorType.ORANGE:           return Convert.ToString(255,16) + Convert.ToString(127,16) + Convert.ToString(39, 16);
-                 case (int)PlayerColorType.YELLOW:           return Convert.ToString(255,16) + Convert.ToString(242,16) + Convert.ToString(0,  16);
+                 case (int)PlayerColorType.YELLOW:           return Convert.ToString(255,16) + Convert.ToString(242,16) + "0" + Convert.ToString(0, 16);
                  case (int)PlayerColorType.GREEN:            return Convert.ToString(34, 16) + Convert.ToString(177,16) + Convert.ToString(76, 16);
-                 case (int)PlayerColorType.BLUE:             return Convert.ToString(0,  16) + Convert.ToString(162,16) + Convert.ToString(232,16);
+                 case (int)PlayerColorType.BLUE:             return "0" + Convert.ToString(0, 16) + Convert.ToString(162,16) + Convert.ToString(232,16);
                  case (int)PlayerColorType.NAVY:             return Convert.ToString(63, 16) + Convert.ToString(72, 16) + Convert.ToString(204,16);
                  case (int)PlayerColorType.PURPLE:           return Convert.ToString(163,16) + Convert.ToString(73, 16) + Convert.ToString(164,16);
                  case (int)PlayerColorType.WHITE:            return Convert.ToString(255,16) + Convert.ToString(255,16) + Convert.ToString(255,16);
