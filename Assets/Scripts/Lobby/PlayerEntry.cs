@@ -29,10 +29,6 @@ public class PlayerEntry : MonoBehaviour
         {
             playerReadyButton.gameObject.SetActive(false);
         }
-
-        Hashtable props = new Hashtable() { { GameData.PLAYER_READY, false } };
-        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
-
     }
 
 
