@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -12,11 +12,13 @@ public class GameManager : MonoBehaviourPunCallbacks
     public static GameManager Instance { get; private set; }
 
     public Text infoText;
-    public Transform[] spawnPos;    
+    public Transform[] spawnPos;
 
-    GameObject player;
+    private bool isTagger;    
     
-    int maxTagger = 0;    
+    int m_maxTagger = 0;
+
+    List<Player> playerList = new List<Player>() { };
 
     private void Awake()
     {
@@ -44,17 +46,19 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
     {
+        Debug.Log("propertiesUpdate access");
         if (changedProps.ContainsKey(GameData.PLAYER_LOAD))
         {
             if (CheckAllPlayerLoadLevel())
             {
+                SetTagger();                
                 StartCoroutine(StartCountDown());
             }
             else
             {
                 PrintInfo("wait players " + PlayersLoadLevel() + " / " + PhotonNetwork.PlayerList.Length);
             }
-        }
+        }      
     }
 
     #endregion PHOTON CALLBACK
@@ -70,25 +74,11 @@ public class GameManager : MonoBehaviourPunCallbacks
             yield return new WaitForSeconds(1.0f);
         }
 
-        PrintInfo("Start Game!");  
+        PrintInfo("Start Game!");
 
-        int playerNumber = PhotonNetwork.LocalPlayer.GetPlayerNumber();      
-
-        // ToDo : πŸ≤Ò
-        if (PhotonNetwork.IsMasterClient)
-        {
-            StartCoroutine(DH.MapSettingMng.instance.Setting());
-        }
-        // ToDo : πŸ≤Ò
-
-        if (PhotonNetwork.IsMasterClient)
-            DH.MapSettingMng.instance.TaggerSetting(PhotonNetwork.LocalPlayer);
-        else
-            DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
-        //PhotonNetwork.Instantiate("PlayerModel", spawnPos[playerNumber].position, spawnPos[playerNumber].rotation, 0);
-
-        // TODO : º˙∑° / ∑Ø≥  πË¡§ 
-        // SetTagger();
+        int playerNumber = PhotonNetwork.LocalPlayer.GetPlayerNumber();
+                   
+        CreatePlayer();
     }
 
     private bool CheckAllPlayerLoadLevel()
@@ -102,7 +92,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         foreach (Player p in PhotonNetwork.PlayerList)
         {
             object playerLoadedLevel;
-
+            
             if (p.CustomProperties.TryGetValue(GameData.PLAYER_LOAD, out playerLoadedLevel))
             {
                 if ((bool)playerLoadedLevel)
@@ -121,67 +111,169 @@ public class GameManager : MonoBehaviourPunCallbacks
         infoText.text = info;
     }
 
+    public static void Shuffle_List<T>(List<T> list)
+    {     
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = UnityEngine.Random.Range(0, n + 1);
+            T value = list[k];
+            list[k] = list[n];
+            list[n] = value;
+        }
+    }
+
     private void SetTagger()
     {
+        Debug.Log("SetTagger access");
         if (!PhotonNetwork.IsMasterClient)
         {
-            Debug.Log("πÊ¿Â æ∆¥‘");
             return;
         }
 
-        Debug.Log("πÊ¿Â¿”");
-        // º˙∑° ¡§«œ±‚ 
-        // [∫Ò¿≤] 1:3 - º˙∑°:∑Ø≥ 
-        // º˙∑° MAX : 5∏Ì
+        m_maxTagger = PhotonNetwork.PlayerList.Length / 4;
+        m_maxTagger = (int)Mathf.Clamp(m_maxTagger, 1, 5);       
 
-        // TODO : º˙∑° ∑£¥˝ º≥¡§      
-
-        List<int> playerList = new List<int>() { };
-
-        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        foreach (Player  player in PhotonNetwork.PlayerList)
         {
-            playerList.Add(i + 1);
+            playerList.Add(player);
         }
 
         Shuffle_List(playerList);
+        
+        // ÌÖåÏä§Ìä∏Ïö© taggerÏÑ§Ï†ï ÏΩîÎìú
+        int minPlayer = 3;      
 
-        maxTagger = PhotonNetwork.PlayerList.Length / 4;
-
-        for (int i = 0; i < maxTagger; i++)
+        if (minPlayer >= PhotonNetwork.PlayerList.Length)
         {
-            int taggerNumber = playerList[i];
-
+            Debug.Log("Ï∞∏Í∞Ä Ïù∏Ïõê : " + PhotonNetwork.PlayerList.Length);
             foreach (Player p in PhotonNetwork.PlayerList)
             {
-               if (p.ActorNumber == taggerNumber)
+                if (p.IsMasterClient)
                 {
-                    ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_TAGGER, true } };
-                    PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+                    isTagger = true;
+                    ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
+                    p.SetCustomProperties(props);
+                    Debug.Log("3Î™Ö Ïù¥Ìïò Ìò∏Ïä§Ìä∏ tagger ÏûêÎèôÏÑ§Ï†ï");
                 }
-            }     
-        }
+                else
+                {
+                    isTagger = false;
+                    ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
+                    p.SetCustomProperties(props);
+                    Debug.Log("runner ÏÑ§Ï†ï");
+                }
+            }
+
+            return;
+        }                    
+
+        int index = 0;
 
         for (int i = 0; i < playerList.Count; i++)
         {
-            Debug.Log(playerList[i]);
-        }
+            if (index < m_maxTagger)
+            {
+                isTagger = true;
+                ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
+                playerList[i].SetCustomProperties(props);
+                Debug.Log("tagger ÏÑ§Ï†ï");
+                index++;
+            }
+            else
+            {
+                isTagger = false;
+                ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
+                playerList[i].SetCustomProperties(props);
+                Debug.Log("runner ÏÑ§Ï†ï");                
+            }
+        }              
     }
 
-    public static void Shuffle_List<T>(List<T> list)
+    //private void CheckTagger()
+    //{
+    //    Debug.Log("CheckTagger access");
+    //    object isTagger;
+
+    //    int countRunner = 0;
+    //    int countTagger = 0;
+
+    //    foreach (Player p in PhotonNetwork.PlayerList)
+    //    {
+    //        Debug.Log("Ï∞∏Í∞Ä Ïù∏Ïõê2 : " + PhotonNetwork.PlayerList.Length);
+    //        if (p.CustomProperties.TryGetValue(GameData.PLAYER_TAGGER, out isTagger))
+    //        {
+    //            Debug.Log(isTagger);
+    //            if ((bool)isTagger)
+    //            {
+    //                countTagger++;
+    //            }            
+    //        }
+    //        else
+    //        {
+    //            Debug.Log(isTagger);
+    //            countRunner++;
+    //        }
+    //    }
+
+    //    if (countRunner + countTagger == PhotonNetwork.PlayerList.Length)
+    //    {           
+    //          return;
+    //    }
+ 
+    //    Debug.Assert(countRunner + countTagger > PhotonNetwork.PlayerList.Length, "ÌîåÎ†àÏù¥Ïñ¥ Íµ¨ÏÑ±Ïõê Ïò§Î•ò");
+    //    Debug.Log("Ï∞∏Í∞Ä Ïù∏Ïõê : " + PhotonNetwork.PlayerList.Length);
+    //    Debug.Log("Ïà†Îûò : " + countTagger);
+    //    Debug.Log("Îü¨ÎÑà : " + countRunner);
+
+    //    //GameObject[] bots = GameObject.FindGameObjectsWithTag("Player");
+    //    //foreach (GameObject bot in bots)
+    //    //{
+    //    //    PlayerController controller = bot.GetComponent<PlayerController>();
+    //    //    PhotonView pv = controller.GetComponent<PhotonView>();
+
+    //    //    if (pv.Owner.CustomProperties.TryGetValue(GameData.PLAYER_TAGGER, out isTagger))
+    //    //    {
+    //    //        if ((bool)isTagger)
+    //    //        {
+    //    //            controller.light.SetActive(true);
+    //    //        }
+    //    //    }
+    //    //}
+    //}
+
+    private void CreatePlayer()
     {
-        int random1;
-        int random2;
-        T tmp;
-
-        for (int index = 0; index < list.Count; ++index)
+        Debug.Log("CreatePlayer access");        
+        object isTagger;
+       
+        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(GameData.PLAYER_TAGGER, out isTagger))
         {
-            random1 = UnityEngine.Random.Range(1, list.Count);
-            random2 = UnityEngine.Random.Range(1, list.Count);
-
-            tmp = list[random1];
-            list[random1] = list[random2];
-            list[random2] = tmp;
+            if ((bool)isTagger)
+            {
+                DH.MapSettingMng.instance.TaggerSetting(PhotonNetwork.LocalPlayer);
+            }
+            else
+            {
+                DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
+            }                        
         }
+
+        Debug.Log("Ï¥ù tagger Ïù∏Ïõê : " + m_maxTagger);
+    }     
+
+    private void MoveLobby()
+    {
+        // TODO : Í≤åÏûÑ ÌîåÎ†àÏù¥ Ï§ë ÎÇòÍ∞îÏùÑ Îïå Î°úÎπÑÎ°ú Ïù¥Îèô
+        // Îã§Ïãú ÎûúÎç§Îß§Ïπ≠ ÌïòÍ±∞ÎÇò Î∞©Ïóê JoinÌñàÏùÑÏãú Î∞îÎ°ú Í≤åÏûÑ Ïî¨ÏúºÎ°ú Ïù¥Îèô
+
+        //LoadBalancingClient.OpJoinRoom();
     }
+
+    // Í≤åÏûÑ Ïî¨ Ï†ÑÌôò Ïù¥ÌõÑÎ°úÎèÑ Î∞©Ïóê Ï†ëÏÜç Í∞ÄÎä•ÌïòÍ≤å ÌïòÎäî Í∏∞Îä• Íµ¨ÌòÑ 
 
 }
+
+
+

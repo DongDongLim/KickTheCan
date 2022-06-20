@@ -22,14 +22,12 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     public float health = 100.0f;
 
     public GameObject missile;
-    public Transform shootPos;
-    public Light light;
+    public Transform shootPos;   
 
     private void Awake()
-    {
-        CheckTagger();
+    {        
         rigid = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();        
     }
 
     void Start()
@@ -94,19 +92,5 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         {
             health = (float)stream.ReceiveNext();
         }
-    }
-
-    private void CheckTagger()
-    {
-        object isTagger;
-        
-        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(Tagger.PLAYER_TAGGER, out isTagger))
-        {          
-            if ((bool)isTagger)
-            {
-                light.enabled = true;
-                Debug.Log("¼ú·¡ÀÓ");
-            }
-        }    
-    }
+    }    
 }
