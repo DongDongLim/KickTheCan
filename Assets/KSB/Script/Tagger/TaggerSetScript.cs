@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-namespace KSB
+namespace DH
 {
     public class TaggerSetScript : MonoBehaviourPun
     {
@@ -15,7 +15,7 @@ namespace KSB
         [PunRPC]
         public void ChildObjCreate()
         {
-            Instantiate(KSB.MapSettingMng.instance.taggerObj, transform, false);
+            Instantiate(DH.MapSettingMng.instance.taggerObj, transform, false);
         }
     }
 }

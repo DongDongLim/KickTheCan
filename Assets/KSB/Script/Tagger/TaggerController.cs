@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-namespace KSB
+namespace DH
 {
     public class TaggerController : Controller
     {
@@ -22,31 +22,12 @@ namespace KSB
 
         private void Awake() {
             attackCurCount = attackMaxCount;
+            CameraMng.instance.TaggerCamSetting();
         }
         public override void ControlUpdate()
         {
             move.GroundChecker();
             AttackCool();
-        }
-
-        public void Attack()
-        {
-            // 공격횟수가 없을 경우 공격 못함
-            if (attackCurCount == 0)
-                return;
-
-            attackCurCount--;
-
-            // 공격 행동
-            attackColl?.SetActive(true);
-            animator?.SetTrigger("isAttack");
-            StartCoroutine("AttackEnd");
-        }
-
-        IEnumerator AttackEnd()
-        {
-            yield return new WaitForSeconds(0.1f);
-            attackColl?.SetActive(false);
         }
 
         public void AttackCool(){
@@ -66,7 +47,7 @@ namespace KSB
 
         public override void ControllerAction()
         {
-            Attack();
+            owner.photonView.RPC("Attack", RpcTarget.All);
         }
     }
 }

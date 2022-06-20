@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-namespace KSB
+namespace DH
 {
     public abstract class Controller : MonoBehaviourPun
     {
@@ -22,7 +22,7 @@ namespace KSB
             owner = GetComponent<PlayerScript>();
             move = GetComponent<PlayerMove>();
             rigid = r;
-            move.Setting(rigid, animator);
+            move.Setting(rigid);
             UIMng.instance.SetMoveUI(move);
             UIMng.instance.actionAction += ControllerAction;
         }

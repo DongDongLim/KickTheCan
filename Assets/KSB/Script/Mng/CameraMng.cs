@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-namespace KSB
+namespace DH
 {
     public class CameraMng : SingletonMini<CameraMng>
     {

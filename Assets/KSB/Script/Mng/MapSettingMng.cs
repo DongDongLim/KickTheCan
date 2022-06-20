@@ -5,7 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
 
-namespace KSB
+namespace DH
 {
     public class MapSettingMng : SingletonMini<MapSettingMng>
     {
@@ -19,7 +19,7 @@ namespace KSB
         }
 
         public IEnumerator Setting()
-        {           
+        {
             for (int i = 0; i < 100; ++i)
             {
                 randIndex = Random.Range(0, mapObj.Length);
@@ -34,7 +34,7 @@ namespace KSB
         {
             Debug.Log("술래 생성");
             GameObject playerObj = PhotonNetwork.Instantiate
-                (KSB.GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
+                (DH.GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
             playerObj.AddComponent<TaggerController>();
             playerObj.GetComponent<TaggerSetScript>().SetObj();
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
@@ -45,7 +45,7 @@ namespace KSB
             Debug.Log("러너 생성");
             randIndex = Random.Range(0, mapObj.Length);
             GameObject playerObj = PhotonNetwork.Instantiate
-                (KSB.GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
+                (DH.GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
             playerObj.AddComponent<RunnerController>();
             playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex);
             playerObj.GetComponent<PlayerScript>().ControllerSetting();

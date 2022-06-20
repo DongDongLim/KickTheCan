@@ -27,7 +27,7 @@ public class GameData : MonoBehaviour
     }
 }
 
-namespace KSB
+namespace DH
 {
     public class GameData : MonoBehaviour
     {

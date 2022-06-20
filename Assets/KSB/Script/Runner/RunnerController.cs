@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-namespace KSB
+namespace DH
 {
     public class RunnerController : Controller, IDamaged
     {

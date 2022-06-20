@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-namespace KSB
+namespace DH
 {
     public class UIMng : SingletonMini<UIMng>
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-namespace KSB
+namespace DH
 {
     public class ObjScript : MonoBehaviourPun
     {
@@ -19,7 +19,7 @@ namespace KSB
         public void ChildObjCreate(int index)
         {
             objIndex = index;
-            Instantiate(KSB.MapSettingMng.instance.mapObj[objIndex], transform, false);
+            Instantiate(DH.MapSettingMng.instance.mapObj[objIndex], transform, false);
         }
 
         private void OnCollisionEnter(Collision collision)

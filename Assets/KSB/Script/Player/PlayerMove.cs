@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace KSB
+namespace DH
 {
     public class PlayerMove : MonoBehaviour
     {
@@ -35,25 +35,18 @@ namespace KSB
         Vector2 boxCastSize;
 
         float maxRayDistance;
-        float jumpCoolDown = 0.5f;
-        float jumpCurTime;
-
-
-        Vector3 rayStatePos;
 
         private void Start()
         {
             cameraArm = transform.GetChild(0).transform;
         }
 
-        public void Setting(Rigidbody r, Animator anim)
+        public void Setting(Rigidbody r)
         { 
-            jumpCurTime = Time.time;
             UIMng.instance.jumpAction += Jump;
             owner = GetComponent<PlayerScript>();
             charactorBody = transform.GetChild(1).transform;
             maxRayDistance = charactorBody.GetComponent<Collider>().bounds.size.y * 0.5f;
-            animator = anim;
             rigid = r;
         }
 

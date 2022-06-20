@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 
-namespace KSB
+namespace DH
 {
     public class PlayerScript : MonoBehaviourPun, IPunObservable
     {
