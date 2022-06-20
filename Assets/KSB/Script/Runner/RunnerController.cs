@@ -42,6 +42,10 @@ namespace DH
             {
                 Damaged();
             }
+            if(other.gameObject.layer == LayerMask.NameToLayer("Can"))
+            {
+
+            }
         }
 
     }
