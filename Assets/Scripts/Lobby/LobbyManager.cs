@@ -68,16 +68,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         inLobbyPanel.ClearRoomList();
     }
 
-    public override void OnCreatedRoom() 
-    {
-        // TODO : 게임 시작 시 룸 남겨놓기
-        base.OnCreatedRoom();
-        EnterRoomParams enterRoomParams = new EnterRoomParams { };
-
-        Room room = PhotonNetwork.CurrentRoom;
-        room.EmptyRoomTtl = 300;
-        
-    }
+    //public override void OnCreatedRoom() 
+    //{
+    //    // TODO : 게임 시작 시 룸 남겨놓기
+    //    base.OnCreatedRoom();
+    //    EnterRoomParams enterRoomParams = new EnterRoomParams { };
+    //    Room room = PhotonNetwork.CurrentRoom;
+    //    room.EmptyRoomTtl = 300;        
+    //}
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
@@ -131,6 +129,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void LocalPlayerPropertiesUpdated()
     {
         inRoomPanel.LocalPlayerPropertiesUpdated();
+    }
+
+    public void OnMoveLobbyButton()
+    {
+
     }
 
     #endregion

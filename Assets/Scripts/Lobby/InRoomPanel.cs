@@ -80,8 +80,10 @@ public class InRoomPanel : MonoBehaviour
 
     public void OnStartGameButtonClicked()
     {
-        PhotonNetwork.CurrentRoom.IsOpen = false;
-        PhotonNetwork.CurrentRoom.IsVisible = false;
+        // TODO : IsOpen false -> true
+        //        IsVisible    -> true
+        PhotonNetwork.CurrentRoom.IsOpen = true;
+        PhotonNetwork.CurrentRoom.IsVisible = true;
         // ToDo : ¹Ù²ñ
         PhotonNetwork.LoadLevel(1);
     }
