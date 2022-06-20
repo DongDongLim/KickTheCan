@@ -7,6 +7,10 @@ namespace DH
 {
     public class TaggerController : Controller
     {
+        private void Awake()
+        {
+            CameraMng.instance.TaggerCamSetting();
+        }
         public override void ControlUpdate()
         {
             move.GroundChecker();

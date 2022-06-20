@@ -9,6 +9,11 @@ namespace DH
     {
         bool isFreeze = false;
 
+        private void Awake()
+        {
+            CameraMng.instance.RunnerCamSetting();
+        }
+
         public override void ControllerAction()
         {
             Freeze();

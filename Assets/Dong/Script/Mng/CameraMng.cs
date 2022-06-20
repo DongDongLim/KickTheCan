@@ -8,6 +8,8 @@ namespace DH
     public class CameraMng : SingletonMini<CameraMng>
     {
         [SerializeField]
+        Camera mainCam;
+        [SerializeField]
         CinemachineVirtualCamera playerCam;
         [SerializeField]
         CinemachineVirtualCamera skyCam;
@@ -45,6 +47,17 @@ namespace DH
                 skyCam.gameObject.SetActive(false);
             }
 
+        }
+
+        public void TaggerCamSetting()
+        {
+            mainCam.cullingMask = ~(1 << LayerMask.NameToLayer("Hide"));
+        }
+
+        public void RunnerCamSetting()
+        {
+            // -1은 everyting
+            mainCam.cullingMask = -1;
         }
 
 

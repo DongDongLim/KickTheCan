@@ -47,6 +47,9 @@ namespace DH
             playerObj.AddComponent<RunnerController>();
             playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex);
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
+            if (p == null)
+                playerObj.layer = LayerMask.NameToLayer("Hide");
+
         }
 
     }
