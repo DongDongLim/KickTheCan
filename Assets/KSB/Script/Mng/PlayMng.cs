@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 namespace DH
 {
@@ -16,7 +17,7 @@ namespace DH
 
         public void BeCaught(GameObject player)
         {
-            Destroy(player);
+            PhotonNetwork.Destroy(player);
             isRunnerBeCaught = true;
             UIMng.instance.jumpAction += Release;
         }
@@ -24,7 +25,11 @@ namespace DH
         public void Release()
         {
             if (isRunnerBeCaught)
+            {
                 MapSettingMng.instance.RunnerSetting(null);
+                UIMng.instance.jumpAction -= Release;
+                isRunnerBeCaught = false;
+            }
         }
     }
 }

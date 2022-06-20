@@ -8,20 +8,46 @@ namespace DH
     public class RunnerSetScript : MonoBehaviourPun
     {
         public int objIndex;
+        ChangeLayer change;
 
-        public void SetObjIndex(int index)
+        public void SetObjIndex(int index, string name)
         {
-            photonView.RPC("ChildObjCreate", RpcTarget.All, index);
+            UIMng.instance.testHideAction += ChangeLayer;
+            photonView.RPC("ChildObjCreate", RpcTarget.All, index, name);
         }
 
         [PunRPC]
-        public void ChildObjCreate(int index)
+        public void ChildObjCreate(int index, string name)
         {
+            change = new ChangeLayer();
             objIndex = index;
             Instantiate(DH.MapSettingMng.instance.mapObj[objIndex], transform, false);
-            foreach(Transform child in transform)
+            change.CangeTransformLayer(transform, name);
+        }
+
+        private void OnDestroy()
+        {
+            if(UIMng.instance != null)
+                UIMng.instance.testHideAction -= ChangeLayer;
+        }
+
+        // TODO : Test
+        public void ChangeLayer()
+        {
+            photonView.RPC("ChangeLayerFunc", RpcTarget.All);
+        }
+
+        [PunRPC]
+        public void ChangeLayerFunc()
+        {
+            switch (LayerMask.LayerToName(gameObject.layer))
             {
-                child.gameObject.layer = gameObject.layer;
+                case "Hide":
+                    change.CangeTransformLayer(transform, "Default");
+                    break;
+                case "Default":
+                    change.CangeTransformLayer(transform, "Hide");
+                    break;
             }
         }
     }
