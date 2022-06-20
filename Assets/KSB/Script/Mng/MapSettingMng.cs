@@ -9,19 +9,24 @@ namespace DH
 {
     public class MapSettingMng : SingletonMini<MapSettingMng>
     {
+        public GameObject[] mapBG;
         public GameObject[] mapObj;
         public GameObject taggerObj;
         int randIndex;
 
-        Query dd;
+
 
         protected override void OnAwake()
         {
-dd = new Query();
+
         }
 
         public IEnumerator Setting()
         {
+            randIndex = Random.Range(0, mapBG.Length);
+            PhotonNetwork.Instantiate
+                    ("Map", Vector3.zero, Quaternion.identity, 0);
+
             for (int i = 0; i < 100; ++i)
             {
                 randIndex = Random.Range(0, mapObj.Length);
