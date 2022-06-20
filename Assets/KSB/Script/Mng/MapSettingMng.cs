@@ -25,7 +25,8 @@ namespace DH
         {
             randIndex = Random.Range(0, mapBG.Length);
             PhotonNetwork.Instantiate
-                    ("Map", Vector3.zero, Quaternion.identity, 0);
+                    ("Map", Vector3.zero, Quaternion.identity, 0)
+                    .GetComponent<MapSetScript>().SetObjIndex(randIndex);
 
             for (int i = 0; i < 100; ++i)
             {
