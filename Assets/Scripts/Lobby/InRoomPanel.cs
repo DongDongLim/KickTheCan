@@ -179,9 +179,6 @@ public class InRoomPanel : MonoBehaviour
         playerListEntries.Add(newPlayer.ActorNumber, entry);
         startGameButton.interactable = CheckPlayersReady();
 
-
-
-
     }
 
     public void OnPlayerLeftRoom(Player otherPlayer)
