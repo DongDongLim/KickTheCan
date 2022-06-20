@@ -97,8 +97,8 @@ public class InRoomPanel : MonoBehaviour
         playerListEntries = null;
 
 
-        Hashtable props = new Hashtable() { { GameData.PLAYER_READY, false } };
-        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+        //Hashtable props = new Hashtable() { { GameData.PLAYER_READY, false } };
+        //PhotonNetwork.LocalPlayer.SetCustomProperties(props);
         Hashtable prop1 = PhotonNetwork.LocalPlayer.CustomProperties;
         object test;
         prop1.TryGetValue(GameData.PLAYER_READY, out test);

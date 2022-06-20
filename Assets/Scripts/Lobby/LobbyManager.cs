@@ -101,6 +101,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         SetActivePanel(PANEL.Room);
+        Hashtable props = new Hashtable() { { GameData.PLAYER_READY, false } };
+        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
     }
 
     public override void OnLeftRoom()
