@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 871745590389325346}
   - component: {fileID: 8261116296052747607}
   - component: {fileID: 3196961815628320816}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Cylinder3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,4 +93,4 @@ CapsuleCollider:
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0.5, z: -0.00000008940697}
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
