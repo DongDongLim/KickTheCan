@@ -19,6 +19,10 @@ namespace DH
         {
             objIndex = index;
             Instantiate(DH.MapSettingMng.instance.mapObj[objIndex], transform, false);
+            foreach(Transform child in transform)
+            {
+                child.gameObject.layer = gameObject.layer;
+            }
         }
     }
 }

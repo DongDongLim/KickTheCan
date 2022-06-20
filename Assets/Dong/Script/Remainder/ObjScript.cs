@@ -21,5 +21,13 @@ namespace DH
             objIndex = index;
             Instantiate(DH.MapSettingMng.instance.mapObj[objIndex], transform, false);
         }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if(collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            {
+                GetComponent<Rigidbody>().isKinematic = true;
+            }
+        }
     }
 }
