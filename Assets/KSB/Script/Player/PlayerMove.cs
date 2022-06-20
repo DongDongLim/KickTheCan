@@ -134,7 +134,7 @@ namespace DH
             rayStatePos = new Vector3(transform.position.x, transform.position.y + maxRayDistance, transform.position.z);
             boxCastSize = new Vector2(charactorBody.GetComponent<Collider>().bounds.size.x,charactorBody.GetComponent<Collider>().bounds.size.z);
             RaycastHit hit;
-            if (Physics.SphereCast(rayStatePos + (Vector3.up * maxRayDistance),boxCastSize.x * 0.5f,Vector3.down,out hit,maxRayDistance + 0.5f,LayerMask.GetMask("Ground")))
+            if (Physics.SphereCast(rayStatePos + (Vector3.up * maxRayDistance),boxCastSize.x * 0.5f,Vector3.down,out hit,maxRayDistance + 0.5f,LayerMask.GetMask("Ground","Object")))
             {
                 isJump = false;
                 owner.photonView.RPC("JumpAnim", Photon.Pun.RpcTarget.All, isJump);

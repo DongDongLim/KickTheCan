@@ -60,26 +60,13 @@ namespace DH
             rigid.isKinematic = !rigid.isKinematic;
         }
 
-        public void JumpAttack()
-        {
-
-        }
-
 
         [PunRPC]
         public void Attack()
         {
-            attackColl?.SetActive(true);
             anim?.SetTrigger("isAttack");
-            StartCoroutine("AttackEnd");
         }
-
-        [PunRPC]
-        IEnumerator AttackEnd()
-        {
-            yield return new WaitForSeconds(0.1f);
-            attackColl?.SetActive(false);
-        }
+        
 
         [PunRPC]
         public void MoveAnim(bool isMove)
