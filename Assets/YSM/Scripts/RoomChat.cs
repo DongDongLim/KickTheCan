@@ -28,7 +28,7 @@ namespace YSM
             text.text = "";
         }
 
-        public void ClickChatMessage()
+        public void RoomChatSendClicked()
         {
             int idx = 9999999;
             for (int i = 0; i < PhotonNetwork.PlayerList.Length; ++i)
@@ -42,7 +42,7 @@ namespace YSM
             }
             if (inputfield.text == "")
                 return;
-            photonView.RPC("ChatMessage",
+            photonView.RPC("RoomChatMessage",
                            RpcTarget.All,
                            PhotonNetwork.LocalPlayer.NickName,
                            inputfield.text,
@@ -53,7 +53,7 @@ namespace YSM
         }
 
         [PunRPC]
-        public void ChatMessage(string a, string b,PlayerColorType colorIdx, bool isHost = false)
+        public void RoomChatMessage(string a, string b,PlayerColorType colorIdx, bool isHost = false)
         {
  
             

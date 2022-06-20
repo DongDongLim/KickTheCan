@@ -312,7 +312,6 @@ public class InRoomPanel : MonoBehaviour
                 PlayerEntry playerEntry = entry.GetComponent<PlayerEntry>();
                 playerEntry.playerColor.color = YSM.ColorTransform.EnumToColor((YSM.PlayerColorType)player.GetPlayerNumber());
                 playerEntry.SetNumbering(player.GetPlayerNumber());
-                Debug.Log(player.GetPlayerNumber());
 
                 Button kickButton = entry.GetComponent<Button>();
                 kickButton.onClick.AddListener(() => LocalPlayerEntryClicked(playerEntry));
