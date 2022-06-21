@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace YSM
@@ -32,28 +33,49 @@ namespace YSM
         CNT,
     }
 
+    public enum GameChatPanelChange
+    {
+        ALL,
+        TEAM,
+        NOTICE,
+    }
+
     public class GameChat : MonoBehaviourPun
     {
 
         [SerializeField] InputField inputfield;     // 입력 텍스트
-        [SerializeField] private Text allText;      // 전쳇 게임에 보여줄 텍스트
-        [SerializeField] private Text teamText;     // 팀 쳇 게임에 보여줄 텍스트
 
-
-        [SerializeField] private GameCharacterType curCharacterType;
+        [SerializeField] private GameCharacterType curCharacterType;// 러너 , 테거 , 데드, 옵저버  
         [SerializeField] private GameChatType curChatType;
+
+
+
         [SerializeField] private Button typeButton;
         [SerializeField] private Text typeButtonText;
 
-        [SerializeField] private Text curCharacterTypeText;
-        [SerializeField] private Text curChatTypeText;
 
 
         [SerializeField] private GameObject chatEntryPrefab;
-        [SerializeField] private GameObject allChatContent;
-        [SerializeField] private GameObject teamChatContent;
-        [SerializeField] private GameObject systemChatContent;
 
+
+        [Header("AllChat")]
+        [SerializeField] private GameObject allChatContent;
+        [SerializeField] private GameObject allChatViewport;
+        [SerializeField] private Button allChangeButton;
+
+
+        [Header("TeamChat")]
+        [SerializeField] private GameObject teamChatContent;
+        [SerializeField] private GameObject teamChatViewport;
+        [SerializeField] private Button teamChangeButton;
+
+
+        [Header("SystemChat")]
+        [SerializeField] private GameObject systemChatContent;
+        [SerializeField] private GameObject systemChatViewport;
+        [SerializeField] private Button systemChangeButton;
+
+        [Header("ChatImage")]
         [SerializeField] private Sprite[] charImageType;
         ChatEntry chatEntry;
 
@@ -63,47 +85,104 @@ namespace YSM
         string tmpChatMessage;
 
 
-
         private void OnEnable()
         {
-
             curChatType = GameChatType.ALL;
+            typeButtonText.text = "All";
             chatEntry = chatEntryPrefab.GetComponent<ChatEntry>();
+
+            Transform[] allChatchildList = allChatContent.GetComponentsInChildren<Transform>();
+            if(allChatchildList != null)
+            {
+                for(int i = 1; i < allChatchildList.Length;i++)
+                {
+                    if (allChatchildList[i] != transform)
+                        Destroy(allChatchildList[i].gameObject);
+                }
+            }
+
+            Transform[] teamChatchildList = allChatContent.GetComponentsInChildren<Transform>();
+            if(teamChatchildList != null)
+            {
+                for(int i = 1; i < teamChatchildList.Length;i++)
+                {
+                    if (teamChatchildList[i] != transform)
+                        Destroy(teamChatchildList[i].gameObject);
+                }
+            }
+            
+            Transform[] systemChatchildList = allChatContent.GetComponentsInChildren<Transform>();
+            if(systemChatchildList != null)
+            {
+                for(int i = 1; i < systemChatchildList.Length;i++)
+                {
+                    if (systemChatchildList[i] != transform)
+                        Destroy(systemChatchildList[i].gameObject);
+                }
+            }
+
+            
         }
 
         private void OnDisable()
         {
-            curChatType = GameChatType.ALL;
-            chatEntry = chatEntryPrefab.GetComponent<ChatEntry>();
+
         }
 
+        private void SetCharacterType(GameCharacterType characterType)
+        {
+            curCharacterType = characterType;
+            UISet();
+        }
+
+        public void UISet()
+        {
+            if(curCharacterType == GameCharacterType.OBSERVER || curCharacterType == GameCharacterType.DEAD)
+            {
+                typeButtonText.text = curCharacterType.ToString();
+                typeButton.interactable = false;
+            }
+            else
+            {
+                typeButtonText.text = curChatType.ToString();
+                typeButton.interactable = true;
+            }
+
+        }
+
+
+
+        //private void Update()
+        //{
+        //    if (Input.GetKeyDown(KeyCode.K))
+        //    {
+        //        curCharacterType++;
+        //        curCharacterType = (GameCharacterType)((int)curCharacterType % (int)GameCharacterType.CNT);
+        //        SetCharacterType(curCharacterType);
+        //    }
+        //}
 
         public void ClickChatTypeButton()
         {
 
-            //curChatType++;
-            //curChatType = (GameChatType)((int)curChatType % (int)GameChatType.CNT);
-            //curChatTypeText.text = curChatType.ToString();
 
+            //죽었을때 
             if (GameChatType.DEAD == curChatType)
             {
                 typeButtonText.text = curChatType.ToString();
                 return;
             }
+
             Debug.Log(curChatType);
             curChatType = GameChatType.ALL == curChatType ? GameChatType.TEAM : GameChatType.ALL;
             typeButtonText.text = curChatType.ToString();
         }
 
-        public void TestChangeCharacterClicked()
-        {
-
-            curCharacterType++;
-            curCharacterType = (GameCharacterType)((int)curCharacterType % (int)GameCharacterType.CNT);
-            curCharacterTypeText.text = curCharacterType.ToString();
-        }
 
 
+
+
+        #region All , Team , Dead, Observer Chat Method
         public void GameChatSendClicked()
         {
             if (inputfield.text == "")
@@ -125,9 +204,9 @@ namespace YSM
         [PunRPC]
         public void GameChatMessage(string userNickName, string userMessage, PlayerColorType colorIdx, GameCharacterType receiveCharacterType, GameChatType receiveChatType, bool isHost = false)
         {
-            Debug.Log("캐릭터 타입 받음 : "+receiveCharacterType.ToString()+ "  /// " + "내꺼"+curCharacterType.ToString());
-            Debug.Log("캐릭터 챗 타입 받음 : "+ receiveChatType.ToString()+ "  /// " + "내꺼"+ curChatType.ToString());
-            
+            Debug.Log("캐릭터 타입 받음 : " + receiveCharacterType.ToString() + "  /// " + "내꺼" + curCharacterType.ToString());
+            Debug.Log("캐릭터 챗 타입 받음 : " + receiveChatType.ToString() + "  /// " + "내꺼" + curChatType.ToString());
+
             if (receiveChatType == GameChatType.NOTICE) // 공지 채팅 오면 모두 받기
             { }
             else if (curCharacterType == GameCharacterType.OBSERVER) //내가 옵저버면 모든 채팅 받기
@@ -162,8 +241,8 @@ namespace YSM
 
             GameObject entry = Instantiate(chatEntryPrefab);
 
-            SetColor(userNickName, userMessage,colorIdx,receiveCharacterType, receiveChatType); //컬러 세팅하고
-            
+            SetColor(userNickName, userMessage, colorIdx, receiveCharacterType, receiveChatType); //컬러 세팅하고
+
             tmpChatName += isHost && receiveCharacterType != GameCharacterType.NOTICE ? " (Host)" : ""; //호스트인지 아닌지
 
 
@@ -174,33 +253,25 @@ namespace YSM
                 tmpChatMessage
                 );
 
-            if (receiveCharacterType == GameCharacterType.NOTICE)
-            {
-                Debug.Log("시스템쳇ㅔㅔㅔㅔㅔㅔㅔ잇 추가");
-                GameObject tmpEntry = Instantiate(entry);
-                tmpEntry.transform.localScale = Vector3.one;
-                tmpEntry.transform.SetParent(systemChatContent.transform);
-            }
 
-            else if (receiveChatType == GameChatType.TEAM)
+            if (receiveChatType == GameChatType.TEAM)
             {
-                Debug.Log("팀체ㅔㅔㅔㅔㅔㅔㅔ잇 추가");
                 GameObject tmpEntry = Instantiate(entry);
                 tmpEntry.transform.localScale = Vector3.one;
                 tmpEntry.transform.SetParent(teamChatContent.transform);
             }
 
-
-
             entry.transform.localScale = Vector3.one;
             entry.transform.SetParent(allChatContent.transform);
 
-
-
         }
 
+        #endregion
 
-        public void SystemKillLog(Player tagger , Player runner)
+
+        #region SystemLogMethod
+
+        public void SystemKillLog(Player tagger, Player runner)
         {
             photonView.RPC("AddKillLog",
                RpcTarget.All,
@@ -220,8 +291,8 @@ namespace YSM
                 charImageType[(int)GameChatType.NOTICE],
                 ColorTransform.EnumToColor(PlayerColorType.RED),
                 "<Size=15><color=#" + GameChatTypeColorToString(GameChatType.NOTICE) + "> <System></color></Size>",
-                "<Size=15><color=#" + YSM.ColorTransform.EnumToColor((YSM.PlayerColorType)tagger.GetPlayerNumber()) + ">" +tagger.NickName +"</color></Size> ->" +
-                "<Size=15><color=#" + YSM.ColorTransform.EnumToColor((YSM.PlayerColorType)runner.GetPlayerNumber()) + ">" + runner.NickName +"</color></Size> Tag!!!"
+                "<Size=15><color=#" + YSM.ColorTransform.EnumToString((YSM.PlayerColorType)tagger.GetPlayerNumber()) + ">" + tagger.NickName + "</color></Size> ->" +
+                "<Size=15><color=#" + YSM.ColorTransform.EnumToString((YSM.PlayerColorType)runner.GetPlayerNumber()) + ">" + runner.NickName + "</color></Size> Tag!!!"
                 );
 
             systemChatEntry.transform.localScale = Vector3.one;
@@ -253,7 +324,7 @@ namespace YSM
                 charImageType[(int)GameChatType.NOTICE],
                 ColorTransform.EnumToColor(PlayerColorType.RED),
                 "<Size=15><color=#" + GameChatTypeColorToString(GameChatType.NOTICE) + "> <System></color></Size>",
-                "<Size=15><color=#" + YSM.ColorTransform.EnumToColor((YSM.PlayerColorType)runner.GetPlayerNumber()) + ">" + runner.NickName + "</color></Size> Kick Can!!!!!!!!"
+                "<Size=15><color=#" + YSM.ColorTransform.EnumToString((YSM.PlayerColorType)runner.GetPlayerNumber()) + ">" + runner.NickName + "</color></Size> Kick Can!!!!!!!!"
                 );
 
             systemChatEntry.transform.localScale = Vector3.one;
@@ -264,7 +335,36 @@ namespace YSM
         }
 
 
+        #endregion
 
+        #region Receive Team Chat Condition 
+        public bool RunnerSendTeamChat()
+        {
+            if (curCharacterType == GameCharacterType.TAGGER)
+                return true;
+            return false;
+        }
+
+
+        public bool TaggerSendTeamChat()
+        {
+            if (curCharacterType == GameCharacterType.RUNNER || curCharacterType == GameCharacterType.DEAD)
+                return true;
+
+            return false;
+        }
+
+        public bool DeadSendChat()
+        {
+            if (curCharacterType != GameCharacterType.DEAD)
+                return true;
+
+            return false;
+        }
+
+        #endregion
+
+        #region ColorMethod
 
         private void SetColor(string userNickName, string userMessage, PlayerColorType colorIdx, GameCharacterType receiveCharacterType, GameChatType receiveChatType)
         {
@@ -282,11 +382,11 @@ namespace YSM
                     tmpChatName = "<Size=15><color=#" + GameCharacterTypeColorToString(receiveCharacterType) + ">" + userNickName + "</color></Size>";
                     tmpChatMessage = "<Size=15><color=#" + GameCharacterTypeColorToString(receiveCharacterType) + ">" + userMessage + "</color></Size>";
                     break;
-                case GameCharacterType.NOTICE:
-                    tmpColor = ColorTransform.EnumToColor(PlayerColorType.RED);
-                    tmpChatName = "<Size=15><color=#" + GameCharacterTypeColorToString(receiveCharacterType) + "> <System></color></Size>";
-                    tmpChatMessage = "<Size=15><color=#" + GameCharacterTypeColorToString(receiveCharacterType) + ">" + userMessage + "</color></Size>";
-                    break;
+                //case GameCharacterType.NOTICE:
+                //    tmpColor = ColorTransform.EnumToColor(PlayerColorType.RED);
+                //    tmpChatName = "<Size=15><color=#" + GameCharacterTypeColorToString(receiveCharacterType) + "> <System></color></Size>";
+                //    tmpChatMessage = "<Size=15><color=#" + GameCharacterTypeColorToString(receiveCharacterType) + ">" + userMessage + "</color></Size>";
+                //    break;
                 default:
                     tmpChatName = "Error";
                     tmpChatMessage = "Error";
@@ -294,72 +394,85 @@ namespace YSM
             }
         }
 
-
-
-        public bool RunnerSendTeamChat()
-        {
-            if (curCharacterType == GameCharacterType.TAGGER)
-                return true;
-            return false;
-        }
-
-        
-        public bool TaggerSendTeamChat()
-        {
-            if (curCharacterType == GameCharacterType.RUNNER || curCharacterType == GameCharacterType.DEAD)
-                return true;
-
-            return false;
-        }
-
-        public bool DeadSendChat()
-        {
-            if (curCharacterType != GameCharacterType.DEAD)
-                return true;
-
-            return false;
-        }
-
-
-
-        static public Color GameCharacterTypeColor(GameCharacterType index)
+        //static public Color GameCharacterTypeColor(GameCharacterType index)
+        //{
+        //    switch (index)
+        //    {
+        //        case GameCharacterType.RUNNER: return new Color32(255, 255, 255, 255);
+        //        case GameCharacterType.TAGGER: return new Color32(255, 0, 255, 255);
+        //        case GameCharacterType.DEAD: return new Color32(127, 127, 127, 255);
+        //        case GameCharacterType.OBSERVER: return new Color32(0, 0, 0, 255);
+        //        default: return Color.cyan; //오류:
+        //    }
+        //}
+        static public string GameCharacterTypeColorToString(GameCharacterType index)
         {
             switch (index)
             {
-                case GameCharacterType.RUNNER: return new Color32(255, 255, 255, 255);
-                case GameCharacterType.TAGGER: return new Color32(255, 0, 255, 255);
-                case GameCharacterType.DEAD: return new Color32(127, 127, 127, 255);
-                case GameCharacterType.OBSERVER: return new Color32(0, 0, 0, 255);
-                default: return Color.cyan; //오류:
-            }
-        }
-        static public string GameCharacterTypeColorToString(GameCharacterType index)
-        {
-             switch (index)
-             {
-                 case GameCharacterType.RUNNER:             return Convert.ToString(255,16) + Convert.ToString(255,16) + Convert.ToString(255,16); //흰색
-                 case GameCharacterType.TAGGER:             return Convert.ToString(0,16) + Convert.ToString(0,16) + Convert.ToString(0,16); //검정색
-                 case GameCharacterType.DEAD:               return Convert.ToString(127,16) + Convert.ToString(127,16) + Convert.ToString(127,16); //회색
-                 case GameCharacterType.OBSERVER:           return Convert.ToString(34, 16) + Convert.ToString(177, 16) + Convert.ToString(76, 16);   //초록색
-                 case GameCharacterType.NOTICE:             return Convert.ToString(237,16) + Convert.ToString(28, 16) + Convert.ToString(36, 16);   //빨강색
+                case GameCharacterType.RUNNER: return Convert.ToString(255, 16) + Convert.ToString(255, 16) + Convert.ToString(255, 16); //흰색
+                case GameCharacterType.TAGGER: return Convert.ToString(0, 16) + Convert.ToString(0, 16) + Convert.ToString(0, 16); //검정색
+                case GameCharacterType.DEAD: return Convert.ToString(127, 16) + Convert.ToString(127, 16) + Convert.ToString(127, 16); //회색
+                case GameCharacterType.OBSERVER: return Convert.ToString(34, 16) + Convert.ToString(177, 16) + Convert.ToString(76, 16);   //초록색
+                 //case GameCharacterType.NOTICE:             return Convert.ToString(237,16) + Convert.ToString(28, 16) + Convert.ToString(36, 16);   //빨강색
                 default: return "Error";
-             }
+            }
 
         }
 
         static public string GameChatTypeColorToString(GameChatType index)
         {
-             switch (index)
-             {
-                 case GameChatType.ALL:               return Convert.ToString(255,16) + Convert.ToString(255,16) + Convert.ToString(255,16); //흰색
-                 case GameChatType.TEAM:              return Convert.ToString(255,16) + Convert.ToString(242,16) + "0" + Convert.ToString(0, 16); // 노랑색
-                 case GameChatType.DEAD:              return Convert.ToString(127,16) + Convert.ToString(127,16) + Convert.ToString(127,16);   //회색
-                 case GameChatType.OBSERVER:          return Convert.ToString(34, 16) + Convert.ToString(177,16) + Convert.ToString(76, 16);   //초록색
-                 case GameChatType.NOTICE:            return Convert.ToString(237,16) + Convert.ToString(28, 16) + Convert.ToString(36, 16);   //빨강색
-                 default: return "Error";
-             }
+            switch (index)
+            {
+                case GameChatType.ALL: return Convert.ToString(255, 16) + Convert.ToString(255, 16) + Convert.ToString(255, 16); //흰색
+                case GameChatType.TEAM: return Convert.ToString(255, 16) + Convert.ToString(242, 16) + "0" + Convert.ToString(0, 16); // 노랑색
+                case GameChatType.DEAD: return Convert.ToString(127, 16) + Convert.ToString(127, 16) + Convert.ToString(127, 16);   //회색
+                case GameChatType.OBSERVER: return Convert.ToString(34, 16) + Convert.ToString(177, 16) + Convert.ToString(76, 16);   //초록색
+                //case GameChatType.NOTICE:            return Convert.ToString(237,16) + Convert.ToString(28, 16) + Convert.ToString(36, 16);   //빨강색
+                default: return "Error";
+            }
 
         }
+
+        #endregion
+
+        #region ChagneChatPanel and Button Listener
+        public void OnClickAllPanel()
+        {
+            ChangeChatPanel(GameChatPanelChange.ALL);
+
+        }
+        public void OnClickTeamPanel()
+        {
+            ChangeChatPanel(GameChatPanelChange.TEAM);
+
+        }
+
+        public void OnClickNoticePanel()
+        {
+            ChangeChatPanel(GameChatPanelChange.NOTICE);
+        }
+
+        private void ChangeChatPanel(GameChatPanelChange change)
+        {
+            //if (curCharacterType == GameCharacterType.OBSERVER)
+            //{
+            //    allChatViewport.gameObject.SetActive(GameChatPanelChange.ALL == change);
+            //    allChangeButton.interactable = GameChatPanelChange.ALL != change;
+            //    systemChatViewport.gameObject.SetActive(GameChatPanelChange.NOTICE == change);
+            //    systemChangeButton.interactable = GameChatPanelChange.NOTICE != change;
+            //    return;
+            //}
+            allChatViewport.gameObject.SetActive(GameChatPanelChange.ALL == change);
+            allChangeButton.interactable = GameChatPanelChange.ALL != change;
+
+            teamChatViewport.gameObject.SetActive(GameChatPanelChange.TEAM == change);
+            teamChangeButton.interactable = GameChatPanelChange.TEAM != change;
+
+            systemChatViewport.gameObject.SetActive(GameChatPanelChange.NOTICE == change);
+            systemChangeButton.interactable = GameChatPanelChange.NOTICE != change;
+        }
+        #endregion
+
 
 
     }
