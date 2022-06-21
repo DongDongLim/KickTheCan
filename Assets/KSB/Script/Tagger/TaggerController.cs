@@ -41,13 +41,16 @@ namespace DH
                 Debug.Log(" 공격 횟수 1 증가 ");
                 return;
             }
-            Debug.Log("남은 쿨타임 : " + (attackCool - attackCurCool));
             attackCurCool += Time.deltaTime;
         }
 
         public override void ControllerAction()
         {
-            owner.photonView.RPC("Attack", RpcTarget.All);
+            if (0 < attackCurCount)
+            {
+                attackCurCount--;
+                owner.photonView.RPC("Attack", RpcTarget.All);
+            }
         }
     }
 }

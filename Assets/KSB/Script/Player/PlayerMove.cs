@@ -56,6 +56,25 @@ namespace DH
                 UIMng.instance.jumpAction -= Jump;
         }
 
+        // TODO : 테스트용
+        void Update()
+        {
+            TestJump();
+        }
+
+        public void TestJump()
+        {
+            if (!Input.GetButtonDown("Jump"))
+                return;
+                
+            if (isJump)
+                return;
+
+            rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+
+            isJump = true;
+        }
+
         public void Move(Vector2 inputDirection)
         {
             moveInput = inputDirection;
@@ -100,13 +119,6 @@ namespace DH
         {
             if (isJump)
                 return;
-            // if(Time.time < jumpCurTime + jumpCoolDown)
-            //     return;
-            // if(rigid.velocity.y < 0)
-            //     return;
-
-            // jumpCurTime = Time.time;
-            // TODO : 점프공격....후일에
 
             rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
 
@@ -122,7 +134,7 @@ namespace DH
             rayStatePos = new Vector3(transform.position.x, transform.position.y + maxRayDistance, transform.position.z);
             boxCastSize = new Vector2(charactorBody.GetComponent<Collider>().bounds.size.x,charactorBody.GetComponent<Collider>().bounds.size.z);
             RaycastHit hit;
-            if (Physics.SphereCast(rayStatePos + (Vector3.up * maxRayDistance),boxCastSize.x * 0.5f,Vector3.down,out hit,maxRayDistance + 0.5f,LayerMask.GetMask("Ground")))
+            if (Physics.SphereCast(rayStatePos + (Vector3.up * maxRayDistance),boxCastSize.x * 0.5f,Vector3.down,out hit,maxRayDistance + 0.5f,LayerMask.GetMask("Ground","Object")))
             {
                 isJump = false;
                 owner.photonView.RPC("JumpAnim", Photon.Pun.RpcTarget.All, isJump);
@@ -134,6 +146,7 @@ namespace DH
                 isJump = true;
                 owner.photonView.RPC("JumpAnim", Photon.Pun.RpcTarget.All, isJump);
             }
+            Debug.DrawRay(rayStatePos, Vector3.down * maxRayDistance, Color.red, 1f);
         }
 
     }
