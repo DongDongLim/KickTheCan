@@ -19,7 +19,7 @@ namespace DH
         public void ChildObjCreate(int index)
         {
             objIndex = index;
-            Instantiate(DH.MapSettingMng.instance.mapObj[objIndex], transform, false);
+            Instantiate(MapSettingMng.instance.mapObj[objIndex], MapSettingMng.instance.gameObject.transform, false);
         }
 
         private void OnCollisionEnter(Collision collision)

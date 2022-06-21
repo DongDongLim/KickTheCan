@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class MapSetScript : MonoBehaviourPun
+namespace DH
 {
-    public int objIndex;
-
-
-    public void SetObjIndex(int index)
+    public class MapSetScript : MonoBehaviourPun
     {
-        photonView.RPC("ChildObjCreate", RpcTarget.All, index);
-    }
+        public int objIndex;
 
-    [PunRPC]
-    public void ChildObjCreate(int index)
-    {
-        objIndex = index;
-        Instantiate(DH.MapSettingMng.instance.mapBG[objIndex], transform, false);
+
+        public void SetObjIndex(int index)
+        {
+            photonView.RPC("ChildObjCreate", RpcTarget.All, index);
+        }
+
+        [PunRPC]
+        public void ChildObjCreate(int index)
+        {
+            objIndex = index;
+            Instantiate(MapSettingMng.instance.mapBG[objIndex], MapSettingMng.instance.gameObject.transform, false);
+        }
     }
 }
