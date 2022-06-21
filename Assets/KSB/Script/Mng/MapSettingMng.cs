@@ -9,6 +9,7 @@ namespace DH
 {
     public class MapSettingMng : SingletonMini<MapSettingMng>
     {
+        public GameObject[] mapBG;
         public GameObject[] mapObj;
         public GameObject taggerObj;
         int randIndex;
@@ -22,6 +23,11 @@ namespace DH
 
         public IEnumerator Setting()
         {
+            randIndex = Random.Range(0, mapBG.Length);
+            PhotonNetwork.Instantiate
+                    ("Map", Vector3.zero, Quaternion.identity, 0)
+                    .GetComponent<MapSetScript>().SetObjIndex(randIndex);
+
             for (int i = 0; i < 100; ++i)
             {
                 randIndex = Random.Range(0, mapObj.Length);
