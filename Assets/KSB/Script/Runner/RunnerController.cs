@@ -48,6 +48,7 @@ namespace DH
         {
             if(collision.gameObject.layer == LayerMask.NameToLayer("Can"))
             {
+                //PlayMng.instance.KickTheCan(Vector3.Normalize(collision.gameObject.transform.position - transform.position));
                 PlayMng.instance.photonView.RPC("KickTheCan", RpcTarget.All, Vector3.Normalize(collision.gameObject.transform.position - transform.position));
             }
         }
