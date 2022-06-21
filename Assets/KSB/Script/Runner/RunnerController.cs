@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
+using Photon.Pun.UtilityScripts;
 
 namespace DH
 {
@@ -41,6 +43,16 @@ namespace DH
             if(other.gameObject.layer == LayerMask.NameToLayer("Weapon"))
             {
                 Damaged();
+                int id = other.transform.parent.parent.GetComponent<PlayerScript>().ownerID;
+                foreach(Player p in PhotonNetwork.PlayerList)
+                {
+                    if (id == p.GetPlayerNumber())
+                    {
+                        GameManager.Instance.gameChat.SystemKillLog(p, PhotonNetwork.LocalPlayer);
+                        break;
+                    }
+                }
+
             }
         }
 

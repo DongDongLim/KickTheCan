@@ -2207,6 +2207,12 @@ MonoBehaviour:
   typeButton: {fileID: 413146130}
   typeButtonText: {fileID: 1656266681}
   curCharacterTypeText: {fileID: 1058630797}
+  curChatTypeText: {fileID: 0}
+  chatEntryPrefab: {fileID: 0}
+  allChatContent: {fileID: 0}
+  teamChatContent: {fileID: 0}
+  systemChatContent: {fileID: 0}
+  charImageType: []
 --- !u!114 &266061125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2599,7 +2605,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.349}
   m_AnchorMin: {x: 0.2, y: 0.19715127}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.4800034, y: -0.009994507}
+  m_AnchoredPosition: {x: 2.480011, y: -0.010009766}
   m_SizeDelta: {x: -1.939148, y: -0.3536911}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &286558087
@@ -3731,6 +3737,12 @@ MonoBehaviour:
   typeButton: {fileID: 511480401}
   typeButtonText: {fileID: 1744603276}
   curCharacterTypeText: {fileID: 1860679759}
+  curChatTypeText: {fileID: 0}
+  chatEntryPrefab: {fileID: 0}
+  allChatContent: {fileID: 0}
+  teamChatContent: {fileID: 0}
+  systemChatContent: {fileID: 0}
+  charImageType: []
 --- !u!114 &470485087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5622,9 +5634,9 @@ RectTransform:
   m_Father: {fileID: 2001253596}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 88, y: -18.638176}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 88, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &650944350
@@ -5817,7 +5829,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.349}
   m_AnchorMin: {x: 0.2, y: 0.19715127}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.4800034, y: -0.009994507}
+  m_AnchoredPosition: {x: 2.480011, y: -0.010009766}
   m_SizeDelta: {x: -1.939148, y: -0.3536911}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &687899119
@@ -8619,9 +8631,9 @@ RectTransform:
   m_Father: {fileID: 2001253596}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 88, y: -3}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 88, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &999253746
@@ -9715,7 +9727,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.349}
   m_AnchorMin: {x: 0.2, y: 0.19715127}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.4800034, y: -0.009994507}
+  m_AnchoredPosition: {x: 2.480011, y: -0.010009766}
   m_SizeDelta: {x: -1.939148, y: -0.3536911}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1070126989
@@ -10186,7 +10198,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.349}
   m_AnchorMin: {x: 0.2, y: 0.19715127}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.4800034, y: -0.009994507}
+  m_AnchoredPosition: {x: 2.480011, y: -0.010009766}
   m_SizeDelta: {x: -1.939148, y: -0.3536911}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1103448024
@@ -11206,7 +11218,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.349}
   m_AnchorMin: {x: 0.2, y: 0.19715127}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.4800034, y: -0.009994507}
+  m_AnchoredPosition: {x: 2.480011, y: -0.010009766}
   m_SizeDelta: {x: -1.939148, y: -0.3536911}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1248739801
@@ -11496,6 +11508,12 @@ MonoBehaviour:
   typeButton: {fileID: 296486612}
   typeButtonText: {fileID: 1496008940}
   curCharacterTypeText: {fileID: 856425294}
+  curChatTypeText: {fileID: 0}
+  chatEntryPrefab: {fileID: 0}
+  allChatContent: {fileID: 0}
+  teamChatContent: {fileID: 0}
+  systemChatContent: {fileID: 0}
+  charImageType: []
 --- !u!114 &1258812865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13382,6 +13400,12 @@ MonoBehaviour:
   typeButton: {fileID: 1647144169}
   typeButtonText: {fileID: 1459022737}
   curCharacterTypeText: {fileID: 370195834}
+  curChatTypeText: {fileID: 0}
+  chatEntryPrefab: {fileID: 0}
+  allChatContent: {fileID: 0}
+  teamChatContent: {fileID: 0}
+  systemChatContent: {fileID: 0}
+  charImageType: []
 --- !u!114 &1464025561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18077,6 +18101,12 @@ MonoBehaviour:
   typeButton: {fileID: 2059083886}
   typeButtonText: {fileID: 1400449482}
   curCharacterTypeText: {fileID: 1109577222}
+  curChatTypeText: {fileID: 0}
+  chatEntryPrefab: {fileID: 0}
+  allChatContent: {fileID: 0}
+  teamChatContent: {fileID: 0}
+  systemChatContent: {fileID: 0}
+  charImageType: []
 --- !u!114 &2049050745
 MonoBehaviour:
   m_ObjectHideFlags: 0

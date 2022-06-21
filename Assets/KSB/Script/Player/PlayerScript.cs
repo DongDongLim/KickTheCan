@@ -16,8 +16,7 @@ namespace DH
 
         Controller control = null;
 
-        [SerializeField]
-        GameObject attackColl;
+        public int ownerID = -1;
 
         bool isSettingComplete = false;
 
@@ -31,7 +30,8 @@ namespace DH
         private void Start()
         {
             anim = transform.GetChild(1).GetComponent<Animator>() == null ? null : transform.GetChild(1).GetComponent<Animator>();
-            attackColl = transform.GetChild(1).childCount > 0 ? transform.GetChild(1).GetChild(0).gameObject : null;
+            if (photonView.IsMine)
+                ownerID = PhotonNetwork.LocalPlayer.GetPlayerNumber();
         }
 
         public void ControllerSetting()
@@ -85,13 +85,15 @@ namespace DH
             if (stream.IsWriting)
             {
                 stream.SendNext(isSettingComplete);
+                stream.SendNext(ownerID);
                 if (isSettingComplete)
                     stream.SendNext(charactorBody.rotation);
             }
             else
             {
                 isSettingComplete = (bool)stream.ReceiveNext();
-                if(null != charactorBody)
+                ownerID = (int)stream.ReceiveNext();
+                if (null != charactorBody)
                     charactorBody.rotation = (Quaternion)stream.ReceiveNext();
             }
         }

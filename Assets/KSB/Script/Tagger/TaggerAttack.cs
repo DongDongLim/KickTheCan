@@ -18,7 +18,7 @@ public class TaggerAttack : MonoBehaviour
     [PunRPC]
     IEnumerator AttackEnd()
     {
-        yield return new WaitForFixedUpdate();
+        yield return new WaitForSeconds(0.1f);
         attackColl.SetActive(false);
     }
 }

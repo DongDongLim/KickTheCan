@@ -212,6 +212,7 @@ namespace YSM
         [PunRPC]
         public void AddKillLog(Player tagger, Player runner)
         {
+            Debug.Log(true);
             GameObject systemChatEntry = Instantiate(chatEntryPrefab);
             GameObject allChatEntry;
             //tagger.NickName;
