@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class PlayerSceneInfo : MonoBehaviour
 {
-    public bool isReturn = false;
-    
+    public bool isRenegade = false;
+    public bool isObserver = false;    
 }

@@ -10,8 +10,15 @@ namespace DH
         public int objIndex;
 
 
-        public void SetObjIndex(int index)
+        public void SetObjIndex(int index, bool isRebuild)
         {
+            // TODO : 바뀜
+            if (!isRebuild)
+            {
+                ChildObjCreate(index);
+                return;
+            }
+
             photonView.RPC("ChildObjCreate", RpcTarget.All, index);
         }
 

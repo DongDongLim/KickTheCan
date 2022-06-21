@@ -14,7 +14,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     public Text infoText;
     public Transform[] spawnPos;
 
-    private bool isTagger;    
+    private PlayerSceneInfo playerSceneInfo;
+    private bool isTagger;
+    private bool isRebuild = false;
     
     int m_maxTagger = 0;
 
@@ -27,6 +29,11 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void Start()
     {
+        playerSceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();
+        if (true == playerSceneInfo.isRenegade || true == playerSceneInfo.isObserver)
+        {
+            isRebuild = true;
+        }
         ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_LOAD, true } };
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
     }
@@ -130,6 +137,13 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (!PhotonNetwork.IsMasterClient)
         {
             return;
+        }               
+
+        if (isRebuild)
+        {
+            Debug.Log(isRebuild);
+            StartCoroutine(DH.MapSettingMng.instance.Setting());
+            return;
         }
 
         StartCoroutine(DH.MapSettingMng.instance.Setting());
@@ -197,9 +211,17 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("CreatePlayer access");        
         object isTagger;
-       
+
+        // TODO : 중간 입장이나 로비에 나갔다가 재입장시 작동하지 말아야한다.
+        //if (true == playerSceneInfo.isRenegade || true == playerSceneInfo.isObserver)
+        //{
+        //    isRebuild = true;
+        //    Debug.Log("관전자 or 탈주자");
+        //    //return;
+        //}
+
         if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(GameData.PLAYER_TAGGER, out isTagger))
-        {
+        {            
             if ((bool)isTagger)
             {
                 DH.MapSettingMng.instance.TaggerSetting(PhotonNetwork.LocalPlayer);
@@ -207,7 +229,8 @@ public class GameManager : MonoBehaviourPunCallbacks
             else
             {
                 DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
-            }                        
+            }                   
+           
         }
 
         Debug.Log("총 tagger 인원 : " + m_maxTagger);

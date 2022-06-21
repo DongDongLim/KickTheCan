@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 public class InConnectPanel : MonoBehaviour
 {
@@ -18,11 +19,11 @@ public class InConnectPanel : MonoBehaviour
     }
 
     public void OnRandomMatchingButtonClicked()
-    {
-        // Ãß°¡ :  
-        if (playerSceneInfo.isReturn)
+    {        
+        if (playerSceneInfo.isRenegade)
         {
             Debug.Log("Go to GameScene");
+            //SceneManager.LoadScene("GameScene");
             PhotonNetwork.LoadLevel(1);
             return;
         }
