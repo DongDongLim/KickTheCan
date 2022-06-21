@@ -5,7 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
 
-public class UIManager : MonoBehaviour
+public class PlayerSceneManager : MonoBehaviour
 {
     public GameObject exitMenuUI;
     public PlayerSceneInfo sceneInfo;
