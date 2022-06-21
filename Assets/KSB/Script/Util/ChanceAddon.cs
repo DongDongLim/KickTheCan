@@ -27,4 +27,33 @@ public class ChanceAddon
             return false;
         }
     }
+
+    
+    public void ChanceThree(float first,float second,float third,int result)
+    {
+        if (100 != (first+second+third))
+            return;
+
+        chanceBase = Random.Range(1,1001);
+        chanceBase = chanceBase * 0.1f;
+
+        // EX 확률 : first% second% third%
+
+        // 0 보다 높고 first 와 같거나 작으면 first%
+        if (0 < chanceBase && first >= chanceBase)
+        {
+            result = 0;
+        }
+        // first 보다 높고 first + second 와 같거나 작으면 second%
+        else if (first < chanceBase && (second + first) >= chanceBase)
+        {
+            result = 1;
+        }
+        // first + second 보다 높고 100 와 같거나 작으면 third%
+        else if ((second + first) < chanceBase && 100 >= chanceBase)
+        {
+            result = 2;
+        }
+            
+    }
 }
