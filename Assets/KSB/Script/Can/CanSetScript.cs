@@ -8,7 +8,7 @@ namespace DH
     public class CanSetScript : MonoBehaviourPun
     {
         [SerializeField]
-        GameObject Can;
+        GameObject can;
         public void SetObjIndex(int index)
         {
             photonView.RPC("ChildObjCreate", RpcTarget.All, index);
@@ -17,7 +17,9 @@ namespace DH
         [PunRPC]
         public void ChildObjCreate(int index)
         {
-            Instantiate(Can, MapSettingMng.instance.gameObject.transform, false).transform.position = transform.position;
+            GameObject canObj = Instantiate(can, MapSettingMng.instance.gameObject.transform, false);
+            canObj.transform.position = transform.position;
+            PlayMng.instance.can = canObj;
         }
 
         private void OnCollisionEnter(Collision collision)

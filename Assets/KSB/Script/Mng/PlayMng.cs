@@ -10,6 +10,8 @@ namespace DH
         [SerializeField]
         bool isRunnerBeCaught = false;
 
+        public GameObject can;
+
         protected override void OnAwake()
         {
 
@@ -30,6 +32,18 @@ namespace DH
                 UIMng.instance.jumpAction -= Release;
                 isRunnerBeCaught = false;
             }
+        }
+
+        [PunRPC]
+        public void KickTheCan(Vector3 canTargetVector)
+        {
+            StartCoroutine(can.GetComponent<CanMoveScript>().CanMove(canTargetVector));
+        }
+
+        [PunRPC]
+        public void SetCanPosition(Vector3 pos)
+        {
+            can.transform.position = pos;
         }
     }
 }
