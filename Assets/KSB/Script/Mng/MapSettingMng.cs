@@ -26,6 +26,9 @@ namespace DH
 
         public IEnumerator Setting()
         {
+            if (objectSpawnPos.Length == 0)
+                yield return null;
+            
             foreach(GameObject obj in objectSpawnPos)
             {
                 Debug.Log("포이치지롱");
@@ -50,7 +53,7 @@ namespace DH
                         Debug.Log("생겼지롱");
                         break;
                 }
-            yield return null;
+                yield return null;
             }
         }
 
