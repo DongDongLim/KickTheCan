@@ -169,6 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df6fd9cabd6782418bc15205dee99aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 0}
   cameraArm: {fileID: 0}
   charactorBody: {fileID: 0}
   rigid: {fileID: 0}

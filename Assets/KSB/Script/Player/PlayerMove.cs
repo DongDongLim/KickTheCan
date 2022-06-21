@@ -6,6 +6,7 @@ namespace DH
 {
     public class PlayerMove : MonoBehaviour
     {
+        [SerializeField]
         PlayerScript owner = null;
 
         [SerializeField]

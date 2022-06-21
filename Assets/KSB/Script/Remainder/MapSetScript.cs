@@ -19,7 +19,7 @@ namespace DH
         public void ChildObjCreate(int index)
         {
             objIndex = index;
-            Instantiate(MapSettingMng.instance.mapBG[objIndex], MapSettingMng.instance.gameObject.transform, false);
+            Instantiate(MapSettingMng.instance.mapBG[objIndex], MapSettingMng.instance.gameObject.transform, false).transform.position = transform.position;
         }
     }
 }

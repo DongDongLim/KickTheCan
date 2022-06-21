@@ -5,11 +5,10 @@ using Photon.Pun;
 
 namespace DH
 {
-    public class ObjScript : MonoBehaviourPun
+    public class CanSetScript : MonoBehaviourPun
     {
-        public int objIndex;
-
-
+        [SerializeField]
+        GameObject Can;
         public void SetObjIndex(int index)
         {
             photonView.RPC("ChildObjCreate", RpcTarget.All, index);
@@ -18,13 +17,12 @@ namespace DH
         [PunRPC]
         public void ChildObjCreate(int index)
         {
-            objIndex = index;
-            Instantiate(MapSettingMng.instance.mapObj[objIndex], MapSettingMng.instance.gameObject.transform, false).transform.position = transform.position;
+            Instantiate(Can, MapSettingMng.instance.gameObject.transform, false).transform.position = transform.position;
         }
 
         private void OnCollisionEnter(Collision collision)
         {
-            if(collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
             {
                 GetComponent<Rigidbody>().isKinematic = true;
             }
