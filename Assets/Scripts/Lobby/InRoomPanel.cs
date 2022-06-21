@@ -31,7 +31,7 @@ public class InRoomPanel : MonoBehaviour
 
 
     /// <summary>
-    /// YSM : 2022.06.16 �÷��̾� ����� �÷� ���� ������ ���� ������
+    /// YSM : 2022.06.16 �÷��̾� �����?�÷� ���� ������ ���� ������
     /// </summary>
     private void OnEnable()
     {
@@ -106,19 +106,9 @@ public class InRoomPanel : MonoBehaviour
     }
 
     public void OnStartGameButtonClicked()
-<<<<<<< Updated upstream
-    {
-        // TODO : IsOpen false -> true
-        //        IsVisible    -> true
-        PhotonNetwork.CurrentRoom.IsOpen = true;
-        PhotonNetwork.CurrentRoom.IsVisible = true;
-        // ToDo : �ٲ�
-
-=======
     {        
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
->>>>>>> Stashed changes
         PhotonNetwork.LoadLevel(1);
     }
 
@@ -228,14 +218,6 @@ public class InRoomPanel : MonoBehaviour
         kickGameButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);
     }
 
-<<<<<<< Updated upstream
-
-
-
-    //�߹�
-=======
-    //�߹�
->>>>>>> Stashed changes
     public void LocalKickGameButtonClicked()
     {
 

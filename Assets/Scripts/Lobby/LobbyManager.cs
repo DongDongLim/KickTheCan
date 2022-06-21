@@ -28,6 +28,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.AutomaticallySyncScene = true;
         
+        // TOOD : 추가
         if (PhotonNetwork.IsConnected)
             SetActivePanel(LobbyManager.PANEL.Connect);
     }
@@ -71,16 +72,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         inLobbyPanel.ClearRoomList();
     }
 
-<<<<<<< Updated upstream
-    //public override void OnCreatedRoom() 
-    //{
-    //    // TODO : 게임 시작 시 룸 남겨놓기
-    //    base.OnCreatedRoom();
-    //    EnterRoomParams enterRoomParams = new EnterRoomParams { };
-    //    Room room = PhotonNetwork.CurrentRoom;
-    //    room.EmptyRoomTtl = 300;        
-    //}
-=======
     public override void OnCreatedRoom() 
     {
         // TODO : 룸 지속시간
@@ -91,7 +82,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         room.EmptyRoomTtl = 1;
         
     }
->>>>>>> Stashed changes
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {

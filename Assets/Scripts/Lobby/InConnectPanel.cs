@@ -1,8 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
 public class InConnectPanel : MonoBehaviour
 {
+    public PlayerSceneInfo playerSceneInfo;
+
+    private void Start()
+    {
+        playerSceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();
+    }
+
     public void OnCreateRoomButtonClicked()
     {
         LobbyManager.instance.SetActivePanel(LobbyManager.PANEL.CreateRoom);
@@ -10,8 +19,8 @@ public class InConnectPanel : MonoBehaviour
 
     public void OnRandomMatchingButtonClicked()
     {
-        // TODO : 로비 재접속시 게임씬으로 이동하기 
-        if (false)
+        // 추가 :  
+        if (playerSceneInfo.isReturn)
         {
             Debug.Log("Go to GameScene");
             PhotonNetwork.LoadLevel(1);

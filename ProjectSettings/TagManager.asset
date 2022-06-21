@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Bullet
+  - DontDestroy
   layers:
   - Default
   - TransparentFX
@@ -36,7 +38,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Object
   - Ground
   m_SortingLayers:
   - name: Default

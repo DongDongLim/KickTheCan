@@ -8,15 +8,19 @@ using Photon.Pun.UtilityScripts;
 public class UIManager : MonoBehaviour
 {
     public GameObject exitMenuUI;
+    public PlayerSceneInfo sceneInfo;
 
     private void Update()
     {
-        StartCoroutine("CheckEscapeButton");    
+        StartCoroutine("CheckEscapeButton");
+        sceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();
     }
 
     public void OnLobbyButton()
     {
-        PhotonNetwork.LoadLevel(0);    
+        sceneInfo.isReturn = true;
+        PhotonNetwork.LoadLevel(0);
+        Debug.Log("Go to GameScene");
     }
 
     public void OnExitButton()

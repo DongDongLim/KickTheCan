@@ -28,6 +28,7 @@ namespace YSM
         ALL, //전체 채팅
         TEAM, //팀 채팅
         DEAD, //죽은사람 채팅
+        OBSERVER, //옵저버 채팅
         NOTICE, //공지 채팅
     }
 
@@ -102,8 +103,13 @@ namespace YSM
             Debug.Log("캐릭터 챗 타입 받음 : "+ receiveChatType.ToString()+ "  /// " + "내꺼"+ curChatType.ToString());
 
             if (curCharacterType == GameCharacterType.OBSERVER) //옵저버면 모든 채팅 받기
+            {}
+            else if(receiveChatType == GameChatType.NOTICE) // 공지 채팅 오면 모두 받기
+            {}
+            else if(receiveChatType == GameChatType.OBSERVER) //옵저버 채팅이 왔을 때 
             {
-                Debug.Log("0");
+                if (curCharacterType != GameCharacterType.OBSERVER) //옵저버가 아니면 받지 않음
+                    return; //return 이면 못받음
             }
             else if (receiveChatType == GameChatType.TEAM)
             {
@@ -111,7 +117,7 @@ namespace YSM
                 {
                     Debug.Log("1");
                     if (RunnerSendTeamChat())
-                        return; //return 이면 못받음
+                        return; 
                 }
                 else if (receiveCharacterType == GameCharacterType.TAGGER) // 테거가 팀챗을 보냈을때 못받는것
                 { 
