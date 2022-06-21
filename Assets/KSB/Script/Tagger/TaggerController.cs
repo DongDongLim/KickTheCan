@@ -49,7 +49,7 @@ namespace DH
             if (0 < attackCurCount)
             {
                 attackCurCount--;
-                owner.photonView.RPC("Attack", RpcTarget.All);
+                //owner.photonView.RPC("Attack", RpcTarget.All);
             }
         }
     }

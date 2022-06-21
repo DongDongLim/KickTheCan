@@ -20,6 +20,8 @@ namespace DH
 
         bool isSettingComplete = false;
 
+        bool animBool;
+
         private void Awake()
         {
             rigid = GetComponent<Rigidbody>();
@@ -60,7 +62,6 @@ namespace DH
             rigid.isKinematic = !rigid.isKinematic;
         }
 
-
         [PunRPC]
         public void Attack()
         {
@@ -68,33 +69,42 @@ namespace DH
         }
         
 
-        [PunRPC]
         public void MoveAnim(bool isMove)
         {
             anim?.SetBool("isMove", isMove);
         }
 
-        [PunRPC]
         public void JumpAnim(bool isJump)
         {
             anim?.SetBool("isJump", isJump);
         }
+        Quaternion quaternion;
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
             if (stream.IsWriting)
             {
                 stream.SendNext(isSettingComplete);
+                //stream.SendNext(anim?.GetBool("isMove") == null ? false : anim.GetBool("isMove"));
+                //stream.SendNext(anim?.GetBool("isJump") == null ? false : anim.GetBool("isJump"));
                 stream.SendNext(ownerID);
                 if (isSettingComplete)
                     stream.SendNext(charactorBody.rotation);
+                else
+                    stream.SendNext(Quaternion.identity);
             }
             else
             {
                 isSettingComplete = (bool)stream.ReceiveNext();
+                //animBool = (bool)stream.ReceiveNext();
+                //anim?.SetBool("isMove", animBool);
+                //animBool = (bool)stream.ReceiveNext();
+                //anim?.SetBool("isJump", animBool);
                 ownerID = (int)stream.ReceiveNext();
                 if (null != charactorBody)
                     charactorBody.rotation = (Quaternion)stream.ReceiveNext();
+                else
+                    quaternion = (Quaternion)stream.ReceiveNext();
             }
         }
     }
