@@ -42,9 +42,13 @@ namespace DH
             {
                 Damaged();
             }
-            if(other.gameObject.layer == LayerMask.NameToLayer("Can"))
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if(collision.gameObject.layer == LayerMask.NameToLayer("Can"))
             {
-                PlayMng.instance.photonView.RPC("KickTheCan", RpcTarget.All, Vector3.Normalize(other.gameObject.transform.position - transform.position));
+                PlayMng.instance.photonView.RPC("KickTheCan", RpcTarget.All, Vector3.Normalize(collision.gameObject.transform.position - transform.position));
             }
         }
 
