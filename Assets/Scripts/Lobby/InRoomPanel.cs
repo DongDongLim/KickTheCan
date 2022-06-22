@@ -48,7 +48,7 @@ public class InRoomPanel : MonoBehaviour
         foreach (Player p in PhotonNetwork.PlayerList)
         {
             GameObject entry = Instantiate(playerEntryPrefab);
-
+            
             PlayerEntry playerEntry = entry.GetComponent<PlayerEntry>();  //ysm
             playerEntry.playerColor.color = YSM.ColorTransform.EnumToColor((YSM.PlayerColorType)p.GetPlayerNumber()); //ysm
             playerEntry.SetNumbering(p.GetPlayerNumber()); //ysm
