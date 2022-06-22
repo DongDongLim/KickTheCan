@@ -84,12 +84,11 @@ namespace DH
             GameObject playerObj = PhotonNetwork.Instantiate
                 (DH.GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
             playerObj.AddComponent<RunnerController>();
-            playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex, isRebuild);
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
             if (p == null)
-                playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex, "Hide");
+                playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex, "Hide", isRebuild);
             else
-                playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex, "Default");
+                playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex, "Default", isRebuild);
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
         }
 

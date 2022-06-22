@@ -10,10 +10,13 @@ namespace DH
         public int objIndex;
         ChangeLayer change;
 
-        public void SetObjIndex(int index, string name)
+        public void SetObjIndex(int index, string name , bool isRebuild)
         {
             UIMng.instance.testHideAction += ChangeLayer;
-            photonView.RPC("ChildObjCreate", RpcTarget.All, index, name);
+            if (isRebuild)
+                ChildObjCreate(index, name);
+            else
+                photonView.RPC("ChildObjCreate", RpcTarget.All, index, name);
         }
 
         [PunRPC]
