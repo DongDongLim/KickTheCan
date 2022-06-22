@@ -19,7 +19,7 @@ namespace DH
 
         protected override void OnAwake()
         {
-            playerCam.gameObject.SetActive(false);
+
         }
 
         public void PlayerCamSetting(GameObject player)
@@ -36,7 +36,7 @@ namespace DH
             if (playerCam.gameObject.activeSelf)
             {
                 UIMng.instance.SetMoveUI(observerObject.GetComponent<PlayerMove>());
-                observerObject.transform.position = playerObject.transform.position;
+                observerObject.transform.position = playerObject == null ? observerObject.transform.position : playerObject.transform.position;
                 skyCam.gameObject.SetActive(true);
                 playerCam.gameObject.SetActive(false);
             }

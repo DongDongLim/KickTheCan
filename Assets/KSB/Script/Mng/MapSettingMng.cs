@@ -113,7 +113,8 @@ namespace DH
         // TODO : 관전자 모드 
         public void ObserverSetting(Player p)
         {
-            Debug.Log("관전자 모드");     
+            Debug.Log("관전자 모드");
+            CameraMng.instance.SwitchCam();
         }
 
     }
