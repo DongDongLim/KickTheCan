@@ -3509,7 +3509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapBG:
-  - {fileID: 8712606125602315030, guid: 1db34a178152c23429394f5beb89bc41, type: 3}
+  - {fileID: 1548458604923761139, guid: 32c0dc32cf8010e4e9008c90a4de314b, type: 3}
   mapObj:
   - {fileID: 2041021369302378627, guid: 92b37722c6d57ac48ae337076adbe7c2, type: 3}
   - {fileID: 5951832055947375062, guid: 144de354587e86a449a705b1128bb40b, type: 3}
@@ -3527,6 +3527,7 @@ MonoBehaviour:
     type: 3}
   objIndex: 0
   objectSpawnPos: []
+  aa: {fileID: 0}
 --- !u!4 &1405825242
 Transform:
   m_ObjectHideFlags: 0
