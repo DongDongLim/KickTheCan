@@ -84,7 +84,6 @@ namespace DH
             GameObject playerObj = PhotonNetwork.Instantiate
                 (DH.GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
             playerObj.AddComponent<RunnerController>();
-            playerObj.GetComponent<PlayerScript>().ControllerSetting();
             if (p == null)
                 playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex, "Hide", isRebuild);
             else

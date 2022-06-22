@@ -9,7 +9,7 @@ namespace DH
     {
         public void SetObj(bool isRebuild)
         {
-            if (!isRebuild)
+            if (isRebuild)
             {
                 ChildObjCreate();
                 return;
