@@ -15,7 +15,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     public Text infoText;
     public Transform[] spawnPos;
 
-    private bool isTagger;    
+    private PlayerSceneInfo playerSceneInfo;
+    private bool isTagger;
+    private bool isRebuild = false;
     
     int m_maxTagger = 0;
 
@@ -28,6 +30,11 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void Start()
     {
+        playerSceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();
+        if (true == playerSceneInfo.isRenegade || true == playerSceneInfo.isObserver)
+        {
+            isRebuild = true;
+        }
         ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_LOAD, true } };
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
     }
@@ -131,6 +138,13 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (!PhotonNetwork.IsMasterClient)
         {
             return;
+        }               
+
+        if (isRebuild)
+        {
+            Debug.Log(isRebuild);
+            StartCoroutine(DH.MapSettingMng.instance.Setting());
+            return;
         }
 
         StartCoroutine(DH.MapSettingMng.instance.Setting());
@@ -194,65 +208,21 @@ public class GameManager : MonoBehaviourPunCallbacks
         }              
     }
 
-    //private void CheckTagger()
-    //{
-    //    Debug.Log("CheckTagger access");
-    //    object isTagger;
-
-    //    int countRunner = 0;
-    //    int countTagger = 0;
-
-    //    foreach (Player p in PhotonNetwork.PlayerList)
-    //    {
-    //        Debug.Log("참가 인원2 : " + PhotonNetwork.PlayerList.Length);
-    //        if (p.CustomProperties.TryGetValue(GameData.PLAYER_TAGGER, out isTagger))
-    //        {
-    //            Debug.Log(isTagger);
-    //            if ((bool)isTagger)
-    //            {
-    //                countTagger++;
-    //            }            
-    //        }
-    //        else
-    //        {
-    //            Debug.Log(isTagger);
-    //            countRunner++;
-    //        }
-    //    }
-
-    //    if (countRunner + countTagger == PhotonNetwork.PlayerList.Length)
-    //    {           
-    //          return;
-    //    }
- 
-    //    Debug.Assert(countRunner + countTagger > PhotonNetwork.PlayerList.Length, "플레이어 구성원 오류");
-    //    Debug.Log("참가 인원 : " + PhotonNetwork.PlayerList.Length);
-    //    Debug.Log("술래 : " + countTagger);
-    //    Debug.Log("러너 : " + countRunner);
-
-    //    //GameObject[] bots = GameObject.FindGameObjectsWithTag("Player");
-    //    //foreach (GameObject bot in bots)
-    //    //{
-    //    //    PlayerController controller = bot.GetComponent<PlayerController>();
-    //    //    PhotonView pv = controller.GetComponent<PhotonView>();
-
-    //    //    if (pv.Owner.CustomProperties.TryGetValue(GameData.PLAYER_TAGGER, out isTagger))
-    //    //    {
-    //    //        if ((bool)isTagger)
-    //    //        {
-    //    //            controller.light.SetActive(true);
-    //    //        }
-    //    //    }
-    //    //}
-    //}
-
     private void CreatePlayer()
     {
         Debug.Log("CreatePlayer access");        
         object isTagger;
-       
+
+        // TODO : 중간 입장이나 로비에 나갔다가 재입장시 작동하지 말아야한다.
+        //if (true == playerSceneInfo.isRenegade || true == playerSceneInfo.isObserver)
+        //{
+        //    isRebuild = true;
+        //    Debug.Log("관전자 or 탈주자");
+        //    //return;
+        //}
+
         if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(GameData.PLAYER_TAGGER, out isTagger))
-        {
+        {            
             if ((bool)isTagger)
             {
                 DH.MapSettingMng.instance.TaggerSetting(PhotonNetwork.LocalPlayer);
@@ -260,22 +230,12 @@ public class GameManager : MonoBehaviourPunCallbacks
             else
             {
                 DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
-            }                        
+            }                   
+           
         }
 
         Debug.Log("총 tagger 인원 : " + m_maxTagger);
     }     
-
-    private void MoveLobby()
-    {
-        // TODO : 게임 플레이 중 나갔을 때 로비로 이동
-        // 다시 랜덤매칭 하거나 방에 Join했을시 바로 게임 씬으로 이동
-
-        //LoadBalancingClient.OpJoinRoom();
-    }
-
-    // 게임 씬 전환 이후로도 방에 접속 가능하게 하는 기능 구현 
-
 }
 
 

@@ -17,7 +17,11 @@ namespace DH
         public UnityAction testHideAction;
         public UnityAction jumpAction;
         public UnityAction actionAction;
-        
+
+        private void Start()
+        {
+            
+        }
 
         protected override void OnAwake()
         {
@@ -43,6 +47,21 @@ namespace DH
         public void OnActionButton()
         {
             actionAction?.Invoke();
+        }
+
+        public void OnLobbyButton()
+        {
+
+        }
+
+        public void OnExitButton()
+        {
+
+        }
+
+        IEnumerator CheckEscapeButton()
+        {
+            yield return new WaitForSeconds(0.1f);                    
         }
 
     }

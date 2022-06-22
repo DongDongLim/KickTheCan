@@ -1,16 +1,36 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 public class InConnectPanel : MonoBehaviour
 {
+    public PlayerSceneInfo playerSceneInfo;
+
+    private void Start()
+    {
+        playerSceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();
+    }
+
     public void OnCreateRoomButtonClicked()
     {
         LobbyManager.instance.SetActivePanel(LobbyManager.PANEL.CreateRoom);
     }
 
     public void OnRandomMatchingButtonClicked()
-    {
-        PhotonNetwork.JoinRandomRoom();
+    {        
+        if (playerSceneInfo.isRenegade)
+        {
+            Debug.Log("Go to GameScene");
+            //SceneManager.LoadScene("GameScene");
+            PhotonNetwork.LoadLevel(1);
+            return;
+        }
+        else
+        {
+            PhotonNetwork.JoinRandomRoom();
+        }      
     }
 
     public void OnLobbyButtonClicked()

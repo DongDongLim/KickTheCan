@@ -10,6 +10,7 @@ namespace DH
     {
         private Rigidbody rigid;
         private Animator anim;
+        private PlayerSceneInfo playerSceneInfo;
 
         [SerializeField]
         Transform charactorBody = null;
@@ -24,6 +25,7 @@ namespace DH
 
         private void Awake()
         {
+            playerSceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();
             rigid = GetComponent<Rigidbody>();
             if (photonView.IsMine)
                 CameraMng.instance.PlayerCamSetting(transform.GetChild(0).gameObject);
@@ -31,6 +33,12 @@ namespace DH
 
         private void Start()
         {
+            // TODO : 중간 입장시 발동되면 Bug 발생 
+            //if (playerSceneInfo.isObserver || playerSceneInfo.isRenegade)
+            //{
+            //    return;
+            //}
+
             anim = transform.GetChild(1).GetComponent<Animator>() == null ? null : transform.GetChild(1).GetComponent<Animator>();
             if (photonView.IsMine)
                 ownerID = PhotonNetwork.LocalPlayer.GetPlayerNumber();

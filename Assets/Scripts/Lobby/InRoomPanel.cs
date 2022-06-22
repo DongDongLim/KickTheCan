@@ -21,7 +21,7 @@ public class InRoomPanel : MonoBehaviour
 
 
 
-    //°­Åð±â´É °ü·Ã º¯¼ö
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public Button kickGameButton;
     public PlayerEntry selectedPlayerEntry;
     [SerializeField] private GameObject checkKickPanel;
@@ -31,7 +31,7 @@ public class InRoomPanel : MonoBehaviour
 
 
     /// <summary>
-    /// YSM : 2022.06.16 ÇÃ·¹ÀÌ¾î ÀÔÀå½Ã ÄÃ·¯ »ö»ó º¯°æÀ» À§ÇØ ¼öÁ¤ÇÔ
+    /// YSM : 2022.06.16 ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿?ï¿½Ã·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     private void OnEnable()
     {
@@ -57,11 +57,6 @@ public class InRoomPanel : MonoBehaviour
             entry.transform.SetParent(playerListContent.transform);
             entry.transform.localScale = Vector3.one;
             entry.GetComponent<PlayerEntry>().Initialize(p.ActorNumber, p.NickName);
-
-
-
-
-
 
             object isPlayerReady;
             if (p.CustomProperties.TryGetValue(GameData.PLAYER_READY, out isPlayerReady))
@@ -103,20 +98,17 @@ public class InRoomPanel : MonoBehaviour
         object test;
         prop1.TryGetValue(GameData.PLAYER_READY, out test);
         PlayerNumbering.OnPlayerNumberingChanged -= DetectPlayerNumberingChanged;
-
-
     }
 
     public void OnLeaveRoomClicked()
     {
-
         PhotonNetwork.LeaveRoom();
     }
 
     public void OnStartGameButtonClicked()
-    {
-        PhotonNetwork.CurrentRoom.IsOpen = false;
-        PhotonNetwork.CurrentRoom.IsVisible = false;
+    {        
+        PhotonNetwork.CurrentRoom.IsOpen = true;
+        PhotonNetwork.CurrentRoom.IsVisible = true;
         PhotonNetwork.LoadLevel(1);
     }
 
@@ -216,12 +208,6 @@ public class InRoomPanel : MonoBehaviour
         startGameButton.interactable = CheckPlayersReady();
     }
 
-
-
-    
-
-
-
     public void SetMasterOrUserCilent()
     {
         startGameButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);
@@ -229,10 +215,6 @@ public class InRoomPanel : MonoBehaviour
         kickGameButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);
     }
 
-
-
-
-    //Ãß¹æ
     public void LocalKickGameButtonClicked()
     {
 
@@ -296,7 +278,7 @@ public class InRoomPanel : MonoBehaviour
 
 
     /// <summary>
-    /// YSM 2022.06.16 event PlayerNumberingÀÌ ¹Ù²ð¶§¸¶´Ù °¢ÀÚ Å¬¶óÀÌ¾ðÆ®¿¡¼­ ¼¼ÆÃ
+    /// YSM 2022.06.16 event PlayerNumberingï¿½ï¿½ ï¿½Ù²ð¶§¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     public void DetectPlayerNumberingChanged()
     {
