@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
+using System.IO;
 
 namespace DH
 {
@@ -21,44 +22,57 @@ namespace DH
 
         bool isRebuild = false;
 
+        public GameObject[] objectSpawnPos;
+
+        ChanceAddon chanceAddon;
+        private int randomResult;
+
         private void Start()
         {
             playerSceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();
             if (true == playerSceneInfo.isRenegade || true == playerSceneInfo.isObserver)
             {
                 isRebuild = true;
-            }            
+            }
         }
 
         protected override void OnAwake()
         {
-
+            chanceAddon = new ChanceAddon();
         }
 
-        public IEnumerator Setting()
+
+
+    public IEnumerator Setting()
         {
-            randIndex = Random.Range(0, mapBG.Length);
-            PhotonNetwork.Instantiate
-                    ("Map", Vector3.zero, Quaternion.identity, 0)
-                    .GetComponent<MapSetScript>().SetObjIndex(randIndex, isRebuild);
-
-            for (int i = 0; i < 100; ++i)
-            Debug.Log("Setting : " + isRebuild);
-            if (isRebuild)
+            if (objectSpawnPos.Length == 0)
+                yield return null;
+            
+            foreach(GameObject obj in objectSpawnPos)
             {
-                photonView.RPC("ChildObjCreate", RpcTarget.All);
-            }
-            else
-            {
-                for (int i = 0; i < 100; ++i)
+                Debug.Log("포이치지롱");
+                randomResult = chanceAddon.ChanceThree(0,0,100);
+                randIndex = Random.Range(0,mapObj.Length);
+                switch(randomResult)
                 {
-                    randIndex = Random.Range(0, mapObj.Length);
-
-                    PhotonNetwork.Instantiate
-                        ("Obj", new Vector3(Random.Range(-25, 26), 10, Random.Range(-25, 26)), Quaternion.identity, 0)
+                    case 0:
+                        Debug.Log(obj.name);
+                        Debug.Log("안생겼지롱");
+                        break;
+                    case 1:
+                        Debug.Log(obj.name);
+                        PhotonNetwork.Instantiate("Obj", obj.transform.position, Quaternion.identity, 0)
                         .GetComponent<ObjScript>().SetObjIndex(randIndex, isRebuild);
-                    yield return null;
+                        Debug.Log("랜덤이지롱");
+                        break;
+                    case 2:
+                        Debug.Log(obj.name);
+                        PhotonNetwork.Instantiate(Path.Combine("SportsMap", obj.name), obj.transform.position, Quaternion.identity, 0);
+                        
+                        Debug.Log("생겼지롱");
+                        break;
                 }
+                yield return null;
             }
         }
         public void ChildObjCreate(int index)

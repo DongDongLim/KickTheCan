@@ -31,14 +31,12 @@ namespace DH
         }
 
         public void AttackCool(){
-            //Debug.Log("공격 가능 횟수 : " + attackCurCount);
             if (attackCurCount >= attackMaxCount)
                 return;
             
             if (attackCurCool >= attackCool){
                 attackCurCool = 0;
                 attackCurCount++;
-                Debug.Log(" 공격 횟수 1 증가 ");
                 return;
             }
             attackCurCool += Time.deltaTime;
