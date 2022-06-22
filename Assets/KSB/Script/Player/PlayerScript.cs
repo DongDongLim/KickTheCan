@@ -85,8 +85,8 @@ namespace DH
             if (stream.IsWriting)
             {
                 stream.SendNext(isSettingComplete);
-                //stream.SendNext(anim?.GetBool("isMove") == null ? false : anim.GetBool("isMove"));
-                //stream.SendNext(anim?.GetBool("isJump") == null ? false : anim.GetBool("isJump"));
+                stream.SendNext(anim?.GetBool("isMove") == null ? false : anim.GetBool("isMove"));
+                stream.SendNext(anim?.GetBool("isJump") == null ? false : anim.GetBool("isJump"));
                 stream.SendNext(ownerID);
                 if (isSettingComplete)
                     stream.SendNext(charactorBody.rotation);
@@ -96,10 +96,10 @@ namespace DH
             else
             {
                 isSettingComplete = (bool)stream.ReceiveNext();
-                //animBool = (bool)stream.ReceiveNext();
-                //anim?.SetBool("isMove", animBool);
-                //animBool = (bool)stream.ReceiveNext();
-                //anim?.SetBool("isJump", animBool);
+                animBool = (bool)stream.ReceiveNext();
+                anim?.SetBool("isMove", animBool);
+                animBool = (bool)stream.ReceiveNext();
+                anim?.SetBool("isJump", animBool);
                 ownerID = (int)stream.ReceiveNext();
                 if (null != charactorBody)
                     charactorBody.rotation = (Quaternion)stream.ReceiveNext();

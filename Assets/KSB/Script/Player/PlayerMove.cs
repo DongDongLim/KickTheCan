@@ -147,7 +147,6 @@ namespace DH
                 isJump = true;
                 owner?.JumpAnim(isJump);
             }
-            Debug.DrawRay(rayStatePos, Vector3.down * maxRayDistance, Color.red, 1f);
         }
 
     }

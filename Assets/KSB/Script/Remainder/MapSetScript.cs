@@ -13,6 +13,7 @@ namespace DH
         public void SetObjIndex(int index)
         {
             photonView.RPC("ChildObjCreate", RpcTarget.All, index);
+            PhotonNetwork.Destroy(gameObject);
         }
 
         [PunRPC]

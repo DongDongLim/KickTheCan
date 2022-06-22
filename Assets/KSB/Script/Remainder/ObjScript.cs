@@ -13,6 +13,8 @@ namespace DH
         public void SetObjIndex(int index)
         {
             photonView.RPC("ChildObjCreate", RpcTarget.All, index);
+
+            PhotonNetwork.Destroy(gameObject);
         }
 
         [PunRPC]
@@ -20,14 +22,6 @@ namespace DH
         {
             objIndex = index;
             Instantiate(MapSettingMng.instance.mapObj[objIndex], MapSettingMng.instance.gameObject.transform, false).transform.position = transform.position;
-        }
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            if(collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-            {
-                GetComponent<Rigidbody>().isKinematic = true;
-            }
         }
     }
 }
