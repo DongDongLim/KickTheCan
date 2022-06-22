@@ -42,11 +42,12 @@ namespace DH
                     ("Map", Vector3.zero, Quaternion.identity, 0)
                     .GetComponent<MapSetScript>().SetObjIndex(randIndex, isRebuild);
 
-            for (int i = 0; i < 100; ++i)
-            Debug.Log("Setting : " + isRebuild);
+            // TODO : Test 중 / 로비에서 재접속 시 맵만 생성됨
             if (isRebuild)
             {
-                photonView.RPC("ChildObjCreate", RpcTarget.All);
+                PhotonNetwork.Instantiate
+                        ("Obj", new Vector3(Random.Range(-25, 26), 10, Random.Range(-25, 26)), Quaternion.identity, 0)
+                        .GetComponent<ObjScript>().SetObjIndex(randIndex, isRebuild);
             }
             else
             {
@@ -60,6 +61,8 @@ namespace DH
                     yield return null;
                 }
             }
+           
+            
         }
         public void ChildObjCreate(int index)
         {

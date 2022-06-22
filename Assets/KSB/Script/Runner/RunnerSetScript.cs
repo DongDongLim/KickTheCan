@@ -14,9 +14,14 @@ namespace DH
         {
             UIMng.instance.testHideAction += ChangeLayer;
             if (isRebuild)
+            {
+                Debug.Log("TaggerSetScript");
                 ChildObjCreate(index, name);
+            }
             else
+            {
                 photonView.RPC("ChildObjCreate", RpcTarget.All, index, name);
+            }
         }
 
         [PunRPC]

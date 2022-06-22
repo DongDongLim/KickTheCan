@@ -11,11 +11,13 @@ namespace DH
         {
             if (isRebuild)
             {
-                ChildObjCreate();
-                return;
+                Debug.Log("TaggerSetScript");
+                ChildObjCreate();                
             }
-
-            photonView.RPC("ChildObjCreate", RpcTarget.All);
+            else
+            {
+                photonView.RPC("ChildObjCreate", RpcTarget.All);
+            }            
         }
 
         [PunRPC]

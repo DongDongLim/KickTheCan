@@ -60,8 +60,15 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             if (CheckAllPlayerLoadLevel())
             {
-                SetTagger();
-                StartCoroutine(StartCountDown());
+                if (!playerSceneInfo.isRenegade)
+                {
+                    SetTagger();
+                    StartCoroutine(StartCountDown());                    
+                }           
+                else
+                {
+                    CreatePlayer(); 
+                }
             }
             else
             {
@@ -213,15 +220,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("CreatePlayer access");        
         object isTagger;
-
-        // TODO : 중간 입장이나 로비에 나갔다가 재입장시 작동하지 말아야한다.
-        //if (true == playerSceneInfo.isRenegade || true == playerSceneInfo.isObserver)
-        //{
-        //    isRebuild = true;
-        //    Debug.Log("관전자 or 탈주자");
-        //    //return;
-        //}
-
+        
         if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(GameData.PLAYER_TAGGER, out isTagger))
         {            
             if ((bool)isTagger)
