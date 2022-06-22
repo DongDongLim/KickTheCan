@@ -9,7 +9,6 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
-    public YSM.GameChat gameChat;
     public static GameManager Instance { get; private set; }
 
     public Text infoText;

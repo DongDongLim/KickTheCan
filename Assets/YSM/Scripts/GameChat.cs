@@ -129,7 +129,7 @@ namespace YSM
 
         }
 
-        private void SetCharacterType(GameCharacterType characterType)
+        public void SetCharacterType(GameCharacterType characterType)
         {
             curCharacterType = characterType;
             UISet();
@@ -156,18 +156,6 @@ namespace YSM
                 typeButton.interactable = true;
             }
 
-        }
-
-
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                curCharacterType++;
-                curCharacterType = (GameCharacterType)((int)curCharacterType % (int)GameCharacterType.CNT);
-                SetCharacterType(curCharacterType);
-            }
         }
 
         public void ClickChatTypeButton()

@@ -94,6 +94,7 @@ namespace DH
             playerObj.AddComponent<TaggerController>();
             playerObj.GetComponent<TaggerSetScript>().SetObj(isRebuild);
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
+            PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.TAGGER);
         }
 
         public void RunnerSetting(Player p)
@@ -108,6 +109,7 @@ namespace DH
             else
                 playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex, "Default", isRebuild);
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
+            PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.RUNNER);
         }
 
         // TODO : 관전자 모드 
@@ -115,6 +117,7 @@ namespace DH
         {
             Debug.Log("관전자 모드");
             CameraMng.instance.SwitchCam();
+            PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.OBSERVER);
         }
 
     }
