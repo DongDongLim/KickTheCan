@@ -60,14 +60,14 @@ namespace YSM
             if (isHost) //방장채팅 구분
             {
                 
-                text.text += "\n" + "<Size=15><color=#" + ColorTransform.EnumToTextString(colorIdx) + ">" + "★ </color></Size>" +
+                text.text += "\n" + "<color=#" + ColorTransform.EnumToTextString(colorIdx) + ">" + "★ </color>" +
                               "<color=#" + ColorTransform.EnumToTextString(PlayerColorType.WHITE) + ">"+ a + "</color>" + " : "; //채팅 색상 변경
                 text.text += b;
 
             }
             else
             {
-                text.text += "\n" + "<Size=15><color=#" + ColorTransform.EnumToTextString(colorIdx) + ">" + "● </color></Size>" + a + " : "; //채팅 색상 변경
+                text.text += "\n" + "<color=#" + ColorTransform.EnumToTextString(colorIdx) + ">" + "● </color>" + a + " : "; //채팅 색상 변경
                 text.text += b;
             }
 

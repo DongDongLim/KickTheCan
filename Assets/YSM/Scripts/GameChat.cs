@@ -137,10 +137,18 @@ namespace YSM
 
         public void UISet()
         {
-            if(curCharacterType == GameCharacterType.OBSERVER || curCharacterType == GameCharacterType.DEAD)
+            if(curCharacterType == GameCharacterType.OBSERVER)
             {
                 typeButtonText.text = curCharacterType.ToString();
+                curChatType = GameChatType.OBSERVER;
                 typeButton.interactable = false;
+            }
+            else if(curCharacterType == GameCharacterType.DEAD)
+            {
+                typeButtonText.text = curCharacterType.ToString();
+                curChatType = GameChatType.DEAD;
+                typeButton.interactable = false;
+
             }
             else
             {
@@ -152,23 +160,24 @@ namespace YSM
 
 
 
-        //private void Update()
-        //{
-        //    if (Input.GetKeyDown(KeyCode.K))
-        //    {
-        //        curCharacterType++;
-        //        curCharacterType = (GameCharacterType)((int)curCharacterType % (int)GameCharacterType.CNT);
-        //        SetCharacterType(curCharacterType);
-        //    }
-        //}
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                curCharacterType++;
+                curCharacterType = (GameCharacterType)((int)curCharacterType % (int)GameCharacterType.CNT);
+                SetCharacterType(curCharacterType);
+            }
+        }
 
         public void ClickChatTypeButton()
         {
 
 
             //죽었을때 
-            if (GameChatType.DEAD == curChatType)
+            if (GameCharacterType.DEAD == curCharacterType)
             {
+                curChatType = GameChatType.DEAD;
                 typeButtonText.text = curChatType.ToString();
                 return;
             }
@@ -268,7 +277,6 @@ namespace YSM
 
         #endregion
 
-
         #region SystemLogMethod
 
         public void SystemKillLog(Player tagger, Player runner)
@@ -290,9 +298,9 @@ namespace YSM
             systemChatEntry.GetComponent<ChatEntry>().SetData(
                 charImageType[(int)GameChatType.NOTICE],
                 ColorTransform.EnumToColor(PlayerColorType.RED),
-                "<Size=15><color=#" + GameChatTypeColorToString(GameChatType.NOTICE) + "> <System></color></Size>",
-                "<Size=15><color=#" + YSM.ColorTransform.EnumToString((YSM.PlayerColorType)tagger.GetPlayerNumber()) + ">" + tagger.NickName + "</color></Size> ->" +
-                "<Size=15><color=#" + YSM.ColorTransform.EnumToString((YSM.PlayerColorType)runner.GetPlayerNumber()) + ">" + runner.NickName + "</color></Size> Tag!!!"
+                "<color=#" + GameChatTypeColorToString(GameChatType.NOTICE) + "> <System></color>",
+                "<color=#" + YSM.ColorTransform.EnumToString((YSM.PlayerColorType)tagger.GetPlayerNumber()) + ">" + tagger.NickName + "</color> ->" +
+                "<color=#" + YSM.ColorTransform.EnumToString((YSM.PlayerColorType)runner.GetPlayerNumber()) + ">" + runner.NickName + "</color> Tag!!!"
                 );
 
             systemChatEntry.transform.localScale = Vector3.one;
@@ -323,8 +331,8 @@ namespace YSM
             systemChatEntry.GetComponent<ChatEntry>().SetData(
                 charImageType[(int)GameChatType.NOTICE],
                 ColorTransform.EnumToColor(PlayerColorType.RED),
-                "<Size=15><color=#" + GameChatTypeColorToString(GameChatType.NOTICE) + "> <System></color></Size>",
-                "<Size=15><color=#" + YSM.ColorTransform.EnumToString((YSM.PlayerColorType)runner.GetPlayerNumber()) + ">" + runner.NickName + "</color></Size> Kick Can!!!!!!!!"
+                "<color=#" + GameChatTypeColorToString(GameChatType.NOTICE) + "> <System></color",
+                "<color=#" + YSM.ColorTransform.EnumToString((YSM.PlayerColorType)runner.GetPlayerNumber()) + ">" + runner.NickName + "</color> Kick Can!!!!!!!!"
                 );
 
             systemChatEntry.transform.localScale = Vector3.one;
@@ -373,19 +381,19 @@ namespace YSM
                 case GameCharacterType.RUNNER:
                 case GameCharacterType.TAGGER:
                     tmpColor = ColorTransform.EnumToColor(colorIdx);
-                    tmpChatName = "<Size=15><color=#" + GameCharacterTypeColorToString(receiveCharacterType) + ">" + userNickName + "</color></Size>";
-                    tmpChatMessage = "<Size=15><color=#" + GameChatTypeColorToString(receiveChatType) + ">" + userMessage + "</color></Size>";
+                    tmpChatName = "<color=#" + GameCharacterTypeColorToString(receiveCharacterType) + ">" + userNickName + "</color>";
+                    tmpChatMessage = "<color=#" + GameChatTypeColorToString(receiveChatType) + ">" + userMessage + "</color>";
                     break;
                 case GameCharacterType.DEAD:
                 case GameCharacterType.OBSERVER:
                     tmpColor = ColorTransform.EnumToColor(colorIdx);
-                    tmpChatName = "<Size=15><color=#" + GameCharacterTypeColorToString(receiveCharacterType) + ">" + userNickName + "</color></Size>";
-                    tmpChatMessage = "<Size=15><color=#" + GameCharacterTypeColorToString(receiveCharacterType) + ">" + userMessage + "</color></Size>";
+                    tmpChatName = "<color=#" + GameCharacterTypeColorToString(receiveCharacterType) + ">" + userNickName + "</color>";
+                    tmpChatMessage = "<color=#" + GameCharacterTypeColorToString(receiveCharacterType) + ">" + userMessage + "</color>";
                     break;
                 //case GameCharacterType.NOTICE:
                 //    tmpColor = ColorTransform.EnumToColor(PlayerColorType.RED);
-                //    tmpChatName = "<Size=15><color=#" + GameCharacterTypeColorToString(receiveCharacterType) + "> <System></color></Size>";
-                //    tmpChatMessage = "<Size=15><color=#" + GameCharacterTypeColorToString(receiveCharacterType) + ">" + userMessage + "</color></Size>";
+                //    tmpChatName = "<color=#" + GameCharacterTypeColorToString(receiveCharacterType) + "> <System></color>";
+                //    tmpChatMessage = "<color=#" + GameCharacterTypeColorToString(receiveCharacterType) + ">" + userMessage + "</color>";
                 //    break;
                 default:
                     tmpChatName = "Error";
