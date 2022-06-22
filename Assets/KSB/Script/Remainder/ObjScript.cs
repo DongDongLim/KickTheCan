@@ -13,9 +13,10 @@ namespace DH
         public void SetObjIndex(int index, bool isRebuild)
         {
             // TODO : 바뀜
-            if (!isRebuild)
+            if (isRebuild)
             {
                 ChildObjCreate(index);
+                Destroy(gameObject);
                 return;
             }
 

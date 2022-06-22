@@ -44,12 +44,13 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.Log("Disconnected : " + cause.ToString());
-        SceneManager.LoadScene("LobbyScene");
+        SceneManager.LoadScene(0);
     }
 
     public override void OnLeftRoom()
     {
-        PhotonNetwork.Disconnect();
+        SceneManager.LoadScene(0);
+        //PhotonNetwork.Disconnect();
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)

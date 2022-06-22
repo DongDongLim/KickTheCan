@@ -10,8 +10,14 @@ namespace DH
         public int objIndex;
 
 
-        public void SetObjIndex(int index)
+        public void SetObjIndex(int index, bool isRebuild)
         {
+            if (isRebuild)
+            {
+                ChildObjCreate(index);
+                Destroy(gameObject);
+                return;
+            }
             photonView.RPC("ChildObjCreate", RpcTarget.All, index);
             PhotonNetwork.Destroy(gameObject);
         }

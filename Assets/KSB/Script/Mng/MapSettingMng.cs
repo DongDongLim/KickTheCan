@@ -40,7 +40,7 @@ namespace DH
             randIndex = Random.Range(0, mapBG.Length);
             PhotonNetwork.Instantiate
                     ("Map", Vector3.zero, Quaternion.identity, 0)
-                    .GetComponent<MapSetScript>().SetObjIndex(randIndex);
+                    .GetComponent<MapSetScript>().SetObjIndex(randIndex, isRebuild);
 
             for (int i = 0; i < 100; ++i)
             Debug.Log("Setting : " + isRebuild);

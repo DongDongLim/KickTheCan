@@ -29,8 +29,8 @@ public class PlayerSceneManager : MonoBehaviour
     {
         // TODO : 나가는 플레이어에게 관전자 모드 설정        
         sceneInfo.isRenegade = true;
-        //SceneManager.LoadScene("LobbyScene");
-        PhotonNetwork.LoadLevel(0);
+        PhotonNetwork.LeaveRoom();
+        //PhotonNetwork.LoadLevel(0);
 
         Debug.Log("Go to Lobby");
     }
