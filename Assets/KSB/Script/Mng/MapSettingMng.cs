@@ -45,10 +45,15 @@ namespace DH
 
     public IEnumerator Setting()
         {
+            randIndex = Random.Range(0, mapBG.Length);
+            PhotonNetwork.Instantiate
+                    ("Map", Vector3.zero, Quaternion.identity, 0)
+                    .GetComponent<MapSetScript>().SetObjIndex(randIndex, isRebuild);
+
             if (objectSpawnPos.Length == 0)
-                yield return null;
-            
-            foreach(GameObject obj in objectSpawnPos)
+                yield break;
+
+            foreach (GameObject obj in objectSpawnPos)
             {
                 Debug.Log("포이치지롱");
                 randomResult = chanceAddon.ChanceThree(0,0,100);
@@ -67,7 +72,7 @@ namespace DH
                         break;
                     case 2:
                         Debug.Log(obj.name);
-                        PhotonNetwork.Instantiate(Path.Combine("SportsMap", obj.name), obj.transform.position, Quaternion.identity, 0);
+                        PhotonNetwork.Instantiate(Path.Combine("Sports", obj.name), obj.transform.position, Quaternion.identity, 0);
                         
                         Debug.Log("생겼지롱");
                         break;
