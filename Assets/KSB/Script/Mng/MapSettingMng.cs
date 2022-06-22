@@ -45,10 +45,10 @@ namespace DH
 
     public IEnumerator Setting()
         {
-            randIndex = Random.Range(0, mapBG.Length);
-            PhotonNetwork.Instantiate
-                    ("Map", Vector3.zero, Quaternion.identity, 0)
-                    .GetComponent<MapSetScript>().SetObjIndex(randIndex, isRebuild);
+            // randIndex = Random.Range(0, mapBG.Length);
+            // PhotonNetwork.Instantiate
+            //         ("Map", Vector3.zero, Quaternion.identity, 0)
+            //         .GetComponent<MapSetScript>().SetObjIndex(randIndex, isRebuild);
 
             if (objectSpawnPos.Length == 0)
                 yield break;
@@ -66,7 +66,7 @@ namespace DH
                         break;
                     case 1:
                         Debug.Log(obj.name);
-                        PhotonNetwork.Instantiate("Obj", obj.transform.position, Quaternion.identity, 0)
+                        PhotonNetwork.Instantiate("Obj", obj.transform.position,transform.rotation, 0)
                         .GetComponent<ObjScript>().SetObjIndex(randIndex, isRebuild);
                         Debug.Log("랜덤이지롱");
                         break;
