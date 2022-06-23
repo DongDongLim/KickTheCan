@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charactorBody: {fileID: 0}
   ownerID: 0
+  isFreeze: 0
 --- !u!114 &1211031691728672808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,6 +116,7 @@ MonoBehaviour:
   cameraArm: {fileID: 0}
   charactorBody: {fileID: 0}
   rigid: {fileID: 0}
+  isMove: 0
   moveSpeed: 5
   jumpPower: 10
   rotateSpeed: 1

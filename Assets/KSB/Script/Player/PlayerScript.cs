@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 
@@ -8,6 +9,7 @@ namespace DH
 {
     public class PlayerScript : MonoBehaviourPun, IPunObservable
     {
+        #region private
         private Rigidbody rigid;
         private Animator anim;
         private PlayerSceneInfo playerSceneInfo;
@@ -17,11 +19,20 @@ namespace DH
 
         Controller control = null;
 
-        public int ownerID = -1;
 
         bool isSettingComplete = false;
 
         bool animBool;
+
+        #endregion
+        #region public
+
+        public UnityAction freezeAction;
+
+        public int ownerID = -1;
+
+        public bool isFreeze = false;
+        #endregion
 
         private void Awake()
         {
@@ -67,6 +78,8 @@ namespace DH
         [PunRPC]
         public void FreezeRigid()
         {
+            isFreeze = !isFreeze;
+            freezeAction?.Invoke();
             rigid.isKinematic = !rigid.isKinematic;
         }
 

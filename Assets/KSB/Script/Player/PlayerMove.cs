@@ -6,6 +6,7 @@ namespace DH
 {
     public class PlayerMove : MonoBehaviour
     {
+
         [SerializeField]
         PlayerScript owner = null;
 
@@ -21,7 +22,7 @@ namespace DH
 
         // 이동
         private Vector2 moveInput;
-        private bool isMove;
+        public bool isMove;
         public float moveSpeed;
 
         // 점프
@@ -37,6 +38,8 @@ namespace DH
 
         float maxRayDistance;
 
+        bool isFreeze = false;
+
         private void Start()
         {
             cameraArm = transform.GetChild(0).transform;
@@ -46,6 +49,7 @@ namespace DH
         { 
             UIMng.instance.jumpAction += Jump;
             owner = GetComponent<PlayerScript>();
+            owner.freezeAction += MoveSynchronization;
             charactorBody = transform.GetChild(1).transform;
             maxRayDistance = charactorBody.GetComponent<Collider>().bounds.size.y * 0.5f;
             rigid = r;
@@ -78,6 +82,8 @@ namespace DH
 
         public void Move(Vector2 inputDirection)
         {
+            if (isFreeze)
+                return;
             moveInput = inputDirection;
             isMove = moveInput.magnitude != 0;
 
@@ -93,6 +99,12 @@ namespace DH
             charactorBody.forward = moveDir;
             rigid.MovePosition(transform.position + moveDir * Time.deltaTime * moveSpeed);
         }
+
+        public void MoveSynchronization()
+        {
+            isFreeze = owner.isFreeze;
+        }
+
         public void LookAround(Vector2 inputDirection)
         {
             // 마우스 이동 값 검출
