@@ -229,6 +229,9 @@ namespace YSM
                 }
                 else if (receiveCharacterType == GameCharacterType.DEAD) // 죽은 사람이 채팅 보냈을때 못받는것
                 {
+                    Debug.Log(curCharacterType.ToString() + "////" + receiveCharacterType.ToString());
+                    Debug.Log(curChatType.ToString() + "////\\\\\\\\" + receiveChatType.ToString());
+
                     if (DeadSendChat())
                         return;
                 }
@@ -410,7 +413,7 @@ namespace YSM
                 case GameCharacterType.TAGGER: return Convert.ToString(0, 16) + Convert.ToString(0, 16) + Convert.ToString(0, 16); //검정색
                 case GameCharacterType.DEAD: return Convert.ToString(127, 16) + Convert.ToString(127, 16) + Convert.ToString(127, 16); //회색
                 case GameCharacterType.OBSERVER: return Convert.ToString(34, 16) + Convert.ToString(177, 16) + Convert.ToString(76, 16);   //초록색
-                 //case GameCharacterType.NOTICE:             return Convert.ToString(237,16) + Convert.ToString(28, 16) + Convert.ToString(36, 16);   //빨강색
+                case GameCharacterType.NOTICE:             return Convert.ToString(237,16) + Convert.ToString(28, 16) + Convert.ToString(36, 16);   //빨강색
                 default: return "Error";
             }
 
@@ -424,7 +427,7 @@ namespace YSM
                 case GameChatType.TEAM: return Convert.ToString(255, 16) + Convert.ToString(242, 16) + "0" + Convert.ToString(0, 16); // 노랑색
                 case GameChatType.DEAD: return Convert.ToString(127, 16) + Convert.ToString(127, 16) + Convert.ToString(127, 16);   //회색
                 case GameChatType.OBSERVER: return Convert.ToString(34, 16) + Convert.ToString(177, 16) + Convert.ToString(76, 16);   //초록색
-                //case GameChatType.NOTICE:            return Convert.ToString(237,16) + Convert.ToString(28, 16) + Convert.ToString(36, 16);   //빨강색
+                case GameChatType.NOTICE:            return Convert.ToString(237,16) + Convert.ToString(28, 16) + Convert.ToString(36, 16);   //빨강색
                 default: return "Error";
             }
 

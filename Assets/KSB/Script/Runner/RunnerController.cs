@@ -61,7 +61,8 @@ namespace DH
             if(collision.gameObject.layer == LayerMask.NameToLayer("Can"))
             {
                 Debug.Log("Can");
-                owner.photonView.RPC("KickTheCan", RpcTarget.All, Vector3.Normalize(collision.gameObject.transform.position - transform.position));                
+                owner.photonView.RPC("KickTheCan", RpcTarget.All, Vector3.Normalize(collision.gameObject.transform.position - transform.position));
+                PlayMng.instance.gameChat.AddCanKickLog(PhotonNetwork.LocalPlayer);
             }
         }
 
