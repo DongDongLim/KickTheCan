@@ -116,7 +116,6 @@ MonoBehaviour:
   cameraArm: {fileID: 0}
   charactorBody: {fileID: 0}
   rigid: {fileID: 0}
-  isMove: 0
   moveSpeed: 5
   jumpPower: 10
   rotateSpeed: 1
