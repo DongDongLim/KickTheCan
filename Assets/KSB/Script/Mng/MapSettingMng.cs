@@ -14,6 +14,8 @@ namespace DH
         public GameObject[] mapObj;
         public GameObject taggerObj;
 
+
+
         private PlayerSceneInfo playerSceneInfo;
 
         public int objIndex;
@@ -22,7 +24,7 @@ namespace DH
 
         bool isRebuild = false;
 
-        public GameObject[] objectSpawnPos;
+        public Transform[] objectSpawnPos;
 
         ChanceAddon chanceAddon;
         private int randomResult;
@@ -41,8 +43,6 @@ namespace DH
             chanceAddon = new ChanceAddon();
         }
 
-
-
     public IEnumerator Setting()
         {
             randIndex = Random.Range(0, mapBG.Length);
@@ -53,27 +53,24 @@ namespace DH
             if (objectSpawnPos.Length == 0)
                 yield break;
 
-            foreach (GameObject obj in objectSpawnPos)
+
+            foreach (Transform obj in objectSpawnPos)
             {
                 Debug.Log("포이치지롱");
-                randomResult = chanceAddon.ChanceThree(0,0,100);
+                randomResult = chanceAddon.ChanceThree(20,20,60);
                 randIndex = Random.Range(0,mapObj.Length);
                 switch(randomResult)
                 {
                     case 0:
-                        Debug.Log(obj.name);
                         Debug.Log("안생겼지롱");
                         break;
                     case 1:
-                        Debug.Log(obj.name);
-                        PhotonNetwork.Instantiate("Obj", obj.transform.position, Quaternion.identity, 0)
+                        PhotonNetwork.Instantiate("Obj", obj.position,transform.rotation, 0)
                         .GetComponent<ObjScript>().SetObjIndex(randIndex, isRebuild);
                         Debug.Log("랜덤이지롱");
                         break;
                     case 2:
-                        Debug.Log(obj.name);
-                        PhotonNetwork.Instantiate(Path.Combine("Sports", obj.name), obj.transform.position, Quaternion.identity, 0);
-                        
+                        PhotonNetwork.Instantiate(Path.Combine("Sports", obj.name), obj.position, obj.rotation, 0);
                         Debug.Log("생겼지롱");
                         break;
                 }

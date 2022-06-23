@@ -936,7 +936,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 358601539}
-  m_LocalRotation: {x: 0.57357645, y: -1e-45, z: -1e-45, w: 0.8191521}
+  m_LocalRotation: {x: 0.57357645, y: 3e-45, z: 1e-45, w: 0.8191521}
   m_LocalPosition: {x: 0, y: 18.793852, z: -6.8404055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2619,7 +2619,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 940741985}
-  m_LocalRotation: {x: 0.57357645, y: -1e-45, z: -1e-45, w: 0.8191521}
+  m_LocalRotation: {x: 0.57357645, y: 3e-45, z: 1e-45, w: 0.8191521}
   m_LocalPosition: {x: 0, y: 18.793852, z: -6.8404055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -3509,7 +3509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapBG:
-  - {fileID: 8712606125602315030, guid: 1db34a178152c23429394f5beb89bc41, type: 3}
+  - {fileID: 1548458604923761139, guid: 1efe7dfa4b0257949867ee938d95b774, type: 3}
   mapObj:
   - {fileID: 2041021369302378627, guid: 92b37722c6d57ac48ae337076adbe7c2, type: 3}
   - {fileID: 5951832055947375062, guid: 144de354587e86a449a705b1128bb40b, type: 3}
@@ -3648,7 +3648,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2031537285}
   m_HandleRect: {fileID: 2031537283}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
