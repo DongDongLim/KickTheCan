@@ -14,6 +14,7 @@ namespace DH
 
         public GameObject can;
 
+
         protected override void OnAwake()
         {
 
@@ -23,8 +24,8 @@ namespace DH
         {
             PhotonNetwork.Destroy(player);
             isRunnerBeCaught = true;
-            UIMng.instance.jumpAction += Release;
-            PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.DEAD);
+            UIMng.instance.jumpAction += TestRelease;
+            gameChat.SetCharacterType(YSM.GameCharacterType.DEAD);
 
         }
 
@@ -35,20 +36,19 @@ namespace DH
                 MapSettingMng.instance.RunnerSetting(null);
                 UIMng.instance.jumpAction -= Release;
                 isRunnerBeCaught = false;
-                PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.RUNNER);
+                gameChat.SetCharacterType(YSM.GameCharacterType.RUNNER);
             }
         }
 
-        [PunRPC]
-        public void KickTheCan(Vector3 canTargetVector)
+        public void TestRelease()
         {
-            StartCoroutine(can.GetComponent<CanMoveScript>().CanMove(canTargetVector));
+            //photonView.RPC("KickTheCan", RpcTarget.All, Vector3.zero);
         }
 
-        [PunRPC]
-        public void SetCanPosition(Vector3 pos)
+        public void KickTheCan(Vector3 canTargetVector)
         {
-            can.transform.position = pos;
+            StartCoroutine(can?.GetComponent<CanMoveScript>().CanMove(canTargetVector));
+            Release();
         }
     }
 }

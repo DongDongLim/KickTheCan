@@ -32,5 +32,7 @@ namespace DH
     public class GameData : MonoBehaviour
     {
         public const string PLAYER_OBJECT = "PlayerObj";
+        public const string PLAYER_CANRIGID = "CanRigid";
+        public const string PLAYER_CANPOS = "CanPos";
     }
 }

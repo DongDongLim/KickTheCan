@@ -229,8 +229,8 @@ public class GameManager : MonoBehaviourPunCallbacks
             else
             {
                 DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
-            }                   
-           
+            }
+            Debug.Log(true);
         }
 
         Debug.Log("총 tagger 인원 : " + m_maxTagger);

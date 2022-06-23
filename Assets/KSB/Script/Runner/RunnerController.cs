@@ -38,7 +38,7 @@ namespace DH
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.gameObject.layer == LayerMask.NameToLayer("Weapon"))
+            if(other.gameObject.layer == LayerMask.NameToLayer("Weapon") && gameObject.layer == LayerMask.NameToLayer("Default"))
             {
                 Damaged();
                 int id = other.transform.parent.parent.GetComponent<PlayerScript>().ownerID;
@@ -54,12 +54,14 @@ namespace DH
             }
         }
 
+        
+
         private void OnCollisionEnter(Collision collision)
         {
             if(collision.gameObject.layer == LayerMask.NameToLayer("Can"))
             {
-                //PlayMng.instance.KickTheCan(Vector3.Normalize(collision.gameObject.transform.position - transform.position));
-                PlayMng.instance.photonView.RPC("KickTheCan", RpcTarget.All, Vector3.Normalize(collision.gameObject.transform.position - transform.position));
+                Debug.Log("Can");
+                owner.photonView.RPC("KickTheCan", RpcTarget.All, Vector3.Normalize(collision.gameObject.transform.position - transform.position));                
             }
         }
 

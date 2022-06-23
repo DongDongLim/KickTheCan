@@ -88,7 +88,13 @@ namespace DH
         {
             anim?.SetTrigger("isAttack");
         }
-        
+
+        [PunRPC]
+        public void KickTheCan(Vector3 vec)
+        {
+            Debug.Log("Kick");
+            PlayMng.instance.KickTheCan(vec);
+        }
 
         public void MoveAnim(bool isMove)
         {

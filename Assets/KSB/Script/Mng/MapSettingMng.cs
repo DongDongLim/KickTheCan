@@ -22,6 +22,7 @@ namespace DH
 
         int randIndex;
 
+        public GameObject testCan;
 
 
 
@@ -44,6 +45,9 @@ namespace DH
             PhotonNetwork.Instantiate
                     ("Map", Vector3.zero, Quaternion.identity, 0)
                     .GetComponent<MapSetScript>().SetObjIndex(randIndex, isRebuild);
+            yield return null;
+            PhotonNetwork.Instantiate
+                   ("Can", new Vector3(15, 0.5f, 10), Quaternion.identity, 0).GetComponent<CanSetScript>().SetObjIndex(isRebuild);
             yield break;
         }
         public void ChildObjCreate(int index)

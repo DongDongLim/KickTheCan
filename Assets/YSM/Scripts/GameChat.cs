@@ -288,8 +288,8 @@ namespace YSM
                 charImageType[(int)GameChatType.NOTICE],
                 ColorTransform.EnumToColor(PlayerColorType.RED),
                 "<color=#" + GameChatTypeColorToString(GameChatType.NOTICE) + "> <System></color>",
-                "<color=#" + YSM.ColorTransform.EnumToString((YSM.PlayerColorType)tagger.GetPlayerNumber()) + ">" + tagger.NickName + "</color> ->" +
-                "<color=#" + YSM.ColorTransform.EnumToString((YSM.PlayerColorType)runner.GetPlayerNumber()) + ">" + runner.NickName + "</color> Tag!!!"
+                "<color=#" + YSM.ColorTransform.EnumToTextString((YSM.PlayerColorType)tagger.GetPlayerNumber()) + ">" + tagger.NickName + "</color> ->" +
+                "<color=#" + YSM.ColorTransform.EnumToTextString((YSM.PlayerColorType)runner.GetPlayerNumber()) + ">" + runner.NickName + "</color> Tag!!!"
                 );
 
             systemChatEntry.transform.localScale = Vector3.one;
@@ -321,7 +321,7 @@ namespace YSM
                 charImageType[(int)GameChatType.NOTICE],
                 ColorTransform.EnumToColor(PlayerColorType.RED),
                 "<color=#" + GameChatTypeColorToString(GameChatType.NOTICE) + "> <System></color",
-                "<color=#" + YSM.ColorTransform.EnumToString((YSM.PlayerColorType)runner.GetPlayerNumber()) + ">" + runner.NickName + "</color> Kick Can!!!!!!!!"
+                "<color=#" + YSM.ColorTransform.EnumToTextString((YSM.PlayerColorType)runner.GetPlayerNumber()) + ">" + runner.NickName + "</color> Kick Can!!!!!!!!"
                 );
 
             systemChatEntry.transform.localScale = Vector3.one;
