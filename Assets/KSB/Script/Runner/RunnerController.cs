@@ -9,7 +9,6 @@ namespace DH
 {
     public class RunnerController : Controller, IDamaged
     {
-        bool isFreeze = false;
 
         private void Awake()
         {
@@ -34,7 +33,6 @@ namespace DH
 
         void Freeze()
         {
-            isFreeze = !isFreeze;
             owner.photonView.RPC("FreezeRigid", RpcTarget.All);
         }
 
