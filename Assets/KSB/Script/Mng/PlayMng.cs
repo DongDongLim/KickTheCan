@@ -10,6 +10,8 @@ namespace DH
         [SerializeField]
         bool isRunnerBeCaught = false;
 
+        public YSM.GameChat gameChat;
+
         public GameObject can;
 
         protected override void OnAwake()
@@ -22,6 +24,8 @@ namespace DH
             PhotonNetwork.Destroy(player);
             isRunnerBeCaught = true;
             UIMng.instance.jumpAction += Release;
+            PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.DEAD);
+
         }
 
         public void Release()
@@ -31,6 +35,7 @@ namespace DH
                 MapSettingMng.instance.RunnerSetting(null);
                 UIMng.instance.jumpAction -= Release;
                 isRunnerBeCaught = false;
+                PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.RUNNER);
             }
         }
 

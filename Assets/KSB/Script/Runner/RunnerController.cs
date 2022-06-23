@@ -48,7 +48,7 @@ namespace DH
                 {
                     if (id == p.GetPlayerNumber())
                     {
-                        GameManager.Instance.gameChat.SystemKillLog(p, PhotonNetwork.LocalPlayer);
+                        PlayMng.instance.gameChat.SystemKillLog(p, PhotonNetwork.LocalPlayer);
                         break;
                     }
                 }
