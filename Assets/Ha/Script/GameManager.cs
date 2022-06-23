@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     public static GameManager Instance { get; private set; }
 
     public Text infoText;
-    public Transform[] spawnPos;
 
     private PlayerSceneInfo playerSceneInfo;
     private bool isTagger;
