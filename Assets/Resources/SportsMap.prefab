@@ -12293,9 +12293,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7652568402577048537}
-  - component: {fileID: 8253659942439427813}
-  - component: {fileID: 7409263947797595932}
-  - component: {fileID: -2143424813636628012}
+  - component: {fileID: -8568321067044239479}
   m_Layer: 0
   m_Name: SportsMap
   m_TagString: Untagged
@@ -12323,7 +12321,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8253659942439427813
+--- !u!114 &-8568321067044239479
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12338,41 +12336,6 @@ MonoBehaviour:
   objectSpawnPosList:
   - {fileID: 1404567384288391336}
   - {fileID: 4878327199040415195}
---- !u!114 &7409263947797595932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1548458604923761139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56ec4ff3d321474408e53f0e83352eb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objIndex: 0
---- !u!114 &-2143424813636628012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1548458604923761139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &1574716728722657621
 GameObject:
   m_ObjectHideFlags: 0

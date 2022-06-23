@@ -4,7 +4,6 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
-using System.IO;
 
 namespace DH
 {
@@ -14,20 +13,17 @@ namespace DH
         public GameObject[] mapObj;
         public GameObject taggerObj;
 
+        public int objIndex;
+        public bool isRebuild = false;
 
 
         private PlayerSceneInfo playerSceneInfo;
 
-        public int objIndex;
 
         int randIndex;
 
-        bool isRebuild = false;
 
-        public Transform[] objectSpawnPos;
 
-        ChanceAddon chanceAddon;
-        private int randomResult;
 
         private void Start()
         {
@@ -40,7 +36,6 @@ namespace DH
 
         protected override void OnAwake()
         {
-            chanceAddon = new ChanceAddon();
         }
 
     public IEnumerator Setting()
@@ -49,33 +44,7 @@ namespace DH
             PhotonNetwork.Instantiate
                     ("Map", Vector3.zero, Quaternion.identity, 0)
                     .GetComponent<MapSetScript>().SetObjIndex(randIndex, isRebuild);
-
-            if (objectSpawnPos.Length == 0)
-                yield break;
-
-
-            foreach (Transform obj in objectSpawnPos)
-            {
-                Debug.Log("포이치지롱");
-                randomResult = chanceAddon.ChanceThree(20,20,60);
-                randIndex = Random.Range(0,mapObj.Length);
-                switch(randomResult)
-                {
-                    case 0:
-                        Debug.Log("안생겼지롱");
-                        break;
-                    case 1:
-                        PhotonNetwork.Instantiate("Obj", obj.position,transform.rotation, 0)
-                        .GetComponent<ObjScript>().SetObjIndex(randIndex, isRebuild);
-                        Debug.Log("랜덤이지롱");
-                        break;
-                    case 2:
-                        PhotonNetwork.Instantiate(Path.Combine("Sports", obj.name), obj.position, obj.rotation, 0);
-                        Debug.Log("생겼지롱");
-                        break;
-                }
-                yield return null;
-            }
+            yield break;
         }
         public void ChildObjCreate(int index)
         {
