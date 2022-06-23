@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     private PlayerSceneInfo playerSceneInfo;
     private bool isTagger;
     private bool isRebuild = false;
-    
+
     int m_maxTagger = 0;
 
     List<Player> playerList = new List<Player>() { };
@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (true == playerSceneInfo.isRenegade || true == playerSceneInfo.isObserver)
         {
             isRebuild = true;
+            ReEntry();
         }
         ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_LOAD, true } };
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
@@ -59,21 +60,18 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             if (CheckAllPlayerLoadLevel())
             {
-                if (!playerSceneInfo.isRenegade)
+                Debug.Log(isRebuild);
+                if (!isRebuild)
                 {
                     SetTagger();
-                    StartCoroutine(StartCountDown());                    
-                }           
-                else
-                {
-                    CreatePlayer(); 
-                }
+                    StartCoroutine(StartCountDown());
+                }               
             }
             else
             {
                 PrintInfo("wait players " + PlayersLoadLevel() + " / " + PhotonNetwork.PlayerList.Length);
             }
-        }      
+        }
     }
 
     #endregion PHOTON CALLBACK
@@ -92,7 +90,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         PrintInfo("Start Game!");
 
         int playerNumber = PhotonNetwork.LocalPlayer.GetPlayerNumber();
-                   
+
         CreatePlayer();
     }
 
@@ -107,7 +105,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         foreach (Player p in PhotonNetwork.PlayerList)
         {
             object playerLoadedLevel;
-            
+
             if (p.CustomProperties.TryGetValue(GameData.PLAYER_LOAD, out playerLoadedLevel))
             {
                 if ((bool)playerLoadedLevel)
@@ -127,7 +125,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
 
     public static void Shuffle_List<T>(List<T> list)
-    {     
+    {
         int n = list.Count;
         while (n > 1)
         {
@@ -145,7 +143,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (!PhotonNetwork.IsMasterClient)
         {
             return;
-        }               
+        }
 
         if (isRebuild)
         {
@@ -157,17 +155,17 @@ public class GameManager : MonoBehaviourPunCallbacks
         StartCoroutine(DH.MapSettingMng.instance.Setting());
 
         m_maxTagger = PhotonNetwork.PlayerList.Length / 4;
-        m_maxTagger = (int)Mathf.Clamp(m_maxTagger, 1, 5);       
+        m_maxTagger = (int)Mathf.Clamp(m_maxTagger, 1, 5);
 
-        foreach (Player  player in PhotonNetwork.PlayerList)
+        foreach (Player player in PhotonNetwork.PlayerList)
         {
             playerList.Add(player);
         }
 
         Shuffle_List(playerList);
-        
+
         // 테스트용 tagger설정 코드
-        int minPlayer = 3;      
+        int minPlayer = 3;
 
         if (minPlayer >= PhotonNetwork.PlayerList.Length)
         {
@@ -191,7 +189,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             }
 
             return;
-        }                    
+        }
 
         int index = 0;
 
@@ -210,18 +208,18 @@ public class GameManager : MonoBehaviourPunCallbacks
                 isTagger = false;
                 ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
                 playerList[i].SetCustomProperties(props);
-                Debug.Log("runner 설정");                
+                Debug.Log("runner 설정");
             }
-        }              
+        }
     }
 
     private void CreatePlayer()
     {
-        Debug.Log("CreatePlayer access");        
+        Debug.Log("CreatePlayer access");
         object isTagger;
-        
+
         if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(GameData.PLAYER_TAGGER, out isTagger))
-        {            
+        {
             if ((bool)isTagger)
             {
                 DH.MapSettingMng.instance.TaggerSetting(PhotonNetwork.LocalPlayer);
@@ -229,12 +227,18 @@ public class GameManager : MonoBehaviourPunCallbacks
             else
             {
                 DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
-            }                   
-           
+            }          
         }
 
         Debug.Log("총 tagger 인원 : " + m_maxTagger);
-    }     
+    }
+
+    private void ReEntry()
+    {        
+        Debug.Log("join on the way");
+        DH.MapSettingMng.instance.Setting();
+        DH.MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);
+    }
 }
 
 

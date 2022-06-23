@@ -11,13 +11,12 @@ namespace DH
         {
             if (isRebuild)
             {
-                Debug.Log("TaggerSetScript");
-                ChildObjCreate();                
-            }
-            else
-            {
-                photonView.RPC("ChildObjCreate", RpcTarget.All);
-            }            
+                Destroy(gameObject);
+                Debug.Log("TaggerSetScript : 재입장");
+                ChildObjCreate();
+            }           
+
+            photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered);
         }
 
         [PunRPC]

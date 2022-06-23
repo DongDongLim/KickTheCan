@@ -27,8 +27,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     private void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
-        
-        // TOOD : Ãß°¡
+              
         if (PhotonNetwork.IsConnected)
             SetActivePanel(LobbyManager.PANEL.Connect);
     }

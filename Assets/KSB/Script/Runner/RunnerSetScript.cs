@@ -13,15 +13,15 @@ namespace DH
         public void SetObjIndex(int index, string name , bool isRebuild)
         {
             UIMng.instance.testHideAction += ChangeLayer;
+
             if (isRebuild)
             {
-                Debug.Log("TaggerSetScript");
+                Destroy(gameObject);
+                Debug.Log("TaggerSetScript : 재입장");
                 ChildObjCreate(index, name);
             }
-            else
-            {
-                photonView.RPC("ChildObjCreate", RpcTarget.All, index, name);
-            }
+
+            photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered, index, name);
         }
 
         [PunRPC]

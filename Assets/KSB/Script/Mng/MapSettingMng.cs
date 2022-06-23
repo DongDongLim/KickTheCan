@@ -77,6 +77,7 @@ namespace DH
                         Debug.Log("생겼지롱");
                         break;
                 }
+               
                 yield return null;
             }
         }
@@ -99,6 +100,7 @@ namespace DH
 
         public void RunnerSetting(Player p)
         {
+            
             Debug.Log("러너 생성");
             randIndex = Random.Range(0, mapObj.Length);
             GameObject playerObj = PhotonNetwork.Instantiate
@@ -111,11 +113,10 @@ namespace DH
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.RUNNER);
         }
-
-        // TODO : 관전자 모드 
+               
         public void ObserverSetting(Player p)
         {
-            Debug.Log("관전자 모드");
+            Debug.Log("관전자 모드");                       
             CameraMng.instance.SwitchCam();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.OBSERVER);
         }

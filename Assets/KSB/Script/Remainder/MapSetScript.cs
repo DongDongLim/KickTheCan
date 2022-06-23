@@ -14,12 +14,13 @@ namespace DH
         {
             if (isRebuild)
             {
-                ChildObjCreate(index);
                 Destroy(gameObject);
-                return;
-            }
-            photonView.RPC("ChildObjCreate", RpcTarget.All, index);
-            PhotonNetwork.Destroy(gameObject);
+                Debug.Log("TaggerSetScript : 재입장");
+                ChildObjCreate(index);
+            }           
+
+            photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered, index);
+            PhotonNetwork.Destroy(gameObject); 
         }
 
         [PunRPC]

@@ -22,8 +22,7 @@ public class InConnectPanel : MonoBehaviour
     {        
         if (playerSceneInfo.isRenegade)
         {
-            Debug.Log("Go to GameScene");
-            //SceneManager.LoadScene("GameScene");
+            Debug.Log("Go to GameScene");            
             PhotonNetwork.LoadLevel(1);
             return;
         }
