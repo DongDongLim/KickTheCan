@@ -114,7 +114,7 @@ namespace DH
             }
 
             // 카메라 암 회전 시키기
-            cameraArm.rotation = Quaternion.Euler(camAngle.z, camAngle.y - mouseDelta.x, x);
+            cameraArm.rotation = Quaternion.Euler(x, camAngle.y - mouseDelta.x, camAngle.z);
         }
 
         public void Jump()

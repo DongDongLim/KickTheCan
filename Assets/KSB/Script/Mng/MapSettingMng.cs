@@ -57,7 +57,7 @@ namespace DH
             foreach (Transform obj in objectSpawnPos)
             {
                 Debug.Log("포이치지롱");
-                randomResult = chanceAddon.ChanceThree(0,0,100);
+                randomResult = chanceAddon.ChanceThree(20,20,60);
                 randIndex = Random.Range(0,mapObj.Length);
                 switch(randomResult)
                 {

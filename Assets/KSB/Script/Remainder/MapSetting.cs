@@ -13,10 +13,7 @@ public class MapSetting : MonoBehaviour
         value = 0;
         for (int i = 0; i < objectSpawnPosList.Length; i++)
         {
-            for (int j = 0; j < objectSpawnPosList[i].childCount; j++)
-            {
-                value++;
-            }
+            value += objectSpawnPosList[i].childCount;
         }
         DH.MapSettingMng.instance.objectSpawnPos = new Transform[value];
         
