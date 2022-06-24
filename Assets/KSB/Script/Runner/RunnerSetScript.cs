@@ -12,7 +12,6 @@ namespace DH
 
         public void SetObjIndex(int index, string name , bool isRebuild)
         {
-            UIMng.instance.testHideAction += ChangeLayer;
             if (isRebuild)
                 ChildObjCreate(index, name);
             else
@@ -23,35 +22,12 @@ namespace DH
         public void ChildObjCreate(int index, string name)
         {
             change = new ChangeLayer();
-            objIndex = index;
-            Instantiate(DH.MapSettingMng.instance.mapObj[objIndex], transform, false);
-            change.CangeTransformLayer(transform, name);
-        }
-
-        private void OnDestroy()
-        {
-            if(UIMng.instance != null)
-                UIMng.instance.testHideAction -= ChangeLayer;
-        }
-
-        // TODO : Test
-        public void ChangeLayer()
-        {
-            photonView.RPC("ChangeLayerFunc", RpcTarget.All);
-        }
-
-        [PunRPC]
-        public void ChangeLayerFunc()
-        {
-            switch (LayerMask.LayerToName(gameObject.layer))
+            if (index != -1)
             {
-                case "Hide":
-                    change.CangeTransformLayer(transform, "Default");
-                    break;
-                case "Default":
-                    change.CangeTransformLayer(transform, "Hide");
-                    break;
+                objIndex = index;
+                Instantiate(DH.MapSettingMng.instance.mapObj[objIndex], transform, false);
             }
+            change.CangeTransformLayer(transform, name, true);
         }
     }
 }

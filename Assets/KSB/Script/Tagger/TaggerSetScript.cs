@@ -7,21 +7,24 @@ namespace DH
 {
     public class TaggerSetScript : MonoBehaviourPun
     {
-        public void SetObj(bool isRebuild)
+        ChangeLayer change;
+        public void SetObj(string name, bool isRebuild)
         {
             if (isRebuild)
             {
-                ChildObjCreate();
+                ChildObjCreate(name);
                 return;
             }
 
-            photonView.RPC("ChildObjCreate", RpcTarget.All);
+            photonView.RPC("ChildObjCreate", RpcTarget.All, name);
         }
 
         [PunRPC]
-        public void ChildObjCreate()
+        public void ChildObjCreate(string name)
         {
+            change = new ChangeLayer();
             Instantiate(DH.MapSettingMng.instance.taggerObj, transform, false);
+            change.CangeTransformLayer(transform, name, false);
         }
     }
 }

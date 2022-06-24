@@ -33,5 +33,6 @@ namespace DH
     {
         public const string PLAYER_OBJECT = "PlayerObj";
         public const string PLAYER_ISKICK = "KickCan";
+        public const string PLAYER_TAGGER = "Catch";
     }
 }

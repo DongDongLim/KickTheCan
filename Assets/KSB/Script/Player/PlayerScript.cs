@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
+using Photon.Realtime;
 
 namespace DH
 {
@@ -90,10 +91,10 @@ namespace DH
         }
 
         [PunRPC]
-        public void KickTheCan(Vector3 vec)
+        public void KickTheCan(Vector3 vec, Player p)
         {
             Debug.Log("Kick");
-            PlayMng.instance.KickTheCan(vec);
+            PlayMng.instance.KickTheCan(vec, p);
         }
 
         public void MoveAnim(bool isMove)

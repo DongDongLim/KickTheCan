@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-
+using Photon.Realtime;
+using Photon.Pun.UtilityScripts;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 namespace DH
 {
     public class CanMoveScript : MonoBehaviourPun
@@ -12,22 +14,51 @@ namespace DH
 
         Rigidbody rigid;
 
+        bool isMove;
+
         private void Start()
         {
-            rigid = GetComponent<Rigidbody>();
+            rigid = GetComponent<Rigidbody>(); 
+            isMove = false;
         }
 
 
-        public IEnumerator CanMove(Vector3 target)
+        public IEnumerator CanMove(Vector3 target, Player p)
         {
-            if (rigid.velocity != Vector3.zero || !photonView.IsMine)
+            if (!photonView.IsMine || isMove)
                 yield break;
-            if(photonView.IsMine)
-                PlayMng.instance.gameChat.SystemCanKickLog(PhotonNetwork.LocalPlayer);
+            isMove = true;
+            PlayMng.instance.gameChat.SystemCanKickLog(p);
             rigid.AddForce(target * kickPower, ForceMode.Impulse);
             while(rigid.velocity != Vector3.zero)
             {
+                yield return null;
+            }
+            isMove = false;
+            photonView.RPC("SetLayer", RpcTarget.All, "Can");
+        }
 
+        [PunRPC]
+        public void SetLayer(string name)
+        {
+            gameObject.layer = LayerMask.NameToLayer(name);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if(collision.gameObject.layer == LayerMask.NameToLayer("Tagger") && !isMove && !GameManager.Instance.isAttack && photonView.IsMine)
+            {
+                isMove = true;
+                int taggerId = collision.transform.gameObject.GetComponent<PlayerScript>().ownerID;
+                foreach(Player p in PhotonNetwork.PlayerList)
+                {
+                    if(p.GetPlayerNumber() == taggerId)
+                    {
+                        Hashtable prob = new Hashtable { {GameData.PLAYER_TAGGER, true } };
+                        p.SetCustomProperties(prob);
+                    }
+                }
+                PhotonNetwork.Destroy(gameObject);
             }
         }
     }

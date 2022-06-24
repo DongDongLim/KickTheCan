@@ -10,10 +10,25 @@ namespace DH
 {
     public class RunnerController : Controller, IDamaged
     {
+        ChangeLayer change;
+
         private void Awake()
         {
             CameraMng.instance.RunnerCamSetting();
+            GameManager.Instance.canCheckActionTrue += ChangeLayer;
         }
+
+        private void OnDisable()
+        {
+            if (GameManager.Instance != null)
+                GameManager.Instance.canCheckActionTrue -= ChangeLayer;
+        }
+
+        public void ChangeLayer()
+        {
+            GetComponent<RunnerSetScript>().photonView.RPC("ChildObjCreate", RpcTarget.All, -1, "Default");
+        }
+
 
         public override void ControllerAction()
         {
@@ -38,7 +53,7 @@ namespace DH
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.gameObject.layer == LayerMask.NameToLayer("Weapon") && gameObject.layer == LayerMask.NameToLayer("Default"))
+            if(other.gameObject.layer == LayerMask.NameToLayer("Weapon"))
             {
                 Damaged();
                 int id = other.transform.parent.parent.GetComponent<PlayerScript>().ownerID;
@@ -60,9 +75,10 @@ namespace DH
         {
             if(collision.gameObject.layer == LayerMask.NameToLayer("Can"))
             {
+                collision.gameObject.layer = LayerMask.NameToLayer("Default");
                 Hashtable hashtable = new Hashtable { {GameData.PLAYER_ISKICK, true } };
                 PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
-                owner.photonView.RPC("KickTheCan", RpcTarget.All, Vector3.Normalize(collision.gameObject.transform.position - transform.position));               
+                owner.photonView.RPC("KickTheCan", RpcTarget.MasterClient, Vector3.Normalize(collision.gameObject.transform.position - transform.position), PhotonNetwork.LocalPlayer);               
             }
         }
 
