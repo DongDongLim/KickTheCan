@@ -9,25 +9,22 @@ namespace DH
     {
         [SerializeField]
         GameObject can;
-        public void SetObjIndex(int index)
+        public void SetObjIndex(bool isRebuild)
         {
-            photonView.RPC("ChildObjCreate", RpcTarget.All, index);
+            if (isRebuild)
+            {
+                ChildObjCreate();
+                return;
+            }
+
+            photonView.RPC("ChildObjCreate", RpcTarget.All);
         }
 
         [PunRPC]
-        public void ChildObjCreate(int index)
+        public void ChildObjCreate()
         {
-            GameObject canObj = Instantiate(can, MapSettingMng.instance.gameObject.transform, false);
-            canObj.transform.position = transform.position;
-            PlayMng.instance.can = canObj;
-        }
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-            {
-                GetComponent<Rigidbody>().isKinematic = true;
-            }
+            GameObject canObj = Instantiate(can, transform, false);
+            PlayMng.instance.can = gameObject;
         }
     }
 }

@@ -13,6 +13,8 @@ namespace DH
         public GameObject[] mapObj;
         public GameObject taggerObj;
 
+        public Vector3 canTransform;
+
         public int objIndex;
         public bool isRebuild = false;
 
@@ -22,6 +24,7 @@ namespace DH
 
         int randIndex;
 
+        public GameObject testCan;
 
 
 
@@ -44,6 +47,10 @@ namespace DH
             PhotonNetwork.Instantiate
                     ("Map", Vector3.zero, Quaternion.identity, 0)
                     .GetComponent<MapSetScript>().SetObjIndex(randIndex, isRebuild);
+            yield return null;
+            canTransform = new Vector3(15, 0.5f, 10);
+            PhotonNetwork.Instantiate
+                   ("Can", canTransform, Quaternion.identity, 0).GetComponent<CanSetScript>().SetObjIndex(isRebuild);
             yield break;
         }
         public void ChildObjCreate(int index)
@@ -58,7 +65,7 @@ namespace DH
             GameObject playerObj = PhotonNetwork.Instantiate
                 (DH.GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
             playerObj.AddComponent<TaggerController>();
-            playerObj.GetComponent<TaggerSetScript>().SetObj(isRebuild);
+            playerObj.GetComponent<TaggerSetScript>().SetObj("Tagger", isRebuild);
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.TAGGER);
         }

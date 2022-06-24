@@ -4,16 +4,31 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 namespace DH
 {
     public class RunnerController : Controller, IDamaged
     {
+        ChangeLayer change;
 
         private void Awake()
         {
             CameraMng.instance.RunnerCamSetting();
+            GameManager.Instance.canCheckActionTrue += ChangeLayer;
         }
+
+        private void OnDisable()
+        {
+            if (GameManager.Instance != null)
+                GameManager.Instance.canCheckActionTrue -= ChangeLayer;
+        }
+
+        public void ChangeLayer()
+        {
+            GetComponent<RunnerSetScript>().photonView.RPC("ChildObjCreate", RpcTarget.All, -1, "Default");
+        }
+
 
         public override void ControllerAction()
         {
@@ -54,12 +69,16 @@ namespace DH
             }
         }
 
+        
+
         private void OnCollisionEnter(Collision collision)
         {
             if(collision.gameObject.layer == LayerMask.NameToLayer("Can"))
             {
-                //PlayMng.instance.KickTheCan(Vector3.Normalize(collision.gameObject.transform.position - transform.position));
-                PlayMng.instance.photonView.RPC("KickTheCan", RpcTarget.All, Vector3.Normalize(collision.gameObject.transform.position - transform.position));
+                collision.gameObject.layer = LayerMask.NameToLayer("Default");
+                Hashtable hashtable = new Hashtable { {GameData.PLAYER_ISKICK, true } };
+                PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
+                owner.photonView.RPC("KickTheCan", RpcTarget.MasterClient, Vector3.Normalize(collision.gameObject.transform.position - transform.position), PhotonNetwork.LocalPlayer);               
             }
         }
 

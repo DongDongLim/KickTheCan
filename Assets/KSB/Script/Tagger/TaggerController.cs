@@ -44,7 +44,7 @@ namespace DH
 
         public override void ControllerAction()
         {
-            if (0 < attackCurCount)
+            if (0 < attackCurCount && GameManager.Instance.isAttack)
             {
                 attackCurCount--;
                 owner.photonView.RPC("Attack", RpcTarget.All);
