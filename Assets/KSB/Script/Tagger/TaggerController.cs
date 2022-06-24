@@ -23,6 +23,8 @@ namespace DH
         private void Awake() {
             attackCurCount = attackMaxCount;
             CameraMng.instance.TaggerCamSetting();
+
+            UIMng.instance.SetUI("Tagger");
         }
         public override void ControlUpdate()
         {

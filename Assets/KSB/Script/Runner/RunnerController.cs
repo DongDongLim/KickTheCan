@@ -13,6 +13,8 @@ namespace DH
         private void Awake()
         {
             CameraMng.instance.RunnerCamSetting();
+
+            UIMng.instance.SetUI("Runner");
         }
 
         public override void ControllerAction()
