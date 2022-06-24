@@ -30,6 +30,7 @@ namespace DH
         {
             move.GroundChecker();
             AttackCool();
+            Debug.Log("남은 공격 횟수 : " + attackCurCount);
         }
 
         public void AttackCool(){
@@ -44,11 +45,15 @@ namespace DH
             attackCurCool += Time.deltaTime;
         }
 
+        public void AttackComplete()
+        {
+            attackCurCount--;
+        }
+
         public override void ControllerAction()
         {
             if (0 < attackCurCount)
             {
-                attackCurCount--;
                 owner.photonView.RPC("Attack", RpcTarget.All);
             }
         }
