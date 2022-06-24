@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 55e64e617a8bfff4ba846574e2651eb9, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -4442,7 +4442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapBG:
-  - {fileID: 8120940490136183754, guid: 1efe7dfa4b0257949867ee938d95b774, type: 3}
+  - {fileID: 1213566448883972027, guid: d5e460fd697724b449e328a990275a14, type: 3}
   mapObj:
   - {fileID: 2041021369302378627, guid: 92b37722c6d57ac48ae337076adbe7c2, type: 3}
   - {fileID: 5951832055947375062, guid: 144de354587e86a449a705b1128bb40b, type: 3}
