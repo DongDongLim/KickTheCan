@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private PlayerSceneInfo playerSceneInfo;
     private bool isTagger;
-    private bool isRebuild = false;
+    private bool isPlaying = false;
 
     int m_maxTagger = 0;
 
@@ -29,14 +29,21 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void Start()
     {
+        isPlaying = true;
+
         playerSceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();
-        if (true == playerSceneInfo.isRenegade || true == playerSceneInfo.isObserver)
+
+        // Test : HasRejoined
+        if (PhotonNetwork.LocalPlayer.HasRejoined)
         {
-            isRebuild = true;
+            //true == playerSceneInfo.isRenegade || true == playerSceneInfo.isObserver
             ReEntry();
         }
-        ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_LOAD, true } };
-        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+        else
+        {
+            ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_LOAD, true } };
+            PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+        }          
     }
 
     #region PHOTON CALLBACK
@@ -60,12 +67,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             if (CheckAllPlayerLoadLevel())
             {
-                Debug.Log(isRebuild);
-                if (!isRebuild)
-                {
-                    SetTagger();
-                    StartCoroutine(StartCountDown());
-                }               
+                SetTagger();
+                StartCoroutine(StartCountDown());
             }
             else
             {
@@ -143,14 +146,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (!PhotonNetwork.IsMasterClient)
         {
             return;
-        }
-
-        if (isRebuild)
-        {
-            Debug.Log(isRebuild);
-            StartCoroutine(DH.MapSettingMng.instance.Setting());
-            return;
-        }
+        }      
 
         StartCoroutine(DH.MapSettingMng.instance.Setting());
 
@@ -235,9 +231,12 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void ReEntry()
     {        
-        Debug.Log("join on the way");
-        DH.MapSettingMng.instance.Setting();
+        Debug.Log("ReEntry 호출");
+
+        StartCoroutine(DH.MapSettingMng.instance.Setting());
         DH.MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);
+        DH.MapSettingMng.instance.TaggerSetting(PhotonNetwork.LocalPlayer);
+        DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
     }
 }
 

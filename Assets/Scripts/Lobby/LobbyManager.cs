@@ -17,6 +17,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public InRoomPanel inRoomPanel;
     public InfoPanel infoPanel;
 
+    public PlayerSceneInfo playerSceneInfo;
+
     #region UNITY
 
     private void Awake()
@@ -28,8 +30,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.AutomaticallySyncScene = true;
               
-        if (PhotonNetwork.IsConnected)
+        if (PhotonNetwork.IsConnected && !playerSceneInfo.isRenegade)
             SetActivePanel(LobbyManager.PANEL.Connect);
+        else if (playerSceneInfo.isRenegade)    
+        {
+            SetActivePanel(LobbyManager.PANEL.Lobby);
+        }
     }
 
     public enum PANEL { Login, Connect, Lobby, Room, CreateRoom }
@@ -45,7 +51,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void ShowError(string error)
     {
         infoPanel.ShowError(error);
-    }
+    }   
 
     #endregion UNITY
 

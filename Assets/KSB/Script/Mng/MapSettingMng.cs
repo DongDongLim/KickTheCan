@@ -29,26 +29,20 @@ namespace DH
 
         private void Start()
         {
-            playerSceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();
-            if (true == playerSceneInfo.isRenegade || true == playerSceneInfo.isObserver)
-            {
-                isRebuild = true;
-            }
+            playerSceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();        
         }
 
         protected override void OnAwake()
         {
             chanceAddon = new ChanceAddon();
-        }
-
-
+        }        
 
     public IEnumerator Setting()
         {
             randIndex = Random.Range(0, mapBG.Length);
             PhotonNetwork.Instantiate
                     ("Map", Vector3.zero, Quaternion.identity, 0)
-                    .GetComponent<MapSetScript>().SetObjIndex(randIndex, isRebuild);
+                    .GetComponent<MapSetScript>().SetObjIndex(randIndex, isRebuild);        
 
             if (objectSpawnPos.Length == 0)
                 yield break;

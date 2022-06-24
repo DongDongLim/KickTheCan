@@ -29,7 +29,7 @@ public class PlayerSceneManager : MonoBehaviour
 
     public void OnLobbyButton()
     {             
-        sceneInfo.isRenegade = true;        
+        sceneInfo.isRenegade = true;      
         PhotonNetwork.LeaveRoom();
         Debug.Log("Go to Lobby");
     }
