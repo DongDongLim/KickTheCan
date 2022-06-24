@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
 namespace DH
 {
@@ -14,18 +15,17 @@ namespace DH
 
         public GameObject can;
 
+
         protected override void OnAwake()
         {
-
+            GameManager.Instance.canCheckActionFalse += Release;
         }
 
         public void BeCaught(GameObject player)
         {
             PhotonNetwork.Destroy(player);
             isRunnerBeCaught = true;
-            UIMng.instance.jumpAction += Release;
-            PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.DEAD);
-
+            gameChat.SetCharacterType(YSM.GameCharacterType.DEAD);
         }
 
         public void Release()
@@ -33,22 +33,15 @@ namespace DH
             if (isRunnerBeCaught)
             {
                 MapSettingMng.instance.RunnerSetting(null);
-                UIMng.instance.jumpAction -= Release;
                 isRunnerBeCaught = false;
-                PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.RUNNER);
+                gameChat.SetCharacterType(YSM.GameCharacterType.RUNNER);
             }
         }
 
-        [PunRPC]
-        public void KickTheCan(Vector3 canTargetVector)
-        {
-            StartCoroutine(can.GetComponent<CanMoveScript>().CanMove(canTargetVector));
-        }
 
-        [PunRPC]
-        public void SetCanPosition(Vector3 pos)
+        public void KickTheCan(Vector3 canTargetVector, Player p)
         {
-            can.transform.position = pos;
+            StartCoroutine(can?.GetComponent<CanMoveScript>().CanMove(canTargetVector, p));
         }
     }
 }
