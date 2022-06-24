@@ -4,12 +4,12 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 namespace DH
 {
     public class RunnerController : Controller, IDamaged
     {
-
         private void Awake()
         {
             CameraMng.instance.RunnerCamSetting();
@@ -60,8 +60,9 @@ namespace DH
         {
             if(collision.gameObject.layer == LayerMask.NameToLayer("Can"))
             {
-                Debug.Log("Can");
                 owner.photonView.RPC("KickTheCan", RpcTarget.All, Vector3.Normalize(collision.gameObject.transform.position - transform.position));
+                Hashtable hashtable = new Hashtable { {GameData.PLAYER_ISKICK, true } };
+                PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
                 PlayMng.instance.gameChat.AddCanKickLog(PhotonNetwork.LocalPlayer);
             }
         }

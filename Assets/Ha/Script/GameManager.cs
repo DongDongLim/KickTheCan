@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public static GameManager Instance { get; private set; }
 
     public Text infoText;
+    public bool isAttack;
 
     private PlayerSceneInfo playerSceneInfo;
     private bool isTagger;
@@ -65,7 +66,13 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 PrintInfo("wait players " + PlayersLoadLevel() + " / " + PhotonNetwork.PlayerList.Length);
             }
-        }      
+        }
+        // 러너가 킥을 찼을 때 술래의 공격불가
+        object value;
+        if(changedProps.TryGetValue(DH.GameData.PLAYER_ISKICK, out value))
+        {
+            isAttack = !(bool)value;
+        }
     }
 
     #endregion PHOTON CALLBACK

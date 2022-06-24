@@ -31,10 +31,12 @@ namespace DH
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.layer == LayerMask.NameToLayer("Tagger"))
+            if (photonView.IsMine)
             {
-                //PlayMng.instance.photonView.RPC("KickTheCan", RpcTarget.All, Vector3.Normalize(collision.gameObject.transform.position - transform.position));
-
+                if (collision.gameObject.layer == LayerMask.NameToLayer("Tagger"))
+                {
+                    
+                }
             }
         }
 
