@@ -28,17 +28,5 @@ namespace DH
 
             }
         }
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (photonView.IsMine)
-            {
-                if (collision.gameObject.layer == LayerMask.NameToLayer("Tagger"))
-                {
-                    
-                }
-            }
-        }
-
     }
 }
