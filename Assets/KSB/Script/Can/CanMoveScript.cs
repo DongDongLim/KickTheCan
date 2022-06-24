@@ -22,6 +22,8 @@ namespace DH
         {
             if (rigid.velocity != Vector3.zero || !photonView.IsMine)
                 yield break;
+            if(photonView.IsMine)
+                PlayMng.instance.gameChat.SystemCanKickLog(PhotonNetwork.LocalPlayer);
             rigid.AddForce(target * kickPower, ForceMode.Impulse);
             while(rigid.velocity != Vector3.zero)
             {

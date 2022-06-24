@@ -60,10 +60,9 @@ namespace DH
         {
             if(collision.gameObject.layer == LayerMask.NameToLayer("Can"))
             {
-                owner.photonView.RPC("KickTheCan", RpcTarget.All, Vector3.Normalize(collision.gameObject.transform.position - transform.position));
                 Hashtable hashtable = new Hashtable { {GameData.PLAYER_ISKICK, true } };
                 PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
-                PlayMng.instance.gameChat.AddCanKickLog(PhotonNetwork.LocalPlayer);
+                owner.photonView.RPC("KickTheCan", RpcTarget.All, Vector3.Normalize(collision.gameObject.transform.position - transform.position));               
             }
         }
 

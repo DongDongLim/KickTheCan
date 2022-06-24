@@ -152,6 +152,7 @@ namespace YSM
             }
             else
             {
+                curChatType = GameChatType.ALL;
                 typeButtonText.text = curChatType.ToString();
                 typeButton.interactable = true;
             }
@@ -323,7 +324,7 @@ namespace YSM
             systemChatEntry.GetComponent<ChatEntry>().SetData(
                 charImageType[(int)GameChatType.NOTICE],
                 ColorTransform.EnumToColor(PlayerColorType.RED),
-                "<color=#" + GameChatTypeColorToString(GameChatType.NOTICE) + "> <System></color",
+                "<color=#" + GameChatTypeColorToString(GameChatType.NOTICE) + "> <System></color>",
                 "<color=#" + YSM.ColorTransform.EnumToTextString((YSM.PlayerColorType)runner.GetPlayerNumber()) + ">" + runner.NickName + "</color> Kick Can!!!!!!!!"
                 );
 
