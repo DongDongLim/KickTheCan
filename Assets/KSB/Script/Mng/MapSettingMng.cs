@@ -18,9 +18,7 @@ namespace DH
 
         public int objIndex;
 
-        int randIndex;
-
-        bool isRebuild = false;
+        int randIndex;   
 
         public GameObject[] objectSpawnPos;
 
@@ -42,7 +40,7 @@ namespace DH
             randIndex = Random.Range(0, mapBG.Length);
             PhotonNetwork.Instantiate
                     ("Map", Vector3.zero, Quaternion.identity, 0)
-                    .GetComponent<MapSetScript>().SetObjIndex(randIndex, isRebuild);        
+                    .GetComponent<MapSetScript>().SetObjIndex(randIndex);        
 
             if (objectSpawnPos.Length == 0)
                 yield break;
@@ -61,7 +59,7 @@ namespace DH
                     case 1:
                         Debug.Log(obj.name);
                         PhotonNetwork.Instantiate("Obj", obj.transform.position, Quaternion.identity, 0)
-                        .GetComponent<ObjScript>().SetObjIndex(randIndex, isRebuild);
+                        .GetComponent<ObjScript>().SetObjIndex(randIndex);
                         Debug.Log("랜덤이지롱");
                         break;
                     case 2:
@@ -87,7 +85,7 @@ namespace DH
             GameObject playerObj = PhotonNetwork.Instantiate
                 (DH.GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
             playerObj.AddComponent<TaggerController>();
-            playerObj.GetComponent<TaggerSetScript>().SetObj(isRebuild);
+            playerObj.GetComponent<TaggerSetScript>().SetObj();
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.TAGGER);
         }
@@ -101,9 +99,9 @@ namespace DH
                 (DH.GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
             playerObj.AddComponent<RunnerController>();
             if (p == null)
-                playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex, "Hide", isRebuild);
+                playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex, "Hide");
             else
-                playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex, "Default", isRebuild);
+                playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex, "Default");
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.RUNNER);
         }

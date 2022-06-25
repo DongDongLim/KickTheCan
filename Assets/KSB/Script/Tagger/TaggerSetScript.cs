@@ -7,15 +7,8 @@ namespace DH
 {
     public class TaggerSetScript : MonoBehaviourPun
     {
-        public void SetObj(bool isRebuild)
-        {
-            if (isRebuild)
-            {
-                Destroy(gameObject);
-                Debug.Log("TaggerSetScript : 재입장");
-                ChildObjCreate();
-            }           
-
+        public void SetObj()
+        {          
             photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered);
         }
 

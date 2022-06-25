@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1879,12 +1879,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa5901b46945fe488d6ccdef9b3899a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomName: 
   loginPanel: {fileID: 48812977}
   inConnectPanel: {fileID: 1752283859}
   createRoomPanel: {fileID: 819061959}
   inLobbyPanel: {fileID: 1490811440}
   inRoomPanel: {fileID: 2055254414}
   infoPanel: {fileID: 0}
+  playerSceneInfo: {fileID: 1088422061}
 --- !u!114 &484014393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5882,6 +5884,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1082453197}
   m_CullTransparentMesh: 1
+--- !u!114 &1088422061 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4733719620310298808, guid: 0723afb5420b7294696010b8f0aa8b1f,
+    type: 3}
+  m_PrefabInstance: {fileID: 855526971}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2369a68ae8f3b0f438c6544b91c6bc20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1089629952
 GameObject:
   m_ObjectHideFlags: 0
@@ -6341,7 +6355,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 88, y: -3}
-  m_SizeDelta: {x: 170, y: 47.083332}
+  m_SizeDelta: {x: 170, y: 46.535732}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1137651062
 GameObject:
@@ -7121,7 +7135,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0.000030517578, y: 0}
-  m_SizeDelta: {x: 0, y: 53.083332}
+  m_SizeDelta: {x: 0, y: 52.535732}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1317110118
 MonoBehaviour:
@@ -7243,7 +7257,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1137651064}
   m_HandleRect: {fileID: 1137651063}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -9422,7 +9436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 511d67ff51ffa6d47839b910b7db04ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSceneInfo: {fileID: 0}
+  playerSceneInfo: {fileID: 1088422061}
 --- !u!1 &1768444877
 GameObject:
   m_ObjectHideFlags: 0
@@ -9780,7 +9794,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.22684692, y: 0}
   m_AnchorMax: {x: 0.80384046, y: 0.18514983}
-  m_AnchoredPosition: {x: -1.4772034, y: 1.5059814}
+  m_AnchoredPosition: {x: -1.4771957, y: 1.5059814}
   m_SizeDelta: {x: 2.785675, y: 2.0120945}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1827738545

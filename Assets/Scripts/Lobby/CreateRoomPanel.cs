@@ -24,6 +24,9 @@ public class CreateRoomPanel : MonoBehaviour
         maxPlayer = (byte)Mathf.Clamp(maxPlayer, 1, 20);
 
         RoomOptions options = new RoomOptions { MaxPlayers = maxPlayer };
+        options.PlayerTtl = 30000;
         PhotonNetwork.CreateRoom(roomName, options, null);
+
+        //EnterRoomParams enterRoomParams = new EnterRoomParams { };
     }
 }

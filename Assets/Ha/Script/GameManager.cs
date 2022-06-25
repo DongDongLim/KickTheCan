@@ -6,6 +6,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
 using System.Collections.Generic;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
@@ -28,22 +29,33 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
 
     public void Start()
-    {
-        isPlaying = true;
-
+    {      
         playerSceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();
-
-        // Test : HasRejoined
+                
         if (PhotonNetwork.LocalPlayer.HasRejoined)
+        {         
+            Debug.Log("재 참가");
+            // TODO : test - 관전자 모드 시 러너 미생성
+            //Hashtable props = new Hashtable() { { GameData.PLAYER_LOAD, true } };
+            //PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+            RejoinMode();            
+        }
+        else if (IsAdditionalPlayer())
         {
-            //true == playerSceneInfo.isRenegade || true == playerSceneInfo.isObserver
-            ReEntry();
+            Debug.Log("추가 참가");           
+            ObserverMode();
         }
         else
         {
-            ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_LOAD, true } };
+            Debug.Log("일반 참가");
+            Hashtable props = new Hashtable() { { GameData.PLAYER_LOAD, true } };
             PhotonNetwork.LocalPlayer.SetCustomProperties(props);
-        }          
+        }
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+             StartCoroutine("GameIsOn");
+        }        
     }
 
     #region PHOTON CALLBACK
@@ -60,7 +72,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         //PhotonNetwork.Disconnect();
     }
 
-    public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
+    public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
     {
         Debug.Log("propertiesUpdate access");
         if (changedProps.ContainsKey(GameData.PLAYER_LOAD))
@@ -74,7 +86,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 PrintInfo("wait players " + PlayersLoadLevel() + " / " + PhotonNetwork.PlayerList.Length);
             }
-        }
+        }      
     }
 
     #endregion PHOTON CALLBACK
@@ -146,7 +158,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (!PhotonNetwork.IsMasterClient)
         {
             return;
-        }      
+        }
 
         StartCoroutine(DH.MapSettingMng.instance.Setting());
 
@@ -171,14 +183,14 @@ public class GameManager : MonoBehaviourPunCallbacks
                 if (p.IsMasterClient)
                 {
                     isTagger = true;
-                    ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
+                    Hashtable props = new Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
                     p.SetCustomProperties(props);
-                    Debug.Log("3명 이하 호스트 tagger 자동설정");
+                    Debug.Log("플레이어 3명 이하! 호스트 tagger 자동설정");
                 }
                 else
                 {
                     isTagger = false;
-                    ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
+                    Hashtable props = new Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
                     p.SetCustomProperties(props);
                     Debug.Log("runner 설정");
                 }
@@ -194,7 +206,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             if (index < m_maxTagger)
             {
                 isTagger = true;
-                ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
+                Hashtable props = new Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
                 playerList[i].SetCustomProperties(props);
                 Debug.Log("tagger 설정");
                 index++;
@@ -202,7 +214,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             else
             {
                 isTagger = false;
-                ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
+                Hashtable props = new Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
                 playerList[i].SetCustomProperties(props);
                 Debug.Log("runner 설정");
             }
@@ -223,20 +235,62 @@ public class GameManager : MonoBehaviourPunCallbacks
             else
             {
                 DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
-            }          
+            }
         }
 
-        Debug.Log("총 tagger 인원 : " + m_maxTagger);
+        isPlaying = true;
+
+        Hashtable props = new Hashtable() { { GameData.MASTER_PLAY, isPlaying } };
+        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
     }
 
-    private void ReEntry()
-    {        
-        Debug.Log("ReEntry 호출");
+    private void ObserverMode()
+    {
+        Debug.Log("ReEntry Mode 호출");
 
         StartCoroutine(DH.MapSettingMng.instance.Setting());
-        DH.MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);
-        DH.MapSettingMng.instance.TaggerSetting(PhotonNetwork.LocalPlayer);
+        DH.MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);        
+    }
+
+    private void RejoinMode()
+    {
+        Debug.Log("ReJoiner Mode 호출");
+        StartCoroutine(DH.MapSettingMng.instance.Setting());
         DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
+    }
+
+    IEnumerator GameIsOn()
+    {
+        yield return new WaitForSeconds(10f);
+
+        Debug.Log("MasterClient : Game is On");
+        isPlaying = true;
+
+        Hashtable props = new Hashtable() { { GameData.MASTER_PLAY, isPlaying } };
+        PhotonNetwork.MasterClient.SetCustomProperties(props);        
+    }
+
+    public override void OnJoinedRoom()
+    {
+        Debug.Log("room에 입장");
+    }
+
+    private bool IsAdditionalPlayer()
+    {        
+        Debug.Log(PhotonNetwork.CurrentRoom.Name);
+        Debug.Log(PhotonNetwork.MasterClient.NickName);        
+        object isStarted;       
+
+        if (PhotonNetwork.MasterClient.CustomProperties.TryGetValue(GameData.MASTER_PLAY, out isStarted))
+        {
+            Debug.Log(isStarted);
+            if ((bool)isStarted)
+            {
+                return true;
+            }           
+        }
+        
+        return false;                   
     }
 }
 

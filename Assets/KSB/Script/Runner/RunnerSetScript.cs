@@ -10,18 +10,11 @@ namespace DH
         public int objIndex;
         ChangeLayer change;
 
-        public void SetObjIndex(int index, string name , bool isRebuild)
+        public void SetObjIndex(int index, string name)
         {
-            UIMng.instance.testHideAction += ChangeLayer;
+            UIMng.instance.testHideAction += ChangeLayer;           
 
-            if (isRebuild)
-            {
-                Destroy(gameObject);
-                Debug.Log("TaggerSetScript : 재입장");
-                ChildObjCreate(index, name);
-            }
-
-            photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered, index, name);
+            photonView.RPC("ChildObjCreate", RpcTarget.All, index, name);
         }
 
         [PunRPC]
