@@ -2822,12 +2822,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa5901b46945fe488d6ccdef9b3899a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomName: 
   loginPanel: {fileID: 48812977}
   inConnectPanel: {fileID: 1752283859}
   createRoomPanel: {fileID: 819061959}
   inLobbyPanel: {fileID: 1490811440}
   inRoomPanel: {fileID: 495516498}
   infoPanel: {fileID: 0}
+  playerSceneInfo: {fileID: 509694659}
 --- !u!114 &484014393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3037,6 +3039,92 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 503569264}
   m_CullTransparentMesh: 0
+--- !u!1001 &509694658
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4733719620310298808, guid: 0723afb5420b7294696010b8f0aa8b1f,
+        type: 3}
+      propertyPath: isRenegade
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4733719620310298809, guid: 0723afb5420b7294696010b8f0aa8b1f,
+        type: 3}
+      propertyPath: m_Name
+      value: DontDestroyObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 4733719620310298814, guid: 0723afb5420b7294696010b8f0aa8b1f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4733719620310298814, guid: 0723afb5420b7294696010b8f0aa8b1f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4733719620310298814, guid: 0723afb5420b7294696010b8f0aa8b1f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4733719620310298814, guid: 0723afb5420b7294696010b8f0aa8b1f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4733719620310298814, guid: 0723afb5420b7294696010b8f0aa8b1f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4733719620310298814, guid: 0723afb5420b7294696010b8f0aa8b1f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4733719620310298814, guid: 0723afb5420b7294696010b8f0aa8b1f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4733719620310298814, guid: 0723afb5420b7294696010b8f0aa8b1f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4733719620310298814, guid: 0723afb5420b7294696010b8f0aa8b1f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4733719620310298814, guid: 0723afb5420b7294696010b8f0aa8b1f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4733719620310298814, guid: 0723afb5420b7294696010b8f0aa8b1f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0723afb5420b7294696010b8f0aa8b1f, type: 3}
+--- !u!114 &509694659 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4733719620310298808, guid: 0723afb5420b7294696010b8f0aa8b1f,
+    type: 3}
+  m_PrefabInstance: {fileID: 509694658}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2369a68ae8f3b0f438c6544b91c6bc20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &510599966
 GameObject:
   m_ObjectHideFlags: 0
@@ -12631,6 +12719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 511d67ff51ffa6d47839b910b7db04ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSceneInfo: {fileID: 0}
 --- !u!1 &1754740824
 GameObject:
   m_ObjectHideFlags: 0

@@ -41,12 +41,13 @@ public class AuthManager : MonoBehaviour
                 if (task.IsCompleted && !task.IsFaulted && !task.IsCanceled)
                 {
                     Debug.Log(email + " 로 로그인 하셨습니다.");
+                    OnCheck.Invoke();
                 }
                 else
                 {
                     Debug.Log("로그인에 실패하셨습니다.");
                 }
-                OnCheck.Invoke();
+
             }
         );
     }
