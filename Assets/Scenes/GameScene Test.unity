@@ -1088,7 +1088,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 358601539}
-  m_LocalRotation: {x: 0.57357645, y: 3e-45, z: 1e-45, w: 0.8191521}
+  m_LocalRotation: {x: 0.57357645, y: -1e-45, z: -1e-45, w: 0.8191521}
   m_LocalPosition: {x: 0, y: 18.793852, z: -6.8404055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3265,7 +3265,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 940741985}
-  m_LocalRotation: {x: 0.57357645, y: 3e-45, z: 1e-45, w: 0.8191521}
+  m_LocalRotation: {x: 0.57357645, y: -1e-45, z: -1e-45, w: 0.8191521}
   m_LocalPosition: {x: 0, y: 18.793852, z: -6.8404055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4422,6 +4422,7 @@ GameObject:
   - component: {fileID: 1405825244}
   - component: {fileID: 1405825245}
   - component: {fileID: 1405825246}
+  - component: {fileID: 1405825247}
   m_Layer: 0
   m_Name: GameMng
   m_TagString: Untagged
@@ -4534,6 +4535,21 @@ MonoBehaviour:
   TaggerCount: {fileID: 147706815}
   RUNNER_LIFE: 0
   TAGGER_LIFE: 0
+--- !u!114 &1405825247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405825240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1594d2fb979db4489fd6cdeb2055711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 9204039137660629915, guid: d894cb0e34e567a4ab3c6cc198d43a97,
+    type: 3}
+  dustVFX: {fileID: 7218281984645173938, guid: d8db721bd3b32e8419f8e675e012fb42, type: 3}
 --- !u!1 &1436610119
 GameObject:
   m_ObjectHideFlags: 0
@@ -4595,7 +4611,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2031537285}
   m_HandleRect: {fileID: 2031537283}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

@@ -28,8 +28,16 @@ namespace DH
             change.CangeTransformLayer(transform, name);
         }
 
+        [PunRPC]
+        public void Die(Transform transform)
+        {
+            KSB.VFXMng.instance.OnExplosion(transform);
+        }
+
         private void OnDestroy()
         {
+            photonView.RPC("Die(transform)", RpcTarget.All);
+
             if(UIMng.instance != null)
                 UIMng.instance.testHideAction -= ChangeLayer;
         }

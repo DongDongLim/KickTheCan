@@ -7,6 +7,8 @@ public class TaggerAttack : MonoBehaviour
 {
     [SerializeField]
     GameObject attackColl;
+
+
     public DH.TaggerController controller;
 
     private void Awake() {
@@ -16,6 +18,11 @@ public class TaggerAttack : MonoBehaviour
     public void AttackDiminish()
     {
         controller.AttackComplete();
+    }
+
+    public void JumpStart()
+    {
+        KSB.VFXMng.instance.OnDust(transform);
     }
 
     [PunRPC]
