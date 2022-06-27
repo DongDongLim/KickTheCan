@@ -35,15 +35,13 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.LocalPlayer.HasRejoined)
         {         
             Debug.Log("재 참가");
-            // TODO : test - 관전자 모드 시 러너 미생성
-            //Hashtable props = new Hashtable() { { GameData.PLAYER_LOAD, true } };
-            //PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+            // TODO : test - 관전자 모드 시 러너 미생성           
             RejoinMode();            
         }
         else if (IsAdditionalPlayer())
         {
-            Debug.Log("추가 참가");           
-            ObserverMode();
+            Debug.Log("추가 참가");            
+            ObserverMode();         
         }
         else
         {
@@ -247,6 +245,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void ObserverMode()
     {
         Debug.Log("ReEntry Mode 호출");
+        Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
 
         StartCoroutine(DH.MapSettingMng.instance.Setting());
         DH.MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);        
@@ -273,6 +272,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("room에 입장");
+        Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
     }
 
     private bool IsAdditionalPlayer()

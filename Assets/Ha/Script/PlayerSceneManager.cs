@@ -7,8 +7,7 @@ using Photon.Pun.UtilityScripts;
 using UnityEngine.SceneManagement;
 
 public class PlayerSceneManager : MonoBehaviour
-{
-    // TODO : singleton 으로 변경
+{  
     public static PlayerSceneManager Instance { get; private set; } 
 
     public GameObject exitMenuUI;

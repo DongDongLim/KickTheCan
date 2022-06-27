@@ -12,9 +12,8 @@ namespace DH
 
         public void SetObjIndex(int index)
         {                
-            photonView.RPC("ChildObjCreate", RpcTarget.All, index);
-            PhotonNetwork.Destroy(gameObject);  
-            // TODO : 포톤 뷰가 삭제 되었기 때문에 재입장 시에 다시 생성해주어야한다.
+            photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered, index);
+            PhotonNetwork.Destroy(gameObject);              
         }
 
         [PunRPC]

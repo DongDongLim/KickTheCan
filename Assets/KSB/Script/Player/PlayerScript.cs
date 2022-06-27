@@ -32,8 +32,7 @@ namespace DH
         }
 
         private void Start()
-        {
-            // TODO : 관전자 모드 시 버그 발생 -> UnityException: Transform child out of bounds
+        {          
             anim = transform.GetChild(1).GetComponent<Animator>() == null ? null : transform.GetChild(1).GetComponent<Animator>();
             if (photonView.IsMine)
                 ownerID = PhotonNetwork.LocalPlayer.GetPlayerNumber();         
@@ -50,8 +49,7 @@ namespace DH
         private void Update()
         {
             if (!photonView.IsMine)
-            {
-                // TODO : 관전자 모드 시 버그 발생 -> UnityException: Transform child out of bounds
+            {              
                 if (isSettingComplete && null == charactorBody)
                     charactorBody = transform.GetChild(1).transform;
                 return;

@@ -11,10 +11,8 @@ namespace DH
         ChangeLayer change;
 
         public void SetObjIndex(int index, string name)
-        {
-            UIMng.instance.testHideAction += ChangeLayer;           
-
-            photonView.RPC("ChildObjCreate", RpcTarget.All, index, name);
+        {               
+            photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered, index, name);
         }
 
         [PunRPC]
@@ -24,15 +22,8 @@ namespace DH
             objIndex = index;
             Instantiate(DH.MapSettingMng.instance.mapObj[objIndex], transform, false);
             change.CangeTransformLayer(transform, name);
-        }
-
-        private void OnDestroy()
-        {
-            if(UIMng.instance != null)
-                UIMng.instance.testHideAction -= ChangeLayer;
-        }
-
-        // TODO : Test
+        }    
+       
         public void ChangeLayer()
         {
             photonView.RPC("ChangeLayerFunc", RpcTarget.All);
