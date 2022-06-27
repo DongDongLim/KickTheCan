@@ -18,6 +18,9 @@ namespace YSM
         static private int setWidth = 1920; //화면  너비
         static private int setHeight = 1080; //화면 높이
 
+
+        public myData myData;
+
         private void Awake()
         {
 
@@ -26,11 +29,6 @@ namespace YSM
 
             Screen.SetResolution(setWidth, setHeight, true);
         }
-
-        //public PlayerColorType GetPlayerNumberingToEnum(Player player)
-        //{
-        //    return (PlayerColorType)PlayerNumberingExtensions.GetPlayerNumber(player);
-        //}
 
 
         public PlayerColorType GetLocalPlayerNumbering()

@@ -124,10 +124,6 @@ namespace YSM
             
         }
 
-        private void OnDisable()
-        {
-
-        }
 
         public void SetCharacterType(GameCharacterType characterType)
         {
@@ -156,6 +152,7 @@ namespace YSM
                 typeButtonText.text = curChatType.ToString();
                 typeButton.interactable = true;
             }
+
 
         }
 
@@ -228,16 +225,12 @@ namespace YSM
                     if (TaggerSendTeamChat())
                         return;
                 }
-                else if (receiveCharacterType == GameCharacterType.DEAD) // 죽은 사람이 채팅 보냈을때 못받는것
-                {
-                    Debug.Log(curCharacterType.ToString() + "////" + receiveCharacterType.ToString());
-                    Debug.Log(curChatType.ToString() + "////\\\\\\\\" + receiveChatType.ToString());
-
-                    if (DeadSendChat())
-                        return;
-                }
             }
-
+            else if (receiveCharacterType == GameCharacterType.DEAD) // 죽은 사람이 채팅 보냈을때 못받는것
+            {
+                if (DeadSendChat())
+                    return;
+            }
 
 
             GameObject entry = Instantiate(chatEntryPrefab);
