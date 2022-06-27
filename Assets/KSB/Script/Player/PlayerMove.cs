@@ -94,8 +94,10 @@ namespace DH
                 x = Mathf.Clamp(x, 335f, 361f);
             }
 
+            mouseDelta = mouseDelta.normalized;
+
             // 카메라 암 회전 시키기
-            cameraArm.rotation = Quaternion.Euler(x, camAngle.y + mouseDelta.x, camAngle.z);
+            cameraArm.rotation = Quaternion.Euler(x, camAngle.y - mouseDelta.x, camAngle.z);
         }
 
         public void Jump()
