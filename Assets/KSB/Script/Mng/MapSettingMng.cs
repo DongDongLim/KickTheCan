@@ -30,16 +30,13 @@ namespace DH
 
         private void Start()
         {
-            playerSceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();
-            if (true == playerSceneInfo.isRenegade || true == playerSceneInfo.isObserver)
-            {
-                isRebuild = true;
-            }
+            playerSceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();        
         }
 
         protected override void OnAwake()
         {
-        }
+
+        }        
 
     public IEnumerator Setting()
         {
@@ -51,8 +48,8 @@ namespace DH
             canTransform = new Vector3(15, 0.5f, 10);
             PhotonNetwork.Instantiate
                    ("Can", canTransform, Quaternion.identity, 0).GetComponent<CanSetScript>().SetObjIndex(isRebuild);
-            yield break;
         }
+
         public void ChildObjCreate(int index)
         {
             objIndex = index;
@@ -72,23 +69,23 @@ namespace DH
 
         public void RunnerSetting(Player p)
         {
+            
             Debug.Log("러너 생성");
             randIndex = Random.Range(0, mapObj.Length);
             GameObject playerObj = PhotonNetwork.Instantiate
                 (DH.GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
             playerObj.AddComponent<RunnerController>();
             if (p == null)
-                playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex, "Hide", isRebuild);
+                playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex, "Hide");
             else
-                playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex, "Default", isRebuild);
+                playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex, "Default");
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.RUNNER);
         }
-
-        // TODO : 관전자 모드 
+               
         public void ObserverSetting(Player p)
         {
-            Debug.Log("관전자 모드");
+            Debug.Log("관전자 모드");                       
             CameraMng.instance.SwitchCam();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.OBSERVER);
         }

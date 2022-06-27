@@ -8,14 +8,8 @@ namespace DH
     public class TaggerSetScript : MonoBehaviourPun
     {
         ChangeLayer change;
-        public void SetObj(string name, bool isRebuild)
+        public void SetObj(string name)
         {
-            if (isRebuild)
-            {
-                ChildObjCreate(name);
-                return;
-            }
-
             photonView.RPC("ChildObjCreate", RpcTarget.All, name);
         }
 

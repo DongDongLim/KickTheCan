@@ -10,12 +10,9 @@ namespace DH
         public int objIndex;
         ChangeLayer change;
 
-        public void SetObjIndex(int index, string name , bool isRebuild)
-        {
-            if (isRebuild)
-                ChildObjCreate(index, name);
-            else
-                photonView.RPC("ChildObjCreate", RpcTarget.All, index, name);
+        public void SetObjIndex(int index, string name)
+        {     
+            photonView.RPC("ChildObjCreate", RpcTarget.All, index, name);
         }
 
         [PunRPC]

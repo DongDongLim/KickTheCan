@@ -45,15 +45,10 @@ namespace DH
 
         private void Start()
         {
-            // TODO : 중간 입장시 발동되면 Bug 발생 
-            //if (playerSceneInfo.isObserver || playerSceneInfo.isRenegade)
-            //{
-            //    return;
-            //}
-
+            // TODO : 관전자 모드 시 버그 발생 -> UnityException: Transform child out of bounds
             anim = transform.GetChild(1).GetComponent<Animator>() == null ? null : transform.GetChild(1).GetComponent<Animator>();
             if (photonView.IsMine)
-                ownerID = PhotonNetwork.LocalPlayer.GetPlayerNumber();
+                ownerID = PhotonNetwork.LocalPlayer.GetPlayerNumber();         
         }
 
         public void ControllerSetting()
@@ -68,7 +63,8 @@ namespace DH
         {
             if (!photonView.IsMine)
             {
-                if(isSettingComplete && null == charactorBody)
+                // TODO : 관전자 모드 시 버그 발생 -> UnityException: Transform child out of bounds
+                if (isSettingComplete && null == charactorBody)
                     charactorBody = transform.GetChild(1).transform;
                 return;
             }

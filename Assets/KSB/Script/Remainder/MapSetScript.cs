@@ -16,17 +16,11 @@ namespace DH
         int randIndex;
 
 
-        public void SetObjIndex(int index, bool isRebuild)
-        {
-            chanceAddon = new ChanceAddon();
-            if (isRebuild)
-            {
-                ChildObjCreate(index);
-                Destroy(gameObject);
-                return;
-            }
+        public void SetObjIndex(int index)
+        {                
             photonView.RPC("ChildObjCreate", RpcTarget.All, index);
-            PhotonNetwork.Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);  
+            // TODO : 포톤 뷰가 삭제 되었기 때문에 재입장 시에 다시 생성해주어야한다.
         }
 
         [PunRPC]

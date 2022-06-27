@@ -9,6 +9,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 {
     public static LobbyManager instance {get; private set;}
 
+    public string roomName;
+
     [Header("Panel")]
     public LoginPanel loginPanel;
     public InConnectPanel inConnectPanel;
@@ -16,6 +18,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public InLobbyPanel inLobbyPanel;
     public InRoomPanel inRoomPanel;
     public InfoPanel infoPanel;
+
+    public PlayerSceneInfo playerSceneInfo;
 
     #region UNITY
 
@@ -26,11 +30,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
+        // TODO : 마스터와 씬 동기화
+        // 방법 2 : 
         PhotonNetwork.AutomaticallySyncScene = true;
-        
-        // TOOD : 추가
-        if (PhotonNetwork.IsConnected)
+              
+        if (PhotonNetwork.IsConnected && !playerSceneInfo.isLeaver)
             SetActivePanel(LobbyManager.PANEL.Connect);
+        else if (playerSceneInfo.isLeaver)    
+        {
+            SetActivePanel(LobbyManager.PANEL.Lobby);
+        }
     }
 
     public enum PANEL { Login, Connect, Lobby, Room, CreateRoom }
@@ -46,7 +55,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void ShowError(string error)
     {
         infoPanel.ShowError(error);
-    }
+    }   
 
     #endregion UNITY
 
@@ -73,14 +82,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
 
     public override void OnCreatedRoom() 
-    {
-        // TODO : 룸 지속시간
-        base.OnCreatedRoom();
-        EnterRoomParams enterRoomParams = new EnterRoomParams { };
-
-        Room room = PhotonNetwork.CurrentRoom;
-        room.EmptyRoomTtl = 1;
-        
+    {        
+        base.OnCreatedRoom();                     
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -116,6 +119,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
+        Debug.Log("로비씬 : 방에 들어왔습니다.");
         inRoomPanel.OnPlayerEnteredRoom(newPlayer);
     }
 
