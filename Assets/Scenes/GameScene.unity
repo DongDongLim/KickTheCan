@@ -122,97 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &7734096
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 232935538562275407, guid: f60cb6c7ea4eefd4a96ffc65b0a853be,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 232935538562275407, guid: f60cb6c7ea4eefd4a96ffc65b0a853be,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 232935538562275407, guid: f60cb6c7ea4eefd4a96ffc65b0a853be,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 232935538562275407, guid: f60cb6c7ea4eefd4a96ffc65b0a853be,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 232935538562275407, guid: f60cb6c7ea4eefd4a96ffc65b0a853be,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 232935538562275407, guid: f60cb6c7ea4eefd4a96ffc65b0a853be,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 232935538562275407, guid: f60cb6c7ea4eefd4a96ffc65b0a853be,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 232935538562275407, guid: f60cb6c7ea4eefd4a96ffc65b0a853be,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 232935538562275407, guid: f60cb6c7ea4eefd4a96ffc65b0a853be,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 232935538562275407, guid: f60cb6c7ea4eefd4a96ffc65b0a853be,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 232935538562275407, guid: f60cb6c7ea4eefd4a96ffc65b0a853be,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 665479578063189061, guid: f60cb6c7ea4eefd4a96ffc65b0a853be,
-        type: 3}
-      propertyPath: m_Name
-      value: Canister
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f60cb6c7ea4eefd4a96ffc65b0a853be, type: 3}
---- !u!1 &7734097 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 665479578063189061, guid: f60cb6c7ea4eefd4a96ffc65b0a853be,
-    type: 3}
-  m_PrefabInstance: {fileID: 7734096}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &7734098
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7734097}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &24802547
 GameObject:
   m_ObjectHideFlags: 0
@@ -3600,7 +3509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapBG:
-  - {fileID: 8120940490136183754, guid: 1efe7dfa4b0257949867ee938d95b774, type: 3}
+  - {fileID: 8712606125602315030, guid: 1db34a178152c23429394f5beb89bc41, type: 3}
   mapObj:
   - {fileID: 2041021369302378627, guid: 92b37722c6d57ac48ae337076adbe7c2, type: 3}
   - {fileID: 5951832055947375062, guid: 144de354587e86a449a705b1128bb40b, type: 3}
@@ -3617,7 +3526,7 @@ MonoBehaviour:
   taggerObj: {fileID: 7180172942738791779, guid: 3e02007bf5ef9124493e4b3acb7fe5f1,
     type: 3}
   objIndex: 0
-  isRebuild: 0
+  objectSpawnPos: []
 --- !u!4 &1405825242
 Transform:
   m_ObjectHideFlags: 0
@@ -3644,7 +3553,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2f3cebd03229bc45b61fd135a42def4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameChat: {fileID: 0}
   infoText: {fileID: 669587242}
+  spawnPos: []
 --- !u!114 &1405825244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3675,7 +3586,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRunnerBeCaught: 0
   gameChat: {fileID: 966585996}
-  can: {fileID: 7734097}
+  can: {fileID: 0}
 --- !u!1 &1436610119
 GameObject:
   m_ObjectHideFlags: 0

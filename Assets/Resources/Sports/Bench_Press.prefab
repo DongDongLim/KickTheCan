@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2330602706321496446}
   - component: {fileID: 5915618171870027084}
+  - component: {fileID: 1033040445668237522}
   m_Layer: 12
   m_Name: Bench_Press
   m_TagString: Untagged
@@ -47,6 +48,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   list: []
+--- !u!114 &1033040445668237522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620801034853854070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &8591228062779480469
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -232,7 +255,7 @@ PrefabInstance:
     - target: {fileID: 1786015703830332187, guid: ab17750896171fa49bc70d8950db9a46,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1786135203145751855, guid: ab17750896171fa49bc70d8950db9a46,
         type: 3}
@@ -348,11 +371,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 7485919783275392188, guid: ab17750896171fa49bc70d8950db9a46,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.197
       objectReference: {fileID: 0}
     - target: {fileID: 7487266217133914366, guid: ab17750896171fa49bc70d8950db9a46,
         type: 3}

@@ -12,7 +12,9 @@ namespace DH
         public GameObject rotateJoystick;
         public Button jumpBtn;
         public Button actionBtn;
+        public Button testHideBtn;
 
+        public UnityAction testHideAction;
         public UnityAction jumpAction;
         public UnityAction actionAction;
 
@@ -33,6 +35,10 @@ namespace DH
             
         }
 
+        public void OnTestHideButton()
+        {
+            testHideAction?.Invoke();
+        }
 
         public void OnJumpButton()
         {
