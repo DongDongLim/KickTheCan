@@ -40,8 +40,8 @@ public class InConnectPanel : MonoBehaviour
             PhotonNetwork.LocalPlayer.SetCustomProperties(props);            
 
             playerSceneInfo.isLeaver = true;
-            PhotonNetwork.LocalPlayer.HasRejoined = true;
-            Debug.Log("Test : " + PhotonNetwork.LocalPlayer.HasRejoined);           
+            //PhotonNetwork.LocalPlayer.HasRejoined = true;
+            //Debug.Log("Test : " + PhotonNetwork.LocalPlayer.HasRejoined);           
             PhotonNetwork.JoinRoom(roomName);           
         }
         else

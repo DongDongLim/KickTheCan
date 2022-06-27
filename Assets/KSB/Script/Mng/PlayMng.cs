@@ -32,7 +32,7 @@ namespace DH
         {
             if (isRunnerBeCaught)
             {
-                MapSettingMng.instance.RunnerSetting(null);
+                MapSettingMng.instance.RunnerSetting("Hide");
                 isRunnerBeCaught = false;
                 gameChat.SetCharacterType(YSM.GameCharacterType.RUNNER);
             }

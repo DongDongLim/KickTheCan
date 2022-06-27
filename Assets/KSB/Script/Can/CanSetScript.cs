@@ -9,15 +9,9 @@ namespace DH
     {
         [SerializeField]
         GameObject can;
-        public void SetObjIndex(bool isRebuild)
-        {
-            if (isRebuild)
-            {
-                ChildObjCreate();
-                return;
-            }
-
-            photonView.RPC("ChildObjCreate", RpcTarget.All);
+        public void SetObjIndex()
+        { 
+            photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered);
         }
 
         [PunRPC]

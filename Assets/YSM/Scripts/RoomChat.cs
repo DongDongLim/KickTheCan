@@ -30,16 +30,6 @@ namespace YSM
 
         public void RoomChatSendClicked()
         {
-            int idx = 9999999;
-            for (int i = 0; i < PhotonNetwork.PlayerList.Length; ++i)
-            {
-                if (PhotonNetwork.PlayerList[i].ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
-                {
-                    idx = i;
-                    break;
-                }
-
-            }
             if (inputfield.text == "")
                 return;
             photonView.RPC("RoomChatMessage",

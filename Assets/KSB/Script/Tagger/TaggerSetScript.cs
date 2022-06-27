@@ -10,7 +10,7 @@ namespace DH
         ChangeLayer change;
         public void SetObj(string name)
         {
-            photonView.RPC("ChildObjCreate", RpcTarget.All, name);
+            photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered, name);
         }
 
         [PunRPC]

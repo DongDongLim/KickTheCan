@@ -84,12 +84,17 @@ public class GameManager : MonoBehaviourPunCallbacks
             if (CheckAllPlayerLoadLevel())
             {
                 SetTagger();
-                StartCoroutine(StartCountDown());
+                //StartCoroutine(StartCountDown());
             }
             else
             {
                 PrintInfo("wait players " + PlayersLoadLevel() + " / " + PhotonNetwork.PlayerList.Length);
             }
+        }
+        if(changedProps.ContainsKey(GameData.PLAYER_TAGGER))
+        {
+            if(targetPlayer == PhotonNetwork.LocalPlayer)
+                StartCoroutine(StartCountDown());
         }
         // 러너가 킥을 찼을 때 술래의 공격불가
         object value;
@@ -262,7 +267,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             }
             else
             {
-                DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
+                DH.MapSettingMng.instance.RunnerSetting("Default");
             }
         }
 
@@ -275,16 +280,16 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void ObserverMode()
     {
         Debug.Log("ReEntry Mode 호출");
-
-        StartCoroutine(DH.MapSettingMng.instance.Setting());
+        // 맵 세팅은 호스트만 부탁드립니다
+        //StartCoroutine(DH.MapSettingMng.instance.Setting());
         DH.MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);        
     }
 
     private void RejoinMode()
     {
         Debug.Log("ReJoiner Mode 호출");
-        StartCoroutine(DH.MapSettingMng.instance.Setting());
-        DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
+        //StartCoroutine(DH.MapSettingMng.instance.Setting());
+        DH.MapSettingMng.instance.RunnerSetting("Default");
     }
 
     IEnumerator GameIsOn()
