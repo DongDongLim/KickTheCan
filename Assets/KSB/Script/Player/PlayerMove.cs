@@ -46,7 +46,7 @@ namespace DH
         { 
             UIMng.instance.jumpAction += Jump;
             owner = GetComponent<PlayerScript>();
-            charactorBody = transform.GetChild(1).transform;
+            charactorBody = transform.GetChild(2).transform;
             maxRayDistance = charactorBody.GetComponent<Collider>().bounds.size.y * 0.5f;
             rigid = r;
         }

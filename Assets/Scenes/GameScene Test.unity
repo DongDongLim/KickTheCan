@@ -4547,8 +4547,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1594d2fb979db4489fd6cdeb2055711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionVFX: {fileID: 9204039137660629915, guid: d894cb0e34e567a4ab3c6cc198d43a97,
-    type: 3}
   dustVFX: {fileID: 7218281984645173938, guid: d8db721bd3b32e8419f8e675e012fb42, type: 3}
 --- !u!1 &1436610119
 GameObject:
@@ -4611,7 +4609,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2031537285}
   m_HandleRect: {fileID: 2031537283}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

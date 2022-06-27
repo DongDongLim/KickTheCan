@@ -59,13 +59,18 @@ public class GameManager : MonoBehaviourPunCallbacks
             if (CheckAllPlayerLoadLevel())
             {
                 SetTagger();
-                StartCoroutine(StartCountDown());
+                //StartCoroutine(StartCountDown());
             }
             else
             {
                 PrintInfo("wait players " + PlayersLoadLevel() + " / " + PhotonNetwork.PlayerList.Length);
             }
         }      
+        if(changedProps.ContainsKey(GameData.PLAYER_TAGGER))
+        {
+            if(PhotonNetwork.LocalPlayer == targetPlayer)
+                StartCoroutine(StartCountDown());
+        }
     }
 
     #endregion PHOTON CALLBACK
