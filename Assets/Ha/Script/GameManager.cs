@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
@@ -13,7 +14,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     public static GameManager Instance { get; private set; }
 
     public Text infoText;
-    public Transform[] spawnPos;
+    public bool isAttack = true;
+    public GameObject canCheckObj;
+    public UnityAction canCheckActionTrue;
+    public UnityAction canCheckActionFalse;
 
     private PlayerSceneInfo playerSceneInfo;
     private bool isTagger;
@@ -84,7 +88,31 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 PrintInfo("wait players " + PlayersLoadLevel() + " / " + PhotonNetwork.PlayerList.Length);
             }
-        }      
+        }
+        // 러너가 킥을 찼을 때 술래의 공격불가
+        object value;
+        if(changedProps.TryGetValue(DH.GameData.PLAYER_ISKICK, out value))
+        {
+            isAttack = !(bool)value;
+            if (isAttack)
+            {
+                canCheckActionTrue?.Invoke();
+            }
+            else
+            {
+                canCheckActionFalse?.Invoke();
+            }
+        }
+        if(changedProps.TryGetValue(DH.GameData.PLAYER_TAGGER, out value))
+        {
+            if(PhotonNetwork.LocalPlayer == targetPlayer)
+            {
+                // TODO : 술래가 깡통을 먹음
+                canCheckObj.transform.position = DH.MapSettingMng.instance.canTransform;
+                canCheckObj.SetActive(true);
+            }
+
+        }
     }
 
     #endregion PHOTON CALLBACK

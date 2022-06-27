@@ -4,7 +4,6 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
-using System.IO;
 
 namespace DH
 {
@@ -14,16 +13,20 @@ namespace DH
         public GameObject[] mapObj;
         public GameObject taggerObj;
 
-        private PlayerSceneInfo playerSceneInfo;
+        public Vector3 canTransform;
 
         public int objIndex;
+        public bool isRebuild = false;
 
-        int randIndex;   
 
-        public GameObject[] objectSpawnPos;
+        private PlayerSceneInfo playerSceneInfo;
 
-        ChanceAddon chanceAddon;
-        private int randomResult;
+
+        int randIndex;
+
+        public GameObject testCan;
+
+
 
         private void Start()
         {
@@ -32,7 +35,7 @@ namespace DH
 
         protected override void OnAwake()
         {
-            chanceAddon = new ChanceAddon();
+
         }        
 
     public IEnumerator Setting()
@@ -40,39 +43,13 @@ namespace DH
             randIndex = Random.Range(0, mapBG.Length);
             PhotonNetwork.Instantiate
                     ("Map", Vector3.zero, Quaternion.identity, 0)
-                    .GetComponent<MapSetScript>().SetObjIndex(randIndex);        
-
-            if (objectSpawnPos.Length == 0)
-                yield break;
-
-            foreach (GameObject obj in objectSpawnPos)
-            {
-                Debug.Log("포이치지롱");
-                randomResult = chanceAddon.ChanceThree(0,0,100);
-                randIndex = Random.Range(0,mapObj.Length);
-                switch(randomResult)
-                {
-                    case 0:
-                        Debug.Log(obj.name);
-                        Debug.Log("안생겼지롱");
-                        break;
-                    case 1:
-                        Debug.Log(obj.name);
-                        PhotonNetwork.Instantiate("Obj", obj.transform.position, Quaternion.identity, 0)
-                        .GetComponent<ObjScript>().SetObjIndex(randIndex);
-                        Debug.Log("랜덤이지롱");
-                        break;
-                    case 2:
-                        Debug.Log(obj.name);
-                        PhotonNetwork.Instantiate(Path.Combine("Sports", obj.name), obj.transform.position, Quaternion.identity, 0);
-                        
-                        Debug.Log("생겼지롱");
-                        break;
-                }
-               
-                yield return null;
-            }
+                    .GetComponent<MapSetScript>().SetObjIndex(randIndex, isRebuild);
+            yield return null;
+            canTransform = new Vector3(15, 0.5f, 10);
+            PhotonNetwork.Instantiate
+                   ("Can", canTransform, Quaternion.identity, 0).GetComponent<CanSetScript>().SetObjIndex(isRebuild);
         }
+
         public void ChildObjCreate(int index)
         {
             objIndex = index;
@@ -85,7 +62,7 @@ namespace DH
             GameObject playerObj = PhotonNetwork.Instantiate
                 (DH.GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
             playerObj.AddComponent<TaggerController>();
-            playerObj.GetComponent<TaggerSetScript>().SetObj();
+            playerObj.GetComponent<TaggerSetScript>().SetObj("Tagger", isRebuild);
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.TAGGER);
         }

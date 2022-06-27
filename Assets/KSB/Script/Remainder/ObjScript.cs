@@ -16,11 +16,38 @@ namespace DH
             PhotonNetwork.Destroy(gameObject);
         }
 
+        public void SetObjIndex(string obj, bool isRebuild)
+        {
+            // TODO : 바뀜
+            if (isRebuild)
+            {
+                ChildObjCreate(obj);
+                Destroy(gameObject);
+                return;
+            }
+
+            photonView.RPC("ChildObjCreate", RpcTarget.All, obj);
+
+            PhotonNetwork.Destroy(gameObject);
+        }
+
         [PunRPC]
         public void ChildObjCreate(int index)
         {
             objIndex = index;
-            Instantiate(MapSettingMng.instance.mapObj[objIndex], MapSettingMng.instance.gameObject.transform, false).transform.position = transform.position;
+            GameObject gameObject =
+            Instantiate(MapSettingMng.instance.mapObj[objIndex], MapSettingMng.instance.gameObject.transform, false);
+            gameObject.transform.position = transform.position;
+            gameObject.transform.rotation = transform.rotation;
+        }
+
+        [PunRPC]
+        public void ChildObjCreate(string obj)
+        {
+            GameObject gameObject =
+            (GameObject)Instantiate(Resources.Load(obj), MapSettingMng.instance.gameObject.transform, false);
+            gameObject.transform.position = transform.position;
+            gameObject.transform.rotation = transform.rotation;
         }
     }
 }

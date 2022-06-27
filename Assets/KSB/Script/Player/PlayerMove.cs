@@ -57,25 +57,6 @@ namespace DH
                 UIMng.instance.jumpAction -= Jump;
         }
 
-        // TODO : 테스트용
-        void Update()
-        {
-            TestJump();
-        }
-
-        public void TestJump()
-        {
-            if (!Input.GetButtonDown("Jump"))
-                return;
-                
-            if (isJump)
-                return;
-
-            rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-
-            isJump = true;
-        }
-
         public void Move(Vector2 inputDirection)
         {
             moveInput = inputDirection;
@@ -84,6 +65,7 @@ namespace DH
             Vector3 lookForward = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
             Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
             Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
+            moveDir = moveDir.normalized;
 
             owner?.MoveAnim(isMove);
 
@@ -100,7 +82,7 @@ namespace DH
             // 카메라의 원래 각도를 오일러 각으로 저장
             Vector3 camAngle = cameraArm.rotation.eulerAngles;
             // 카메라의 피치 값 계산
-            float x = camAngle.x - mouseDelta.y;
+            float x = camAngle.x + mouseDelta.y;
 
             // 카메라 피치 값을 위쪽으로 70도 아래쪽으로 25도 이상 움직이지 못하게 제한
             if (x < 180f)

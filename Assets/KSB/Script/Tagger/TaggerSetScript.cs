@@ -7,15 +7,18 @@ namespace DH
 {
     public class TaggerSetScript : MonoBehaviourPun
     {
-        public void SetObj()
-        {          
-            photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered);
+        ChangeLayer change;
+        public void SetObj(string name)
+        {
+            photonView.RPC("ChildObjCreate", RpcTarget.All, name);
         }
 
         [PunRPC]
-        public void ChildObjCreate()
+        public void ChildObjCreate(string name)
         {
+            change = new ChangeLayer();
             Instantiate(DH.MapSettingMng.instance.taggerObj, transform, false);
+            change.CangeTransformLayer(transform, name, false);
         }
     }
 }
