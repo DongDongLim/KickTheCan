@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     public Text infoText;
     public Transform[] spawnPos;
 
-    private PlayerSceneInfo playerSceneInfo;
     private bool isTagger;
     private bool isPlaying = false;
 
@@ -29,13 +28,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
 
     public void Start()
-    {      
-        playerSceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();
-                
+    {                        
         if (PhotonNetwork.LocalPlayer.HasRejoined)
         {         
-            Debug.Log("재 참가");
-            // TODO : test - 관전자 모드 시 러너 미생성           
+            Debug.Log("재 참가");                
             RejoinMode();            
         }
         else if (IsAdditionalPlayer())
@@ -158,7 +154,8 @@ public class GameManager : MonoBehaviourPunCallbacks
             return;
         }
 
-        StartCoroutine(DH.MapSettingMng.instance.Setting());
+        // TODO : Text 예정
+        //StartCoroutine(DH.MapSettingMng.instance.Setting());
 
         m_maxTagger = PhotonNetwork.PlayerList.Length / 4;
         m_maxTagger = (int)Mathf.Clamp(m_maxTagger, 1, 5);
@@ -247,14 +244,16 @@ public class GameManager : MonoBehaviourPunCallbacks
         Debug.Log("ReEntry Mode 호출");
         Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
 
-        StartCoroutine(DH.MapSettingMng.instance.Setting());
+        // TODO : Text 예정
+        //StartCoroutine(DH.MapSettingMng.instance.Setting());
         DH.MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);        
     }
 
     private void RejoinMode()
     {
         Debug.Log("ReJoiner Mode 호출");
-        StartCoroutine(DH.MapSettingMng.instance.Setting());
+        // TODO : Text 예정
+        //StartCoroutine(DH.MapSettingMng.instance.Setting());
         DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
     }
 
@@ -266,7 +265,10 @@ public class GameManager : MonoBehaviourPunCallbacks
         isPlaying = true;
 
         Hashtable props = new Hashtable() { { GameData.MASTER_PLAY, isPlaying } };
-        PhotonNetwork.MasterClient.SetCustomProperties(props);        
+        PhotonNetwork.MasterClient.SetCustomProperties(props);  
+        
+        // TODO : 모든플레이어가 준비가 되었을 시에 게임을 시작한다.
+        // 정해진 시간안에 참가하지 못한 플레이어는 추방하고 게임을 시작한다.
     }
 
     public override void OnJoinedRoom()
@@ -291,7 +293,14 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
         
         return false;                   
+    }   
+
+    private void GameOver()
+    {
+
     }
+
+
 }
 
 
