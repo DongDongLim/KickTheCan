@@ -82,16 +82,12 @@ namespace DH
             }
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             if (isInput)
             {
                 InputControlVector();
             }
-        }
-        private void Update()
-        {
-            
         }
     }
 }

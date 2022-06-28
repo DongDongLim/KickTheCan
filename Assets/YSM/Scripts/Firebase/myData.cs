@@ -1,13 +1,12 @@
 ﻿
 public class myData
 {
-    public string DisplayNickname;
-    public string Score;
-    public string Email;
-    public myData(string Email , string DisplayNickname, string Score)
+    public string ID;
+    public string Data;
+
+    public myData(string ID, string Data)
     {
-        this.Email = Email;
-        this.DisplayNickname = DisplayNickname;
-        this.Score = Score;
+        this.ID = ID;
+        this.Data = Data;
     }
 }

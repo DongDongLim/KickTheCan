@@ -14,8 +14,6 @@ public class PlayerSceneManager : MonoBehaviour
     public GameObject exitMenuUI;
     public PlayerSceneInfo sceneInfo;
 
-    bool isButtonOn = false;
-
     private void Awake()
     {
         Instance = this;
@@ -28,11 +26,12 @@ public class PlayerSceneManager : MonoBehaviour
     }
 
     public void OnLobbyButton()
-    {            
-        sceneInfo.roomName = PhotonNetwork.CurrentRoom.Name;
-        Debug.Log(sceneInfo.roomName);
-        sceneInfo.isLeaver = true;      
+    {
+        // TODO : 나가는 플레이어에게 관전자 모드 설정        
+        sceneInfo.isRenegade = true;
         PhotonNetwork.LeaveRoom();
+        //PhotonNetwork.LoadLevel(0);
+
         Debug.Log("Go to Lobby");
     }
 
@@ -50,8 +49,7 @@ public class PlayerSceneManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            isButtonOn = !isButtonOn;
-            exitMenuUI.SetActive(isButtonOn);
+            exitMenuUI.SetActive(true);
         }
     }
 }

@@ -9,9 +9,6 @@ public class GameData : MonoBehaviour
     public const string PLAYER_READY = "Ready";
     public const string PLAYER_LOAD = "Load";
     public const string PLAYER_TAGGER = "Tagger";
-    public const string PLAYER_LEAVER = "Leaver";
-    public const string MASTER_PLAY = "Play";
-    
 
     public static Color GetColor(int playerNumber)
     {
@@ -35,7 +32,5 @@ namespace DH
     public class GameData : MonoBehaviour
     {
         public const string PLAYER_OBJECT = "PlayerObj";
-        public const string PLAYER_ISKICK = "KickCan";
-        public const string PLAYER_TAGGER = "Catch";
     }
 }

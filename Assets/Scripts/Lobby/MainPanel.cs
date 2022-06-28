@@ -133,7 +133,8 @@ public class MainPanel : MonoBehaviourPunCallbacks
     public void OnStartGameButtonClicked()
     {
         PhotonNetwork.CurrentRoom.IsOpen = true;
-        PhotonNetwork.CurrentRoom.IsVisible = true;       
+        PhotonNetwork.CurrentRoom.IsVisible = true;
+        // ToDo : ¹Ù²ñ
         PhotonNetwork.LoadLevel(1);
     }
 

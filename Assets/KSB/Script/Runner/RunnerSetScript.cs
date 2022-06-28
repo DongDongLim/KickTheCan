@@ -10,40 +10,48 @@ namespace DH
         public int objIndex;
         ChangeLayer change;
 
-        public void SetObjIndex(int index, string name)
-        {     
-            photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered, index, name);
-        }
-
-        public void SetObjIndex(int index, string objName ,string name)
+        public void SetObjIndex(int index, string name , bool isRebuild)
         {
-            photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered, index, objName, name);
+            UIMng.instance.testHideAction += ChangeLayer;
+            if (isRebuild)
+                ChildObjCreate(index, name);
+            else
+                photonView.RPC("ChildObjCreate", RpcTarget.All, index, name);
         }
-
 
         [PunRPC]
         public void ChildObjCreate(int index, string name)
         {
             change = new ChangeLayer();
-            if (index != -1)
-            {
-                objIndex = index;
-                Instantiate(MapSettingMng.instance.mapObj[objIndex], transform, false);
-            }
-            change.CangeTransformLayer(transform, name, true);
+            objIndex = index;
+            Instantiate(DH.MapSettingMng.instance.mapObj[objIndex], transform, false);
+            change.CangeTransformLayer(transform, name);
+        }
+
+        private void OnDestroy()
+        {
+            if(UIMng.instance != null)
+                UIMng.instance.testHideAction -= ChangeLayer;
+        }
+
+        // TODO : Test
+        public void ChangeLayer()
+        {
+            photonView.RPC("ChangeLayerFunc", RpcTarget.All);
         }
 
         [PunRPC]
-        public void ChildObjCreate(int index, string objName, string name)
+        public void ChangeLayerFunc()
         {
-            if (index != -1)
+            switch (LayerMask.LayerToName(gameObject.layer))
             {
-                objIndex = index;
-                Debug.Log("진짜생성");
-                Instantiate(Resources.Load(objName), transform, false);
+                case "Hide":
+                    change.CangeTransformLayer(transform, "Default");
+                    break;
+                case "Default":
+                    change.CangeTransformLayer(transform, "Hide");
+                    break;
             }
-            change = new ChangeLayer();
-            change.CangeTransformLayer(transform, name, true);
         }
     }
 }

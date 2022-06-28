@@ -31,6 +31,8 @@ public class PlayerEntry : MonoBehaviour
         }
     }
 
+
+
     public void OnReadyButtonClicked()
     {
         Hashtable props = PhotonNetwork.LocalPlayer.CustomProperties;

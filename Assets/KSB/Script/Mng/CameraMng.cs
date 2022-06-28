@@ -14,7 +14,7 @@ namespace DH
         [SerializeField]
         CinemachineVirtualCamera skyCam;
 
-        GameObject playerObject;
+        public GameObject playerObject;
         public GameObject observerObject;
 
         protected override void OnAwake()
@@ -33,6 +33,7 @@ namespace DH
 
         public void SwitchCam()
         {
+
             if (playerCam.gameObject.activeSelf)
             {
                 UIMng.instance.SetMoveUI(observerObject.GetComponent<PlayerMove>());

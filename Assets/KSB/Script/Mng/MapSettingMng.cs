@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
-using System.IO;
 using Photon.Pun.UtilityScripts;
 
 namespace DH
@@ -13,10 +12,6 @@ namespace DH
         public GameObject[] mapBG;
         public GameObject[] mapObj;
         public GameObject taggerObj;
-        public GameObject curMap;
-        public Transform[] objectSpawnPos;
-
-        public Vector3 canTransform;
 
         public int objIndex;
         public bool isRebuild = false;
@@ -27,32 +22,30 @@ namespace DH
 
         int randIndex;
 
-        public GameObject testCan;
 
 
 
         private void Start()
         {
-            playerSceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();        
+            playerSceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();
+            if (true == playerSceneInfo.isRenegade || true == playerSceneInfo.isObserver)
+            {
+                isRebuild = true;
+            }
         }
 
         protected override void OnAwake()
         {
-
-        }        
+        }
 
     public IEnumerator Setting()
         {
             randIndex = Random.Range(0, mapBG.Length);
             PhotonNetwork.Instantiate
                     ("Map", Vector3.zero, Quaternion.identity, 0)
-                    .GetComponent<MapSetScript>().SetObjIndex(randIndex);
-            yield return null;
-            canTransform = new Vector3(15, 0.5f, 10);
-            PhotonNetwork.Instantiate
-                   ("Can", canTransform, Quaternion.identity, 0).GetComponent<CanSetScript>().SetObjIndex();
+                    .GetComponent<MapSetScript>().SetObjIndex(randIndex, isRebuild);
+            yield break;
         }
-
         public void ChildObjCreate(int index)
         {
             objIndex = index;
@@ -65,35 +58,33 @@ namespace DH
             GameObject playerObj = PhotonNetwork.Instantiate
                 (DH.GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
             playerObj.AddComponent<TaggerController>();
-            playerObj.GetComponent<TaggerSetScript>().SetObj("Tagger");
+            playerObj.GetComponent<TaggerSetScript>().SetObj(isRebuild);
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.TAGGER);
+
+            UIDataMng.Instance.SetTagger(UIDataMng.Instance.TAGGER_LIFE + 1);
         }
 
-        public void RunnerSetting(string layerName)
+        public void RunnerSetting(Player p)
         {
             Debug.Log("러너 생성");
-            randIndex = Random.Range(12, mapObj.Length + objectSpawnPos.Length);
+            //UIDataMng.Instance.SetRunner(UIDataMng.Instance.RUNNER_LIFE + 1);
+            randIndex = Random.Range(0, mapObj.Length);
             GameObject playerObj = PhotonNetwork.Instantiate
-                (GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
+                (DH.GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
             playerObj.AddComponent<RunnerController>();
-            if (randIndex < mapObj.Length)
-            {
-                playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex, layerName);
-            }
+            if (p == null)
+                playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex, "Hide", isRebuild);
             else
-            {
-                Debug.Log("생성");
-                playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex,
-                    Path.Combine("Sports", objectSpawnPos[randIndex - mapObj.Length].name), layerName);
-            }
+                playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex, "Default", isRebuild);
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.RUNNER);
         }
-               
+
+        // TODO : 관전자 모드 
         public void ObserverSetting(Player p)
         {
-            Debug.Log("관전자 모드");                       
+            Debug.Log("관전자 모드");
             CameraMng.instance.SwitchCam();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.OBSERVER);
         }

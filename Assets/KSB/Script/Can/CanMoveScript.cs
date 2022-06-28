@@ -2,64 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
-using Photon.Pun.UtilityScripts;
-using Hashtable = ExitGames.Client.Photon.Hashtable;
+
 namespace DH
 {
-    public class CanMoveScript : MonoBehaviourPun
+    public class CanMoveScript : MonoBehaviour
     {
         [SerializeField]
         float kickPower = 10;
 
         Rigidbody rigid;
 
-        bool isMove;
-
         private void Start()
         {
-            rigid = GetComponent<Rigidbody>(); 
-            isMove = false;
+            rigid = GetComponent<Rigidbody>();
         }
 
 
-        public IEnumerator CanMove(Vector3 target, Player p)
+        public IEnumerator CanMove(Vector3 target)
         {
-            if (!photonView.IsMine || isMove)
+            if (rigid.velocity != Vector3.zero)
                 yield break;
-            isMove = true;
-            PlayMng.instance.gameChat.SystemCanKickLog(p);
             rigid.AddForce(target * kickPower, ForceMode.Impulse);
             while(rigid.velocity != Vector3.zero)
             {
-                yield return null;
+
             }
-            isMove = false;
-            photonView.RPC("SetLayer", RpcTarget.All, "Can");
+            if (PhotonNetwork.IsMasterClient)
+                PlayMng.instance.photonView.RPC("SetCanPosition", RpcTarget.Others, transform.position);
         }
 
-        [PunRPC]
-        public void SetLayer(string name)
-        {
-            gameObject.layer = LayerMask.NameToLayer(name);
-        }
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            if(collision.gameObject.layer == LayerMask.NameToLayer("Tagger") && !isMove && !GameManager.Instance.isAttack && photonView.IsMine)
-            {
-                isMove = true;
-                int taggerId = collision.transform.gameObject.GetComponent<PlayerScript>().ownerID;
-                foreach(Player p in PhotonNetwork.PlayerList)
-                {
-                    if(p.GetPlayerNumber() == taggerId)
-                    {
-                        Hashtable prob = new Hashtable { {GameData.PLAYER_TAGGER, true } };
-                        p.SetCustomProperties(prob);
-                    }
-                }
-                PhotonNetwork.Destroy(gameObject);
-            }
-        }
     }
 }

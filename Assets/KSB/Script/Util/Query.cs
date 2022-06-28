@@ -33,8 +33,6 @@ public class Query
         }
         return null;
     }
-
-
     public GameObject NearestPoint(List<GameObject> list, Vector3 target, int index = 0, bool isInverse = false)
     {
         //https://hijuworld.tistory.com/56
@@ -58,9 +56,7 @@ public class Query
                 return vertex;
             ++count;
         }
-        
         return null;
-
     }
 
 

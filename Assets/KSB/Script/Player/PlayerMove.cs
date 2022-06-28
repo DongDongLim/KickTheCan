@@ -46,7 +46,7 @@ namespace DH
         { 
             UIMng.instance.jumpAction += Jump;
             owner = GetComponent<PlayerScript>();
-            charactorBody = transform.GetChild(1).transform;
+            charactorBody = transform.GetChild(2).transform;
             maxRayDistance = charactorBody.GetComponent<Collider>().bounds.size.y * 0.5f;
             rigid = r;
         }
@@ -94,8 +94,10 @@ namespace DH
                 x = Mathf.Clamp(x, 335f, 361f);
             }
 
+            mouseDelta = mouseDelta.normalized;
+
             // 카메라 암 회전 시키기
-            cameraArm.rotation = Quaternion.Euler(x, camAngle.y + mouseDelta.x, camAngle.z);
+            cameraArm.rotation = Quaternion.Euler(x, camAngle.y - mouseDelta.x, camAngle.z);
         }
 
         public void Jump()

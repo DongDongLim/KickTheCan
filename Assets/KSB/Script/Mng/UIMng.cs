@@ -8,13 +8,23 @@ namespace DH
 {
     public class UIMng : SingletonMini<UIMng>
     {
-        public GameObject moveJoystick;
-        public GameObject rotateJoystick;
+        public GameObject runnerUI;
+        public GameObject runnerMoveJoystick;
+        public GameObject runnerRotateJoystick;
+
+
+        public GameObject taggerUI;
+        public GameObject taggerMoveJoystick;
+        public GameObject taggerRotateJoystick;
+
         public Button jumpBtn;
         public Button actionBtn;
+        public Button testHideBtn;
 
+        public UnityAction testHideAction;
         public UnityAction jumpAction;
         public UnityAction actionAction;
+
 
         private void Start()
         {
@@ -26,13 +36,34 @@ namespace DH
 
         }
 
-        public void SetMoveUI(PlayerMove move)
+        public void SetUI(string who) 
         {
-            moveJoystick.GetComponent<VirtualJoyStick>().controller = move;
-            rotateJoystick.GetComponent<VirtualJoyStick>().controller = move;
-            
+            switch(who)
+            {
+                case "Runner":
+                    runnerUI.SetActive(true);
+                    taggerUI.SetActive(false);
+                    break;
+                case "Tagger":
+                    runnerUI.SetActive(false);
+                    taggerUI.SetActive(true);
+                    break;
+            }
         }
 
+        public void SetMoveUI(PlayerMove move)
+        {
+            runnerMoveJoystick.GetComponent<VirtualJoyStick>().controller = move;
+            runnerRotateJoystick.GetComponent<VirtualJoyStick>().controller = move;
+
+            taggerMoveJoystick.GetComponent<VirtualJoyStick>().controller = move;
+            taggerRotateJoystick.GetComponent<VirtualJoyStick>().controller = move;
+        }
+
+        public void OnTestHideButton()
+        {
+            testHideAction?.Invoke();
+        }
 
         public void OnJumpButton()
         {

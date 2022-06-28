@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
-using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class InConnectPanel : MonoBehaviour
 {
     public PlayerSceneInfo playerSceneInfo;
 
-    private string roomName;    
-
     private void Start()
     {
-        playerSceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();    
+        playerSceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();
     }
 
     public void OnCreateRoomButtonClicked()
@@ -23,26 +20,12 @@ public class InConnectPanel : MonoBehaviour
 
     public void OnRandomMatchingButtonClicked()
     {        
-        if (playerSceneInfo.isLeaver)
+        if (playerSceneInfo.isRenegade)
         {
             Debug.Log("Go to GameScene");
-            // TODO : 자신이 나왔던 방으로 들어간다                 
-
-            if (PhotonNetwork.InLobby) // 0625 추가 
-            {
-                PhotonNetwork.LeaveLobby(); 
-            }           
-
-            roomName = playerSceneInfo.roomName;
-            Debug.Log(roomName);
-
-            Hashtable props = new Hashtable() { { GameData.PLAYER_READY, true } };
-            PhotonNetwork.LocalPlayer.SetCustomProperties(props);            
-
-            playerSceneInfo.isLeaver = true;
-            //PhotonNetwork.LocalPlayer.HasRejoined = true;
-            //Debug.Log("Test : " + PhotonNetwork.LocalPlayer.HasRejoined);           
-            PhotonNetwork.JoinRoom(roomName);           
+            //SceneManager.LoadScene("GameScene");
+            PhotonNetwork.LoadLevel(1);
+            return;
         }
         else
         {
@@ -53,7 +36,7 @@ public class InConnectPanel : MonoBehaviour
     public void OnLobbyButtonClicked()
     {
         PhotonNetwork.JoinLobby();
-        LobbyManager.instance.SetActivePanel(LobbyManager.PANEL.Lobby);        
+        LobbyManager.instance.SetActivePanel(LobbyManager.PANEL.Lobby);
     }
 
     public void OnLogoutButtonClicked()
