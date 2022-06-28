@@ -6,20 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SungMinTestScene.unity
-    guid: 1124a448209e023448d4947187f00fae
+    path: Assets/Scenes/LobbyScene.unity
+    guid: b186191f4a3e5634d96aea44bfe46c0f
+  - enabled: 1
+    path: Assets/Scenes/GmaeScene Test.unity
+    guid: 66ee82a37902d5c498f7bda1082550f1
   - enabled: 1
     path: Assets/Scenes/GameSceneDong.unity
     guid: cbf68f99604882b40a6f367e0cf3f4e4
   - enabled: 1
-    path: Assets/Scenes/LobbyScene.unity
-    guid: b186191f4a3e5634d96aea44bfe46c0f
+    path: Assets/Scenes/SungMinTestScene.unity
+    guid: 1124a448209e023448d4947187f00fae
   - enabled: 1
     path: Assets/Scenes/SH_LobbyScene.unity
     guid: 3a053ffbb247697459fbac4989a20924
-  - enabled: 1
-    path: Assets/Scenes/GameScene Test.unity
-    guid: 66ee82a37902d5c498f7bda1082550f1
   - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 254da32427dbb604180eb5a4c5dddf8b

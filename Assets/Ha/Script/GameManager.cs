@@ -33,20 +33,20 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
 
     public void Start()
-    {      
+    {
         playerSceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();
-                
+
         if (PhotonNetwork.LocalPlayer.HasRejoined)
-        {         
+        {
             Debug.Log("재 참가");
             // TODO : test - 관전자 모드 시 러너 미생성
             //Hashtable props = new Hashtable() { { GameData.PLAYER_LOAD, true } };
             //PhotonNetwork.LocalPlayer.SetCustomProperties(props);
-            RejoinMode();            
+            RejoinMode();
         }
         else if (IsAdditionalPlayer())
         {
-            Debug.Log("추가 참가");           
+            Debug.Log("추가 참가");
             ObserverMode();
         }
         else
@@ -58,8 +58,8 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         if (PhotonNetwork.IsMasterClient)
         {
-             StartCoroutine("GameIsOn");
-        }        
+            StartCoroutine("GameIsOn");
+        }
     }
 
     #region PHOTON CALLBACK
@@ -91,14 +91,14 @@ public class GameManager : MonoBehaviourPunCallbacks
                 PrintInfo("wait players " + PlayersLoadLevel() + " / " + PhotonNetwork.PlayerList.Length);
             }
         }
-        if(changedProps.ContainsKey(GameData.PLAYER_TAGGER))
+        if (changedProps.ContainsKey(GameData.PLAYER_TAGGER))
         {
-            if(targetPlayer == PhotonNetwork.LocalPlayer)
+            if (targetPlayer == PhotonNetwork.LocalPlayer)
                 StartCoroutine(StartCountDown());
         }
         // 러너가 킥을 찼을 때 술래의 공격불가
         object value;
-        if(changedProps.TryGetValue(DH.GameData.PLAYER_ISKICK, out value))
+        if (changedProps.TryGetValue(DH.GameData.PLAYER_ISKICK, out value))
         {
             isAttack = !(bool)value;
             if (isAttack)
@@ -110,9 +110,9 @@ public class GameManager : MonoBehaviourPunCallbacks
                 canCheckActionFalse?.Invoke();
             }
         }
-        if(changedProps.TryGetValue(DH.GameData.PLAYER_TAGGER, out value))
+        if (changedProps.TryGetValue(DH.GameData.PLAYER_TAGGER, out value))
         {
-            if(PhotonNetwork.LocalPlayer == targetPlayer)
+            if (PhotonNetwork.LocalPlayer == targetPlayer)
             {
                 // TODO : 술래가 깡통을 먹음
                 canCheckObj.transform.position = DH.MapSettingMng.instance.canTransform;
@@ -282,7 +282,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         Debug.Log("ReEntry Mode 호출");
         // 맵 세팅은 호스트만 부탁드립니다
         //StartCoroutine(DH.MapSettingMng.instance.Setting());
-        DH.MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);        
+        DH.MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);
     }
 
     private void RejoinMode()
@@ -300,7 +300,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         isPlaying = true;
 
         Hashtable props = new Hashtable() { { GameData.MASTER_PLAY, isPlaying } };
-        PhotonNetwork.MasterClient.SetCustomProperties(props);        
+        PhotonNetwork.MasterClient.SetCustomProperties(props);
     }
 
     public override void OnJoinedRoom()
@@ -309,10 +309,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
 
     private bool IsAdditionalPlayer()
-    {        
+    {
         Debug.Log(PhotonNetwork.CurrentRoom.Name);
-        Debug.Log(PhotonNetwork.MasterClient.NickName);        
-        object isStarted;       
+        Debug.Log(PhotonNetwork.MasterClient.NickName);
+        object isStarted;
 
         if (PhotonNetwork.MasterClient.CustomProperties.TryGetValue(GameData.MASTER_PLAY, out isStarted))
         {
@@ -320,12 +320,9 @@ public class GameManager : MonoBehaviourPunCallbacks
             if ((bool)isStarted)
             {
                 return true;
-            }           
+            }
         }
-        
-        return false;                   
+
+        return false;
     }
 }
-
-
-

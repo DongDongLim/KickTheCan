@@ -266,11 +266,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
---- !u!1 &163005025
-========
 --- !u!1 &147706813
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -278,51 +274,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  - component: {fileID: 163005026}
-  - component: {fileID: 163005027}
-  m_Layer: 5
-  m_Name: Chat Panel
-========
   - component: {fileID: 147706814}
   - component: {fileID: 147706816}
   - component: {fileID: 147706815}
   m_Layer: 5
   m_Name: Count
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
---- !u!224 &163005026
-========
 --- !u!224 &147706814
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  m_GameObject: {fileID: 163005025}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1542096284}
-  - {fileID: 2042901000}
-  m_Father: {fileID: 537084959}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0}
---- !u!114 &163005027
-========
   m_GameObject: {fileID: 147706813}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -337,34 +304,11 @@ RectTransform:
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &147706815
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  m_GameObject: {fileID: 163005025}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 3
-    m_Right: 0
-    m_Top: 3
-    m_Bottom: 3
-  m_ChildAlignment: 0
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 1
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
---- !u!1 &177209524
-========
   m_GameObject: {fileID: 147706813}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -401,7 +345,6 @@ CanvasRenderer:
   m_GameObject: {fileID: 147706813}
   m_CullTransparentMesh: 0
 --- !u!1 &163005025
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -409,8 +352,6 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-========
   - component: {fileID: 163005026}
   - component: {fileID: 163005027}
   m_Layer: 5
@@ -474,7 +415,6 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   - component: {fileID: 177209525}
   - component: {fileID: 177209528}
   - component: {fileID: 177209527}
@@ -838,11 +778,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225838093}
   m_CullTransparentMesh: 0
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
---- !u!1 &275913256
-========
 --- !u!1 &236839003
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -850,43 +786,20 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  - component: {fileID: 275913257}
-  - component: {fileID: 275913258}
-  m_Layer: 5
-  m_Name: Chat Panel
-========
   - component: {fileID: 236839004}
   m_Layer: 5
   m_Name: TaggerCount
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
---- !u!224 &275913257
-========
 --- !u!224 &236839004
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  m_GameObject: {fileID: 275913256}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1843976123}
-  - {fileID: 1632666717}
-  m_Father: {fileID: 1666267313}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-========
   m_GameObject: {fileID: 236839003}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -972,7 +885,6 @@ RectTransform:
   m_Father: {fileID: 1666267313}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 3, y: -55.258865}
@@ -1322,13 +1234,8 @@ RectTransform:
   m_LocalScale: {x: 1.0810789, y: 1.0810789, z: 1.0810789}
   m_Children:
   - {fileID: 1592912013}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  m_Father: {fileID: 903384505}
-  m_RootOrder: 5
-========
   m_Father: {fileID: 636163812}
   m_RootOrder: 3
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -1766,11 +1673,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 502144370}
   m_CullTransparentMesh: 0
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
---- !u!1 &537084958
-========
 --- !u!1 &525459812
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1778,88 +1681,20 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  - component: {fileID: 537084959}
-  - component: {fileID: 537084961}
-  - component: {fileID: 537084960}
-  m_Layer: 5
-  m_Name: All Chat Content
-========
   - component: {fileID: 525459813}
   m_Layer: 5
   m_Name: RunnerCount
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
---- !u!224 &537084959
-========
 --- !u!224 &525459813
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  m_GameObject: {fileID: 537084958}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 163005026}
-  m_Father: {fileID: 206589778}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0}
---- !u!114 &537084960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 537084958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 3
-    m_Right: 0
-    m_Top: 3
-    m_Bottom: 3
-  m_ChildAlignment: 0
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 1
-  m_ChildScaleWidth: 1
-  m_ChildScaleHeight: 1
---- !u!114 &537084961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 537084958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
-  m_VerticalFit: 2
---- !u!1 &589148609
-========
   m_GameObject: {fileID: 525459812}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -1876,7 +1711,6 @@ MonoBehaviour:
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &537084958
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1884,8 +1718,6 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-========
   - component: {fileID: 537084959}
   - component: {fileID: 537084961}
   - component: {fileID: 537084960}
@@ -1963,7 +1795,6 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   - component: {fileID: 589148612}
   - component: {fileID: 589148611}
   - component: {fileID: 589148610}
@@ -1981,8 +1812,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 589148609}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-========
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
@@ -2080,7 +1909,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 630773071}
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
@@ -2100,50 +1928,21 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
-    m_RichText: 0
-    m_HorizontalOverflow: 1
+    m_RichText: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  m_Text: 
---- !u!222 &589148611
-========
   m_Text: ' : Runner'
 --- !u!222 &630773074
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  m_GameObject: {fileID: 589148609}
-  m_CullTransparentMesh: 0
---- !u!224 &589148612
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 589148609}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1445920502}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.5}
-  m_SizeDelta: {x: -20, y: -13}
-  m_Pivot: {x: 0.5, y: 0.5}
-========
   m_GameObject: {fileID: 630773071}
   m_CullTransparentMesh: 0
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 --- !u!1 &635530417
 GameObject:
   m_ObjectHideFlags: 0
@@ -2268,8 +2067,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 635530417}
   m_CullTransparentMesh: 0
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-========
 --- !u!1 &636163811
 GameObject:
   m_ObjectHideFlags: 0
@@ -2403,7 +2200,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 642987717}
   m_CullTransparentMesh: 0
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 --- !u!1 &665036147
 GameObject:
   m_ObjectHideFlags: 0
@@ -2681,11 +2477,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
---- !u!1 &777557064
-========
 --- !u!1 &775961474
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2693,86 +2485,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  - component: {fileID: 777557065}
-========
   - component: {fileID: 775961475}
   - component: {fileID: 775961477}
   - component: {fileID: 775961476}
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   m_Layer: 5
-  m_Name: Sliding Area
+  m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
---- !u!224 &777557065
-========
 --- !u!224 &775961475
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  m_GameObject: {fileID: 777557064}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 452467996}
-  m_Father: {fileID: 635530419}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: -20}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &803896263
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 803896264}
-  - component: {fileID: 803896267}
-  - component: {fileID: 803896266}
-  - component: {fileID: 803896265}
-  m_Layer: 5
-  m_Name: NoticeChatButton
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &803896264
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 803896263}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1318610014}
-  m_Father: {fileID: 2083201911}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0}
-  m_SizeDelta: {x: 56.006058, y: 30}
-  m_Pivot: {x: 0, y: 0.5}
---- !u!114 &803896265
-========
   m_GameObject: {fileID: 775961474}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -2787,15 +2515,11 @@ RectTransform:
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &775961476
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  m_GameObject: {fileID: 803896263}
-========
   m_GameObject: {fileID: 775961474}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -2909,7 +2633,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 782562919}
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -2942,21 +2665,12 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  m_TargetGraphic: {fileID: 803896266}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 966585996}
-        m_MethodName: OnClickNoticePanel
-========
   m_TargetGraphic: {fileID: 782562922}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 903384506}
         m_MethodName: OnActionButton
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2966,21 +2680,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
---- !u!114 &803896266
-========
 --- !u!114 &782562922
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  m_GameObject: {fileID: 803896263}
-========
   m_GameObject: {fileID: 782562919}
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -3003,23 +2709,12 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
---- !u!222 &803896267
-========
 --- !u!222 &782562923
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  m_GameObject: {fileID: 803896263}
-  m_CullTransparentMesh: 0
---- !u!1001 &832506776
-PrefabInstance:
-  m_ObjectHideFlags: 0
-========
   m_GameObject: {fileID: 782562919}
   m_CullTransparentMesh: 0
 --- !u!1 &803896263
@@ -3155,7 +2850,6 @@ CanvasRenderer:
 --- !u!1001 &832506776
 PrefabInstance:
   m_ObjectHideFlags: 0
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
@@ -3234,8 +2928,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2369a68ae8f3b0f438c6544b91c6bc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-========
 --- !u!1 &891005225
 GameObject:
   m_ObjectHideFlags: 0
@@ -3275,7 +2967,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 --- !u!1 &903384501
 GameObject:
   m_ObjectHideFlags: 0
@@ -3368,20 +3059,11 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 669587241}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  - {fileID: 2036293003}
-  - {fileID: 1355037559}
-  - {fileID: 225838094}
-  - {fileID: 2058499771}
-  - {fileID: 416146474}
-  - {fileID: 966585995}
-========
   - {fileID: 966585995}
   - {fileID: 255900085}
   - {fileID: 891005226}
   - {fileID: 2058499771}
   - {fileID: 636163812}
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3672,11 +3354,7 @@ RectTransform:
   - {fileID: 412888041}
   - {fileID: 2083201911}
   m_Father: {fileID: 903384505}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  m_RootOrder: 6
-========
   m_RootOrder: 1
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.75000006, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3868,11 +3546,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
---- !u!1 &1054857385
-========
 --- !u!1 &1047807315
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3880,145 +3554,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  - component: {fileID: 1054857389}
-  - component: {fileID: 1054857388}
-  - component: {fileID: 1054857387}
-  - component: {fileID: 1054857386}
-  m_Layer: 5
-  m_Name: TeamChatButton
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1054857386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1054857385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1054857387}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 966585996}
-        m_MethodName: OnClickTeamPanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1054857387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1054857385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1054857388
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1054857385}
-  m_CullTransparentMesh: 0
---- !u!224 &1054857389
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1054857385}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1923544583}
-  m_Father: {fileID: 2083201911}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -0.000030517578, y: 30.000004}
-  m_SizeDelta: {x: 56.006058, y: 30}
-  m_Pivot: {x: 0, y: 0.5}
---- !u!1 &1128714447
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1128714448}
-  - component: {fileID: 1128714450}
-  - component: {fileID: 1128714449}
-========
   - component: {fileID: 1047807316}
   - component: {fileID: 1047807318}
   - component: {fileID: 1047807317}
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -4026,30 +3564,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
---- !u!224 &1128714448
-========
 --- !u!224 &1047807316
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  m_GameObject: {fileID: 1128714447}
-========
   m_GameObject: {fileID: 1047807315}
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  m_Father: {fileID: 665036148}
-========
   m_Father: {fileID: 1239818032}
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4057,21 +3583,13 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
---- !u!114 &1128714449
-========
 --- !u!114 &1047807317
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  m_GameObject: {fileID: 1128714447}
-========
   m_GameObject: {fileID: 1047807315}
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
@@ -4097,27 +3615,16 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  m_Text: Send
---- !u!222 &1128714450
-========
   m_Text: JumpB
 --- !u!222 &1047807318
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  m_GameObject: {fileID: 1128714447}
-  m_CullTransparentMesh: 0
---- !u!1 &1318610013
-========
   m_GameObject: {fileID: 1047807315}
   m_CullTransparentMesh: 0
 --- !u!1 &1054857385
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4125,28 +3632,17 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  - component: {fileID: 1318610014}
-  - component: {fileID: 1318610016}
-  - component: {fileID: 1318610015}
-  m_Layer: 5
-  m_Name: Text
-========
   - component: {fileID: 1054857389}
   - component: {fileID: 1054857388}
   - component: {fileID: 1054857387}
   - component: {fileID: 1054857386}
   m_Layer: 5
   m_Name: TeamChatButton
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
---- !u!224 &1318610014
-========
 --- !u!114 &1054857386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4239,22 +3735,11 @@ CanvasRenderer:
   m_GameObject: {fileID: 1054857385}
   m_CullTransparentMesh: 0
 --- !u!224 &1054857389
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  m_GameObject: {fileID: 1318610013}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 803896264}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-========
   m_GameObject: {fileID: 1054857385}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -4301,27 +3786,18 @@ RectTransform:
   m_Father: {fileID: 665036148}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
---- !u!114 &1318610015
-========
 --- !u!114 &1128714449
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  m_GameObject: {fileID: 1318610013}
-========
   m_GameObject: {fileID: 1128714447}
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
@@ -4347,20 +3823,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  m_Text: Notice
---- !u!222 &1318610016
-========
   m_Text: Send
 --- !u!222 &1128714450
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-========
   m_GameObject: {fileID: 1128714447}
   m_CullTransparentMesh: 0
 --- !u!1 &1236341227
@@ -4647,7 +4116,6 @@ CanvasRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   m_GameObject: {fileID: 1318610013}
   m_CullTransparentMesh: 0
 --- !u!1 &1320882320
@@ -4992,11 +4460,7 @@ MonoBehaviour:
   taggerObj: {fileID: 7180172942738791779, guid: 3e02007bf5ef9124493e4b3acb7fe5f1,
     type: 3}
   objIndex: 0
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  objectSpawnPos: []
-========
   isRebuild: 0
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 --- !u!4 &1405825242
 Transform:
   m_ObjectHideFlags: 0
@@ -5023,10 +4487,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2f3cebd03229bc45b61fd135a42def4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  gameChat: {fileID: 0}
-========
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   infoText: {fileID: 669587242}
 --- !u!114 &1405825244
 MonoBehaviour:
@@ -5059,8 +4519,6 @@ MonoBehaviour:
   isRunnerBeCaught: 0
   gameChat: {fileID: 966585996}
   can: {fileID: 0}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-========
 --- !u!114 &1405825246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5090,7 +4548,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dustVFX: {fileID: 7218281984645173938, guid: d8db721bd3b32e8419f8e675e012fb42, type: 3}
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 --- !u!1 &1436610119
 GameObject:
   m_ObjectHideFlags: 0
@@ -5621,8 +5078,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1500491125}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-========
   m_CullTransparentMesh: 0
 --- !u!224 &1500491129
 RectTransform:
@@ -5717,28 +5172,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1505711171}
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   m_CullTransparentMesh: 0
---- !u!224 &1500491129
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1500491125}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 445938835}
-  m_Father: {fileID: 2083201911}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.21530618, y: 0.18514983}
-  m_AnchoredPosition: {x: 0.13998413, y: 1.5005493}
-  m_SizeDelta: {x: 0.28018188, y: 2.9988956}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1520362973
 GameObject:
   m_ObjectHideFlags: 0
@@ -6376,82 +5810,6 @@ MonoBehaviour:
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: All
---- !u!222 &1691577208
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1691577205}
-  m_CullTransparentMesh: 0
---- !u!1 &1738925802
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1738925806}
-  - component: {fileID: 1738925805}
-  - component: {fileID: 1738925804}
-  - component: {fileID: 1738925803}
-  m_Layer: 5
-  m_Name: TeamChatViewport
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1738925803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1738925802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Content: {fileID: 24802548}
-  m_Horizontal: 0
-  m_Vertical: 1
-  m_MovementType: 2
-  m_Elasticity: 0.1
-  m_Inertia: 1
-  m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
-  m_Viewport: {fileID: 1854498621}
-  m_HorizontalScrollbar: {fileID: 0}
-  m_VerticalScrollbar: {fileID: 2000901683}
-  m_HorizontalScrollbarVisibility: 2
-  m_VerticalScrollbarVisibility: 2
-  m_HorizontalScrollbarSpacing: -3
-  m_VerticalScrollbarSpacing: -3
-  m_OnValueChanged:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1738925804
-========
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
@@ -6516,15 +5874,11 @@ RectTransform:
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1693572500
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-  m_GameObject: {fileID: 1738925802}
-========
   m_GameObject: {fileID: 1693572498}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -6544,14 +5898,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693572498}
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -6992,8 +6345,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1854498620}
   m_CullTransparentMesh: 0
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-========
 --- !u!1 &1884270391
 GameObject:
   m_ObjectHideFlags: 0
@@ -7072,7 +6423,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1884270391}
   m_CullTransparentMesh: 0
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 --- !u!1 &1923544582
 GameObject:
   m_ObjectHideFlags: 0
@@ -7386,8 +6736,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2000901682}
   m_CullTransparentMesh: 0
-<<<<<<<< HEAD:Assets/Scenes/SH_GameScene.unity
-========
 --- !u!1 &2015067613
 GameObject:
   m_ObjectHideFlags: 0
@@ -7466,7 +6814,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015067613}
   m_CullTransparentMesh: 0
->>>>>>>> origin/UI-Setting:Assets/Scenes/GameScene Test.unity
 --- !u!1 &2020359459
 GameObject:
   m_ObjectHideFlags: 0

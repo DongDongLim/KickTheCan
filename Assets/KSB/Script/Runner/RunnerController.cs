@@ -70,14 +70,17 @@ namespace DH
             }
         }
 
-        
+        private void OnApplicationPause(bool pause)
+        {
+            
+        }
 
         private void OnCollisionEnter(Collision collision)
         {
             if(collision.gameObject.layer == LayerMask.NameToLayer("Can"))
             {
                 collision.gameObject.layer = LayerMask.NameToLayer("Default");
-                Hashtable hashtable = new Hashtable { {GameData.PLAYER_ISKICK, true } };
+                Hashtable hashtable = new Hashtable { { GameData.PLAYER_ISKICK, true } };
                 PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
                 owner.photonView.RPC("KickTheCan", RpcTarget.MasterClient, Vector3.Normalize(collision.gameObject.transform.position - transform.position), PhotonNetwork.LocalPlayer);               
             }

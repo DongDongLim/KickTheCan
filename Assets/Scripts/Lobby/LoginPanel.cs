@@ -4,24 +4,24 @@ using Photon.Pun;
 
 public class LoginPanel : MonoBehaviour
 {
-    //public InputField playerNameInput;
+    public InputField playerNameInput;
 
     void Start()
     {
-        //playerNameInput.text = "Player " + Random.Range(1000, 10000);
+        playerNameInput.text = "Player " + Random.Range(1000, 10000);
     }
 
     public void OnLoginButtonClicked()
     {
-        //string playerName = playerNameInput.text;
+        string playerName = playerNameInput.text;
 
-        //if (playerName == "")
-        //{
-        //    LobbyManager.instance.ShowError("Invalid Player Name");
-        //    return;
-        //}
+        if (playerName == "")
+        {
+            LobbyManager.instance.ShowError("Invalid Player Name");
+            return;
+        }
 
-        //PhotonNetwork.LocalPlayer.NickName = playerName;
+        PhotonNetwork.LocalPlayer.NickName = playerName;
         PhotonNetwork.ConnectUsingSettings();
     }
 }
