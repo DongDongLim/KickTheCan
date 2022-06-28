@@ -36,11 +36,7 @@ public class DatabaseManager : MonoBehaviour
     {
         string json = JsonUtility.ToJson(mydata);
         dbReference.Child("UserInfo").Child(AuthManager.instance.GetAuthUID()).SetRawJsonValueAsync(json);
-<<<<<<< HEAD
-=======
 
-
->>>>>>> origin/GameChat
     }
 
 
@@ -56,11 +52,8 @@ public class DatabaseManager : MonoBehaviour
                 DataSnapshot dataSnapshot = (DataSnapshot)snapshot.Child(AuthManager.instance.GetAuthUID());
                 IDictionary id = (IDictionary)dataSnapshot.Value;
                 data = new myData(id["Email"].ToString(), id["DisplayNickname"].ToString(), id["Score"].ToString());
-<<<<<<< HEAD
-=======
-                SetUserDataInDataBase(data);
 
->>>>>>> origin/GameChat
+                SetUserDataInDataBase(data);
                 PhotonNetwork.LocalPlayer.NickName = data.DisplayNickname;
                 PhotonNetwork.ConnectUsingSettings();
             }
