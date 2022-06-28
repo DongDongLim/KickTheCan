@@ -16,6 +16,8 @@ namespace DH
         {
             CameraMng.instance.RunnerCamSetting();
             GameManager.Instance.canCheckActionTrue += ChangeLayer;
+
+            UIMng.instance.SetUI("Runner");
         }
 
         private void OnDisable()
@@ -42,8 +44,7 @@ namespace DH
 
         public void Damaged()
         {
-            CameraMng.instance.SwitchCam();
-            PlayMng.instance.BeCaught(gameObject);
+            owner?.DieAnim();
         }
 
         void Freeze()

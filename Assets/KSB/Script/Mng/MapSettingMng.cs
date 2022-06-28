@@ -68,12 +68,14 @@ namespace DH
             playerObj.GetComponent<TaggerSetScript>().SetObj("Tagger");
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.TAGGER);
+
+            UIDataMng.Instance.SetTagger(UIDataMng.Instance.TAGGER_LIFE + 1);
         }
 
         public void RunnerSetting(string layerName)
         {
             Debug.Log("러너 생성");
-            randIndex = Random.Range(12, mapObj.Length + objectSpawnPos.Length);
+            randIndex = Random.Range(0, mapObj.Length + objectSpawnPos.Length);
             GameObject playerObj = PhotonNetwork.Instantiate
                 (GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
             playerObj.AddComponent<RunnerController>();

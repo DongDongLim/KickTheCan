@@ -33,6 +33,7 @@ namespace DH
 
         public void SwitchCam()
         {
+
             if (playerCam.gameObject.activeSelf)
             {
                 UIMng.instance.SetMoveUI(observerObject.GetComponent<PlayerMove>());
