@@ -149,11 +149,14 @@ namespace DH
             {
                 isSettingComplete = (bool)stream.ReceiveNext();
                 animBool = (bool)stream.ReceiveNext();
-                taggerAnim?.SetBool("isMove", animBool);
+                if (taggerAnim != null)
+                    taggerAnim.SetBool("isMove", animBool);
                 animBool = (bool)stream.ReceiveNext();
-                taggerAnim?.SetBool("isJump", animBool);
+                if (taggerAnim != null)
+                    taggerAnim.SetBool("isJump", animBool);
                 animBool = (bool)stream.ReceiveNext();
-                runnerAnim?.SetBool("isDie", animBool);
+                if (runnerAnim != null)
+                    runnerAnim.SetBool("isDie", animBool);
                     
                 ownerID = (int)stream.ReceiveNext();
                 if (null != charactorBody)

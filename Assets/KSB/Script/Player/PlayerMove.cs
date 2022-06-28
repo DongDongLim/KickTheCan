@@ -73,7 +73,7 @@ namespace DH
                 return;
 
             charactorBody.forward = moveDir;
-            rigid.MovePosition(transform.position + moveDir * Time.deltaTime * moveSpeed);
+            rigid.MovePosition(transform.position + moveDir * Time.fixedDeltaTime * moveSpeed);
         }
         public void LookAround(Vector2 inputDirection)
         {

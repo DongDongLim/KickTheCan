@@ -82,7 +82,7 @@ namespace DH
             }
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (isInput)
             {
