@@ -23,14 +23,11 @@ namespace DH
         private void Awake() {
             attackCurCount = attackMaxCount;
             CameraMng.instance.TaggerCamSetting();
-
-            UIMng.instance.SetUI("Tagger");
         }
         public override void ControlUpdate()
         {
             move.GroundChecker();
             AttackCool();
-            Debug.Log("남은 공격 횟수 : " + attackCurCount);
         }
 
         public void AttackCool(){
@@ -45,15 +42,11 @@ namespace DH
             attackCurCool += Time.deltaTime;
         }
 
-        public void AttackComplete()
-        {
-            attackCurCount--;
-        }
-
         public override void ControllerAction()
         {
-            if (0 < attackCurCount)
+            if (0 < attackCurCount && GameManager.Instance.isAttack)
             {
+                attackCurCount--;
                 owner.photonView.RPC("Attack", RpcTarget.All);
             }
         }

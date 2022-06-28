@@ -104135,10 +104135,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 8120940490136183754}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63a8fa613d7189d44beeb0efaf00fe41, type: 3}
+  m_Script: {fileID: 11500000, guid: 99dde1aaa5a8bd64e9f6e08d78aea1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectSpawnPosList: []
+  objectSpawnPosList:
+  - {fileID: 8120940489698330380}
+  - {fileID: 8120940489013651036}
+  - {fileID: 8120940488725950604}
+  - {fileID: 8120940488978061591}
+  - {fileID: 8120940489969013460}
+  - {fileID: 8120940490125852840}
+  - {fileID: 8120940490561009184}
+  - {fileID: 8120940490187592032}
 --- !u!1 &8120940490137122510
 GameObject:
   m_ObjectHideFlags: 0

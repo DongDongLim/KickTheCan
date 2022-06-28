@@ -11,7 +11,7 @@ namespace DH
         ChangeLayer change;
 
         public void SetObjIndex(int index, string name)
-        { 
+        {     
             photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered, index, name);
         }
 
@@ -19,6 +19,7 @@ namespace DH
         {
             photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered, index, objName, name);
         }
+
 
         [PunRPC]
         public void ChildObjCreate(int index, string name)

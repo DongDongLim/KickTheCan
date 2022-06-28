@@ -19,7 +19,7 @@ public class InRoomPanel : MonoBehaviour
     private Dictionary<int, GameObject> playerListEntries;
     PhotonView photonView;
 
-    int minPlayerNumber = 4;
+
 
     //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public Button kickGameButton;
@@ -120,6 +120,7 @@ public class InRoomPanel : MonoBehaviour
 
     private bool CheckPlayersReady()
     {
+
         int cnt = 0;
         if (!PhotonNetwork.IsMasterClient)
         {
@@ -148,14 +149,6 @@ public class InRoomPanel : MonoBehaviour
         }
 
         return true;
-
-        // TODO : (Test) ÃÖ¼Ò ÀÎ¿ø ¼³Á¤
-        //if (minPlayerNumber == cnt)
-        //{
-        //    return true;
-        //}
-
-        //return false;
     }
 
     public void LocalPlayerPropertiesUpdated()

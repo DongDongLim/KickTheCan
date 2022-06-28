@@ -16,8 +16,6 @@ namespace DH
         {
             CameraMng.instance.RunnerCamSetting();
             GameManager.Instance.canCheckActionTrue += ChangeLayer;
-
-            UIMng.instance.SetUI("Runner");
         }
 
         private void OnDisable()
@@ -44,7 +42,8 @@ namespace DH
 
         public void Damaged()
         {
-            owner?.DieAnim();
+            CameraMng.instance.SwitchCam();
+            PlayMng.instance.BeCaught(gameObject);
         }
 
         void Freeze()
@@ -55,13 +54,7 @@ namespace DH
         private void OnTriggerEnter(Collider other)
         {
             if(other.gameObject.layer == LayerMask.NameToLayer("Weapon"))
-            {   
-                // 추가
-                // TODO : (Test) GameOver    
-                //Hashtable props = new Hashtable() { { global::GameData.PLAYER_DEAD, true } };
-                //PhotonNetwork.LocalPlayer.SetCustomProperties(props);
-                // =================================
-
+            {
                 Damaged();
                 int id = other.transform.parent.parent.GetComponent<PlayerScript>().ownerID;
                 foreach(Player p in PhotonNetwork.PlayerList)
@@ -76,15 +69,16 @@ namespace DH
             }
         }
 
+        
+
         private void OnCollisionEnter(Collision collision)
         {
             if(collision.gameObject.layer == LayerMask.NameToLayer("Can"))
             {
                 collision.gameObject.layer = LayerMask.NameToLayer("Default");
-                Hashtable hashtable = new Hashtable { { GameData.PLAYER_ISKICK, true } };
+                Hashtable hashtable = new Hashtable { {GameData.PLAYER_ISKICK, true } };
                 PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
                 owner.photonView.RPC("KickTheCan", RpcTarget.MasterClient, Vector3.Normalize(collision.gameObject.transform.position - transform.position), PhotonNetwork.LocalPlayer);               
-
             }
         }
 

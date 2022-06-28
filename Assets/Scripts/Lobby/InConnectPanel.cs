@@ -25,9 +25,10 @@ public class InConnectPanel : MonoBehaviour
     {        
         if (playerSceneInfo.isLeaver)
         {
-            Debug.Log("Go to GameScene");                            
+            Debug.Log("Go to GameScene");
+            // TODO : 자신이 나왔던 방으로 들어간다                 
 
-            if (PhotonNetwork.InLobby) 
+            if (PhotonNetwork.InLobby) // 0625 추가 
             {
                 PhotonNetwork.LeaveLobby(); 
             }           

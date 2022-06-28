@@ -7,7 +7,8 @@ using Photon.Pun.UtilityScripts;
 using UnityEngine.SceneManagement;
 
 public class PlayerSceneManager : MonoBehaviour
-{  
+{
+    // TODO : singleton 으로 변경
     public static PlayerSceneManager Instance { get; private set; } 
 
     public GameObject exitMenuUI;
@@ -41,8 +42,6 @@ public class PlayerSceneManager : MonoBehaviour
                 UnityEditor.EditorApplication.isPlaying = false;
         #endif
                 Application.Quit();
-
-
     }
 
     IEnumerator CheckEscapeButton()

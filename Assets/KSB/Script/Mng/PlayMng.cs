@@ -15,19 +15,17 @@ namespace DH
 
         public GameObject can;
 
+
         protected override void OnAwake()
         {
-
+            GameManager.Instance.canCheckActionFalse += Release;
         }
 
         public void BeCaught(GameObject player)
         {
-            UIDataMng.Instance.SetRunner(UIDataMng.Instance.RUNNER_LIFE - 1);
             PhotonNetwork.Destroy(player);
             isRunnerBeCaught = true;
-            UIMng.instance.jumpAction += Release;
-            PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.DEAD);
-
+            gameChat.SetCharacterType(YSM.GameCharacterType.DEAD);
         }
 
         public void Release()
@@ -36,9 +34,10 @@ namespace DH
             {
                 MapSettingMng.instance.RunnerSetting("Hide");
                 isRunnerBeCaught = false;
-                PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.RUNNER);
+                gameChat.SetCharacterType(YSM.GameCharacterType.RUNNER);
             }
         }
+
 
         public void KickTheCan(Vector3 canTargetVector, Player p)
         {

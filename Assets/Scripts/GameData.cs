@@ -11,7 +11,6 @@ public class GameData : MonoBehaviour
     public const string PLAYER_TAGGER = "Tagger";
     public const string PLAYER_LEAVER = "Leaver";
     public const string MASTER_PLAY = "Play";
-    public const string PLAYER_DEAD = "Dead";  // TODO : (Test) GameOver
     
 
     public static Color GetColor(int playerNumber)

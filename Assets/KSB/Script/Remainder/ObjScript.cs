@@ -27,9 +27,11 @@ namespace DH
         public void ChildObjCreate(int index)
         {
             objIndex = index;
-            Instantiate(MapSettingMng.instance.mapObj[objIndex], MapSettingMng.instance.gameObject.transform, false).transform.position = transform.position;
+            GameObject gameObject =
+            Instantiate(MapSettingMng.instance.mapObj[objIndex], MapSettingMng.instance.gameObject.transform, false);
+            gameObject.transform.position = transform.position;
+            gameObject.transform.rotation = transform.rotation;
         }
-
 
         [PunRPC]
         public void ChildObjCreate(string obj)

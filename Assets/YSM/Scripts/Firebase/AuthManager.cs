@@ -55,7 +55,6 @@ public class AuthManager : MonoBehaviour
 
     public void register(string email, string password , myData data)
     {
-        
         // 제공되는 함수 : 이메일과 비밀번호로 회원가입 시켜 줌
         auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(
             task => {

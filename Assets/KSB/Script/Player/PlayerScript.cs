@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 using Photon.Realtime;
@@ -9,26 +10,30 @@ namespace DH
 {
     public class PlayerScript : MonoBehaviourPun, IPunObservable
     {
+        #region private
         private Rigidbody rigid;
-        [SerializeField]
-        private Animator taggerAnim = null;
-        [SerializeField]
-        private Animator runnerAnim = null;
+        private Animator anim;
         private PlayerSceneInfo playerSceneInfo;
 
         [SerializeField]
         Transform charactorBody = null;
 
-        [SerializeField]
-        GameObject dieVFX;
-
         Controller control = null;
 
-        public int ownerID = -1;
 
         bool isSettingComplete = false;
 
         bool animBool;
+
+        #endregion
+        #region public
+
+        public UnityAction freezeAction;
+
+        public int ownerID = -1;
+
+        public bool isFreeze = false;
+        #endregion
 
         private void Awake()
         {
@@ -40,19 +45,17 @@ namespace DH
 
         private void Start()
         {
-            taggerAnim = transform.GetChild(2).GetComponent<Animator>() == null ? null : transform.GetChild(2).GetComponent<Animator>();
-            runnerAnim = taggerAnim != null ? null : transform.GetComponent<Animator>();
-            if (runnerAnim != null)
-                runnerAnim.enabled = true;
+            // TODO : 관전자 모드 시 버그 발생 -> UnityException: Transform child out of bounds
+            anim = transform.GetChild(1).GetComponent<Animator>() == null ? null : transform.GetChild(1).GetComponent<Animator>();
             if (photonView.IsMine)
                 ownerID = PhotonNetwork.LocalPlayer.GetPlayerNumber();         
         }
 
         public void ControllerSetting()
         {
-            charactorBody = transform.GetChild(2).transform;
+            charactorBody = transform.GetChild(1).transform;
             control = GetComponent<Controller>();
-            control.Setting(rigid, taggerAnim);
+            control.Setting(rigid, anim);
             isSettingComplete = true;
         }
 
@@ -60,8 +63,9 @@ namespace DH
         {
             if (!photonView.IsMine)
             {
-                if(isSettingComplete && null == charactorBody)
-                    charactorBody = transform.GetChild(2).transform;
+                // TODO : 관전자 모드 시 버그 발생 -> UnityException: Transform child out of bounds
+                if (isSettingComplete && null == charactorBody)
+                    charactorBody = transform.GetChild(1).transform;
                 return;
             }
 
@@ -71,36 +75,17 @@ namespace DH
         [PunRPC]
         public void FreezeRigid()
         {
+            isFreeze = !isFreeze;
+            freezeAction?.Invoke();
             rigid.isKinematic = !rigid.isKinematic;
         }
 
         [PunRPC]
         public void Attack()
         {
-            taggerAnim?.SetTrigger("isAttack");
+            anim?.SetTrigger("isAttack");
         }
 
-        public void DieAnim()
-        {
-            runnerAnim?.SetBool("isDie",true);
-        }
-
-        public void DieVFX()
-        {
-            charactorBody.gameObject.SetActive(false);
-            dieVFX.SetActive(true);
-            StartCoroutine(Die());
-        }
-
-        IEnumerator Die()
-        {
-            yield return new WaitForSeconds(0.5f);
-            if(photonView.IsMine)
-            {
-                CameraMng.instance.SwitchCam();
-                PlayMng.instance.BeCaught(gameObject);
-            }
-        }
         [PunRPC]
         public void KickTheCan(Vector3 vec, Player p)
         {
@@ -110,12 +95,12 @@ namespace DH
 
         public void MoveAnim(bool isMove)
         {
-            taggerAnim?.SetBool("isMove", isMove);
+            anim?.SetBool("isMove", isMove);
         }
 
         public void JumpAnim(bool isJump)
         {
-            taggerAnim?.SetBool("isJump", isJump);
+            anim?.SetBool("isJump", isJump);
         }
         Quaternion quaternion;
 
@@ -124,9 +109,8 @@ namespace DH
             if (stream.IsWriting)
             {
                 stream.SendNext(isSettingComplete);
-                stream.SendNext(taggerAnim == null ? false : taggerAnim.GetBool("isMove"));
-                stream.SendNext(taggerAnim == null ? false : taggerAnim.GetBool("isJump"));
-                stream.SendNext(runnerAnim == null ? false : runnerAnim.GetBool("isDie"));
+                stream.SendNext(anim?.GetBool("isMove") == null ? false : anim.GetBool("isMove"));
+                stream.SendNext(anim?.GetBool("isJump") == null ? false : anim.GetBool("isJump"));
                 stream.SendNext(ownerID);
                 if (isSettingComplete)
                     stream.SendNext(charactorBody.rotation);
@@ -137,22 +121,15 @@ namespace DH
             {
                 isSettingComplete = (bool)stream.ReceiveNext();
                 animBool = (bool)stream.ReceiveNext();
-                taggerAnim?.SetBool("isMove", animBool);
+                anim?.SetBool("isMove", animBool);
                 animBool = (bool)stream.ReceiveNext();
-                taggerAnim?.SetBool("isJump", animBool);
-                animBool = (bool)stream.ReceiveNext();
-                runnerAnim?.SetBool("isDie", animBool);
-                    
+                anim?.SetBool("isJump", animBool);
                 ownerID = (int)stream.ReceiveNext();
                 if (null != charactorBody)
                     charactorBody.rotation = (Quaternion)stream.ReceiveNext();
                 else
                     quaternion = (Quaternion)stream.ReceiveNext();
             }
-
-            // TODO : 변수 동기화
-
-            
         }
     }
 }

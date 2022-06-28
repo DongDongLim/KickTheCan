@@ -33,15 +33,15 @@ namespace DH
 
         private void Start()
         {
-            playerSceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();
+            playerSceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();        
         }
 
         protected override void OnAwake()
         {
 
-        }
+        }        
 
-        public IEnumerator Setting()
+    public IEnumerator Setting()
         {
             randIndex = Random.Range(0, mapBG.Length);
             PhotonNetwork.Instantiate
@@ -68,14 +68,12 @@ namespace DH
             playerObj.GetComponent<TaggerSetScript>().SetObj("Tagger");
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.TAGGER);
-
-            UIDataMng.Instance.SetTagger(UIDataMng.Instance.TAGGER_LIFE + 1);
         }
 
         public void RunnerSetting(string layerName)
         {
             Debug.Log("러너 생성");
-            randIndex = Random.Range(0, mapObj.Length + objectSpawnPos.Length);
+            randIndex = Random.Range(12, mapObj.Length + objectSpawnPos.Length);
             GameObject playerObj = PhotonNetwork.Instantiate
                 (GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
             playerObj.AddComponent<RunnerController>();
@@ -92,10 +90,10 @@ namespace DH
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.RUNNER);
         }
-
+               
         public void ObserverSetting(Player p)
         {
-            Debug.Log("관전자 모드");
+            Debug.Log("관전자 모드");                       
             CameraMng.instance.SwitchCam();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.OBSERVER);
         }

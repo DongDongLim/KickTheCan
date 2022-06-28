@@ -30,7 +30,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        // TODO : 마스터와 씬 동기화     
+        // TODO : 마스터와 씬 동기화
+        // 방법 2 : 
         PhotonNetwork.AutomaticallySyncScene = true;
               
         if (PhotonNetwork.IsConnected && !playerSceneInfo.isLeaver)

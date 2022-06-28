@@ -18,7 +18,7 @@ namespace DH
 
         private void Start()
         {
-            rigid = GetComponent<Rigidbody>();
+            rigid = GetComponent<Rigidbody>(); 
             isMove = false;
         }
 
@@ -30,7 +30,7 @@ namespace DH
             isMove = true;
             PlayMng.instance.gameChat.SystemCanKickLog(p);
             rigid.AddForce(target * kickPower, ForceMode.Impulse);
-            while (rigid.velocity != Vector3.zero)
+            while(rigid.velocity != Vector3.zero)
             {
                 yield return null;
             }
@@ -46,15 +46,15 @@ namespace DH
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.layer == LayerMask.NameToLayer("Tagger") && !isMove && !GameManager.Instance.isAttack && photonView.IsMine)
+            if(collision.gameObject.layer == LayerMask.NameToLayer("Tagger") && !isMove && !GameManager.Instance.isAttack && photonView.IsMine)
             {
                 isMove = true;
                 int taggerId = collision.transform.gameObject.GetComponent<PlayerScript>().ownerID;
-                foreach (Player p in PhotonNetwork.PlayerList)
+                foreach(Player p in PhotonNetwork.PlayerList)
                 {
-                    if (p.GetPlayerNumber() == taggerId)
+                    if(p.GetPlayerNumber() == taggerId)
                     {
-                        Hashtable prob = new Hashtable { { GameData.PLAYER_TAGGER, true } };
+                        Hashtable prob = new Hashtable { {GameData.PLAYER_TAGGER, true } };
                         p.SetCustomProperties(prob);
                     }
                 }
