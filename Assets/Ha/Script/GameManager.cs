@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
@@ -13,6 +14,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     public static GameManager Instance { get; private set; }
 
     public Text infoText;
+    public bool isAttack = true;
+    public GameObject canCheckObj;
+    public UnityAction canCheckActionTrue;
+    public UnityAction canCheckActionFalse;
     public Transform[] spawnPos;
     public GameObject timer;
 
@@ -287,7 +292,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         Debug.Log("ReJoiner Mode 호출");
         // TODO : Text 예정
         //StartCoroutine(DH.MapSettingMng.instance.Setting());
-        DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
+        DH.MapSettingMng.instance.RunnerSetting("Default");
     }
 
     IEnumerator GameIsOn()

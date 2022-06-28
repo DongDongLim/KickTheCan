@@ -9,9 +9,9 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 namespace DH
 {
     public class RunnerController : Controller, IDamaged
-    {      
-        bool isFreeze = false;
-    
+    {
+        ChangeLayer change;
+
         private void Awake()
         {
             CameraMng.instance.RunnerCamSetting();
@@ -19,6 +19,18 @@ namespace DH
 
             UIMng.instance.SetUI("Runner");
         }
+
+        private void OnDisable()
+        {
+            if (GameManager.Instance != null)
+                GameManager.Instance.canCheckActionTrue -= ChangeLayer;
+        }
+
+        public void ChangeLayer()
+        {
+            GetComponent<RunnerSetScript>().photonView.RPC("ChildObjCreate", RpcTarget.All, -1, "Default");
+        }
+
 
         public override void ControllerAction()
         {
@@ -37,7 +49,6 @@ namespace DH
 
         void Freeze()
         {
-            isFreeze = !isFreeze;
             owner.photonView.RPC("FreezeRigid", RpcTarget.All);
         }
 
