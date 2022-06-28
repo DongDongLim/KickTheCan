@@ -108,6 +108,10 @@ namespace DH
                 else
                     quaternion = (Quaternion)stream.ReceiveNext();
             }
+
+            // TODO : 변수 동기화
+
+            
         }
     }
 }

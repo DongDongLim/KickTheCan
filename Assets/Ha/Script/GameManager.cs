@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private bool isTagger;
     private bool isPlaying = false;
+    private bool isOver = false;
 
     int m_maxTagger = 0;
 
@@ -300,6 +301,39 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void GameOver()
     {
+        // 게임 종료 조건 체크 -> true -> 승자 UI 표시 -> 모두 룸으로 가기           
+
+        if (0 == timer.GetComponent<Timer>().totalSeconds)
+        {
+            StartCoroutine(WhoIsWinner());
+            return;
+        }
+
+        StartCoroutine(WhoIsWinner());
+
+        return;
+
+
+
+    }
+
+    IEnumerator WhoIsWinner()
+    {
+        yield return new WaitForSeconds(3f);
+
+        // [게임 술래 승리 조건]
+        // 1. 러너가 0명
+        //  - 러너를 모두 잡았을 때
+
+        foreach (Player player in playerList)
+        {
+            
+        }
+        
+
+        //[게임 러너 승리 조건]
+        // 1. 술래가 0명 
+        // 2. 타임아웃까지 러너가 1명이라도 살아남았을 시
 
     }
 

@@ -4,13 +4,14 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 namespace DH
 {
     public class RunnerController : Controller, IDamaged
-    {
+    {      
         bool isFreeze = false;
-
+    
         private void Awake()
         {
             CameraMng.instance.RunnerCamSetting();
@@ -27,7 +28,7 @@ namespace DH
         }
 
         public void Damaged()
-        {
+        {            
             CameraMng.instance.SwitchCam();
             PlayMng.instance.BeCaught(gameObject);
         }
@@ -41,7 +42,13 @@ namespace DH
         private void OnTriggerEnter(Collider other)
         {
             if(other.gameObject.layer == LayerMask.NameToLayer("Weapon"))
-            {
+            {   
+                // 추가
+                // TODO : (Test) GameOver    
+                //Hashtable props = new Hashtable() { { global::GameData.PLAYER_DEAD, true } };
+                //PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+                // =================================
+
                 Damaged();
                 int id = other.transform.parent.parent.GetComponent<PlayerScript>().ownerID;
                 foreach(Player p in PhotonNetwork.PlayerList)

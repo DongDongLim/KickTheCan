@@ -10,10 +10,10 @@ public class Timer : MonoBehaviour
     public Text secondsText;
     public GameObject timeOut;
 
+    public int totalSeconds = 0;
     public int minutes;
     public int sec;
-
-    int totalSeconds = 0;
+        
 
     private void Start()
     {
