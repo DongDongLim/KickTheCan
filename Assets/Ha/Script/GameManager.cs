@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public Text infoText;
     public Transform[] spawnPos;
+    public GameObject timer;
 
     private bool isTagger;
     private bool isPlaying = false;
@@ -101,6 +102,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         int playerNumber = PhotonNetwork.LocalPlayer.GetPlayerNumber();
 
         CreatePlayer();
+
+        timer.SetActive(true);
     }
 
     private bool CheckAllPlayerLoadLevel()
@@ -155,7 +158,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
 
         // TODO : Text 예정
-        //StartCoroutine(DH.MapSettingMng.instance.Setting());
+        StartCoroutine(DH.MapSettingMng.instance.Setting());
 
         m_maxTagger = PhotonNetwork.PlayerList.Length / 4;
         m_maxTagger = (int)Mathf.Clamp(m_maxTagger, 1, 5);
