@@ -3,30 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using System.IO;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 namespace DH
 {
     public class MapSetScript : MonoBehaviourPun
     {
         public int objIndex;
-        Transform[] objectSpawnPos;
         ChanceAddon chanceAddon;
         private int randomResult;
 
         int randIndex;
 
 
-        public void SetObjIndex(int index, bool isRebuild)
+        public void SetObjIndex(int index)
         {
             chanceAddon = new ChanceAddon();
-            if (isRebuild)
-            {
-                ChildObjCreate(index);
-                Destroy(gameObject);
-                return;
-            }
-            photonView.RPC("ChildObjCreate", RpcTarget.All, index);
-            PhotonNetwork.Destroy(gameObject);
+            photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered, index);
         }
 
         [PunRPC]
@@ -35,9 +28,12 @@ namespace DH
             objIndex = index;
             GameObject mapObject = Instantiate(MapSettingMng.instance.mapBG[objIndex], MapSettingMng.instance.gameObject.transform, false);
             mapObject.transform.position = transform.position;
-            if(PhotonNetwork.IsMasterClient)
+            MapSettingMng.instance.curMap = mapObject;
+            ref Transform[] objectSpawnPos = ref MapSettingMng.instance.objectSpawnPos;
+            mapObject.GetComponent<MapSetting>().SetObjectSpawnPosList(ref objectSpawnPos);
+            if (PhotonNetwork.IsMasterClient)
             {
-                mapObject.GetComponent<MapSetting>().SetObjectSpawnPosList(ref objectSpawnPos);
+
                 if (objectSpawnPos.Length == 0)
                     return;
 
@@ -54,16 +50,18 @@ namespace DH
                             break;
                         case 1:
                             PhotonNetwork.Instantiate("Obj", obj.position, obj.rotation, 0)
-                            .GetComponent<ObjScript>().SetObjIndex(randIndex, MapSettingMng.instance.isRebuild);
+                            .GetComponent<ObjScript>().SetObjIndex(randIndex);
                             Debug.Log("랜덤이지롱");
                             break;
                         case 2:
                             PhotonNetwork.Instantiate("Obj", obj.position, obj.rotation, 0)
-                            .GetComponent<ObjScript>().SetObjIndex(Path.Combine("Sports", obj.name), MapSettingMng.instance.isRebuild);
+                            .GetComponent<ObjScript>().SetObjIndex(Path.Combine("Sports", obj.name));
                             Debug.Log("생겼지롱");
                             break;
                     }
                 }
+
+                PhotonNetwork.Destroy(gameObject);
             }
 
         }

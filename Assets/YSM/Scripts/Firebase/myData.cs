@@ -1,12 +1,21 @@
 ﻿
 public class myData
 {
-    public string ID;
-    public string Data;
-
-    public myData(string ID, string Data)
+    public string DisplayNickname;
+    public string Score;
+    public string Email;
+    public string IsLoggingIn;
+    public myData(string Email , string DisplayNickname, string Score, string IsLoggingIn = "true")
     {
-        this.ID = ID;
-        this.Data = Data;
+        this.Email = Email;
+        this.DisplayNickname = DisplayNickname;
+        this.Score = Score;
+        this.IsLoggingIn = IsLoggingIn;
+    }
+
+
+    public void SetLogout()
+    {
+        IsLoggingIn = "false";
     }
 }

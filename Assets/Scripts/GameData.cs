@@ -9,10 +9,14 @@ public class GameData : MonoBehaviour
     public const string PLAYER_READY = "Ready";
     public const string PLAYER_LOAD = "Load";
     public const string PLAYER_TAGGER = "Tagger";
+    public const string PLAYER_LEAVER = "Leaver";
+    public const string MASTER_PLAY = "Play";
+    public const string PLAYER_DEAD = "Dead";  // TODO : (Test) GameOver
+
 
     public static Color GetColor(int playerNumber)
     {
-        switch(playerNumber)
+        switch (playerNumber)
         {
             case 0: return Color.red;
             case 1: return Color.green;

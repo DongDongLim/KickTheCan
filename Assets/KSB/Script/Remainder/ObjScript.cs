@@ -10,32 +10,15 @@ namespace DH
         public int objIndex;
 
 
-        public void SetObjIndex(int index, bool isRebuild)
+        public void SetObjIndex(int index)
         {
-            // TODO : 바뀜
-            if (isRebuild)
-            {
-                ChildObjCreate(index);
-                Destroy(gameObject);
-                return;
-            }
-
-            photonView.RPC("ChildObjCreate", RpcTarget.All, index);
-
+            photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered, index);
             PhotonNetwork.Destroy(gameObject);
         }
 
-        public void SetObjIndex(string obj, bool isRebuild)
+        public void SetObjIndex(string obj)
         {
-            // TODO : 바뀜
-            if (isRebuild)
-            {
-                ChildObjCreate(obj);
-                Destroy(gameObject);
-                return;
-            }
-
-            photonView.RPC("ChildObjCreate", RpcTarget.All, obj);
+            photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered, obj);
 
             PhotonNetwork.Destroy(gameObject);
         }
