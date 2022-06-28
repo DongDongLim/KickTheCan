@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,9 @@ public class Timer : MonoBehaviour
 
     private void Start()
     {
+        minutesText.text = minutes.ToString();
+        secondsText.text = sec.ToString();
+        
         if (10 > minutes)
         {
             minutesText.text =  "0" + minutes + " : ";
