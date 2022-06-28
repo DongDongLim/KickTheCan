@@ -124,8 +124,12 @@ namespace YSM
             
         }
 
+        private void OnDisable()
+        {
 
-        private void SetCharacterType(GameCharacterType characterType)
+        }
+
+        public void SetCharacterType(GameCharacterType characterType)
         {
             curCharacterType = characterType;
             UISet();
@@ -148,17 +152,11 @@ namespace YSM
             }
             else
             {
-                curChatType = GameChatType.ALL;
                 typeButtonText.text = curChatType.ToString();
                 typeButton.interactable = true;
             }
 
-
         }
-
-
-
-
 
         public void ClickChatTypeButton()
         {
@@ -229,12 +227,13 @@ namespace YSM
                     if (TaggerSendTeamChat())
                         return;
                 }
+                else if (receiveCharacterType == GameCharacterType.DEAD) // 죽은 사람이 채팅 보냈을때 못받는것
+                {
+                    if (DeadSendChat())
+                        return;
+                }
             }
-            else if (receiveCharacterType == GameCharacterType.DEAD) // 죽은 사람이 채팅 보냈을때 못받는것
-            {
-                if (DeadSendChat())
-                    return;
-            }
+
 
 
             GameObject entry = Instantiate(chatEntryPrefab);
@@ -280,6 +279,7 @@ namespace YSM
         [PunRPC]
         public void AddKillLog(Player tagger, Player runner)
         {
+            Debug.Log(true);
             GameObject systemChatEntry = Instantiate(chatEntryPrefab);
             GameObject allChatEntry;
             //tagger.NickName;
@@ -288,8 +288,8 @@ namespace YSM
                 charImageType[(int)GameChatType.NOTICE],
                 ColorTransform.EnumToColor(PlayerColorType.RED),
                 "<color=#" + GameChatTypeColorToString(GameChatType.NOTICE) + "> <System></color>",
-                "<color=#" + YSM.ColorTransform.EnumToTextString((YSM.PlayerColorType)tagger.GetPlayerNumber()) + ">" + tagger.NickName + "</color> ->" +
-                "<color=#" + YSM.ColorTransform.EnumToTextString((YSM.PlayerColorType)runner.GetPlayerNumber()) + ">" + runner.NickName + "</color> Tag!!!"
+                "<color=#" + YSM.ColorTransform.EnumToString((YSM.PlayerColorType)tagger.GetPlayerNumber()) + ">" + tagger.NickName + "</color> ->" +
+                "<color=#" + YSM.ColorTransform.EnumToString((YSM.PlayerColorType)runner.GetPlayerNumber()) + ">" + runner.NickName + "</color> Tag!!!"
                 );
 
             systemChatEntry.transform.localScale = Vector3.one;
@@ -320,8 +320,8 @@ namespace YSM
             systemChatEntry.GetComponent<ChatEntry>().SetData(
                 charImageType[(int)GameChatType.NOTICE],
                 ColorTransform.EnumToColor(PlayerColorType.RED),
-                "<color=#" + GameChatTypeColorToString(GameChatType.NOTICE) + "> <System></color>",
-                "<color=#" + YSM.ColorTransform.EnumToTextString((YSM.PlayerColorType)runner.GetPlayerNumber()) + ">" + runner.NickName + "</color> Kick Can!!!!!!!!"
+                "<color=#" + GameChatTypeColorToString(GameChatType.NOTICE) + "> <System></color",
+                "<color=#" + YSM.ColorTransform.EnumToString((YSM.PlayerColorType)runner.GetPlayerNumber()) + ">" + runner.NickName + "</color> Kick Can!!!!!!!!"
                 );
 
             systemChatEntry.transform.localScale = Vector3.one;
@@ -410,7 +410,7 @@ namespace YSM
                 case GameCharacterType.TAGGER: return Convert.ToString(0, 16) + Convert.ToString(0, 16) + Convert.ToString(0, 16); //검정색
                 case GameCharacterType.DEAD: return Convert.ToString(127, 16) + Convert.ToString(127, 16) + Convert.ToString(127, 16); //회색
                 case GameCharacterType.OBSERVER: return Convert.ToString(34, 16) + Convert.ToString(177, 16) + Convert.ToString(76, 16);   //초록색
-                case GameCharacterType.NOTICE:             return Convert.ToString(237,16) + Convert.ToString(28, 16) + Convert.ToString(36, 16);   //빨강색
+                 //case GameCharacterType.NOTICE:             return Convert.ToString(237,16) + Convert.ToString(28, 16) + Convert.ToString(36, 16);   //빨강색
                 default: return "Error";
             }
 
@@ -424,7 +424,7 @@ namespace YSM
                 case GameChatType.TEAM: return Convert.ToString(255, 16) + Convert.ToString(242, 16) + "0" + Convert.ToString(0, 16); // 노랑색
                 case GameChatType.DEAD: return Convert.ToString(127, 16) + Convert.ToString(127, 16) + Convert.ToString(127, 16);   //회색
                 case GameChatType.OBSERVER: return Convert.ToString(34, 16) + Convert.ToString(177, 16) + Convert.ToString(76, 16);   //초록색
-                case GameChatType.NOTICE:            return Convert.ToString(237,16) + Convert.ToString(28, 16) + Convert.ToString(36, 16);   //빨강색
+                //case GameChatType.NOTICE:            return Convert.ToString(237,16) + Convert.ToString(28, 16) + Convert.ToString(36, 16);   //빨강색
                 default: return "Error";
             }
 
