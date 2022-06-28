@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class ChangeLayer
 {
-    public void CangeTransformLayer(Transform parent, string name, bool ischild)
+    public void CangeTransformLayer(Transform parent, string name)
     {
         parent.gameObject.layer = LayerMask.NameToLayer(name);
-        if (ischild)
-            foreach (Transform child in parent)
-                CangeTransformLayer(child, name, ischild);
+        foreach (Transform child in parent)
+            CangeTransformLayer(child, name);
     }
 }

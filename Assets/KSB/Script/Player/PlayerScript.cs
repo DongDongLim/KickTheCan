@@ -1,16 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
-using Photon.Realtime;
 
 namespace DH
 {
     public class PlayerScript : MonoBehaviourPun, IPunObservable
     {
-        #region private
         private Rigidbody rigid;
         [SerializeField]
         private Animator taggerAnim = null;
@@ -26,20 +23,11 @@ namespace DH
 
         Controller control = null;
 
+        public int ownerID = -1;
 
         bool isSettingComplete = false;
 
         bool animBool;
-
-        #endregion
-        #region public
-
-        public UnityAction freezeAction;
-
-        public int ownerID = -1;
-
-        public bool isFreeze = false;
-        #endregion
 
         private void Awake()
         {
@@ -82,8 +70,6 @@ namespace DH
         [PunRPC]
         public void FreezeRigid()
         {
-            isFreeze = !isFreeze;
-            freezeAction?.Invoke();
             rigid.isKinematic = !rigid.isKinematic;
         }
 
@@ -162,6 +148,10 @@ namespace DH
                 else
                     quaternion = (Quaternion)stream.ReceiveNext();
             }
+
+            // TODO : 변수 동기화
+
+            
         }
     }
 }

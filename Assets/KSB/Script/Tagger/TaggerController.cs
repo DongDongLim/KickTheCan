@@ -52,7 +52,7 @@ namespace DH
 
         public override void ControllerAction()
         {
-            if (0 < attackCurCount && GameManager.Instance.isAttack)
+            if (0 < attackCurCount)
             {
                 owner.photonView.RPC("Attack", RpcTarget.All);
             }

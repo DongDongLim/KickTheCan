@@ -9,9 +9,9 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 namespace DH
 {
     public class RunnerController : Controller, IDamaged
-    {
-        ChangeLayer change;
-
+    {      
+        bool isFreeze = false;
+    
         private void Awake()
         {
             CameraMng.instance.RunnerCamSetting();
@@ -19,18 +19,6 @@ namespace DH
 
             UIMng.instance.SetUI("Runner");
         }
-
-        private void OnDisable()
-        {
-            if (GameManager.Instance != null)
-                GameManager.Instance.canCheckActionTrue -= ChangeLayer;
-        }
-
-        public void ChangeLayer()
-        {
-            GetComponent<RunnerSetScript>().photonView.RPC("ChildObjCreate", RpcTarget.All, -1, "Default");
-        }
-
 
         public override void ControllerAction()
         {
@@ -49,13 +37,20 @@ namespace DH
 
         void Freeze()
         {
+            isFreeze = !isFreeze;
             owner.photonView.RPC("FreezeRigid", RpcTarget.All);
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if(other.gameObject.layer == LayerMask.NameToLayer("Weapon"))
-            {
+            {   
+                // 추가
+                // TODO : (Test) GameOver    
+                //Hashtable props = new Hashtable() { { global::GameData.PLAYER_DEAD, true } };
+                //PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+                // =================================
+
                 Damaged();
                 int id = other.transform.parent.parent.GetComponent<PlayerScript>().ownerID;
                 foreach(Player p in PhotonNetwork.PlayerList)
@@ -70,11 +65,6 @@ namespace DH
             }
         }
 
-        private void OnApplicationPause(bool pause)
-        {
-            
-        }
-
         private void OnCollisionEnter(Collision collision)
         {
             if(collision.gameObject.layer == LayerMask.NameToLayer("Can"))
@@ -83,6 +73,7 @@ namespace DH
                 Hashtable hashtable = new Hashtable { { GameData.PLAYER_ISKICK, true } };
                 PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
                 owner.photonView.RPC("KickTheCan", RpcTarget.MasterClient, Vector3.Normalize(collision.gameObject.transform.position - transform.position), PhotonNetwork.LocalPlayer);               
+
             }
         }
 

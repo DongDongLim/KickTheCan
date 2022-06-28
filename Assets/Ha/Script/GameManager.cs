@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
@@ -14,14 +13,12 @@ public class GameManager : MonoBehaviourPunCallbacks
     public static GameManager Instance { get; private set; }
 
     public Text infoText;
-    public bool isAttack = true;
-    public GameObject canCheckObj;
-    public UnityAction canCheckActionTrue;
-    public UnityAction canCheckActionFalse;
+    public Transform[] spawnPos;
+    public GameObject timer;
 
-    private PlayerSceneInfo playerSceneInfo;
     private bool isTagger;
     private bool isPlaying = false;
+    private bool isOver = false;
 
     int m_maxTagger = 0;
 
@@ -33,21 +30,16 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
 
     public void Start()
-    {
-        playerSceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();
-
+    {                        
         if (PhotonNetwork.LocalPlayer.HasRejoined)
-        {
-            Debug.Log("재 참가");
-            // TODO : test - 관전자 모드 시 러너 미생성
-            //Hashtable props = new Hashtable() { { GameData.PLAYER_LOAD, true } };
-            //PhotonNetwork.LocalPlayer.SetCustomProperties(props);
-            RejoinMode();
+        {         
+            Debug.Log("재 참가");                
+            RejoinMode();            
         }
         else if (IsAdditionalPlayer())
         {
-            Debug.Log("추가 참가");
-            ObserverMode();
+            Debug.Log("추가 참가");            
+            ObserverMode();         
         }
         else
         {
@@ -140,6 +132,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         int playerNumber = PhotonNetwork.LocalPlayer.GetPlayerNumber();
 
         CreatePlayer();
+
+        timer.SetActive(true);
     }
 
     private bool CheckAllPlayerLoadLevel()
@@ -193,6 +187,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             return;
         }
 
+        // TODO : Text 예정
         StartCoroutine(DH.MapSettingMng.instance.Setting());
 
         m_maxTagger = PhotonNetwork.PlayerList.Length / 4;
@@ -280,16 +275,19 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void ObserverMode()
     {
         Debug.Log("ReEntry Mode 호출");
-        // 맵 세팅은 호스트만 부탁드립니다
+        Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
+
+        // TODO : Text 예정
         //StartCoroutine(DH.MapSettingMng.instance.Setting());
-        DH.MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);
+        DH.MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);  
     }
 
     private void RejoinMode()
     {
         Debug.Log("ReJoiner Mode 호출");
+        // TODO : Text 예정
         //StartCoroutine(DH.MapSettingMng.instance.Setting());
-        DH.MapSettingMng.instance.RunnerSetting("Default");
+        DH.MapSettingMng.instance.RunnerSetting(PhotonNetwork.LocalPlayer);
     }
 
     IEnumerator GameIsOn()
@@ -300,12 +298,16 @@ public class GameManager : MonoBehaviourPunCallbacks
         isPlaying = true;
 
         Hashtable props = new Hashtable() { { GameData.MASTER_PLAY, isPlaying } };
-        PhotonNetwork.MasterClient.SetCustomProperties(props);
+        PhotonNetwork.MasterClient.SetCustomProperties(props);  
+        
+        // TODO : 모든플레이어가 준비가 되었을 시에 게임을 시작한다.
+        // 정해진 시간안에 참가하지 못한 플레이어는 추방하고 게임을 시작한다.
     }
 
     public override void OnJoinedRoom()
     {
         Debug.Log("room에 입장");
+        Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
     }
 
     private bool IsAdditionalPlayer()
@@ -322,7 +324,46 @@ public class GameManager : MonoBehaviourPunCallbacks
                 return true;
             }
         }
+        
+        return false;                   
+    }   
 
-        return false;
+    private void GameOver()
+    {
+        // 게임 종료 조건 체크 -> true -> 승자 UI 표시 -> 모두 룸으로 가기           
+
+        if (0 == timer.GetComponent<Timer>().totalSeconds)
+        {
+            StartCoroutine(WhoIsWinner());
+            return;
+        }
+
+        StartCoroutine(WhoIsWinner());
+
+        return;
+
+
     }
+
+    IEnumerator WhoIsWinner()
+    {
+        yield return new WaitForSeconds(3f);
+
+        // [게임 술래 승리 조건]
+        // 1. 러너가 0명
+        //  - 러너를 모두 잡았을 때
+
+        foreach (Player player in playerList)
+        {
+            
+        }
+        
+
+        //[게임 러너 승리 조건]
+        // 1. 술래가 0명 
+        // 2. 타임아웃까지 러너가 1명이라도 살아남았을 시
+
+    }
+
+
 }

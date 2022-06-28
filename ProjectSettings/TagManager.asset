@@ -3,9 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - DontDestroy
-  - Ground
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -18,14 +16,14 @@ TagManager:
   - 
   - 
   - 
-  - Ground
-  - Object
-  - Weapon
-  - Can
-  - Hide
-  - Tagger
-  - PassObject
-  - Wall
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

@@ -9,6 +9,7 @@ namespace DH
     {
         [SerializeField]
         GameObject can;
+
         public void SetObjIndex()
         { 
             photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered);
@@ -17,8 +18,9 @@ namespace DH
         [PunRPC]
         public void ChildObjCreate()
         {
-            GameObject canObj = Instantiate(can, transform, false);
-            PlayMng.instance.can = gameObject;
+            GameObject canObj = Instantiate(can, MapSettingMng.instance.gameObject.transform, false);
+            canObj.transform.position = transform.position;
+            PlayMng.instance.can = canObj;
         }
     }
 }
