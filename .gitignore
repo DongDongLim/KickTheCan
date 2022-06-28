@@ -72,7 +72,6 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 Assets/ExResource/
-Assets/Resources/
 Assets/Editor Default Resources/
 Assets/ExternalDependencyManager/
 Assets/Firebase/
