@@ -33,20 +33,11 @@ public class SignUpPanel : MonoBehaviour
 
     [SerializeField] private Button SignUpButton;
     [SerializeField] private CheckPanel CheckBox;
-
     [SerializeField] private SignUpComplete signUpCompletePanel;
 
 
     bool isEmailDuplication;
     bool isDisplayNickNameDuplication;
-
-    //Firebase
-    public DatabaseReference reference { get; set; }
-
-
-    // 인증을 관리할 객체
-    FirebaseAuth auth;
-
 
 
     public void OnEnable()
@@ -69,13 +60,6 @@ public class SignUpPanel : MonoBehaviour
     }
 
 
-    private void Start()
-    {
-        auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
-        reference = FirebaseDatabase.DefaultInstance.RootReference;
-    }
-
-
     
     public void OnEmailConfirmClick()
     {
@@ -86,9 +70,9 @@ public class SignUpPanel : MonoBehaviour
     public void IsEmailDuplication(UnityAction OnCheck)
     {
 
-        reference = FirebaseDatabase.DefaultInstance.GetReference("UserInfo");
-        
-        reference.GetValueAsync().ContinueWith(task =>
+        DatabaseManager.instance.reference = FirebaseDatabase.DefaultInstance.GetReference("UserInfo");
+
+        DatabaseManager.instance.reference.GetValueAsync().ContinueWith(task =>
         {
             if (task.IsCompleted)
             {
@@ -174,9 +158,9 @@ public class SignUpPanel : MonoBehaviour
 
     public void IsDisplayNickNameDuplication(UnityAction OnCheck)
     {
-        reference = FirebaseDatabase.DefaultInstance.GetReference("UserInfo");
+        DatabaseManager.instance.reference = FirebaseDatabase.DefaultInstance.GetReference("UserInfo");
 
-        reference.GetValueAsync().ContinueWith(task =>
+        DatabaseManager.instance.reference.GetValueAsync().ContinueWith(task =>
         {
             if (task.IsCompleted)
             {
@@ -252,7 +236,7 @@ public class SignUpPanel : MonoBehaviour
 
     private void SetUserDataInDataBase()
     {
-        myData newUser = new myData(emailInputField.text, displayNickName.text, "0","false");
+        DBData newUser = new DBData(emailInputField.text, displayNickName.text, "0","false");
         AuthManager.instance.register(emailInputField.text, passwordInputField.text, newUser);
        
     }
@@ -298,7 +282,10 @@ public class SignUpPanel : MonoBehaviour
         this.gameObject.SetActive(true);
     }
 
-
+    public void BackButtonClicked()
+    {
+        this.gameObject.SetActive(false);
+    }
 }
 
 
