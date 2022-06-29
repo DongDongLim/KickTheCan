@@ -5,26 +5,26 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class DatabaseManager : MonoBehaviour
 {
-
-    private DatabaseReference dbReference;
-    public DatabaseReference reference { get; set; }
     static public DatabaseManager instance { get; private set; }
-    
 
-    public myData data;
+    public DatabaseReference dbReference;
+    public DatabaseReference reference;
 
+    public DBData dbData;
+    public DBFriend dbFriend;
 
     public bool CanLogout;
+
 
     void Start()
     {
         instance = this;
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
-        
         reference = FirebaseDatabase.DefaultInstance.GetReference("UserInfo");
 
 
@@ -32,12 +32,10 @@ public class DatabaseManager : MonoBehaviour
         // 여기선 rank 데이터 셋에 접근
     }
 
-    public void SetUserDataInDataBase(myData mydata)
+    public void SetUserDataInDataBase(DBData mydata)
     {
         string json = JsonUtility.ToJson(mydata);
         dbReference.Child("UserInfo").Child(AuthManager.instance.GetAuthUID()).SetRawJsonValueAsync(json);
-
-
     }
 
 
@@ -52,10 +50,9 @@ public class DatabaseManager : MonoBehaviour
                 DataSnapshot snapshot = task.Result;
                 DataSnapshot dataSnapshot = (DataSnapshot)snapshot.Child(AuthManager.instance.GetAuthUID());
                 IDictionary id = (IDictionary)dataSnapshot.Value;
-                data = new myData(id["Email"].ToString(), id["DisplayNickname"].ToString(), id["Score"].ToString());
-                SetUserDataInDataBase(data);
-
-                PhotonNetwork.LocalPlayer.NickName = data.DisplayNickname;
+                dbData = new DBData(id["Email"].ToString(), id["DisplayNickname"].ToString(), id["Score"].ToString());
+                //SetUserDataInDataBase(dbData);
+                PhotonNetwork.LocalPlayer.NickName = dbData.DisplayNickname;
                 PhotonNetwork.ConnectUsingSettings();
             }
             else
@@ -66,51 +63,32 @@ public class DatabaseManager : MonoBehaviour
         
     }
 
-    public void test()
-    {
-        data.IsLoggingIn = "false";
-        string json = JsonUtility.ToJson(data);
 
 
-        Dictionary<string, object> update = new Dictionary<string, object>();
-        update["IsLoggingIn"] = "false";
-        dbReference.Child("UserInfo").Child(AuthManager.instance.GetAuthUID()).UpdateChildrenAsync(update).ContinueWith(task =>
-        {
-            if (task.IsCompleted)
-            {
-                CanLogout = true;
-                Debug.Log("굿/");
-                Application.Quit();
-            }
-            else
-            {
-                CanLogout = false;
-            }
-        });
-        Debug.Log("끝남 함수");
-    }
 
 
-    private void OnApplicationQuit()
-    {
-        if (!CanLogout)
-        {
-            Application.CancelQuit();
-            test();
-        }
-    }
+    //public void test()
+    //{
+    //    data.IsLoggingIn = "false";
+    //    string json = JsonUtility.ToJson(data);
 
 
-    IEnumerator DelayedQuit()
-    {
-        Application.LoadLevel("finalsplash");
-
-        // Wait for showSplashTimeout
-        yield return new WaitForSeconds(2.0f);
-
-        // then quit for real
-        CanLogout = true;
-        Application.Quit();
-    }
+    //    Dictionary<string, object> update = new Dictionary<string, object>();
+    //    update["IsLoggingIn"] = "false";
+    //    dbReference.Child("UserInfo").Child(AuthManager.instance.GetAuthUID()).UpdateChildrenAsync(update).ContinueWith(task =>
+    //    {
+    //        if (task.IsCompleted)
+    //        {
+    //            CanLogout = true;
+    //            Debug.Log("굿/");
+    //            Application.Quit();
+    //        }
+    //        else
+    //        {
+    //            CanLogout = false;
+    //        }
+    //    });
+    //    Debug.Log("끝남 함수");
+    //}
 
 }
