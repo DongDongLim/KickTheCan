@@ -18,8 +18,33 @@ public class FriendPanel : MonoBehaviour
     [SerializeField] private InputField requestNicknameField;
     [SerializeField] private string requestFriendUID;
 
+
+    
+    private IDictionary friendNickname;
+    private IDictionary requestNickname;
+    bool FinishGetData;
+
+
+    //UI
+
+
+    [SerializeField] GameObject requestFriendprefab;
+    [SerializeField] GameObject RequestContent;
+
+    [SerializeField] GameObject friendListprefab;
+    [SerializeField] GameObject friendListContent;
+
+
+    [SerializeField] GameObject friendPanel;
+    [SerializeField] GameObject requestPanel;
+
+
+
+
     void Start()
     {
+        dbFriend = new DBFriend();
+        FinishGetData = false;
     }
 
 
@@ -36,8 +61,7 @@ public class FriendPanel : MonoBehaviour
 
     }
 
-
-
+    #region Client Friend request
     public void FriendRequestClicked()
     {
         FindUserNickname(FriendRequestCheck);
@@ -85,12 +109,12 @@ public class FriendPanel : MonoBehaviour
 
     }
 
-
-    public string DictionaryToJson(string nickname, string UID)
-    {
-        string tmp = "{\"" + nickname + "\":\"" + UID + "\"}";
-        return tmp;
-    }
+    #endregion
+    //public string DictionaryToJson(string nickname, string UID)
+    //{
+    //    string tmp = "{\"" + nickname + "\":\"" + UID + "\"}";
+    //    return tmp;
+    //}
 
     public IDictionary<string, object> StringToIDictionary(string nickname, string UID)
     {
@@ -100,9 +124,12 @@ public class FriendPanel : MonoBehaviour
     }
 
 
-    public void AcceptFriendClicked()
-    {
+    #region Get Friend data in Firebase  
 
+    public void FriendDataGet() // 처음 로그인 되었을때 실행해줘야 하는 함수
+    {
+        StartCoroutine("FriendRequestListAddContent");
+        GetMyRequestFriendList();
     }
 
     public void GetMyRequestFriendList()
@@ -112,64 +139,157 @@ public class FriendPanel : MonoBehaviour
             if (task.IsCompleted)
             {
                 DataSnapshot snapshot = task.Result;
-                DataSnapshot dataSnapshot = (DataSnapshot)snapshot
+
+                DataSnapshot dataSnapshotFriendList = (DataSnapshot)snapshot
+                                .Child(AuthManager.instance.GetAuthUID())
+                                .Child(DBFriend.Friend)
+                                .Child(DBFriend.FriendLists);
+
+                DataSnapshot dataSnapshotRequestList = (DataSnapshot)snapshot
                                                                 .Child(AuthManager.instance.GetAuthUID())
                                                                 .Child(DBFriend.Friend)
                                                                 .Child(DBFriend.FriendRequests);
-                IDictionary id = (IDictionary)dataSnapshot.Value;
-                foreach (var tmp in id.Keys)
-                {
-                    Debug.Log((string)tmp);
-                    string a = id[tmp].ToString();
-                    Debug.Log(a);
-                }
+
+                
+                friendNickname = (IDictionary)dataSnapshotFriendList.Value;
+                Debug.Log(friendNickname.ToString());
+                requestNickname = (IDictionary)dataSnapshotRequestList.Value;
+
+
+                FinishGetData = true;
+                Debug.Log("데이터 성공적으로 가져옴");
             }
             else
             {
                 Debug.Log("데이터 가져오기 실패");
             }
+
+
         });
 
     }
 
-
-
-
-
-
-    public void ReceiveFriendRequest()
+    IEnumerator FriendRequestListAddContent()
     {
-        //내가 친구요청을 받으면 받은 아이디를 내 FriendList에 Nickname, UID넣어주고 
+        Debug.Log("코루틴 시작");
+        while (!FinishGetData)
+        {
+            yield return new WaitForSeconds(0.1f);
+            Debug.Log("데이터 수집중!!!");
+        }
+        
+        if (requestNickname != null)
+        {
+            foreach (string name in requestNickname.Keys)
+            {
+                GameObject entry = Instantiate(requestFriendprefab);
+                entry.GetComponent<FriendRequestEntry>().SetData(
+                    name.ToString(),
+                    requestNickname[name].ToString()
+                    );
+                entry.transform.localScale = Vector3.one;
+                entry.transform.SetParent(RequestContent.transform);
+            }
+        }
+
+        if (friendNickname != null)
+        {
+            foreach (string name in friendNickname.Keys)
+            {
+                GameObject entry = Instantiate(friendListprefab);
+                entry.GetComponent<FriendListEntry>().SetData(
+                    name.ToString(),
+                    friendNickname[name].ToString()
+                    );
+                entry.transform.localScale = Vector3.one;
+                entry.transform.SetParent(friendListContent.transform);
+            }
+        }
 
 
 
-        DatabaseManager.instance.dbReference
-            .Child("UserInfo")
-            .Child(requestFriendUID/*상대방 UID넣어주고*/)
-            .Child(DBFriend.Friend/*Friend*/)
-            .Child(DBFriend.FriendRequests /*DB Friend Request List에 넣어주기*/)
-            .Child(DatabaseManager.instance.dbData.DisplayNickname)
-            .RemoveValueAsync();
-
-
-        DatabaseManager.instance.dbReference
-             .Child("UserInfo")
-             .Child(requestFriendUID/*상대방 UID넣어주고*/)
-             .Child(DBFriend.Friend/*Friend*/)
-             .Child(DBFriend.FriendRequests /*DB Friend Request List에 넣어주기*/)
-             .Child(DatabaseManager.instance.dbData.DisplayNickname)
-             .RemoveValueAsync();
-
-        DatabaseManager.instance.dbReference
-             .Child("UserInfo")
-             .Child(requestFriendUID/*상대방 UID넣어주고*/)
-             .Child(DBFriend.Friend/*Friend*/)
-             .Child(DBFriend.FriendRequests /*DB Friend Request List에 넣어주기*/)
-             .Child(DatabaseManager.instance.dbData.DisplayNickname)
-             .RemoveValueAsync();
-        //.UpdateChildrenAsync(StringToIDictionary(DatabaseManager.instance.dbData.DisplayNickname, AuthManager.instance.GetAuthUID())); /*내정보*/
-
+        FinishGetData = false;
+        yield return null;
     }
 
 
+#endregion
+
+
+    #region Friend Receive , Cansel
+    public void ReceiveFriendRequest(FriendRequestEntry entry)
+    {
+        Debug.Log(entry.GetRequestFriendName());
+        //내가 친구요청을 받으면 받은 아이디를 내 FriendList에 Nickname, UID넣어주고 
+        DatabaseManager.instance.dbReference
+            .Child("UserInfo")
+            .Child(AuthManager.instance.GetAuthUID()/*내 UID에*/)
+            .Child(DBFriend.Friend/*Friend*/)
+            .Child(DBFriend.FriendLists /*DB Friend List에 넣어주기*/)
+            .UpdateChildrenAsync(StringToIDictionary(entry.GetRequestFriendName() ,entry.GetUID())/*넣을 데이터*/);
+
+        //내가 받은 친구요청을 상대방에게도 추가해주고
+        DatabaseManager.instance.dbReference
+             .Child("UserInfo")
+             .Child(entry.GetUID()/*상대방 UID넣어주고*/)
+             .Child(DBFriend.Friend/*Friend*/)
+             .Child(DBFriend.FriendLists /*DB Friend List에 넣어주기*/)
+             .UpdateChildrenAsync(StringToIDictionary(DatabaseManager.instance.dbData.DisplayNickname, AuthManager.instance.GetAuthUID())/*내정보*/);
+
+        //내 request요청에 있는거 지워주고
+        DatabaseManager.instance.dbReference
+             .Child("UserInfo")
+             .Child(AuthManager.instance.GetAuthUID()/*내 UID에 있는거 지우고*/)
+             .Child(DBFriend.Friend/*Friend*/)
+             .Child(DBFriend.FriendRequests /*DB Friend Request List에 있는 데이터 지워주기*/)
+             .Child(entry.GetRequestFriendName()/*지울 데이터*/)
+             .RemoveValueAsync();
+        Destroy(entry.gameObject);
+    }
+    
+    public void CancelFriendRequest(FriendRequestEntry entry)
+    {
+        Debug.Log(entry.GetRequestFriendName());
+        DatabaseManager.instance.dbReference
+             .Child("UserInfo")
+             .Child(AuthManager.instance.GetAuthUID()/*내 UID에 있는거 지우고*/)
+             .Child(DBFriend.Friend/*Friend*/)
+             .Child(DBFriend.FriendRequests /*DB Friend Request List에 있는 데이터 지워주기*/)
+             .Child(entry.GetRequestFriendName()/*지울 데이터*/)
+             .RemoveValueAsync();
+        Destroy(entry.gameObject);
+    }
+
+    public void OpenFriendInfo(FriendListEntry entry)
+    {
+        Debug.Log("OpenClicked");
+        //TODO:열었을때 UI 활성화 시켜야함 
+    }
+
+
+    #endregion
+
+
+    #region UI event
+
+    public void OnFriendListOpenBtnClicked()
+    {
+        friendPanel.SetActive(true);
+    }
+
+    public void OnFriendListCloseBtnClicked()
+    {
+        friendPanel.SetActive(false);
+    }
+
+    public void OnRequestListCloseBtnClicked()
+    {
+        requestPanel.SetActive(false);
+    }
+    public void OnRequestListOpenBtnClicked()
+    {
+        requestPanel.SetActive(true);
+    }
+
+    #endregion
 }

@@ -16,7 +16,6 @@ public class DatabaseManager : MonoBehaviour
     public DatabaseReference reference;
 
     public DBData dbData;
-    public DBFriend dbFriend;
 
     public bool CanLogout;
 
