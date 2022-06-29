@@ -51,12 +51,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             Debug.Log("일반 참가");
             Hashtable props = new Hashtable() { { GameData.PLAYER_LOAD, true } };
             PhotonNetwork.LocalPlayer.SetCustomProperties(props);
-        }
-
-        if (PhotonNetwork.IsMasterClient)
-        {
-             StartCoroutine("GameIsOn");
-        }        
+        }      
     }
 
     #region PHOTON CALLBACK
@@ -90,7 +85,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
         if (changedProps.ContainsKey(GameData.PLAYER_TAGGER))
         {
-            if (targetPlayer == PhotonNetwork.LocalPlayer)
+            // StartSetting / DH
+            if (PlayersReadyLevel() == playerList.Count)
                 StartCoroutine(StartCountDown());
         }
         // 러너가 킥을 찼을 때 술래의 공격불가
@@ -165,6 +161,25 @@ public class GameManager : MonoBehaviourPunCallbacks
         return count;
     }
 
+    private int PlayersReadyLevel()
+    {
+        int count = 0;
+        foreach (Player p in PhotonNetwork.PlayerList)
+        {
+            object playerReadyLevel;
+
+            if (p.CustomProperties.TryGetValue(GameData.PLAYER_TAGGER, out playerReadyLevel))
+            {
+                if ((bool)playerReadyLevel)
+                {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+
     private void PrintInfo(string info)
     {
         Debug.Log(info);
@@ -204,6 +219,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
 
         Shuffle_List(playerList);
+        // TODO : (Test) StartSetting / DH
+        StartCoroutine("GameIsOn");
 
         // 테스트용 tagger설정 코드
         int minPlayer = 3;
