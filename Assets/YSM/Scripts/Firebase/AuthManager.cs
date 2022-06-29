@@ -53,7 +53,7 @@ public class AuthManager : MonoBehaviour
     }
     //->로그인 버튼 누르면 - > // 비동기  로그인 실행 -> 로그인 된 나의 UID -> // 비동기 데이터 가져오기 -> //패널 넘어가는거  
 
-    public void register(string email, string password , myData data)
+    public void register(string email, string password , DBData data)
     {
         
         // 제공되는 함수 : 이메일과 비밀번호로 회원가입 시켜 줌
@@ -63,7 +63,7 @@ public class AuthManager : MonoBehaviour
                 {
                     Debug.Log(email+ "로 회원가입\n");
                     DatabaseManager.instance.SetUserDataInDataBase(data);
-                    auth = Firebase.Auth.FirebaseAuth.DefaultInstance; 
+                    auth = FirebaseAuth.DefaultInstance; 
                 }
                 else
                     Debug.Log("회원가입 실패\n");
