@@ -22,17 +22,20 @@ public class AuthManager : MonoBehaviour
 
     static public AuthManager instance { get; private set; }
 
-
-
+    bool isFinishLogFunction;
+    bool isWrong;
+    [SerializeField] GameObject IDPasswordMismatchPanel;
     void Awake()
     {
         // 객체 초기화
         instance = this;
         auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
+        isFinishLogFunction = false;
     }
 
     public void OnClickLogin()
     {
+        StartCoroutine("ShowLogInMessage");
         login(emailField.text, passwordField.text, DatabaseManager.instance.GetMyData);
     }
 
@@ -46,16 +49,39 @@ public class AuthManager : MonoBehaviour
                 {
                     Debug.Log(email + " 로 로그인 하셨습니다.");
                     OnCheck.Invoke();
+                    isWrong = false;
                 }
                 else
                 {
+                    //아이디 비번 확인 메세지 
+                    isWrong = true;
                     Debug.Log("로그인에 실패하셨습니다.");
                 }
-
+                isFinishLogFunction = true;
             }
         );
     }
     //->로그인 버튼 누르면 - > // 비동기  로그인 실행 -> 로그인 된 나의 UID -> // 비동기 데이터 가져오기 -> //패널 넘어가는거  
+
+    IEnumerator ShowLogInMessage()
+    {
+
+        while (!isFinishLogFunction)
+            yield return new WaitForSeconds(0.05f);
+
+        if(true == isWrong)
+        {
+            IDPasswordMismatchPanel.SetActive(true);
+        }
+        isFinishLogFunction = false;
+        yield return null;
+    }
+
+    public void OnIDPasswordMismatchPanelCloseClicked()
+    {
+        IDPasswordMismatchPanel.SetActive(false);
+    }
+
 
     public void register(string email, string password , DBData data)
     {

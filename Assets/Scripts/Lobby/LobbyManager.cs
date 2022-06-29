@@ -32,7 +32,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsConnected)
             SetActivePanel(LobbyManager.PANEL.Connect);
 
-        SoundMng.instance.PlayBGM(SoundMng.BGM_CLIP.BGM_Lobby);
+        //SoundMng.instance.PlayBGM(SoundMng.BGM_CLIP.BGM_Lobby);
     }
 
     public enum PANEL { Login, Connect, Lobby, Room, CreateRoom }
