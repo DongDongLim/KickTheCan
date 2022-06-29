@@ -8,6 +8,7 @@ using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
 using System.Collections.Generic;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
+using DH;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
@@ -20,12 +21,14 @@ public class GameManager : MonoBehaviourPunCallbacks
     public UnityAction canCheckActionFalse;
     public Transform[] spawnPos;
     public GameObject timer;
+    public List<GameObject> playerObjList;   
 
     private bool isTagger;
     private bool isPlaying = false;
     private bool isOver = false;
 
     int m_maxTagger = 0;
+    int m_deathCount = 0;
 
     List<Player> playerList = new List<Player>() { };
 
@@ -281,17 +284,13 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("ReEntry Mode 호출");
         Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
-
-        // TODO : Text 예정
-        //StartCoroutine(DH.MapSettingMng.instance.Setting());
+              
         DH.MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);        
     }
 
     private void RejoinMode()
     {
-        Debug.Log("ReJoiner Mode 호출");
-        // TODO : Text 예정
-        //StartCoroutine(DH.MapSettingMng.instance.Setting());
+        Debug.Log("ReJoiner Mode 호출");     
         DH.MapSettingMng.instance.RunnerSetting("Default");
     }
 
@@ -359,11 +358,20 @@ public class GameManager : MonoBehaviourPunCallbacks
         // 1. 러너가 0명
         //  - 러너를 모두 잡았을 때
 
-        foreach (Player player in playerList)
+        // 방법 1 : find object 사용 tag
+        // 방법 2 : customproperty 사용
+
+
+        // 러너 타격시 이벤트 구독을 받아 폴링하는 방식으로 구현?
+        playerObjList = Instance.GetComponent<MapSettingMng>().playerObjList;
+
+        foreach (GameObject player in playerObjList)
         {
-            
-        }
-        
+            if (player.GetComponent<PlayerScript>().isDead)
+            {
+                m_deathCount++;
+            }
+        }        
 
         //[게임 러너 승리 조건]
         // 1. 술래가 0명 

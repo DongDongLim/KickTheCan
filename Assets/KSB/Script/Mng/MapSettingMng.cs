@@ -12,7 +12,7 @@ namespace DH
     {
         public GameObject[] mapBG;
         public GameObject[] mapObj;
-        public GameObject taggerObj;
+        public GameObject taggerObj;       
 
         public GameObject curMap;
         public Transform[] objectSpawnPos;
@@ -21,9 +21,9 @@ namespace DH
 
         public Vector3 canTransform;
 
+        public List<GameObject> playerObjList;
 
         int randIndex;
-
 
 
         protected override void OnAwake()
@@ -58,6 +58,9 @@ namespace DH
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.TAGGER);
 
             UIDataMng.Instance.SetTagger(UIDataMng.Instance.TAGGER_LIFE + 1);
+
+            // TODO : (Test) GameOver / SH          
+            playerObjList.Add(playerObj);
         }
 
         public void RunnerSetting(string layerName)
@@ -79,9 +82,11 @@ namespace DH
             }
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.RUNNER);
+
+            // TODO : (Test) GameOver / SH         
+            playerObjList.Add(playerObj);
         }
 
-        // TODO : 관전자 모드 
         public void ObserverSetting(Player p)
         {
             Debug.Log("관전자 모드");
