@@ -16,8 +16,10 @@ public class SoundMng : Singleton<SoundMng>
     // 배경음 이름 여기에 추가해주시면 됩니다
     public enum BGM_CLIP
     {
-        BGM_Menu,
-        BGM_Game,
+        BGM_Title,
+        BGM_Lobby,
+        BGM_Game1,
+        BGM_Game2,
     }
 
     // 효과음 이름 여기에 추가해주시면 됩니다
@@ -56,23 +58,23 @@ public class SoundMng : Singleton<SoundMng>
         m_audio[(int)AUDIO_TYPE.SFX].loop = false;
         SetVolumeTotal(1);
         // 첫 시작시 배경음 바꾸고 싶다면 여기서 바꿔주면 됩니다
-        PlayBGM(BGM_CLIP.BGM_Menu);
-        SceneMng.instance.SceneEnter += SceneBGMPlay;
+        PlayBGM(BGM_CLIP.BGM_Title);
+        //SceneMng.instance.SceneEnter += SceneBGMPlay;
 
     }
 
-    public void SceneBGMPlay(string curScene)
-    {
-        switch(curScene)
-        {
-            case "Title":
-                PlayBGM(BGM_CLIP.BGM_Menu);
-                break;
-            case "Game":
-                PlayBGM(BGM_CLIP.BGM_Game);
-                break;
-        }
-    }
+    //public void SceneBGMPlay(string curScene)
+    //{
+    //    switch(curScene)
+    //    {
+    //        case "Title":
+    //            PlayBGM(BGM_CLIP.BGM_Menu);
+    //            break;
+    //        case "Game":
+    //            PlayBGM(BGM_CLIP.BGM_Game);
+    //            break;
+    //    }
+    //}
 
     // 배경음 재생
     // SoundMng.instance.PlayBGM(SoundMng.BGM_CLIP.BGM1);
