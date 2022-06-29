@@ -77,7 +77,7 @@ public class InRoomPanel : MonoBehaviour
 
         PlayerNumbering.OnPlayerNumberingChanged += DetectPlayerNumberingChanged;
 
-
+        kickGameButton.interactable = false;
         checkKickPanel.gameObject.SetActive(false);
     }
 
