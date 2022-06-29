@@ -252,7 +252,7 @@ public class SignUpPanel : MonoBehaviour
 
     private void SetUserDataInDataBase()
     {
-        myData newUser = new myData(emailInputField.text, displayNickName.text, "0","false");
+        DBData newUser = new DBData(emailInputField.text, displayNickName.text, "0","false");
         AuthManager.instance.register(emailInputField.text, passwordInputField.text, newUser);
        
     }

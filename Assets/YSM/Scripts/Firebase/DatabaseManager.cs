@@ -7,18 +7,21 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class DatabaseManager : MonoBehaviour
 {
 
     private DatabaseReference dbReference;
     public DatabaseReference reference { get; set; }
     static public DatabaseManager instance { get; private set; }
-    
 
-    public myData data;
+
+    public DBData data;
 
 
     public bool CanLogout;
+    public GameObject test112;
+    public bool test11 = true;
 
     void Start()
     {
@@ -32,10 +35,16 @@ public class DatabaseManager : MonoBehaviour
         // 여기선 rank 데이터 셋에 접근
     }
 
-    public void SetUserDataInDataBase(myData mydata)
+    public void SetUserDataInDataBase(DBData mydata)
     {
+        DBFriendList test = new DBFriendList();
+        test.AddFriend("sksksk", "slslsl");
         string json = JsonUtility.ToJson(mydata);
+        string json2 = JsonConvert.SerializeObject(test);
+
+
         dbReference.Child("UserInfo").Child(AuthManager.instance.GetAuthUID()).SetRawJsonValueAsync(json);
+        dbReference.Child("UserInfo").Child(AuthManager.instance.GetAuthUID()).Child("FriendList").SetRawJsonValueAsync(json2);
 
 
     }
@@ -52,7 +61,7 @@ public class DatabaseManager : MonoBehaviour
                 DataSnapshot snapshot = task.Result;
                 DataSnapshot dataSnapshot = (DataSnapshot)snapshot.Child(AuthManager.instance.GetAuthUID());
                 IDictionary id = (IDictionary)dataSnapshot.Value;
-                data = new myData(id["Email"].ToString(), id["DisplayNickname"].ToString(), id["Score"].ToString());
+                data = new DBData(id["Email"].ToString(), id["DisplayNickname"].ToString(), id["Score"].ToString());
                 SetUserDataInDataBase(data);
 
                 PhotonNetwork.LocalPlayer.NickName = data.DisplayNickname;
@@ -90,27 +99,44 @@ public class DatabaseManager : MonoBehaviour
         Debug.Log("끝남 함수");
     }
 
+    
+    //void OnApplicationPause()
+    //{
 
-    private void OnApplicationQuit()
+    //    //test112.gameObject.SetActive(test11);
+    //    //test11 = !test11;
+    //    //if (!CanLogout)
+    //    //{
+    //    //    Application.CancelQuit();
+    //    //    test();
+    //    //}
+    //    data.IsLoggingIn = "false";
+    //    string json = JsonUtility.ToJson(data);
+
+
+    //    Dictionary<string, object> update = new Dictionary<string, object>();
+    //    update["IsLoggingIn"] = "false";
+    //    dbReference.Child("UserInfo").Child(AuthManager.instance.GetAuthUID()).UpdateChildrenAsync(update).ContinueWith(task =>
+    //    {
+    //        if (task.IsCompleted)
+    //        {
+    //            CanLogout = true;
+    //            Debug.Log("굿/");
+    //            Application.Quit();
+    //        }
+    //        else
+    //        {
+    //            CanLogout = false;
+    //        }
+    //    });
+    //    Debug.Log("끝남 함수");
+    //}
+
+
+    void FriendRequest()
     {
-        if (!CanLogout)
-        {
-            Application.CancelQuit();
-            test();
-        }
+
     }
 
-
-    IEnumerator DelayedQuit()
-    {
-        Application.LoadLevel("finalsplash");
-
-        // Wait for showSplashTimeout
-        yield return new WaitForSeconds(2.0f);
-
-        // then quit for real
-        CanLogout = true;
-        Application.Quit();
-    }
 
 }

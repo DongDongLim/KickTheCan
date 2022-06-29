@@ -19,7 +19,7 @@ namespace YSM
         static private int setHeight = 1080; //화면 높이
 
 
-        public myData myData;
+        public DBData myData;
 
         private void Awake()
         {

@@ -1,11 +1,11 @@
 ﻿
-public class myData
+public class DBData
 {
     public string DisplayNickname;
     public string Score;
     public string Email;
     public string IsLoggingIn;
-    public myData(string Email , string DisplayNickname, string Score, string IsLoggingIn = "true")
+    public DBData(string Email , string DisplayNickname, string Score, string IsLoggingIn = "true")
     {
         this.Email = Email;
         this.DisplayNickname = DisplayNickname;
@@ -19,3 +19,4 @@ public class myData
         IsLoggingIn = "false";
     }
 }
+
