@@ -56,7 +56,7 @@ public class SoundMng : Singleton<SoundMng>
         m_audio[(int)AUDIO_TYPE.SFX].playOnAwake = false;
 
         m_audio[(int)AUDIO_TYPE.SFX].loop = false;
-        SetVolumeTotal(1);
+        SetVolumeTotal(5);
         // 첫 시작시 배경음 바꾸고 싶다면 여기서 바꿔주면 됩니다
         PlayBGM(BGM_CLIP.BGM_Title);
         //SceneMng.instance.SceneEnter += SceneBGMPlay;
