@@ -389,6 +389,7 @@ public class SignUpPanel : MonoBehaviour
     IEnumerator SignUpInteractableCoroutine()
     {
         yield return new WaitForSeconds(0.5f);
+        Debug.Log("사인업버튼");
         switch(signUpButtonChecker)
         {
             case 0:
