@@ -53,6 +53,7 @@ namespace DH
         public void TaggerSetting(Player p)
         {
             Debug.Log("술래 생성");
+            
             GameObject playerObj = PhotonNetwork.Instantiate
                 (DH.GameData.PLAYER_OBJECT, taggerSpawnPos + Vector3.up, Quaternion.identity, 0);
             playerObj.AddComponent<TaggerController>();
@@ -61,6 +62,7 @@ namespace DH
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.TAGGER);
 
             UIDataMng.Instance.SetTagger(UIDataMng.Instance.TAGGER_LIFE + 1);
+            UISetting(true);
 
             // TODO : (Test) GameOver / SH          
             playerObjList.Add(playerObj);
@@ -85,7 +87,8 @@ namespace DH
             }
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.RUNNER);
-
+            UISetting(true);
+            
             // TODO : (Test) GameOver / SH         
             playerObjList.Add(playerObj);
         }
@@ -95,6 +98,14 @@ namespace DH
             Debug.Log("관전자 모드");
             CameraMng.instance.SwitchCam();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.OBSERVER);
+        }
+
+        public void UISetting(bool isTagger)
+        {
+            DH.UIMng.instance.loadingScreen.SetActive(false);
+            DH.UIMng.instance.taggerCaption.SetActive(isTagger);
+            DH.UIMng.instance.runnerCaption.SetActive(!isTagger);
+            DH.UIMng.instance.startCount.SetActive(true);
         }
 
     }
