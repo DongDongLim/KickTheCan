@@ -307,6 +307,9 @@ public class SignUpPanel : MonoBehaviour
 
 
 
+
+
+
     public void PasswordCheck()
     {
         if (passwordInputField.text.Length >= 6 && passwordInputField.text.Length <= 20)

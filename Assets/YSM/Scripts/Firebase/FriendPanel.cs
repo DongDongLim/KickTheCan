@@ -22,8 +22,9 @@ public class FriendPanel : MonoBehaviour
     
     private IDictionary friendNickname;
     private IDictionary requestNickname;
-    bool FinishGetData;
-
+    bool FinishGetAllFriendData;
+    bool FinishGetRequestFriendData;
+    
 
     //UI
 
@@ -38,13 +39,14 @@ public class FriendPanel : MonoBehaviour
     [SerializeField] GameObject friendPanel;
     [SerializeField] GameObject requestPanel;
 
-
-
+    bool IsFirstOpenFriendPanel;
 
     void Start()
     {
         dbFriend = new DBFriend();
-        FinishGetData = false;
+        FinishGetAllFriendData = false;
+        FinishGetRequestFriendData = false;
+        IsFirstOpenFriendPanel = true;
     }
 
 
@@ -65,6 +67,7 @@ public class FriendPanel : MonoBehaviour
     public void FriendRequestClicked()
     {
         FindUserNickname(FriendRequestCheck);
+
     }
 
     public void FindUserNickname(UnityAction OnCheck)
@@ -128,12 +131,18 @@ public class FriendPanel : MonoBehaviour
 
     public void FriendDataGet() // 처음 로그인 되었을때 실행해줘야 하는 함수
     {
-        StartCoroutine("FriendRequestListAddContent");
-        GetMyRequestFriendList();
+        if (IsFirstOpenFriendPanel)
+        {
+            StartCoroutine("FriendRequestListAddContent");
+            GetMyRequestFriendList();
+            IsFirstOpenFriendPanel = false;
+        }
     }
 
     public void GetMyRequestFriendList()
     {
+        requestNickname = null;
+        friendNickname = null;
         DatabaseManager.instance.reference.GetValueAsync().ContinueWith(task =>
         {
             if (task.IsCompleted)
@@ -152,29 +161,94 @@ public class FriendPanel : MonoBehaviour
 
                 
                 friendNickname = (IDictionary)dataSnapshotFriendList.Value;
-                Debug.Log(friendNickname.ToString());
                 requestNickname = (IDictionary)dataSnapshotRequestList.Value;
 
 
-                FinishGetData = true;
                 Debug.Log("데이터 성공적으로 가져옴");
             }
             else
             {
                 Debug.Log("데이터 가져오기 실패");
             }
+            FinishGetAllFriendData = true;
 
 
         });
 
     }
 
+    public void GetMyRequestList()
+    {
+        requestNickname = null;
+        DatabaseManager.instance.reference.GetValueAsync().ContinueWith(task =>
+        {
+            if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+
+                DataSnapshot dataSnapshotRequestList = (DataSnapshot)snapshot
+                                                                .Child(AuthManager.instance.GetAuthUID())
+                                                                .Child(DBFriend.Friend)
+                                                                .Child(DBFriend.FriendRequests);
+                requestNickname = (IDictionary)dataSnapshotRequestList.Value;
+
+
+                Debug.Log("데이터 성공적으로 가져옴");
+            }
+            else
+            {
+                Debug.Log("데이터 가져오기 실패");
+            }
+            FinishGetRequestFriendData = true;
+
+
+        });
+
+    }
+
+    IEnumerator RequestListAddContent()
+    {
+        Debug.Log("코루틴 시작");
+        while (!FinishGetRequestFriendData)
+        {
+            yield return new WaitForSeconds(0.05f);
+            Debug.Log("데이터 수집중!!!");
+        }
+
+        if (requestNickname != null)
+        {
+            Transform[] tmp = RequestContent.GetComponentsInChildren<Transform>();
+            for (int i =1; i < tmp.Length; i++)
+            {
+                Destroy(tmp[i].gameObject);
+            }
+
+            foreach (string name in requestNickname.Keys)
+            {
+                GameObject entry = Instantiate(requestFriendprefab);
+                entry.GetComponent<FriendRequestEntry>().SetData(
+                    name.ToString(),
+                    requestNickname[name].ToString()
+                    );
+                entry.transform.localScale = Vector3.one;
+                entry.transform.SetParent(RequestContent.transform);
+            }
+        }
+
+
+        FinishGetRequestFriendData = false;
+
+        yield return null;
+    }
+
+
+
     IEnumerator FriendRequestListAddContent()
     {
         Debug.Log("코루틴 시작");
-        while (!FinishGetData)
+        while (!FinishGetAllFriendData)
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
             Debug.Log("데이터 수집중!!!");
         }
         
@@ -208,7 +282,8 @@ public class FriendPanel : MonoBehaviour
 
 
 
-        FinishGetData = false;
+        FinishGetAllFriendData = false;
+
         yield return null;
     }
 
@@ -244,6 +319,19 @@ public class FriendPanel : MonoBehaviour
              .Child(DBFriend.FriendRequests /*DB Friend Request List에 있는 데이터 지워주기*/)
              .Child(entry.GetRequestFriendName()/*지울 데이터*/)
              .RemoveValueAsync();
+
+
+
+        GameObject friendprefebEntry = Instantiate(friendListprefab);
+        friendprefebEntry.GetComponent<FriendListEntry>().SetData(
+            entry.GetRequestFriendName(),
+            entry.GetUID()
+            );
+        friendprefebEntry.transform.localScale = Vector3.one;
+        friendprefebEntry.transform.SetParent(friendListContent.transform);
+
+
+
         Destroy(entry.gameObject);
     }
     
@@ -284,10 +372,13 @@ public class FriendPanel : MonoBehaviour
 
     public void OnRequestListCloseBtnClicked()
     {
+
         requestPanel.SetActive(false);
     }
     public void OnRequestListOpenBtnClicked()
     {
+        StartCoroutine("RequestListAddContent");
+        GetMyRequestList();
         requestPanel.SetActive(true);
     }
 
