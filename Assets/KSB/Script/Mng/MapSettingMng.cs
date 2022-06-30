@@ -10,6 +10,9 @@ namespace DH
 {
     public class MapSettingMng : SingletonMini<MapSettingMng>
     {
+        public Vector3 taggerSpawnPos;
+        public Vector3 runnerSpawnPos;
+
         public GameObject[] mapBG;
         public GameObject[] mapObj;
         public GameObject taggerObj;       
