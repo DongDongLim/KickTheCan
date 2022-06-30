@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 namespace DH
 {
@@ -30,6 +31,10 @@ namespace DH
         public void Damaged()
         {
             owner?.DieAnim();
+            // (Test) GameOver / SH
+            Hashtable props = new Hashtable() { { global::GameData.PLAYER_DEAD, true } };
+            PhotonNetwork.LocalPlayer.SetCustomProperties(props);            
+            // ======================
         }
 
         void Freeze()
@@ -39,8 +44,9 @@ namespace DH
 
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log("러너 OnTriggerEnter 호출");
             if(other.gameObject.layer == LayerMask.NameToLayer("Weapon"))
-            {
+            {               
                 Damaged();
                 int id = other.transform.parent.parent.GetComponent<PlayerScript>().ownerID;
                 foreach(Player p in PhotonNetwork.PlayerList)

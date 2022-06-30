@@ -38,6 +38,9 @@ namespace DH
         public int ownerID = -1;
 
         public bool isFreeze = false;
+
+        public bool isDead = false;
+        
         #endregion
 
         private void Awake()
@@ -49,13 +52,7 @@ namespace DH
         }
 
         private void Start()
-        {
-            // TODO : 중간 입장시 발동되면 Bug 발생 
-            //if (playerSceneInfo.isObserver || playerSceneInfo.isRenegade)
-            //{
-            //    return;
-            //}
-
+        {           
             taggerAnim = transform.GetChild(2).GetComponent<Animator>() == null ? null : transform.GetChild(2).GetComponent<Animator>();
             runnerAnim = taggerAnim != null ? null : transform.GetComponent<Animator>();
             if (runnerAnim != null)
@@ -99,7 +96,7 @@ namespace DH
         }
 
         public void DieAnim()
-        {
+        {                     
             runnerAnim?.SetBool("isDie",true);
         }
 
@@ -112,6 +109,7 @@ namespace DH
 
         IEnumerator Die()
         {
+           
             yield return new WaitForSeconds(0.5f);
             if(photonView.IsMine)
             {
@@ -165,5 +163,7 @@ namespace DH
                     quaternion = (Quaternion)stream.ReceiveNext();
             }
         }
+
+
     }
 }

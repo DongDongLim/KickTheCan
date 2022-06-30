@@ -10,12 +10,9 @@ namespace DH
 {
     public class MapSettingMng : SingletonMini<MapSettingMng>
     {
-        public Vector3 taggerSpawnPos;
-        public Vector3 runnerSpawnPos;
-
         public GameObject[] mapBG;
         public GameObject[] mapObj;
-        public GameObject taggerObj;
+        public GameObject taggerObj;       
 
         public GameObject curMap;
         public Transform[] objectSpawnPos;
@@ -24,8 +21,9 @@ namespace DH
 
         public Vector3 canTransform;
 
-        int randIndex;
+        public List<GameObject> playerObjList;
 
+        int randIndex;
 
 
         protected override void OnAwake()
@@ -53,13 +51,16 @@ namespace DH
         {
             Debug.Log("술래 생성");
             GameObject playerObj = PhotonNetwork.Instantiate
-                (DH.GameData.PLAYER_OBJECT, taggerSpawnPos + Vector3.up, Quaternion.identity, 0);
+                (DH.GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
             playerObj.AddComponent<TaggerController>();
             playerObj.GetComponent<TaggerSetScript>().SetObj();
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.TAGGER);
 
             UIDataMng.Instance.SetTagger(UIDataMng.Instance.TAGGER_LIFE + 1);
+
+            // TODO : (Test) GameOver / SH          
+            playerObjList.Add(playerObj);
         }
 
         public void RunnerSetting(string layerName)
@@ -67,7 +68,7 @@ namespace DH
             Debug.Log("러너 생성");
             randIndex = Random.Range(0, 11);//mapObj.Length + objectSpawnPos.Length);
             GameObject playerObj = PhotonNetwork.Instantiate
-                (GameData.PLAYER_OBJECT, runnerSpawnPos + Vector3.up, Quaternion.identity, 0);
+                (GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
             playerObj.AddComponent<RunnerController>();
             if (randIndex < mapObj.Length)
             {
@@ -81,9 +82,11 @@ namespace DH
             }
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.RUNNER);
+
+            // TODO : (Test) GameOver / SH         
+            playerObjList.Add(playerObj);
         }
 
-        // TODO : 관전자 모드 
         public void ObserverSetting(Player p)
         {
             Debug.Log("관전자 모드");

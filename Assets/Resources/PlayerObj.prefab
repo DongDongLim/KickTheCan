@@ -105,6 +105,7 @@ MonoBehaviour:
   dieVFX: {fileID: 507015136656536487}
   ownerID: 0
   isFreeze: 0
+  isDead: 0
 --- !u!114 &1211031691728672808
 MonoBehaviour:
   m_ObjectHideFlags: 0
