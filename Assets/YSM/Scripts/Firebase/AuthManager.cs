@@ -5,6 +5,7 @@ using Firebase.Auth;
 using UnityEngine.UI;
 using Photon.Pun;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 #if UNITY_ANDROID
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
@@ -29,7 +30,7 @@ public class AuthManager : MonoBehaviour
     {
         // 객체 초기화
         instance = this;
-        auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
+        auth = FirebaseAuth.DefaultInstance;
         isFinishLogFunction = false;
     }
 
@@ -115,19 +116,6 @@ public class AuthManager : MonoBehaviour
     // 로그인 버튼을 눌렀을 때
     public void Start_Auth()
     {
-        //PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
-        //    //.EnableSavedGames() // 게임 진행 상황을 저장할 수 있게 함
-        //    //.WithInvitationDelegate(< callback method >) // 게임이 꺼져 있을 때, 게임 초대 수신을 위한 콜백
-        //    //.WithMatchDelegate(< callback method >) // 게임이 꺼져 있을 때, 턴 기반 매치 알림을 수신을 위한 콜백
-        //    //.RequestEmail() // 플레이어의 이메일 주소를 사용할 수 있도록 요청 + 동의를 요청하는 메시지를 띄움
-        //    //.RequestServerAuthCode( false ) // 연결된 백엔드 서버 애플리케이션에 전달되고 OAuth 토큰으로 교환될 수 있도록 서버 인증 코드를 생성하도록 요청
-        //    .RequestIdToken() // ID 토큰 생성을 요청(Firebase에서 플레이어를 식별하는 데 사용)
-        //    .Build();
-
-        //PlayGamesPlatform.InitializeInstance(config);
-        //PlayGamesPlatform.DebugLogEnabled = true; // recommended for debugging
-        //PlayGamesPlatform.Activate(); // Activate the Google Play Games platform
-
         PlayGamesPlatform.InitializeInstance(new PlayGamesClientConfiguration.Builder()
             .RequestIdToken()
             .RequestEmail()
@@ -135,7 +123,7 @@ public class AuthManager : MonoBehaviour
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
 
-        Social.localUser.Authenticate((bool success) =>
+        Social.localUser.Authenticate(success =>
         {
             // handle success or failure
             if (success)
@@ -143,7 +131,7 @@ public class AuthManager : MonoBehaviour
                 StartCoroutine(TryFirebaseLogin()); //로그인 성공 - 로그인 패널 꺼짐
             }
             else
-                Application.Quit();
+                SceneManager.LoadScene(0);
         });
     }
 
