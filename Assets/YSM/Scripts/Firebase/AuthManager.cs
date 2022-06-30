@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using Photon.Pun;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using Firebase.Database;
 #if UNITY_ANDROID
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
@@ -14,6 +15,8 @@ using GooglePlayGames.BasicApi;
 public class AuthManager : MonoBehaviour
 {
 
+    [SerializeField]
+    Text testText;
 
     [SerializeField] private InputField emailField;
     [SerializeField] private InputField passwordField;
@@ -24,6 +27,7 @@ public class AuthManager : MonoBehaviour
     static public AuthManager instance { get; private set; }
 
     bool isFinishLogFunction;
+    bool isFinishGoogleLogFunction;
     bool isWrong;
     [SerializeField] GameObject IDPasswordMismatchPanel;
     void Awake()
@@ -135,8 +139,11 @@ public class AuthManager : MonoBehaviour
         });
     }
 
+
+    public bool isNickName = false;
     IEnumerator TryFirebaseLogin()
     {
+        isFinishGoogleLogFunction = true;
         while (string.IsNullOrEmpty(((PlayGamesLocalUser)Social.localUser).GetIdToken()))
             yield return null;
         string idToken = ((PlayGamesLocalUser)Social.localUser).GetIdToken();
@@ -156,9 +163,24 @@ public class AuthManager : MonoBehaviour
             }
 
             Debug.Log("Success!");
+            isFinishGoogleLogFunction = false;
+            // 파이어베이스 로그인 성공하고 uid로 닉네임 가져옴
+            // null이면 닉네임 생성창
+            // 있으면 DatabaseManager.instance.GetMyData?
         });
+        while (isFinishGoogleLogFunction)
+        {
+            testText.text = "1";
+            yield return null;
+        }
+        testText.text = "2";
+        yield return StartCoroutine(DatabaseManager.instance.MyNickNameCheck());
+        testText.text = isNickName == true ? "True" : "False";
+        if (isNickName)
+            DatabaseManager.instance.GetMyData();
+        else
+            LobbyManager.instance.SetActivePanel(LobbyManager.PANEL.NickName);
     }
-
 
 #endif
 

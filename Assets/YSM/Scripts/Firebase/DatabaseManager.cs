@@ -10,12 +10,16 @@ using UnityEngine.UI;
 
 public class DatabaseManager : MonoBehaviour
 {
+    [SerializeField]
+    Text testTxt;
+
     static public DatabaseManager instance { get; private set; }
 
     public DatabaseReference dbReference;
     public DatabaseReference reference;
 
     public DBData dbData;
+    public DBData dbDataGoogle;
 
     public bool CanLogout;
 
@@ -62,8 +66,40 @@ public class DatabaseManager : MonoBehaviour
         
     }
 
+    // GoogleFirebaseLogin / DH
 
+    public IEnumerator MyNickNameCheck()
+    {
+        bool isFinish = true;
+        testTxt.text = "0";
+        reference.GetValueAsync().ContinueWith(task =>
+        {
+            if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+                DataSnapshot dataSnapshot = (DataSnapshot)snapshot.Child(AuthManager.instance.GetAuthUID());
+                IDictionary id = (IDictionary)dataSnapshot.Value;
 
+                testTxt.text = "1";
+                testTxt.text = id["DisplayNickname"].ToString();
+                dbDataGoogle = new DBData(id["Email"].ToString(), id["DisplayNickname"].ToString(), id["Score"].ToString());
+                //SetUserDataInDataBase(dbData);
+                if (dbDataGoogle.DisplayNickname == null || dbDataGoogle.DisplayNickname == "")
+                    AuthManager.instance.isNickName = false;
+                else
+                    AuthManager.instance.isNickName = true;
+            }
+            else
+            {
+                Debug.Log("데이터 가져오기 실패");
+            }
+            isFinish = false;
+            testTxt.text = "2";
+        });
+        while (isFinish)
+            yield return null;
+        testTxt.text = "3";
+    }
 
 
     //public void test()
