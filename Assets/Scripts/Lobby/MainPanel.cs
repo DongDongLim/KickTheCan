@@ -135,7 +135,7 @@ public class MainPanel : MonoBehaviourPunCallbacks
         PhotonNetwork.CurrentRoom.IsOpen = true;
         PhotonNetwork.CurrentRoom.IsVisible = true;
         // ToDo : ¹Ù²ñ
-        PhotonNetwork.LoadLevel(1);
+        PhotonNetwork.LoadLevel(2);
     }
 
     private void ClearRoomListView()

@@ -35,20 +35,15 @@ public class SignUpPanel : MonoBehaviour
     [SerializeField] private CheckPanel CheckBox;
 
     [SerializeField] private SignUpComplete signUpCompletePanel;
+    [SerializeField] private CheckPanel checkPanel;
 
 
     bool isEmailDuplication;
     bool isDisplayNickNameDuplication;
 
-    //Firebase
-    public DatabaseReference reference { get; set; }
 
-
-    // 인증을 관리할 객체
-    FirebaseAuth auth;
-
-
-
+    bool isFinishEmailCheckFunction;
+    bool isFinishDisplaynicknameCheckFunction;
     public void OnEnable()
     {
         emailInputField.text = "";
@@ -66,19 +61,16 @@ public class SignUpPanel : MonoBehaviour
         isEmailDuplication = false;
         SignUpButton.interactable = false;
         signUpCompletePanel.gameObject.SetActive(false);
-    }
-
-
-    private void Start()
-    {
-        auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
-        reference = FirebaseDatabase.DefaultInstance.RootReference;
+        checkPanel.gameObject.SetActive(false);
+        isFinishEmailCheckFunction = false;
+        isFinishDisplaynicknameCheckFunction = false;
     }
 
 
     
     public void OnEmailConfirmClick()
     {
+        StartCoroutine("EmailCheckPanelShow");
         IsEmailDuplication(EmailCheckClick);
     }
 
@@ -86,32 +78,45 @@ public class SignUpPanel : MonoBehaviour
     public void IsEmailDuplication(UnityAction OnCheck)
     {
 
-        reference = FirebaseDatabase.DefaultInstance.GetReference("UserInfo");
-        
-        reference.GetValueAsync().ContinueWith(task =>
+        DatabaseManager.instance.reference = FirebaseDatabase.DefaultInstance.GetReference("UserInfo");
+
+        DatabaseManager.instance.reference.GetValueAsync().ContinueWith(task =>
         {
             if (task.IsCompleted)
             {
                 DataSnapshot snapshot = task.Result;
-                Debug.Log(snapshot.ChildrenCount);
                 isEmailDuplication = false;
                 foreach (DataSnapshot data in snapshot.Children)
                 {
 
                     IDictionary userInfo = (IDictionary)data.Value;
-                    Debug.Log((string)userInfo["Email"]);
                     if ((string)userInfo["Email"] == emailInputField.text)
                     {
                         isEmailDuplication = true;
                         break;
                     }
                 }
+                isFinishEmailCheckFunction = true;
                 OnCheck.Invoke();
             }
         });
     }
 
 
+    IEnumerator EmailCheckPanelShow()
+    {
+
+        while(!isFinishEmailCheckFunction)
+        {
+
+            yield return new WaitForSeconds(0.05f);
+        }
+        checkPanel.CanUse(emailInputField.text, emailCheck);
+        checkPanel.gameObject.SetActive(true);
+        isFinishEmailCheckFunction = false;
+
+        yield return null;
+    }
 
     public void EmailCheckClick()
     {
@@ -130,6 +135,7 @@ public class SignUpPanel : MonoBehaviour
             Debug.Log("잘못된 이메일 형식 입니다");
             emailCheck = false;
         }
+
         SignUpInteractable();
     }
 
@@ -147,10 +153,23 @@ public class SignUpPanel : MonoBehaviour
 
     public void OnDisplayNickNameConfirmClick()
     {
+        StartCoroutine("DisplayNicknameCheckPanelShow");
         IsDisplayNickNameDuplication(DisplayDuplicationCheck);
     }
 
+    IEnumerator DisplayNicknameCheckPanelShow()
+    {
 
+        while (!isFinishDisplaynicknameCheckFunction)
+        {
+            yield return new WaitForSeconds(0.05f);
+        }
+        checkPanel.CanUse(displayNickName.text, displayNicknameCheck);
+        checkPanel.gameObject.SetActive(true);
+        isFinishDisplaynicknameCheckFunction = false;
+
+        yield return null;
+    }
 
 
     public void DisplayDuplicationCheck()
@@ -159,6 +178,7 @@ public class SignUpPanel : MonoBehaviour
         {
             Debug.Log("중복된 닉네임");
             displayNicknameCheck = false;
+
         }
         else
         {
@@ -174,9 +194,9 @@ public class SignUpPanel : MonoBehaviour
 
     public void IsDisplayNickNameDuplication(UnityAction OnCheck)
     {
-        reference = FirebaseDatabase.DefaultInstance.GetReference("UserInfo");
+        DatabaseManager.instance.reference = FirebaseDatabase.DefaultInstance.GetReference("UserInfo");
 
-        reference.GetValueAsync().ContinueWith(task =>
+        DatabaseManager.instance.reference.GetValueAsync().ContinueWith(task =>
         {
             if (task.IsCompleted)
             {
@@ -188,9 +208,11 @@ public class SignUpPanel : MonoBehaviour
                     if ((string)userInfo["DisplayNickname"] == displayNickName.text)
                     {
                         isDisplayNickNameDuplication = true;
+                        
                         break;
                     }
                 }
+                isFinishDisplaynicknameCheckFunction = true;
                 OnCheck.Invoke();
             }
         });
@@ -252,7 +274,7 @@ public class SignUpPanel : MonoBehaviour
 
     private void SetUserDataInDataBase()
     {
-        myData newUser = new myData(emailInputField.text, displayNickName.text, "0","false");
+        DBData newUser = new DBData(emailInputField.text, displayNickName.text, "0","false");
         AuthManager.instance.register(emailInputField.text, passwordInputField.text, newUser);
        
     }
@@ -298,7 +320,15 @@ public class SignUpPanel : MonoBehaviour
         this.gameObject.SetActive(true);
     }
 
+    public void BackButtonClicked()
+    {
+        this.gameObject.SetActive(false);
+    }
 
+    public void CheckPanelCloseBtn()
+    {
+        checkPanel.gameObject.SetActive(false);
+    }
 }
 
 

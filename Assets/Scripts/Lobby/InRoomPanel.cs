@@ -77,7 +77,7 @@ public class InRoomPanel : MonoBehaviour
 
         PlayerNumbering.OnPlayerNumberingChanged += DetectPlayerNumberingChanged;
 
-
+        kickGameButton.interactable = false;
         checkKickPanel.gameObject.SetActive(false);
     }
 
@@ -109,7 +109,7 @@ public class InRoomPanel : MonoBehaviour
     {        
         PhotonNetwork.CurrentRoom.IsOpen = true;
         PhotonNetwork.CurrentRoom.IsVisible = true;
-        PhotonNetwork.LoadLevel(1);
+        PhotonNetwork.LoadLevel(2);
     }
 
     public void ReadyGameButtonClicked()

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Cinemachine;
 
 namespace DH
@@ -17,6 +18,8 @@ namespace DH
         public GameObject playerObject;
         public GameObject observerObject;
 
+        public UnityAction playerSetAction;
+
         protected override void OnAwake()
         {
 
@@ -29,6 +32,7 @@ namespace DH
             playerCam.Follow = playerObject.transform;
             playerCam.LookAt = playerObject.transform;
             skyCam.gameObject.SetActive(false);
+            playerSetAction?.Invoke();
         }
 
         public void SwitchCam()

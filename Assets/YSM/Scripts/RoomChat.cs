@@ -30,16 +30,7 @@ namespace YSM
 
         public void RoomChatSendClicked()
         {
-            int idx = 9999999;
-            for (int i = 0; i < PhotonNetwork.PlayerList.Length; ++i)
-            {
-                if (PhotonNetwork.PlayerList[i].ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
-                {
-                    idx = i;
-                    break;
-                }
 
-            }
             if (inputfield.text == "")
                 return;
             photonView.RPC("RoomChatMessage",
@@ -69,14 +60,6 @@ namespace YSM
             {
                 text.text += "\n" + "<color=#" + ColorTransform.EnumToTextString(colorIdx) + ">" + "● </color>" + a + " : "; //채팅 색상 변경
                 text.text += b;
-            }
-
-
-            for (int i = 0; i < PhotonNetwork.PlayerList.Length; ++i)
-            {
-                if (PhotonNetwork.PlayerList[i].ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
-                    Debug.Log(i);
-
             }
 
         }

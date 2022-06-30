@@ -12,18 +12,14 @@ public class CheckPanel : MonoBehaviour
 
     public void CanUse(string name , bool canUse)
     {
-        if(canUse )
+        if(canUse)
         {
-            text.text = name + "사용이 가능합니다";
+            text.text = "\"" + name + "\"\n"  + "사용 가능";
         }
         else
         {
-            text.text = name + "사용이 불가합니다";
+            text.text = "\"" + name + "\"\n" + "사용 불가";
         }
     }
 
-    public void OnOkayButtonClicked()
-    {
-        text.text = "사용하시겠습니까?";
-    }
 }
