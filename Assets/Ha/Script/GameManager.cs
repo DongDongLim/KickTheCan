@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviourPunCallbacks
  
     private bool isTagger;
     private bool isPlaying = false;
-    private bool isOver = false;
 
     int m_maxTagger = 0;
     int m_deathCount = 0;
@@ -84,7 +83,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             if (CheckAllPlayerLoadLevel())
             {
                 SetTagger();
-                //StartCoroutine(StartCountDown());
+                StartCoroutine(StartCountDown());
             }
             else
             {
@@ -94,6 +93,9 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (changedProps.ContainsKey(GameData.PLAYER_TAGGER))
         {
             // StartSetting / DH
+            // SH-> DH 전달
+            // 일단 사용하지 않고 나중에 다시 수정하겠습니다.
+
             if (PlayersReadyLevel() == playerList.Count)
                 StartCoroutine(StartCountDown());
         }
@@ -184,7 +186,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             object playerReadyLevel;
 
-            if (p.CustomProperties.TryGetValue(GameData.PLAYER_TAGGER, out playerReadyLevel))
+            if (p.CustomProperties.TryGetValue(GameData.PLAYER_READY, out playerReadyLevel))
             {
                 if ((bool)playerReadyLevel)
                 {
@@ -365,20 +367,27 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void GameOver()
     {
         // 게임 종료 조건 체크 -> true -> 승자 UI 표시 -> 모두 룸으로 가기           
-        StartCoroutine(WhoIsWinner());
+       
 
         // TODO : 모두 로비로
-        //PhotonNetwork.LeaveRoom();
-        Debug.Log("Go to Lobby");
+        if (PhotonNetwork.IsMasterClient)
+        {
+            //PhotonNetwork.LeaveRoom();
+            //PhotonNetwork.LoadLevel(1);
+            // Test 같이 시작하는 방으로 돌아가기
+        }
 
-        // TODO : 모든 플레이어 load, ready -> falsef로 바꾸기
+        Debug.Log("게임 종료");
+        Debug.Log("Go to Lobby");
+        
+        // TODO : 모든 플레이어 load, ready -> false로 바꾸기
 
         return;
     }
 
-    IEnumerator WhoIsWinner()
+    public void WhoIsWinner()
     {
-        yield return new WaitForSeconds(2f);
+        //yield return new WaitForSeconds(2f);
         
         playerObjList = Instance.GetComponent<MapSettingMng>().playerObjList;
 
@@ -387,13 +396,15 @@ public class GameManager : MonoBehaviourPunCallbacks
             if (!player.GetComponent<PlayerScript>().isDead)
             {
                 // 러너 승리
+
                 Debug.Log("러너 승리");
-                StopAllCoroutines();
+                GameOver();
             }            
         }
 
         // 술래 승리
         Debug.Log("술래 승리");
+        GameOver();
     }
 
     public void CountDeath()
@@ -414,6 +425,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             // TODO : winner UI Set 
             // 게임 종료 UI Set
             Debug.Log("게임종료");
+            GameOver();
         }         
     }
 }
