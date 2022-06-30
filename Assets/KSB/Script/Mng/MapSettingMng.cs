@@ -54,7 +54,7 @@ namespace DH
         {
             Debug.Log("술래 생성");
             GameObject playerObj = PhotonNetwork.Instantiate
-                (DH.GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
+                (DH.GameData.PLAYER_OBJECT, taggerSpawnPos + Vector3.up, Quaternion.identity, 0);
             playerObj.AddComponent<TaggerController>();
             playerObj.GetComponent<TaggerSetScript>().SetObj();
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
@@ -71,7 +71,7 @@ namespace DH
             Debug.Log("러너 생성");
             randIndex = Random.Range(0, 11);//mapObj.Length + objectSpawnPos.Length);
             GameObject playerObj = PhotonNetwork.Instantiate
-                (GameData.PLAYER_OBJECT, Vector3.up * 5, Quaternion.identity, 0);
+                (GameData.PLAYER_OBJECT, runnerSpawnPos + Vector3.up * 3, Quaternion.identity, 0);
             playerObj.AddComponent<RunnerController>();
             if (randIndex < mapObj.Length)
             {

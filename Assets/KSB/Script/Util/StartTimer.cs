@@ -6,27 +6,37 @@ using TMPro;
 
 public class StartTimer : MonoBehaviour
 {
-    [SerializeField]
-    private TextMeshProUGUI startTimer;
+    [SerializeField] GameObject runnerCaption;
+    [SerializeField] GameObject taggerCaption;
 
-    public float timer;
+    [SerializeField] TextMeshProUGUI startTimer;
 
-    private void Awake() {
-        startTimer.text = ((int)timer).ToString();
+    public int timer;
+
+    private void Start() {
+        startTimer.text = timer.ToString();
+        StartCoroutine(TimerCount());
     }
 
-    private void FixedUpdate() {
-        timer -= Time.fixedDeltaTime;
-
-        if ((int)timer <= 5)
-            TimeSoon();
-        
-        startTimer.text = ((int)timer).ToString();
-
+    private void Update() {
         if (timer <= 0)
         {
             TimerStop();
         }
+    }
+
+    IEnumerator TimerCount()
+    {
+        yield return new WaitForSeconds(1f);
+        timer--;
+        startTimer.text = timer.ToString();
+
+        if (timer <= 5)
+        {
+            TimeSoon();
+        }
+
+        StartCoroutine(TimerCount());
     }
 
     public void TimeSoon()
@@ -37,6 +47,9 @@ public class StartTimer : MonoBehaviour
 
     public void TimerStop()
     {
+        runnerCaption.SetActive(false);
+        taggerCaption.SetActive(false);
+
         startTimer.text = "Start !";
         startTimer.color = Color.white;
         StartCoroutine(TimerStopCoroutine());
