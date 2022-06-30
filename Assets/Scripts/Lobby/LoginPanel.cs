@@ -1,14 +1,26 @@
+
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using System.Collections;
 
 public class LoginPanel : MonoBehaviour
 {
-    //public InputField playerNameInput;
+    public GameObject googleLoginBtn;
+
+    //https://geukggom.tistory.com/155
 
     void Start()
     {
-        //playerNameInput.text = "Player " + Random.Range(1000, 10000);
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            // 구글 플레이 서비스에 로그인되어 있지 않으면 로그인 패널을 띄움
+            if (IsAuthenticated())
+                OnLoginButtonClicked();
+            else
+                googleLoginBtn.SetActive(true);
+
+        }
     }
 
     public void OnLoginButtonClicked()
@@ -24,4 +36,11 @@ public class LoginPanel : MonoBehaviour
         //PhotonNetwork.LocalPlayer.NickName = playerName;
         PhotonNetwork.ConnectUsingSettings();
     }
+
+    public static bool IsAuthenticated()
+    {
+        return Social.localUser.authenticated;
+    }
+
+
 }
