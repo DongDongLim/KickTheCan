@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!65 &3112814754423220773
+--- !u!65 &2004070110431083849
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11,8 +11,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.001, y: 0.001, z: 0.0010042842}
-  m_Center: {x: 0, y: 7.540019e-18, z: -0.004704473}
+  m_Size: {x: 0.010045663, y: 0.010045663, z: 0.010516707}
+  m_Center: {x: -4.656613e-10, y: -0.000009034992, z: 0.00012649175}
 --- !u!1 &3688771520979631470
 GameObject:
   m_ObjectHideFlags: 0
@@ -23,7 +23,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7663749745882207972}
   m_Layer: 17
-  m_Name: BilliardsPoolChalk
+  m_Name: BilliardsPoolChalkBig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,7 +38,7 @@ Transform:
   m_GameObject: {fileID: 3688771520979631470}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 50, y: 50, z: 50}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2004070110591746336}
   m_Father: {fileID: 0}
