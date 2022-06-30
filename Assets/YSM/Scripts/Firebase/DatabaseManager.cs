@@ -71,6 +71,7 @@ public class DatabaseManager : MonoBehaviour
     public IEnumerator MyNickNameCheck()
     {
         bool isFinish = true;
+        bool isNickName = false;
         testTxt.text = "0";
         reference.GetValueAsync().ContinueWith(task =>
         {
@@ -81,13 +82,14 @@ public class DatabaseManager : MonoBehaviour
                 IDictionary id = (IDictionary)dataSnapshot.Value;
 
                 testTxt.text = "1";
-                testTxt.text = id["DisplayNickname"].ToString();
-                dbDataGoogle = new DBData(id["Email"].ToString(), id["DisplayNickname"].ToString(), id["Score"].ToString());
+                //testTxt.text = id.Count.ToString();
+                //dbDataGoogle = new DBData(id["Email"].ToString(), id["DisplayNickname"].ToString(), id["Score"].ToString());
                 //SetUserDataInDataBase(dbData);
-                if (dbDataGoogle.DisplayNickname == null || dbDataGoogle.DisplayNickname == "")
-                    AuthManager.instance.isNickName = false;
+                if (id == null || id.Count == 0)
+                    isNickName = false;
                 else
-                    AuthManager.instance.isNickName = true;
+                    isNickName = true;
+                testTxt.text = "4";
             }
             else
             {
@@ -98,6 +100,7 @@ public class DatabaseManager : MonoBehaviour
         });
         while (isFinish)
             yield return null;
+        AuthManager.instance.isNickName = isNickName;
         testTxt.text = "3";
     }
 

@@ -84,7 +84,7 @@ public class GoogleNickNamePanel : MonoBehaviour
 
     private void SetUserDataInDataBase()
     {
-        DBData dBData = new DBData(DatabaseManager.instance.dbDataGoogle.Email.ToString(), displayNickName.text, "0", "false");
+        DBData dBData = new DBData("성공이닭@zz.com", displayNickName.text, "0", "false");
         DatabaseManager.instance.SetUserDataInDataBase(dBData);
 
     }
