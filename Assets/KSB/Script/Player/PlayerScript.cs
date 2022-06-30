@@ -40,6 +40,7 @@ namespace DH
         public bool isFreeze = false;
 
         public bool isDead = false;
+        
         #endregion
 
         private void Awake()
@@ -95,7 +96,7 @@ namespace DH
         }
 
         public void DieAnim()
-        {
+        {                     
             runnerAnim?.SetBool("isDie",true);
         }
 
@@ -108,10 +109,7 @@ namespace DH
 
         IEnumerator Die()
         {
-            // TODO : (Test) GameOver / SH
-            isDead = true; 
-
-            // ======================
+           
             yield return new WaitForSeconds(0.5f);
             if(photonView.IsMine)
             {
@@ -165,5 +163,7 @@ namespace DH
                     quaternion = (Quaternion)stream.ReceiveNext();
             }
         }
+
+
     }
 }

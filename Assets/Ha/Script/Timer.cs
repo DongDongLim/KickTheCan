@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Timer : MonoBehaviour
 {
     public Text minutesText;
     public Text secondsText;
-    public GameObject timeOut;
+    public GameObject timeOut;   
 
     public int totalSeconds = 0;
     public int minutes;
@@ -53,6 +54,7 @@ public class Timer : MonoBehaviour
             timeOut.SetActive(true);
 
             StopAllCoroutines();
+            GameManager.Instance.GameOver();
         }
     }
 

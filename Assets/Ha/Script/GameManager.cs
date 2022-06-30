@@ -21,8 +21,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     public UnityAction canCheckActionFalse;
     public Transform[] spawnPos;
     public GameObject timer;
-    public List<GameObject> playerObjList;   
-
+    public List<GameObject> playerObjList;  
+ 
     private bool isTagger;
     private bool isPlaying = false;
     private bool isOver = false;
@@ -30,11 +30,13 @@ public class GameManager : MonoBehaviourPunCallbacks
     int m_maxTagger = 0;
     int m_deathCount = 0;
 
+
+
     List<Player> playerList = new List<Player>() { };
 
     private void Awake()
     {
-        Instance = this;
+        Instance = this;  
     }
 
     public void Start()
@@ -72,8 +74,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
-        SceneManager.LoadScene(0);
-        //PhotonNetwork.Disconnect();
+        SceneManager.LoadScene(0);       
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
@@ -119,6 +120,14 @@ public class GameManager : MonoBehaviourPunCallbacks
                 canCheckObj.SetActive(true);
             }
 
+        }
+
+        if (changedProps.TryGetValue(GameData.PLAYER_DEAD, out value))
+        {
+            if ((bool)value)
+            {
+                CountDeath();
+            }          
         }
     }
 
@@ -332,54 +341,60 @@ public class GameManager : MonoBehaviourPunCallbacks
         return false;                   
     }   
 
-    private void GameOver()
+    public void GameOver()
     {
         // 게임 종료 조건 체크 -> true -> 승자 UI 표시 -> 모두 룸으로 가기           
-
-        if (0 == timer.GetComponent<Timer>().totalSeconds)
-        {
-            StartCoroutine(WhoIsWinner());
-            return;
-        }
-
         StartCoroutine(WhoIsWinner());
 
+        // TODO : 모두 로비로
+        //PhotonNetwork.LeaveRoom();
+        Debug.Log("Go to Lobby");
+
+        // TODO : 모든 플레이어 load, ready -> falsef로 바꾸기
+
         return;
-
-
-
     }
 
     IEnumerator WhoIsWinner()
     {
-        yield return new WaitForSeconds(3f);
-
-        // [게임 술래 승리 조건]
-        // 1. 러너가 0명
-        //  - 러너를 모두 잡았을 때
-
-        // 방법 1 : find object 사용 tag
-        // 방법 2 : customproperty 사용
-
-
-        // 러너 타격시 이벤트 구독을 받아 폴링하는 방식으로 구현?
+        yield return new WaitForSeconds(2f);
+        
         playerObjList = Instance.GetComponent<MapSettingMng>().playerObjList;
 
         foreach (GameObject player in playerObjList)
         {
-            if (player.GetComponent<PlayerScript>().isDead)
+            if (!player.GetComponent<PlayerScript>().isDead)
             {
-                m_deathCount++;
-            }
-        }        
+                // 러너 승리
+                Debug.Log("러너 승리");
+                StopAllCoroutines();
+            }            
+        }
 
-        //[게임 러너 승리 조건]
-        // 1. 술래가 0명 
-        // 2. 타임아웃까지 러너가 1명이라도 살아남았을 시
-
+        // 술래 승리
+        Debug.Log("술래 승리");
     }
 
+    public void CountDeath()
+    {
+        m_maxTagger = PhotonNetwork.PlayerList.Length / 4;
+        m_maxTagger = (int)Mathf.Clamp(m_maxTagger, 1, 5);
 
+        int m_iRunner = PhotonNetwork.CurrentRoom.PlayerCount - m_maxTagger;
+
+        m_deathCount++;
+        Debug.Log("현재 방에 있는 사람 수 : " + PhotonNetwork.CurrentRoom.PlayerCount);
+        Debug.Log("죽은 러너 수 : " + m_deathCount);
+        Debug.Log("러너 : " + m_iRunner);
+        Debug.Log("술래 총 인원 : " + m_maxTagger);
+
+        if (m_iRunner == m_deathCount)
+        {
+            // TODO : winner UI Set 
+            // 게임 종료 UI Set
+            Debug.Log("게임종료");
+        }         
+    }
 }
 
 
