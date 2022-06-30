@@ -43,7 +43,9 @@ public class SignUpPanel : MonoBehaviour
 
     [SerializeField] private Button SignUpButton;
     [SerializeField] private CheckPanel CheckBox;
+
     [SerializeField] private SignUpComplete signUpCompletePanel;
+    [SerializeField] private CheckPanel checkPanel;
 
     int signUpButtonChecker;
 
@@ -52,6 +54,8 @@ public class SignUpPanel : MonoBehaviour
     bool isDisplayNickNameDuplication;
 
 
+    bool isFinishEmailCheckFunction;
+    bool isFinishDisplaynicknameCheckFunction;
     public void OnEnable()
     {
         emailInputField.text = "";
@@ -76,14 +80,20 @@ public class SignUpPanel : MonoBehaviour
         isEmailDuplication = false;
         SignUpButton.interactable = false;
         signUpCompletePanel.gameObject.SetActive(false);
-
+        
         signUpButtonChecker = 0;
+
+        checkPanel.gameObject.SetActive(false);
+        isFinishEmailCheckFunction = false;
+        isFinishDisplaynicknameCheckFunction = false;
+
     }
 
 
     
     public void OnEmailConfirmClick()
     {
+        StartCoroutine("EmailCheckPanelShow");
         IsEmailDuplication(EmailCheckClick);
     }
 
@@ -98,22 +108,37 @@ public class SignUpPanel : MonoBehaviour
             if (task.IsCompleted)
             {
                 DataSnapshot snapshot = task.Result;
-                Debug.Log(snapshot.ChildrenCount);
                 isEmailDuplication = false;
                 foreach (DataSnapshot data in snapshot.Children)
                 {
 
                     IDictionary userInfo = (IDictionary)data.Value;
-                    Debug.Log((string)userInfo["Email"]);
                     if ((string)userInfo["Email"] == emailInputField.text)
                     {
                         isEmailDuplication = true;
                         break;
                     }
                 }
+                isFinishEmailCheckFunction = true;
                 OnCheck.Invoke();
             }
         });
+    }
+
+
+    IEnumerator EmailCheckPanelShow()
+    {
+
+        while(!isFinishEmailCheckFunction)
+        {
+
+            yield return new WaitForSeconds(0.05f);
+        }
+        checkPanel.CanUse(emailInputField.text, emailCheck);
+        checkPanel.gameObject.SetActive(true);
+        isFinishEmailCheckFunction = false;
+
+        yield return null;
     }
 
     public void EmailCheckClick()
@@ -136,6 +161,7 @@ public class SignUpPanel : MonoBehaviour
             emailChecker = 2;
             emailCheck = false;
         }
+
         SignUpInteractable();
     }
 
@@ -186,10 +212,23 @@ public class SignUpPanel : MonoBehaviour
 
     public void OnDisplayNickNameConfirmClick()
     {
+        StartCoroutine("DisplayNicknameCheckPanelShow");
         IsDisplayNickNameDuplication(DisplayDuplicationCheck);
     }
 
+    IEnumerator DisplayNicknameCheckPanelShow()
+    {
 
+        while (!isFinishDisplaynicknameCheckFunction)
+        {
+            yield return new WaitForSeconds(0.05f);
+        }
+        checkPanel.CanUse(displayNickName.text, displayNicknameCheck);
+        checkPanel.gameObject.SetActive(true);
+        isFinishDisplaynicknameCheckFunction = false;
+
+        yield return null;
+    }
 
 
     public void DisplayDuplicationCheck()
@@ -198,6 +237,7 @@ public class SignUpPanel : MonoBehaviour
         {
             nicknameChecker = 0;
             displayNicknameCheck = false;
+
         }
         else
         {
@@ -252,9 +292,11 @@ public class SignUpPanel : MonoBehaviour
                     if ((string)userInfo["DisplayNickname"] == displayNickName.text)
                     {
                         isDisplayNickNameDuplication = true;
+                        
                         break;
                     }
                 }
+                isFinishDisplaynicknameCheckFunction = true;
                 OnCheck.Invoke();
             }
         });
@@ -384,6 +426,11 @@ public class SignUpPanel : MonoBehaviour
     public void BackButtonClicked()
     {
         this.gameObject.SetActive(false);
+    }
+
+    public void CheckPanelCloseBtn()
+    {
+        checkPanel.gameObject.SetActive(false);
     }
 }
 

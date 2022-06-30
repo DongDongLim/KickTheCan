@@ -9,9 +9,18 @@ EditorBuildSettings:
     path: Assets/Scenes/TitleScene.unity
     guid: c665b547572a2784097ac6b703204bb0
   - enabled: 1
-    path: Assets/Scenes/KSB_LobbyScene.unity
-    guid: eda6b7cdf64f5e14b98928f0a15a976f
+    path: Assets/Scenes/LobbySceneWithGoogle.unity
+    guid: 1183c16921aac874d94defa9aed2e59c
   - enabled: 1
-    path: Assets/Scenes/KSB_GameScene.unity
+    path: Assets/Scenes/GameSceneDong.unity
+    guid: cbf68f99604882b40a6f367e0cf3f4e4
+  - enabled: 1
+    path: Assets/Scenes/LobbyScene.unity
+    guid: 9e099b83fec0598459ba25bd6e11fc59
+  - enabled: 1
+    path: Assets/Scenes/SungMinTestScene.unity
+    guid: 1124a448209e023448d4947187f00fae
+  - enabled: 1
+    path: Assets/Scenes/GameScene Test.unity
     guid: 66ee82a37902d5c498f7bda1082550f1
   m_configObjects: {}
