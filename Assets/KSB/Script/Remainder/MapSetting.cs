@@ -5,10 +5,17 @@ using UnityEngine;
 public class MapSetting : MonoBehaviour
 {
     [SerializeField]
+    private Transform taggerSpawnPos;
+    [SerializeField]
+    private Transform runnerSpawnPos;
+    [SerializeField]
     private Transform[] objectSpawnPosList;
     private int value;
     private int count;
 
+    private void Awake() {
+        SetPlayerSpawnPos();
+    }
 
     public void SetObjectSpawnPosList(ref Transform[] objectSpawnPos)
     {
@@ -29,5 +36,11 @@ public class MapSetting : MonoBehaviour
                 count++;
             }
         }
+    }
+
+    public void SetPlayerSpawnPos()
+    {
+        DH.MapSettingMng.instance.taggerSpawnPos = taggerSpawnPos.position;
+        DH.MapSettingMng.instance.runnerSpawnPos = runnerSpawnPos.position;
     }
 }

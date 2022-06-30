@@ -41,8 +41,6 @@ public class PlayerSceneManager : MonoBehaviour
                 UnityEditor.EditorApplication.isPlaying = false;
         #endif
                 Application.Quit();
-
-
     }
 
     IEnumerator CheckEscapeButton()

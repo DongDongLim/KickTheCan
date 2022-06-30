@@ -272,6 +272,7 @@ public class InRoomPanel : MonoBehaviour
             return;
         }
 
+        // TODO : isLeaver
         OnLeaveRoomClicked();
     }
 

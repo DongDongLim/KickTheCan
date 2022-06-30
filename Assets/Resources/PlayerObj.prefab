@@ -105,6 +105,7 @@ MonoBehaviour:
   dieVFX: {fileID: 507015136656536487}
   ownerID: 0
   isFreeze: 0
+  isDead: 0
 --- !u!114 &1211031691728672808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,7 +122,7 @@ MonoBehaviour:
   cameraArm: {fileID: 0}
   charactorBody: {fileID: 0}
   rigid: {fileID: 0}
-  moveSpeed: 5
+  moveSpeed: 15
   jumpPower: 10
   rotateSpeed: 1
 --- !u!114 &-3886878875351515772

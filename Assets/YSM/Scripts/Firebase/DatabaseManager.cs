@@ -37,8 +37,10 @@ public class DatabaseManager : MonoBehaviour
 
     public void SetUserDataInDataBase(DBData mydata)
     {
+
         string json = JsonUtility.ToJson(mydata);
         dbReference.Child("UserInfo").Child(AuthManager.instance.GetAuthUID()).SetRawJsonValueAsync(json);
+        //이 함수 사용하면 덮어 씌워짐
     }
 
 
