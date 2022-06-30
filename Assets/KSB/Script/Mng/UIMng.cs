@@ -25,10 +25,15 @@ namespace DH
         public UnityAction jumpAction;
         public UnityAction actionAction;
 
+        public GameObject loadingScreen;
+        public GameObject taggerCaption;
+        public GameObject runnerCaption;
+        public GameObject startCount;
+
 
         private void Start()
         {
-            
+            loadingScreen.SetActive(true);
         }
 
         protected override void OnAwake()
