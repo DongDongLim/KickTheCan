@@ -54,8 +54,7 @@ public class Timer : MonoBehaviour
             timeOut.SetActive(true);
 
             StopAllCoroutines();
-            StartCoroutine("GameManager.Instance.WhoIsWinner()");
-            // TODO : 게임 종료 기능 작동
+            GameManager.Instance.GameOver();
         }
     }
 
