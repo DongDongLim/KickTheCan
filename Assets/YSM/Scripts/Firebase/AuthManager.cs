@@ -177,6 +177,11 @@ public class AuthManager : MonoBehaviour
             LobbyManager.instance.SetActivePanel(LobbyManager.PANEL.NickName);
     }
 
+    public FirebaseUser GetUser()
+    {
+        return auth.CurrentUser;
+    }
+
 #endif
 
 }

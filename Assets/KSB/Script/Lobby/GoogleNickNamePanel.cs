@@ -73,19 +73,24 @@ public class GoogleNickNamePanel : MonoBehaviour
         checkPanel.CanUse(displayNickName.text, displayNicknameCheck);
         checkPanel.gameObject.SetActive(true);
         isFinishDisplaynicknameCheckFunction = false;
-        if (displayNicknameCheck)
-            SetUserDataInDataBase();
         yield return null;
     }
     public void CheckPanelCloseBtn()
     {
         checkPanel.gameObject.SetActive(false);
+        if (displayNicknameCheck)
+            SetUserDataInDataBase();
     }
 
     private void SetUserDataInDataBase()
     {
-        DBData dBData = new DBData("성공이닭@zz.com", displayNickName.text, "0", "false");
+        Firebase.Auth.FirebaseUser user = AuthManager.instance.GetUser();
+        if (user == null)
+            return;
+
+        DBData dBData = new DBData(user.Email, displayNickName.text, "0", "false");
         DatabaseManager.instance.SetUserDataInDataBase(dBData);
+        DatabaseManager.instance.GetMyData();
 
     }
 }

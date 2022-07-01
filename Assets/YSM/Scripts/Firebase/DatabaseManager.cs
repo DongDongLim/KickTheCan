@@ -81,9 +81,10 @@ public class DatabaseManager : MonoBehaviour
             {
                 DataSnapshot snapshot = task.Result;
                 DataSnapshot dataSnapshot = (DataSnapshot)snapshot.Child(AuthManager.instance.GetAuthUID());
+                testTxt.text = dataSnapshot.ToString();
                 IDictionary id = (IDictionary)dataSnapshot.Value;
 
-                testTxt.text = "1";
+                
                 //testTxt.text = id.Count.ToString();
                 //dbDataGoogle = new DBData(id["Email"].ToString(), id["DisplayNickname"].ToString(), id["Score"].ToString());
                 //SetUserDataInDataBase(dbData);

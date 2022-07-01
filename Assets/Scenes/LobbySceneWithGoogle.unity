@@ -4896,11 +4896,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emailInputField: {fileID: 2113755932}
+  emailMessage: {fileID: 0}
+  emailCheckImage01: {fileID: 0}
+  emailCheckImage02: {fileID: 0}
   passwordInputField: {fileID: 1362007142}
-  passwordMessage: {fileID: 1690245175}
+  passwordMessage: {fileID: 0}
   passwordConfirmInputField: {fileID: 1848212508}
-  passwordConfirmMessage: {fileID: 827391935}
+  passwordConfirmMessage: {fileID: 0}
   displayNickName: {fileID: 1754740826}
+  nicknameMessage: {fileID: 0}
+  nickCheckImage01: {fileID: 0}
+  nickCheckImage02: {fileID: 0}
   displayNicknameCheckButton: {fileID: 1885150843}
   SignUpButton: {fileID: 457736261}
   CheckBox: {fileID: 0}
@@ -12608,7 +12614,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1620118084
 RectTransform:
   m_ObjectHideFlags: 0
