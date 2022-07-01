@@ -16,6 +16,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public InLobbyPanel inLobbyPanel;
     public InRoomPanel inRoomPanel;
     public InfoPanel infoPanel;
+    public GoogleNickNamePanel nickNamePanel;
 
     #region UNITY
 
@@ -35,7 +36,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         SoundMng.instance.PlayBGM(SoundMng.BGM_CLIP.BGM_Lobby);
     }
 
-    public enum PANEL { Login, Connect, Lobby, Room, CreateRoom }
+    public enum PANEL { Login, Connect, Lobby, Room, CreateRoom, NickName }
     public void SetActivePanel(PANEL panel)
     {
         loginPanel.gameObject.SetActive(panel == PANEL.Login);
@@ -43,6 +44,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         createRoomPanel.gameObject.SetActive(panel == PANEL.CreateRoom);
         inLobbyPanel.gameObject.SetActive(panel == PANEL.Lobby);
         inRoomPanel.gameObject.SetActive(panel == PANEL.Room);
+        nickNamePanel.gameObject.SetActive(panel == PANEL.NickName);
     }  
 
     public void ShowError(string error)
