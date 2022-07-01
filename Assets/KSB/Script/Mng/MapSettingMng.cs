@@ -20,9 +20,9 @@ namespace DH
         public GameObject curMap;
         public Transform[] objectSpawnPos;
 
-        public int objIndex;
-
         public Vector3 canTransform;
+
+        public int objIndex;
 
         public List<GameObject> playerObjList;
 
@@ -40,9 +40,6 @@ namespace DH
                     ("Map", Vector3.zero, Quaternion.identity, 0)
                     .GetComponent<MapSetScript>().SetObjIndex(randIndex);
             yield return null;
-            canTransform = new Vector3(15, 0.5f, 10);
-            PhotonNetwork.Instantiate
-                   ("Can", canTransform, Quaternion.identity, 0).GetComponent<CanSetScript>().SetObjIndex();
         }
         public void ChildObjCreate(int index)
         {
