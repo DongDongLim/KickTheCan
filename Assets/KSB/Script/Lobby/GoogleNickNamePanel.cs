@@ -71,15 +71,16 @@ public class GoogleNickNamePanel : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
         }
         checkPanel.CanUse(displayNickName.text, displayNicknameCheck);
-        checkPanel.gameObject.SetActive(true);
         isFinishDisplaynicknameCheckFunction = false;
+        if (displayNicknameCheck)
+            SetUserDataInDataBase();
+        else
+            checkPanel.gameObject.SetActive(true);
         yield return null;
     }
     public void CheckPanelCloseBtn()
     {
         checkPanel.gameObject.SetActive(false);
-        if (displayNicknameCheck)
-            SetUserDataInDataBase();
     }
 
     private void SetUserDataInDataBase()
