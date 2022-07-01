@@ -60,7 +60,8 @@ namespace DH
                             break;
                     }
                 }
-
+                PhotonNetwork.Instantiate
+                   ("Can", mapObject.GetComponent<MapSetting>().CanSpqwnPos(), Quaternion.identity, 0).GetComponent<CanSetScript>().SetObjIndex();
                 PhotonNetwork.Destroy(gameObject);
             }
 
