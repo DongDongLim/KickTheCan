@@ -376,12 +376,18 @@ public class SignUpPanel : MonoBehaviour
 
     private void SignUpInteractable()
     {
-        if (emailCheck &&
-        passwordCheck &&
-        passwordConfirmCheck &&
-        displayNicknameCheck
-        )
+        // (Test) signUP 버튼이 작동하지 않아서 잠시 임시 사용 코드를 사용
+        Debug.Log("emailCheck : " + emailCheck);
+        Debug.Log("passwordCheck : " + passwordCheck);
+        Debug.Log("passwordConfirmCheck : " + passwordConfirmCheck);
+        Debug.Log("displayNicknameCheck : " + displayNicknameCheck);
+
+        if (emailCheck && passwordCheck && passwordConfirmCheck && displayNicknameCheck)
+        {
+            Debug.Log("SignUpInteractable call");
             signUpButtonChecker = 1;
+            SignUpButton.interactable = true;
+        } 
         else
         {
             signUpButtonChecker = 0;
@@ -393,6 +399,7 @@ public class SignUpPanel : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         Debug.Log("사인업버튼");
+        Debug.Log(signUpButtonChecker);
         switch(signUpButtonChecker)
         {
             case 0:
@@ -400,6 +407,7 @@ public class SignUpPanel : MonoBehaviour
                 break;
             case 1:
                 SignUpButton.interactable = true;
+                Debug.Log("사인업 버튼 On");
                 break;
         }
     }

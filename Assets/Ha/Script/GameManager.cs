@@ -24,13 +24,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     public List<GameObject> playerObjList;  
  
     private bool isTagger;
-    private bool isPlaying = false;
-    private bool isOver = false;
+    private bool isPlaying = false;   
 
     int m_maxTagger = 0;
     int m_deathCount = 0;
-
-
 
     List<Player> playerList = new List<Player>() { };
 
@@ -84,19 +81,24 @@ public class GameManager : MonoBehaviourPunCallbacks
             if (CheckAllPlayerLoadLevel())
             {
                 SetTagger();
-                //StartCoroutine(StartCountDown());
+                StartCoroutine(StartCountDown());
             }
             else
             {
                 PrintInfo("wait players " + PlayersLoadLevel() + " / " + PhotonNetwork.PlayerList.Length);
             }
         }
-        if (changedProps.ContainsKey(GameData.PLAYER_TAGGER))
-        {
-            // StartSetting / DH
-            if (PlayersReadyLevel() == playerList.Count)
-                StartCoroutine(StartCountDown());
-        }
+
+        // bug :  PlayersReadyLevel() 의 함수를 바꾸지 않고 그대로 사용하면 아무도 시작하지 않는 버그 발생
+        //if (changedProps.ContainsKey(GameData.PLAYER_TAGGER))
+        //{
+        //    // StartSetting / DH
+        //    if (PlayersReadyLevel() == playerList.Count)
+        //        StartCoroutine(StartCountDown());
+        //}
+
+
+
         // 러너가 킥을 찼을 때 술래의 공격불가
         object value;
         if (changedProps.TryGetValue(DH.GameData.PLAYER_ISKICK, out value))
@@ -184,7 +186,9 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             object playerReadyLevel;
 
-            if (p.CustomProperties.TryGetValue(GameData.PLAYER_TAGGER, out playerReadyLevel))
+            // (bug) loading 화면에서 넘어가지 않은 bug가 발생하여 수정 : GameData.PLAYER_TAGGER -> GameData.PLAYER_LOAD
+            // (TEST) GameDate.PLAYER.LOAD
+            if (p.CustomProperties.TryGetValue(GameData.PLAYER_LOAD, out playerReadyLevel))
             {
                 if ((bool)playerReadyLevel)
                 {
@@ -371,7 +375,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         //PhotonNetwork.LeaveRoom();
         Debug.Log("Go to Lobby");
 
-        // TODO : 모든 플레이어 load, ready -> falsef로 바꾸기
+        // TODO : 모든 플레이어 load, ready -> false로 바꾸기
 
         return;
     }
