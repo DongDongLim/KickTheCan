@@ -21,7 +21,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     public UnityAction canCheckActionFalse;
     public Transform[] spawnPos;
     public GameObject timer;
-    public List<GameObject> playerObjList;  
+    public List<GameObject> playerObjList;
+    public GameObject RunnerWinUI;
+    public GameObject TaggerWinUI;
  
     private bool isTagger;
     private bool isPlaying = false;   
@@ -367,22 +369,27 @@ public class GameManager : MonoBehaviourPunCallbacks
     }   
 
     public void GameOver()
-    {
-        // 게임 종료 조건 체크 -> true -> 승자 UI 표시 -> 모두 룸으로 가기           
-        StartCoroutine(WhoIsWinner());
+    {                 
+        StartCoroutine(WhoIsWinner());                    
+              
+        if (PhotonNetwork.IsMasterClient)
+        {
+            foreach (Player p in PhotonNetwork.PlayerList)
+            {
+                Hashtable props = new Hashtable() { { GameData.PLAYER_LOAD, false } };
+                p.SetCustomProperties(props);
+            }
+        }
 
-        // TODO : 모두 로비로
-        //PhotonNetwork.LeaveRoom();
-        Debug.Log("Go to Lobby");
-
-        // TODO : 모든 플레이어 load, ready -> false로 바꾸기
+        Debug.Log("모든 유저 Load -> false");
+        PhotonNetwork.LeaveRoom();        
 
         return;
     }
 
     IEnumerator WhoIsWinner()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
         
         playerObjList = Instance.GetComponent<MapSettingMng>().playerObjList;
 
@@ -391,13 +398,16 @@ public class GameManager : MonoBehaviourPunCallbacks
             if (!player.GetComponent<PlayerScript>().isDead)
             {
                 // 러너 승리
-                Debug.Log("러너 승리");
+                Debug.Log("러너 승리");               
+                RunnerWinUI.SetActive(true);
                 StopAllCoroutines();
             }            
         }
 
         // 술래 승리
         Debug.Log("술래 승리");
+        TaggerWinUI.SetActive(true);
+
     }
 
     public void CountDeath()
@@ -415,10 +425,27 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         if (m_iRunner == m_deathCount)
         {
-            // TODO : winner UI Set 
-            // 게임 종료 UI Set
-            Debug.Log("게임종료");
+            TaggerWinUI.SetActive(true);           
+            StartCoroutine(TaggerWin());
         }         
+    }
+
+    IEnumerator TaggerWin()
+    {
+        yield return new WaitForSeconds(5f);
+        
+        Debug.Log("술래 승리, 게임종료");        
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            foreach (Player p in PhotonNetwork.PlayerList)
+            {
+                Hashtable props = new Hashtable() { { GameData.PLAYER_LOAD, false } };
+                p.SetCustomProperties(props);
+            }
+        }
+        Debug.Log("모든 유저 Load -> false");
+        PhotonNetwork.LeaveRoom();       
     }
 }
 
