@@ -24,7 +24,6 @@ namespace DH
             UIDataMng.Instance.SetRunner(UIDataMng.Instance.RUNNER_LIFE - 1);
             PhotonNetwork.Destroy(player);
             isRunnerBeCaught = true;
-            UIMng.instance.jumpAction += Release;
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.DEAD);
 
         }
@@ -34,7 +33,6 @@ namespace DH
             if (isRunnerBeCaught)
             {
                 MapSettingMng.instance.RunnerSetting(null);
-                UIMng.instance.jumpAction -= Release;
                 isRunnerBeCaught = false;
                 PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.RUNNER);
             }
