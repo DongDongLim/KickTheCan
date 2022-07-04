@@ -10,12 +10,16 @@ using UnityEngine.UI;
 
 public class DatabaseManager : MonoBehaviour
 {
+    [SerializeField]
+    Text testTxt;
+
     static public DatabaseManager instance { get; private set; }
 
     public DatabaseReference dbReference;
     public DatabaseReference reference;
 
     public DBData dbData;
+    public DBData dbDataGoogle;
 
     public bool CanLogout;
 
@@ -60,10 +64,48 @@ public class DatabaseManager : MonoBehaviour
                 Debug.Log("데이터 가져오기 실패");
             }
         });
-        
+
     }
+#if UNITY_ANDROID
+    // GoogleFirebaseLogin / DH
 
+    public IEnumerator MyNickNameCheck()
+    {
+        bool isFinish = true;
+        bool isNickName = false;
+        testTxt.text = "0";
+        reference.GetValueAsync().ContinueWith(task =>
+        {
+            if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+                DataSnapshot dataSnapshot = (DataSnapshot)snapshot.Child(AuthManager.instance.GetAuthUID());
+                testTxt.text = dataSnapshot.ToString();
+                IDictionary id = (IDictionary)dataSnapshot.Value;
 
+                
+                //testTxt.text = id.Count.ToString();
+                //dbDataGoogle = new DBData(id["Email"].ToString(), id["DisplayNickname"].ToString(), id["Score"].ToString());
+                //SetUserDataInDataBase(dbData);
+                if (id == null || id.Count == 0)
+                    isNickName = false;
+                else
+                    isNickName = true;
+                testTxt.text = "4";
+            }
+            else
+            {
+                Debug.Log("데이터 가져오기 실패");
+            }
+            isFinish = false;
+            testTxt.text = "2";
+        });
+        while (isFinish)
+            yield return null;
+        AuthManager.instance.isNickName = isNickName;
+        testTxt.text = "3";
+    }
+#endif
 
     //public void test()
     //{

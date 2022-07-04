@@ -56,10 +56,10 @@ public class GameManager : MonoBehaviourPunCallbacks
             Hashtable props = new Hashtable() { { GameData.PLAYER_LOAD, true } };
             PhotonNetwork.LocalPlayer.SetCustomProperties(props);
         }
-        //if (Random.Range(0, 2) == 0)
-        //    SoundMng.instance.PlayBGM(SoundMng.BGM_CLIP.BGM_Game1);
-        //else
-        //    SoundMng.instance.PlayBGM(SoundMng.BGM_CLIP.BGM_Game2);
+        if (Random.Range(0, 2) == 0)
+            SoundMng.instance.PlayBGM(SoundMng.BGM_CLIP.BGM_Game1);
+        else
+            SoundMng.instance.PlayBGM(SoundMng.BGM_CLIP.BGM_Game2);
     }
 
     #region PHOTON CALLBACK

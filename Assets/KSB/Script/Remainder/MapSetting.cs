@@ -10,6 +10,10 @@ public class MapSetting : MonoBehaviour
     private Transform runnerSpawnPos;
     [SerializeField]
     private Transform[] objectSpawnPosList;
+    // CanLink / DH
+    [SerializeField]
+    private Transform[] canSpqwnPosList;
+
     private int value;
     private int count;
 
@@ -43,4 +47,14 @@ public class MapSetting : MonoBehaviour
         DH.MapSettingMng.instance.taggerSpawnPos = taggerSpawnPos.position;
         DH.MapSettingMng.instance.runnerSpawnPos = runnerSpawnPos.position;
     }
+
+
+    // CanLink / DH
+    public Vector3 CanSpqwnPos()
+    {
+        int rand = Random.Range(0, canSpqwnPosList.Length);
+        DH.MapSettingMng.instance.canTransform = canSpqwnPosList[rand].position;
+        return canSpqwnPosList[rand].position;
+    }
+
 }
