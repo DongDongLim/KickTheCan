@@ -22,4 +22,10 @@ public class CheckPanel : MonoBehaviour
         }
     }
 
+
+    public void OnCloseBtnClicked()
+    {
+        gameObject.SetActive(false);
+    }
+
 }

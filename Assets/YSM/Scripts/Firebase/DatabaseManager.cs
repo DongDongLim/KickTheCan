@@ -25,7 +25,7 @@ public class DatabaseManager : MonoBehaviour
         instance = this;
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
         reference = FirebaseDatabase.DefaultInstance.GetReference("UserInfo");
-
+        
 
         // 사용하고자 하는 데이터를 reference가 가리킴
         // 여기선 rank 데이터 셋에 접근
@@ -38,7 +38,6 @@ public class DatabaseManager : MonoBehaviour
         dbReference.Child("UserInfo").Child(AuthManager.instance.GetAuthUID()).SetRawJsonValueAsync(json);
         //이 함수 사용하면 덮어 씌워짐
     }
-
 
 
 

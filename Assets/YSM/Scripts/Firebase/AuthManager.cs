@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using Photon.Pun;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using Firebase.Database;
 #if UNITY_ANDROID
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
@@ -20,6 +21,7 @@ public class AuthManager : MonoBehaviour
 
     // 인증을 관리할 객체
     FirebaseAuth auth;
+    FirebaseUser user;
 
     static public AuthManager instance { get; private set; }
 
@@ -31,8 +33,14 @@ public class AuthManager : MonoBehaviour
         // 객체 초기화
         instance = this;
         auth = FirebaseAuth.DefaultInstance;
+
         isFinishLogFunction = false;
     }
+
+
+
+
+
 
     public void OnClickLogin()
     {
@@ -161,6 +169,25 @@ public class AuthManager : MonoBehaviour
 
 
 #endif
+
+
+    private void OnDisable()
+    {
+        //내가 친구 요청을걸면 건 상대의 UID에 
+        DatabaseManager.instance.dbReference
+            .Child("UserInfo")
+            .Child("1111"/*상대방 UID넣어주고*/)
+            .Child("2222"/*Friend*/)
+            .Child("3333")
+            .UpdateChildrenAsync(StringToIDictionary("테스ㅌ", "테스으트으")); /*내정보*/
+        Debug.Log("헤헤");
+    }
+    public IDictionary<string, object> StringToIDictionary(string nickname, string UID)
+    {
+        IDictionary<string, object> tmp = new Dictionary<string, object>();
+        tmp.Add(nickname, UID);
+        return tmp;
+    }
 
 }
 

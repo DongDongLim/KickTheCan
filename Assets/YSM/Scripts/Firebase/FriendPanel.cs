@@ -39,14 +39,14 @@ public class FriendPanel : MonoBehaviour
     [SerializeField] GameObject friendPanel;
     [SerializeField] GameObject requestPanel;
 
-    bool IsFirstOpenFriendPanel;
+    //bool IsFirstOpenFriendPanel = true;
 
     void Start()
     {
         dbFriend = new DBFriend();
         FinishGetAllFriendData = false;
-        FinishGetRequestFriendData = false;
-        IsFirstOpenFriendPanel = true;
+
+        DatabaseManager.instance.reference.ValueChanged += ReceiveMessage;
     }
 
 
@@ -131,12 +131,11 @@ public class FriendPanel : MonoBehaviour
 
     public void FriendDataGet() // 처음 로그인 되었을때 실행해줘야 하는 함수
     {
-        if (IsFirstOpenFriendPanel)
-        {
+
             StartCoroutine("FriendRequestListAddContent");
             GetMyRequestFriendList();
-            IsFirstOpenFriendPanel = false;
-        }
+            //IsFirstOpenFriendPanel = false;
+
     }
 
     public void GetMyRequestFriendList()
@@ -211,7 +210,7 @@ public class FriendPanel : MonoBehaviour
         Debug.Log("코루틴 시작");
         while (!FinishGetRequestFriendData)
         {
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.01f);
             Debug.Log("데이터 수집중!!!");
         }
 
@@ -248,26 +247,32 @@ public class FriendPanel : MonoBehaviour
         Debug.Log("코루틴 시작");
         while (!FinishGetAllFriendData)
         {
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.01f);
             Debug.Log("데이터 수집중!!!");
         }
         
-        if (requestNickname != null)
-        {
-            foreach (string name in requestNickname.Keys)
-            {
-                GameObject entry = Instantiate(requestFriendprefab);
-                entry.GetComponent<FriendRequestEntry>().SetData(
-                    name.ToString(),
-                    requestNickname[name].ToString()
-                    );
-                entry.transform.localScale = Vector3.one;
-                entry.transform.SetParent(RequestContent.transform);
-            }
-        }
+        //if (requestNickname != null)
+        //{
+        //    foreach (string name in requestNickname.Keys)
+        //    {
+        //        GameObject entry = Instantiate(requestFriendprefab);
+        //        entry.GetComponent<FriendRequestEntry>().SetData(
+        //            name.ToString(),
+        //            requestNickname[name].ToString()
+        //            );
+        //        entry.transform.localScale = Vector3.one;
+        //        entry.transform.SetParent(RequestContent.transform);
+        //    }
+        //}
 
         if (friendNickname != null)
         {
+            Transform[] tmp = friendListContent.GetComponentsInChildren<Transform>();
+            for (int i = 1; i < tmp.Length; i++)
+            {
+                Destroy(tmp[i].gameObject);
+            }
+
             foreach (string name in friendNickname.Keys)
             {
                 GameObject entry = Instantiate(friendListprefab);
@@ -283,7 +288,6 @@ public class FriendPanel : MonoBehaviour
 
 
         FinishGetAllFriendData = false;
-
         yield return null;
     }
 
@@ -383,4 +387,10 @@ public class FriendPanel : MonoBehaviour
     }
 
     #endregion
+
+    
+    private void ReceiveMessage(object sender , ValueChangedEventArgs e)
+    {
+
+    }
 }

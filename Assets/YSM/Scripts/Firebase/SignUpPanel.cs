@@ -81,7 +81,6 @@ public class SignUpPanel : MonoBehaviour
         SignUpButton.interactable = false;
         signUpCompletePanel.gameObject.SetActive(false);
         
-        signUpButtonChecker = 0;
 
         checkPanel.gameObject.SetActive(false);
         isFinishEmailCheckFunction = false;
@@ -131,13 +130,12 @@ public class SignUpPanel : MonoBehaviour
 
         while(!isFinishEmailCheckFunction)
         {
-
             yield return new WaitForSeconds(0.05f);
         }
         checkPanel.CanUse(emailInputField.text, emailCheck);
         checkPanel.gameObject.SetActive(true);
         isFinishEmailCheckFunction = false;
-
+        EmailCheckerUIChange();
         yield return null;
     }
 
@@ -165,15 +163,9 @@ public class SignUpPanel : MonoBehaviour
         SignUpInteractable();
     }
 
-#region EmailChecker
-    public void EmailChecker()
-    {
-        StartCoroutine(EmailCheckerCoroutine());
-    }
 
-    IEnumerator EmailCheckerCoroutine()
+    void EmailCheckerUIChange()
     {
-        yield return new WaitForSeconds(0.5f);
         switch (emailChecker)
         {
             case 0:
@@ -195,9 +187,14 @@ public class SignUpPanel : MonoBehaviour
                 emailCheckImage01.color = Color.red;
                 emailCheckImage02.color = Color.red;
                 break;
+            case 3:
+                emailMessage.text = "이메일 확인체크";
+                emailMessage.color = Color.red;
+                emailCheckImage01.color = Color.red;
+                emailCheckImage02.color = Color.red;
+                break;
         }
     }
-#endregion
 
 
 
@@ -226,7 +223,7 @@ public class SignUpPanel : MonoBehaviour
         checkPanel.CanUse(displayNickName.text, displayNicknameCheck);
         checkPanel.gameObject.SetActive(true);
         isFinishDisplaynicknameCheckFunction = false;
-
+        NickNameCheckerUIChange();
         yield return null;
     }
 
@@ -237,7 +234,6 @@ public class SignUpPanel : MonoBehaviour
         {
             nicknameChecker = 0;
             displayNicknameCheck = false;
-
         }
         else
         {
@@ -248,15 +244,10 @@ public class SignUpPanel : MonoBehaviour
         SignUpInteractable();
     }
 
-#region NickNameChecker
-    public void NickNameChecker()
-    {
-        StartCoroutine(NickNameCheckerCoroutine());
-    }
+    #region NickNameChecker
 
-    IEnumerator NickNameCheckerCoroutine()
+    void NickNameCheckerUIChange()
     {
-        yield return new WaitForSeconds(0.5f);
         switch (nicknameChecker)
         {
             case 0:
@@ -270,10 +261,17 @@ public class SignUpPanel : MonoBehaviour
                 nicknameMessage.color = Color.green;
                 nickCheckImage01.color = Color.green;
                 nickCheckImage02.color = Color.green;
+                break; 
+            case 2:
+                nicknameMessage.text = "닉네임 중복체크";
+                nicknameMessage.color = Color.red;
+                nickCheckImage01.color = Color.red;
+                nickCheckImage02.color = Color.red;
                 break;
         }
     }
-#endregion
+    #endregion
+
 
 
     public void IsDisplayNickNameDuplication(UnityAction OnCheck)
@@ -350,6 +348,8 @@ public class SignUpPanel : MonoBehaviour
     public void EmailInputFieldCheck()
     {
         emailCheck = false;
+        emailChecker = 3;
+        EmailCheckerUIChange();
         SignUpInteractable();
     }
     
@@ -357,6 +357,8 @@ public class SignUpPanel : MonoBehaviour
     public void DisplayNicknameInputFieldCheck()
     {
         displayNicknameCheck = false;
+        nicknameChecker = 2;
+        NickNameCheckerUIChange();
         SignUpInteractable();
     }
 
@@ -381,28 +383,16 @@ public class SignUpPanel : MonoBehaviour
         passwordConfirmCheck &&
         displayNicknameCheck
         )
-            signUpButtonChecker = 1;
+        {
+            SignUpButton.interactable = true;
+        }
         else
         {
-            signUpButtonChecker = 0;
+            SignUpButton.interactable = false;
         }
-        StartCoroutine(SignUpInteractableCoroutine());
     }
 
-    IEnumerator SignUpInteractableCoroutine()
-    {
-        yield return new WaitForSeconds(0.5f);
-        Debug.Log("사인업버튼");
-        switch(signUpButtonChecker)
-        {
-            case 0:
-                SignUpButton.interactable = false;
-                break;
-            case 1:
-                SignUpButton.interactable = true;
-                break;
-        }
-    }
+
 
 
 
