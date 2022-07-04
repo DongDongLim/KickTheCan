@@ -61,8 +61,8 @@ namespace DH
         {
             // Vector2 vec = new Vector2(vecTouch - rectTransform.position);
             // vec = Vector2.ClampMagnitude(vec, )
-
-            var inputPos = new Vector2(vecTouch.x - rectTransform.position.x, vecTouch.y - rectTransform.position.y);
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(rectTransform.position);
+            var inputPos = new Vector2(vecTouch.x - screenPos.x, vecTouch.y - screenPos.y);
             var inputVector = inputPos.magnitude < leverRange ? inputPos : inputPos.normalized * leverRange;
             lever.localPosition = inputVector;
             inputDirection = inputVector / leverRange;
@@ -77,7 +77,7 @@ namespace DH
                     controller.Move(inputDirection * moveSensitivity);
                     break;
                 case JoyStickType.Rotate:
-                    controller.LookAround(inputDirection * rotateSensitivity);
+                    controller.LookAround(inputDirection * -rotateSensitivity);
                     break;
             }
         }
