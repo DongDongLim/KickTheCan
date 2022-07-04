@@ -390,11 +390,12 @@ public class SignUpPanel : MonoBehaviour
         } 
         else
         {
+            SignUpButton.interactable = false;
             signUpButtonChecker = 0;
         }
         StartCoroutine(SignUpInteractableCoroutine());
     }
-
+    
     IEnumerator SignUpInteractableCoroutine()
     {
         yield return new WaitForSeconds(0.5f);

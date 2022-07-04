@@ -23,30 +23,7 @@ public class InConnectPanel : MonoBehaviour
 
     public void OnRandomMatchingButtonClicked()
     {
-        if (playerSceneInfo.isLeaver)
-        {
-            Debug.Log("Go to GameScene");
-
-            if (PhotonNetwork.InLobby)
-            {
-                PhotonNetwork.LeaveLobby();
-            }
-
-            roomName = playerSceneInfo.roomName;
-            Debug.Log(roomName);
-
-            Hashtable props = new Hashtable() { { GameData.PLAYER_READY, true } };
-            PhotonNetwork.LocalPlayer.SetCustomProperties(props);
-
-            playerSceneInfo.isLeaver = true;
-            PhotonNetwork.LocalPlayer.HasRejoined = true;
-            Debug.Log("Test : " + PhotonNetwork.LocalPlayer.HasRejoined);
-            PhotonNetwork.JoinRoom(roomName);
-        }
-        else
-        {
-            PhotonNetwork.JoinRandomRoom();
-        }
+        PhotonNetwork.JoinRandomRoom();      
     }
 
     public void OnLobbyButtonClicked()
