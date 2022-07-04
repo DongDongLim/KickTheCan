@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class GoogleNickNamePanel : MonoBehaviour
 {
+#if UNITY_ANDROID
     [Header("NickName")]
     [SerializeField] private InputField displayNickName;
     [SerializeField] private Button displayNicknameCheckButton;
@@ -94,4 +95,5 @@ public class GoogleNickNamePanel : MonoBehaviour
         DatabaseManager.instance.GetMyData();
 
     }
+#endif
 }

@@ -65,9 +65,9 @@ public class DatabaseManager : MonoBehaviour
                 Debug.Log("데이터 가져오기 실패");
             }
         });
-        
-    }
 
+    }
+#if UNITY_ANDROID
     // GoogleFirebaseLogin / DH
 
     public IEnumerator MyNickNameCheck()
@@ -106,7 +106,7 @@ public class DatabaseManager : MonoBehaviour
         AuthManager.instance.isNickName = isNickName;
         testTxt.text = "3";
     }
-
+#endif
 
     //public void test()
     //{
