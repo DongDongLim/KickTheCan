@@ -25,7 +25,6 @@ public class PlayerEntry : MonoBehaviour
 
     public void Start()
     {
-        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 0);
         if (PhotonNetwork.LocalPlayer.ActorNumber != ownerId)
         {
             playerReadyButton.gameObject.SetActive(false);

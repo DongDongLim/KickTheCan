@@ -11,6 +11,8 @@ namespace DH
         [SerializeField]
         Camera mainCam;
         [SerializeField]
+        public Camera uiCam;
+        [SerializeField]
         CinemachineVirtualCamera playerCam;
         [SerializeField]
         CinemachineVirtualCamera skyCam;

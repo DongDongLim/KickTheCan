@@ -85,6 +85,7 @@ GameObject:
   - component: {fileID: 5605425268057977500}
   - component: {fileID: 5605425268057977498}
   - component: {fileID: 6991987231546924964}
+  - component: {fileID: -3978039797091693133}
   m_Layer: 5
   m_Name: FriendListEntry
   m_TagString: Untagged
@@ -150,6 +151,18 @@ MonoBehaviour:
   loginImage: {fileID: 5458774974292677864}
   loginState: 0
   openBtn: {fileID: 5605425268832221049}
+--- !u!114 &-3978039797091693133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5605425268057977501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0278144c929832a4cb92ce03de74a156, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5605425268661979115
 GameObject:
   m_ObjectHideFlags: 0

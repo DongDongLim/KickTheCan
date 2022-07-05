@@ -236,8 +236,8 @@ namespace YSM
                     return;
             }
 
-
-            GameObject entry = Instantiate(chatEntryPrefab);
+            // UIBugFix / DH
+            GameObject entry = Instantiate(chatEntryPrefab, allChatContent.transform, false);
 
             SetColor(userNickName, userMessage, colorIdx, receiveCharacterType, receiveChatType); //컬러 세팅하고
 
@@ -260,7 +260,7 @@ namespace YSM
             }
 
             entry.transform.localScale = Vector3.one;
-            entry.transform.SetParent(allChatContent.transform);
+            //entry.transform.SetParent(allChatContent.transform);
 
         }
 
