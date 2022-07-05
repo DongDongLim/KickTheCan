@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1464750611812224945}
   - component: {fileID: 4290190810141764120}
   - component: {fileID: 808292457595651113}
+  - component: {fileID: -1943104403084389227}
   m_Layer: 5
   m_Name: ChatEntry
   m_TagString: Untagged
@@ -79,6 +80,18 @@ MonoBehaviour:
   iconImage: {fileID: 2647465925236166492}
   nameText: {fileID: 3959076512220424336}
   message: {fileID: 1329468715453388822}
+--- !u!114 &-1943104403084389227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626515545800925924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0278144c929832a4cb92ce03de74a156, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2087513331585234367
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,7 +235,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 25
+    m_FontSize: 10
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -304,7 +317,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 203, y: 0}
+  m_AnchoredPosition: {x: 8, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8142550378581788548
@@ -336,7 +349,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 25
+    m_FontSize: 10
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -377,7 +390,7 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 400
+  m_PreferredWidth: 100
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
