@@ -59,6 +59,7 @@ public class AuthManager : MonoBehaviour
                     Debug.Log(email + " 로 로그인 하셨습니다.");
                     OnCheck.Invoke();
                     user = auth.CurrentUser;
+                    FriendManager.instance.SetEventListener();
                     isWrong = false;
                 }
                 else

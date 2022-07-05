@@ -12,6 +12,7 @@ public class DBFriend
     private Dictionary<string, string> FriendList;
     private Dictionary<string, string> FriendRequestList;
 
+
     public DBFriend()
     {
         FriendList = new Dictionary<string, string>();
