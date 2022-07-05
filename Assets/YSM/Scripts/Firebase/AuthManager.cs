@@ -71,6 +71,28 @@ public class AuthManager : MonoBehaviour
             }
         );
     }
+
+    // GoogleBugFix / DH
+    public void login(Credential credential, UnityAction OnCheck)
+    {
+        // 제공되는 함수 : 이메일과 비밀번호로 로그인 시켜 줌
+        auth.SignInWithCredentialAsync(credential).ContinueWith(
+            task => {
+                if (task.IsCompleted && !task.IsFaulted && !task.IsCanceled)
+                {
+                    OnCheck.Invoke();
+                    user = auth.CurrentUser;
+                    isWrong = false;
+                }
+                else
+                {
+                    //아이디 비번 확인 메세지 
+                    isWrong = true;
+                }
+                isFinishLogFunction = true;
+            }
+        );
+    }
     //->로그인 버튼 누르면 - > // 비동기  로그인 실행 -> 로그인 된 나의 UID -> // 비동기 데이터 가져오기 -> //패널 넘어가는거  
 
     IEnumerator ShowLogInMessage()
@@ -124,12 +146,14 @@ public class AuthManager : MonoBehaviour
 
 #if UNITY_ANDROID
 
-    // 구글 플레이 서비스에 로그인이 되어있는지 확인하는 함수
-
 
     // 로그인 버튼을 눌렀을 때
     public void Start_Auth()
     {
+        // 구글 플레이 서비스에 로그인되어 있으면 반환
+        if (Social.localUser.authenticated)
+            return;
+
         PlayGamesPlatform.InitializeInstance(new PlayGamesClientConfiguration.Builder()
             .RequestIdToken()
             .RequestEmail()
@@ -151,7 +175,7 @@ public class AuthManager : MonoBehaviour
 
 
     public bool isNickName = false;
-    IEnumerator TryFirebaseLogin()
+    public IEnumerator TryFirebaseLogin()
     {
         isFinishGoogleLogFunction = true;
         while (string.IsNullOrEmpty(((PlayGamesLocalUser)Social.localUser).GetIdToken()))
@@ -185,7 +209,7 @@ public class AuthManager : MonoBehaviour
         yield return StartCoroutine(DatabaseManager.instance.MyNickNameCheck());
         yield return null;
         if (isNickName)
-            DatabaseManager.instance.GetMyData();
+            login(credential, DatabaseManager.instance.GetMyData);
         else
             LobbyManager.instance.SetActivePanel(LobbyManager.PANEL.NickName);
     }
