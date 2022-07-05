@@ -22,8 +22,8 @@ public class FriendPanel : MonoBehaviour
     
     private IDictionary friendNickname;
     private IDictionary requestNickname;
-    bool FinishGetAllFriendData;
-    bool FinishGetRequestFriendData;
+    bool isFinishRequestListGetData;
+    bool isFinishFriendListGetData ;
     
 
     //UI
@@ -39,12 +39,21 @@ public class FriendPanel : MonoBehaviour
     [SerializeField] GameObject friendPanel;
     [SerializeField] GameObject requestPanel;
 
-    //bool IsFirstOpenFriendPanel = true;
+    bool IsFirstOpenFriendPanel = true;
 
-    void Start()
+
+    DatabaseReference reqeustListReference;
+    DatabaseReference friendListReference;
+
+
+
+    void Awake()
     {
         dbFriend = new DBFriend();
-        FinishGetAllFriendData = false;
+        isFinishRequestListGetData = false;
+        isFinishFriendListGetData = false;
+        reqeustListReference = DatabaseManager.instance.reference;
+        friendListReference = DatabaseManager.instance.reference;
     }
 
 
@@ -58,7 +67,7 @@ public class FriendPanel : MonoBehaviour
             .Child(DBFriend.Friend/*Friend*/)
             .Child(DBFriend.FriendRequests /*DB Friend Request List에 넣어주기*/)
             .UpdateChildrenAsync(FuncTool.ConvertToIDictionary(DatabaseManager.instance.dbData.DisplayNickname, AuthManager.instance.GetCurrentUID())); /*내정보*/
-
+        
     }
 
     #region Client Friend request
@@ -100,7 +109,7 @@ public class FriendPanel : MonoBehaviour
     {
         if (isExistNickname)
         {
-            Debug.Log("친구추가");
+            Debug.Log("요청 성공");
             RequestFriend();
         }
         else
@@ -111,103 +120,88 @@ public class FriendPanel : MonoBehaviour
     }
 
     #endregion
-    //public string DictionaryToJson(string nickname, string UID)
-    //{
-    //    string tmp = "{\"" + nickname + "\":\"" + UID + "\"}";
-    //    return tmp;
-    //}
-
 
 
     #region Get Friend data in Firebase  
 
     public void FriendDataGet() // 처음 로그인 되었을때 실행해줘야 하는 함수
     {
+        if(IsFirstOpenFriendPanel)
+        {
+            StartCoroutine("FriendListAddContent");
 
-            StartCoroutine("FriendRequestListAddContent");
-            GetMyRequestFriendList();
-            //IsFirstOpenFriendPanel = false;
+            StartCoroutine("RequestListAddContent");
 
+
+
+            DatabaseManager.instance.dbReference
+                    .Child("UserInfo")
+                    .Child(AuthManager.instance.GetAuthUID())
+                    .Child(DBFriend.Friend/*Friend*/)
+                    .Child(DBFriend.FriendLists /*DB Friend Request List에 넣어주기*/).ChildAdded += friendTest;
+
+            DatabaseManager.instance.dbReference
+                    .Child("UserInfo")
+                    .Child(AuthManager.instance.GetAuthUID())
+                    .Child(DBFriend.Friend/*Friend*/)
+                    .Child(DBFriend.FriendRequests /*DB Friend Request List에 넣어주기*/).ChildAdded += RequestTest;
+
+
+            IsFirstOpenFriendPanel = false;
+        }
     }
 
-    public void GetMyRequestFriendList()
+    private void friendTest(object sender, ChildChangedEventArgs e)
     {
-        requestNickname = null;
-        friendNickname = null;
-        DatabaseManager.instance.reference.GetValueAsync().ContinueWith(task =>
-        {
-            if (task.IsCompleted)
-            {
-                DataSnapshot snapshot = task.Result;
-
-                DataSnapshot dataSnapshotFriendList = (DataSnapshot)snapshot
-                                .Child(AuthManager.instance.GetCurrentUID())
-                                .Child(DBFriend.Friend)
-                                .Child(DBFriend.FriendLists);
-
-                DataSnapshot dataSnapshotRequestList = (DataSnapshot)snapshot
-                                                                .Child(AuthManager.instance.GetCurrentUID())
-                                                                .Child(DBFriend.Friend)
-                                                                .Child(DBFriend.FriendRequests);
-
-
-
-                
-                friendNickname = (IDictionary)dataSnapshotFriendList.Value;
-                requestNickname = (IDictionary)dataSnapshotRequestList.Value;
-
-
-                Debug.Log("데이터 성공적으로 가져옴");
-            }
-            else
-            {
-                Debug.Log("데이터 가져오기 실패");
-            }
-            FinishGetAllFriendData = true;
-
-
-        });
+        StartCoroutine("FriendListAddContent");
+        Debug.Log("상대방, 내가 수락함");
 
     }
-
-    public void GetMyRequestList()
+    private void RequestTest(object sender, ChildChangedEventArgs e)
     {
-        requestNickname = null;
-        DatabaseManager.instance.reference.GetValueAsync().ContinueWith(task =>
-        {
-            if (task.IsCompleted)
-            {
-                DataSnapshot snapshot = task.Result;
-
-                DataSnapshot dataSnapshotRequestList = (DataSnapshot)snapshot
-                                                                .Child(AuthManager.instance.GetCurrentUID())
-                                                                .Child(DBFriend.Friend)
-                                                                .Child(DBFriend.FriendRequests);
-                requestNickname = (IDictionary)dataSnapshotRequestList.Value;
-
-
-                Debug.Log("데이터 성공적으로 가져옴");
-            }
-            else
-            {
-                Debug.Log("데이터 가져오기 실패");
-            }
-            FinishGetRequestFriendData = true;
-
-
-        });
+        StartCoroutine("RequestListAddContent");
+        Debug.Log("친구요청옴");
 
     }
 
     IEnumerator RequestListAddContent()
     {
         Debug.Log("코루틴 시작");
-        while (!FinishGetRequestFriendData)
+
+
+        //데이터 가져오기
+        requestNickname = null;
+        reqeustListReference.GetValueAsync().ContinueWith(task =>
         {
-            yield return new WaitForSeconds(0.01f);
-            Debug.Log("데이터 수집중!!!");
+            if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+
+                DataSnapshot dataSnapshotRequestList = (DataSnapshot)snapshot
+                                                                .Child(AuthManager.instance.GetCurrentUID())
+                                                                .Child(DBFriend.Friend)
+                                                                .Child(DBFriend.FriendRequests);
+                requestNickname = (IDictionary)dataSnapshotRequestList.Value;
+                Debug.Log("데이터 성공적으로 가져옴");
+            }
+            else
+            {
+                Debug.Log("데이터 가져오기 실패");
+            }
+            isFinishRequestListGetData = true;
+
+
+
+        });
+
+
+        while (!isFinishRequestListGetData)
+        {
+            yield return null;
+            Debug.Log("친구요청 목록 데이터 수집중!!!");
         }
 
+        //친구 목록에 추가
         if (requestNickname != null)
         {
             Transform[] tmp = RequestContent.GetComponentsInChildren<Transform>();
@@ -229,35 +223,48 @@ public class FriendPanel : MonoBehaviour
         }
 
 
-        FinishGetRequestFriendData = false;
-
+        isFinishRequestListGetData = false;
         yield return null;
+
     }
 
 
 
-    IEnumerator FriendRequestListAddContent()
+    IEnumerator FriendListAddContent() //이걸 처음 데이터 가져올때로 바꾸고
     {
         Debug.Log("코루틴 시작");
-        while (!FinishGetAllFriendData)
+
+        friendNickname = null;
+        friendListReference.GetValueAsync().ContinueWith(task =>
         {
-            yield return new WaitForSeconds(0.01f);
-            Debug.Log("데이터 수집중!!!");
+            if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+
+                DataSnapshot dataSnapshotFriendList = (DataSnapshot)snapshot
+                                .Child(AuthManager.instance.GetCurrentUID())
+                                .Child(DBFriend.Friend)
+                                .Child(DBFriend.FriendLists);
+
+
+                friendNickname = (IDictionary)dataSnapshotFriendList.Value;
+
+                Debug.Log("데이터 성공적으로 가져옴");
+            }
+            else
+            {
+                Debug.Log("데이터 가져오기 실패");
+            }
+            isFinishFriendListGetData = true;
+
+
+        });
+
+        while (!isFinishFriendListGetData)
+        {
+            yield return null;
+            Debug.Log("친구 목록 데이터 수집중!!!");
         }
-        
-        //if (requestNickname != null)
-        //{
-        //    foreach (string name in requestNickname.Keys)
-        //    {
-        //        GameObject entry = Instantiate(requestFriendprefab);
-        //        entry.GetComponent<FriendRequestEntry>().SetData(
-        //            name.ToString(),
-        //            requestNickname[name].ToString()
-        //            );
-        //        entry.transform.localScale = Vector3.one;
-        //        entry.transform.SetParent(RequestContent.transform);
-        //    }
-        //}
 
         if (friendNickname != null)
         {
@@ -279,14 +286,12 @@ public class FriendPanel : MonoBehaviour
             }
         }
 
-
-
-        FinishGetAllFriendData = false;
+        isFinishFriendListGetData = false;
         yield return null;
     }
 
 
-#endregion
+    #endregion
 
 
     #region Friend Receive , Cansel
@@ -355,7 +360,6 @@ public class FriendPanel : MonoBehaviour
 
     #endregion
 
-
     #region UI event
 
     public void OnFriendListOpenBtnClicked()
@@ -375,8 +379,6 @@ public class FriendPanel : MonoBehaviour
     }
     public void OnRequestListOpenBtnClicked()
     {
-        StartCoroutine("RequestListAddContent");
-        GetMyRequestList();
         requestPanel.SetActive(true);
     }
 

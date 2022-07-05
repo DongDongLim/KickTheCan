@@ -30,6 +30,7 @@ public class FriendListEntry : MonoBehaviour
         this.friendName.text = name;
         this.UID = UID;
         eachReference = FirebaseDatabase.DefaultInstance.GetReference("UserInfo").Child(UID).Child(DBData.KeyIsLogin);
+
         eachReference.ValueChanged += LoginStateUI;
 
         StartCoroutine("GetMyData");
