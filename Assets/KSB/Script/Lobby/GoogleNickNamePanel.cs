@@ -74,7 +74,10 @@ public class GoogleNickNamePanel : MonoBehaviour
         checkPanel.CanUse(displayNickName.text, displayNicknameCheck);
         isFinishDisplaynicknameCheckFunction = false;
         if (displayNicknameCheck)
+        {
             SetUserDataInDataBase();
+            displayNicknameCheckButton.interactable = false;
+        }
         else
             checkPanel.gameObject.SetActive(true);
         yield return null;
@@ -92,7 +95,7 @@ public class GoogleNickNamePanel : MonoBehaviour
 
         DBData dBData = new DBData(user.Email, displayNickName.text, 0,false);
         DatabaseManager.instance.SetUserDataInDataBase(dBData);
-        DatabaseManager.instance.GetMyData();
+        StartCoroutine(AuthManager.instance.TryFirebaseLogin());
 
     }
 #endif

@@ -37,10 +37,11 @@ public class LoginPanel : MonoBehaviour
         PhotonNetwork.ConnectUsingSettings();
     }
 
+    // 구글 플레이 서비스에 로그인이 되어있는지 확인하는 함수
+
     public static bool IsAuthenticated()
     {
         return Social.localUser.authenticated;
     }
-
 
 }

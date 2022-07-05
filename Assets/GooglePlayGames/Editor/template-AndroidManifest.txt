@@ -8,8 +8,6 @@
 
      __NEARBY_PERMISSIONS__
 
-
-
     <application>
 
      __NEARBY_SERVICE_ELEMENT__
