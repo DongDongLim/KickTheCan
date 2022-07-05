@@ -84,7 +84,7 @@ namespace DH
             }
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.RUNNER);
-            UISetting(true);
+            UISetting(false);
             
             // TODO : (Test) GameOver / SH         
             playerObjList.Add(playerObj);
@@ -95,13 +95,19 @@ namespace DH
             Debug.Log("관전자 모드");
             CameraMng.instance.SwitchCam();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.OBSERVER);
+
+            UISetting(true, false);
+            UIMng.instance.SetUI("Observer");
         }
 
-        public void UISetting(bool isTagger)
+        public void UISetting(bool isTagger, bool isShow = true)
         {
             DH.UIMng.instance.loadingScreen.SetActive(false);
-            DH.UIMng.instance.taggerCaption.SetActive(isTagger);
-            DH.UIMng.instance.runnerCaption.SetActive(!isTagger);
+            if (isShow)
+            {
+                DH.UIMng.instance.taggerCaption.SetActive(isTagger);
+                DH.UIMng.instance.runnerCaption.SetActive(!isTagger);
+            }
             DH.UIMng.instance.startCount.SetActive(true);
         }
 
