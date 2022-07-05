@@ -33,7 +33,7 @@ public class AuthManager : MonoBehaviour
         // 객체 초기화
         instance = this;
         auth = FirebaseAuth.DefaultInstance;
-
+        user = null;
         isFinishLogFunction = false;
     }
 
@@ -58,6 +58,7 @@ public class AuthManager : MonoBehaviour
                 {
                     Debug.Log(email + " 로 로그인 하셨습니다.");
                     OnCheck.Invoke();
+                    user = auth.CurrentUser;
                     isWrong = false;
                 }
                 else
@@ -65,6 +66,28 @@ public class AuthManager : MonoBehaviour
                     //아이디 비번 확인 메세지 
                     isWrong = true;
                     Debug.Log("로그인에 실패하셨습니다.");
+                }
+                isFinishLogFunction = true;
+            }
+        );
+    }
+
+    // GoogleBugFix / DH
+    public void login(Credential credential, UnityAction OnCheck)
+    {
+        // 제공되는 함수 : 이메일과 비밀번호로 로그인 시켜 줌
+        auth.SignInWithCredentialAsync(credential).ContinueWith(
+            task => {
+                if (task.IsCompleted && !task.IsFaulted && !task.IsCanceled)
+                {
+                    OnCheck.Invoke();
+                    user = auth.CurrentUser;
+                    isWrong = false;
+                }
+                else
+                {
+                    //아이디 비번 확인 메세지 
+                    isWrong = true;
                 }
                 isFinishLogFunction = true;
             }
@@ -116,14 +139,21 @@ public class AuthManager : MonoBehaviour
         return auth.CurrentUser.UserId;
     }
 
-#if UNITY_ANDROID
+    public string GetCurrentUID()
+    {
+        return user.UserId;
+    }
 
-    // 구글 플레이 서비스에 로그인이 되어있는지 확인하는 함수
+#if UNITY_ANDROID
 
 
     // 로그인 버튼을 눌렀을 때
     public void Start_Auth()
     {
+        // 구글 플레이 서비스에 로그인되어 있으면 반환
+        if (Social.localUser.authenticated)
+            return;
+
         PlayGamesPlatform.InitializeInstance(new PlayGamesClientConfiguration.Builder()
             .RequestIdToken()
             .RequestEmail()
@@ -145,7 +175,7 @@ public class AuthManager : MonoBehaviour
 
 
     public bool isNickName = false;
-    IEnumerator TryFirebaseLogin()
+    public IEnumerator TryFirebaseLogin()
     {
         isFinishGoogleLogFunction = true;
         while (string.IsNullOrEmpty(((PlayGamesLocalUser)Social.localUser).GetIdToken()))
@@ -179,7 +209,7 @@ public class AuthManager : MonoBehaviour
         yield return StartCoroutine(DatabaseManager.instance.MyNickNameCheck());
         yield return null;
         if (isNickName)
-            DatabaseManager.instance.GetMyData();
+            login(credential, DatabaseManager.instance.GetMyData);
         else
             LobbyManager.instance.SetActivePanel(LobbyManager.PANEL.NickName);
     }
@@ -192,22 +222,37 @@ public class AuthManager : MonoBehaviour
 #endif
 
 
-    private void OnDisable()
+
+
+    private void OnApplicationFocus(bool focus)
     {
-        //내가 친구 요청을걸면 건 상대의 UID에 
+        if (user == null)
+            return;
+        if (focus == true)
+        {
+            SetLogin(true);
+        }
+        else
+        {
+            SetLogin(false);
+        }
+    }
+
+    public void OnApplicationQuit()
+    {
+        if (user == null)
+            return;
+        SetLogin(false);
+
+    }
+
+    public void SetLogin(bool isLogin) //true = login  // false = logout
+    {
+
         DatabaseManager.instance.dbReference
             .Child("UserInfo")
-            .Child("1111"/*상대방 UID넣어주고*/)
-            .Child("2222"/*Friend*/)
-            .Child("3333")
-            .UpdateChildrenAsync(StringToIDictionary("테스ㅌ", "테스으트으")); /*내정보*/
-        Debug.Log("헤헤");
-    }
-    public IDictionary<string, object> StringToIDictionary(string nickname, string UID)
-    {
-        IDictionary<string, object> tmp = new Dictionary<string, object>();
-        tmp.Add(nickname, UID);
-        return tmp;
+            .Child(GetCurrentUID())
+            .UpdateChildrenAsync(FuncTool.ConvertToIDictionary(DBData.KeyIsLogin, isLogin)); //로그인 로그아웃
     }
 
 }

@@ -45,9 +45,6 @@ public class DBFriend
     }
 
 
-    //public void RequestFriend()
-    //{
 
-    //}
 
 }
