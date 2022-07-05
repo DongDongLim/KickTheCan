@@ -22,7 +22,12 @@ public class PlayerSceneManager : MonoBehaviour
 
     private void Update()
     {
-        StartCoroutine("CheckEscapeButton");
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isButtonOn = !isButtonOn;
+            exitMenuUI.SetActive(isButtonOn);
+        }
+     
         sceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();
     }
 
@@ -30,8 +35,11 @@ public class PlayerSceneManager : MonoBehaviour
     {            
         sceneInfo.roomName = PhotonNetwork.CurrentRoom.Name;
         Debug.Log(sceneInfo.roomName);
-        sceneInfo.isLeaver = true;      
+        sceneInfo.isLeaver = true;
+        
+        PhotonNetwork.LoadLevel(1);
         PhotonNetwork.LeaveRoom();
+
         Debug.Log("Go to Lobby");
     }
 
@@ -41,16 +49,5 @@ public class PlayerSceneManager : MonoBehaviour
                 UnityEditor.EditorApplication.isPlaying = false;
         #endif
                 Application.Quit();
-    }
-
-    IEnumerator CheckEscapeButton()
-    {
-        yield return new WaitForSeconds(0.1f);
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            isButtonOn = !isButtonOn;
-            exitMenuUI.SetActive(isButtonOn);
-        }
-    }
+    } 
 }

@@ -1191,7 +1191,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 358601539}
-  m_LocalRotation: {x: 0.57357645, y: -1e-45, z: -1e-45, w: 0.8191521}
+  m_LocalRotation: {x: 0.57357645, y: 3e-45, z: 1e-45, w: 0.8191521}
   m_LocalPosition: {x: 0, y: 18.793852, z: -6.8404055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3976,8 +3976,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 940741985}
-  m_LocalRotation: {x: 0.57357645, y: -1e-45, z: -1e-45, w: 0.8191521}
-  m_LocalPosition: {x: 0, y: 18.793852, z: -6.8404055}
+  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
+  m_LocalPosition: {x: 0, y: 5.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 636500905}
@@ -5088,6 +5088,7 @@ MonoBehaviour:
   runnerCaption: {fileID: 337477496}
   taggerCaption: {fileID: 51990801}
   startTimer: {fileID: 1549265593}
+  playTimer: {fileID: 1640895766}
   timer: 10
 --- !u!1 &1307466983
 GameObject:
@@ -5570,6 +5571,7 @@ MonoBehaviour:
   - {fileID: 4849748062588695500, guid: bffa6c5d8ced00b44a2348197a97d912, type: 3}
   taggerObj: {fileID: 7180172942738791779, guid: 3e02007bf5ef9124493e4b3acb7fe5f1,
     type: 3}
+  timer: {fileID: 1640895766}
   curMap: {fileID: 0}
   objectSpawnPos: []
   canTransform: {x: 0, y: 0, z: 0}
@@ -5605,7 +5607,6 @@ MonoBehaviour:
   isAttack: 1
   canCheckObj: {fileID: 0}
   spawnPos: []
-  timer: {fileID: 1640895766}
   playerObjList: []
   RunnerWinUI: {fileID: 816351527}
   TaggerWinUI: {fileID: 588354145}
@@ -5731,7 +5732,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2031537285}
   m_HandleRect: {fileID: 2031537283}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -7250,10 +7251,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3582191782983442046, guid: de25f4a29a228d34fb0d2d3b71d84155,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -62
+      objectReference: {fileID: 0}
     - target: {fileID: 3582191784440857528, guid: de25f4a29a228d34fb0d2d3b71d84155,
         type: 3}
       propertyPath: sec
-      value: 10
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8554590710087451153, guid: de25f4a29a228d34fb0d2d3b71d84155,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -62
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de25f4a29a228d34fb0d2d3b71d84155, type: 3}

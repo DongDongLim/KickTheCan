@@ -15,7 +15,7 @@ namespace DH
 
         public GameObject[] mapBG;
         public GameObject[] mapObj;
-        public GameObject taggerObj;       
+        public GameObject taggerObj;      
 
         public GameObject curMap;
         public Transform[] objectSpawnPos;
@@ -84,9 +84,8 @@ namespace DH
             }
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.RUNNER);
-            UISetting(true);
-            
-            // TODO : (Test) GameOver / SH         
+            UISetting(true);            
+                 
             playerObjList.Add(playerObj);
         }
 
@@ -95,6 +94,7 @@ namespace DH
             Debug.Log("관전자 모드");
             CameraMng.instance.SwitchCam();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.OBSERVER);
+            UISetting(true);
         }
 
         public void UISetting(bool isTagger)
@@ -102,7 +102,7 @@ namespace DH
             DH.UIMng.instance.loadingScreen.SetActive(false);
             DH.UIMng.instance.taggerCaption.SetActive(isTagger);
             DH.UIMng.instance.runnerCaption.SetActive(!isTagger);
-            DH.UIMng.instance.startCount.SetActive(true);
+            DH.UIMng.instance.startCount.SetActive(true);            
         }
 
     }
