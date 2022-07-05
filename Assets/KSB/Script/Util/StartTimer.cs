@@ -11,6 +11,8 @@ public class StartTimer : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI startTimer;
 
+    public GameObject playTimer;
+
     public int timer;
 
     private void Start() {
@@ -21,7 +23,7 @@ public class StartTimer : MonoBehaviour
     private void Update() {
         if (timer <= 0)
         {
-            TimerStop();
+            TimerStop();           
         }
     }
 
@@ -53,6 +55,8 @@ public class StartTimer : MonoBehaviour
         startTimer.text = "Start !";
         startTimer.color = Color.white;
         StartCoroutine(TimerStopCoroutine());
+        
+        playTimer.SetActive(true);
 
     }
 
@@ -60,5 +64,6 @@ public class StartTimer : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         gameObject.SetActive(false);
+        
     }
 }

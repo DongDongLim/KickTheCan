@@ -19,8 +19,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public GameObject canCheckObj;
     public UnityAction canCheckActionTrue;
     public UnityAction canCheckActionFalse;
-    public Transform[] spawnPos;
-    public GameObject timer;
+    public Transform[] spawnPos;    
     public List<GameObject> playerObjList;
     public GameObject RunnerWinUI;
     public GameObject TaggerWinUI;
@@ -152,9 +151,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         int playerNumber = PhotonNetwork.LocalPlayer.GetPlayerNumber();
 
-        CreatePlayer();
-
-        timer.SetActive(true);
+        CreatePlayer();        
     }
 
     private bool CheckAllPlayerLoadLevel()
@@ -229,7 +226,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             return;
         }
 
-        // TODO : Text 예정
+        // TODO : Test 예정
         StartCoroutine(DH.MapSettingMng.instance.Setting());
 
         m_maxTagger = PhotonNetwork.PlayerList.Length / 4;
@@ -318,16 +315,21 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void ObserverMode()
     {
-        Debug.Log("ReEntry Mode 호출");
+        Debug.Log("Observer Mode 호출");
         Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
-              
-        DH.MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);        
+
+        //StartCoroutine(MapSettingMng.instance.Setting());
+        MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);        
     }
 
     private void RejoinMode()
     {
         Debug.Log("ReJoiner Mode 호출");     
-        DH.MapSettingMng.instance.RunnerSetting("Default");
+        MapSettingMng.instance.RunnerSetting("Default");
+
+        // Test
+        //StartCoroutine(MapSettingMng.instance.Setting());
+        //MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);
     }
 
     IEnumerator GameIsOn()
