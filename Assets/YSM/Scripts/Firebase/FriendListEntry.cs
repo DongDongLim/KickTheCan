@@ -69,7 +69,6 @@ public class FriendListEntry : MonoBehaviour
     {
         DataSnapshot snapshot = e.Snapshot;
         loginState = (bool)snapshot.Value;
-        Debug.Log(loginState);
         if (this.gameObject.activeSelf == false)
         {
             return;
