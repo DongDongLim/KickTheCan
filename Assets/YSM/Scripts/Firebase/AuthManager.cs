@@ -33,7 +33,7 @@ public class AuthManager : MonoBehaviour
         // 객체 초기화
         instance = this;
         auth = FirebaseAuth.DefaultInstance;
-
+        user = null;
         isFinishLogFunction = false;
     }
 
@@ -58,6 +58,7 @@ public class AuthManager : MonoBehaviour
                 {
                     Debug.Log(email + " 로 로그인 하셨습니다.");
                     OnCheck.Invoke();
+                    user = auth.CurrentUser;
                     isWrong = false;
                 }
                 else
@@ -114,6 +115,11 @@ public class AuthManager : MonoBehaviour
     public string GetAuthUID()
     {
         return auth.CurrentUser.UserId;
+    }
+
+    public string GetCurrentUID()
+    {
+        return user.UserId;
     }
 
 #if UNITY_ANDROID
@@ -192,22 +198,37 @@ public class AuthManager : MonoBehaviour
 #endif
 
 
-    private void OnDisable()
+
+
+    private void OnApplicationFocus(bool focus)
     {
-        //내가 친구 요청을걸면 건 상대의 UID에 
+        if (user == null)
+            return;
+        if (focus == true)
+        {
+            SetLogin(true);
+        }
+        else
+        {
+            SetLogin(false);
+        }
+    }
+
+    public void OnApplicationQuit()
+    {
+        if (user == null)
+            return;
+        SetLogin(false);
+
+    }
+
+    public void SetLogin(bool isLogin) //true = login  // false = logout
+    {
+
         DatabaseManager.instance.dbReference
             .Child("UserInfo")
-            .Child("1111"/*상대방 UID넣어주고*/)
-            .Child("2222"/*Friend*/)
-            .Child("3333")
-            .UpdateChildrenAsync(StringToIDictionary("테스ㅌ", "테스으트으")); /*내정보*/
-        Debug.Log("헤헤");
-    }
-    public IDictionary<string, object> StringToIDictionary(string nickname, string UID)
-    {
-        IDictionary<string, object> tmp = new Dictionary<string, object>();
-        tmp.Add(nickname, UID);
-        return tmp;
+            .Child(GetCurrentUID())
+            .UpdateChildrenAsync(FuncTool.ConvertToIDictionary(DBData.KeyIsLogin, isLogin)); //로그인 로그아웃
     }
 
 }

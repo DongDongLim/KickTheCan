@@ -5,24 +5,19 @@ public class DBData
     static public string KeyDisplayNickname = "DisplayNickname";
     static public string KeyScore = "Score";
     static public string KeyEmail = "Email";
-    static public string KeyIsLoggingIn = "IsLoggingIn";
+    static public string KeyIsLogin = "IsLogin";
 
 
     public string DisplayNickname;
-    public string Score;
+    public int Score;
     public string Email;
-    public string IsLoggingIn;
-    public DBData(string Email , string DisplayNickname, string Score, string IsLoggingIn = "true")
+    public bool IsLogin;
+    public DBData(string Email , string DisplayNickname, int Score, bool IsLogin = false)
     {
         this.Email = Email;
         this.DisplayNickname = DisplayNickname;
         this.Score = Score;
-        this.IsLoggingIn = IsLoggingIn;
+        this.IsLogin = IsLogin;
     }
 
-
-    public void SetLogout()
-    {
-        IsLoggingIn = "false";
-    }
 }

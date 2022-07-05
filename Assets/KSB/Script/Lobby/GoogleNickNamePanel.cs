@@ -90,7 +90,7 @@ public class GoogleNickNamePanel : MonoBehaviour
         if (user == null)
             return;
 
-        DBData dBData = new DBData(user.Email, displayNickName.text, "0", "false");
+        DBData dBData = new DBData(user.Email, displayNickName.text, 0,false);
         DatabaseManager.instance.SetUserDataInDataBase(dBData);
         DatabaseManager.instance.GetMyData();
 

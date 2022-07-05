@@ -16,7 +16,7 @@ public class DatabaseManager : MonoBehaviour
     static public DatabaseManager instance { get; private set; }
 
     public DatabaseReference dbReference;
-    public DatabaseReference reference;
+    public DatabaseReference reference; //데이터 가져오기용
 
     public DBData dbData;
     public DBData dbDataGoogle;
@@ -29,8 +29,7 @@ public class DatabaseManager : MonoBehaviour
         instance = this;
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
         reference = FirebaseDatabase.DefaultInstance.GetReference("UserInfo");
-        
-
+        //reference.Child("")
         // 사용하고자 하는 데이터를 reference가 가리킴
         // 여기선 rank 데이터 셋에 접근
     }
@@ -54,7 +53,8 @@ public class DatabaseManager : MonoBehaviour
                 DataSnapshot snapshot = task.Result;
                 DataSnapshot dataSnapshot = (DataSnapshot)snapshot.Child(AuthManager.instance.GetAuthUID());
                 IDictionary id = (IDictionary)dataSnapshot.Value;
-                dbData = new DBData(id["Email"].ToString(), id["DisplayNickname"].ToString(), id["Score"].ToString());
+                dbData = new DBData(id["Email"].ToString(), id["DisplayNickname"].ToString(), int.Parse(id["Score"].ToString()),true);
+                AuthManager.instance.SetLogin(true);
                 //SetUserDataInDataBase(dbData);
                 PhotonNetwork.LocalPlayer.NickName = dbData.DisplayNickname;
                 PhotonNetwork.ConnectUsingSettings();
@@ -107,28 +107,6 @@ public class DatabaseManager : MonoBehaviour
     }
 #endif
 
-    //public void test()
-    //{
-    //    data.IsLoggingIn = "false";
-    //    string json = JsonUtility.ToJson(data);
 
-
-    //    Dictionary<string, object> update = new Dictionary<string, object>();
-    //    update["IsLoggingIn"] = "false";
-    //    dbReference.Child("UserInfo").Child(AuthManager.instance.GetAuthUID()).UpdateChildrenAsync(update).ContinueWith(task =>
-    //    {
-    //        if (task.IsCompleted)
-    //        {
-    //            CanLogout = true;
-    //            Debug.Log("굿/");
-    //            Application.Quit();
-    //        }
-    //        else
-    //        {
-    //            CanLogout = false;
-    //        }
-    //    });
-    //    Debug.Log("끝남 함수");
-    //}
 
 }
