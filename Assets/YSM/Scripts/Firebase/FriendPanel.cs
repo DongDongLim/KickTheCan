@@ -45,8 +45,6 @@ public class FriendPanel : MonoBehaviour
     {
         dbFriend = new DBFriend();
         FinishGetAllFriendData = false;
-
-        DatabaseManager.instance.reference.ValueChanged += ReceiveMessage;
     }
 
 
@@ -59,7 +57,7 @@ public class FriendPanel : MonoBehaviour
             .Child(requestFriendUID/*상대방 UID넣어주고*/)
             .Child(DBFriend.Friend/*Friend*/)
             .Child(DBFriend.FriendRequests /*DB Friend Request List에 넣어주기*/)
-            .UpdateChildrenAsync(StringToIDictionary(DatabaseManager.instance.dbData.DisplayNickname, AuthManager.instance.GetAuthUID())); /*내정보*/
+            .UpdateChildrenAsync(FuncTool.ConvertToIDictionary(DatabaseManager.instance.dbData.DisplayNickname, AuthManager.instance.GetCurrentUID())); /*내정보*/
 
     }
 
@@ -119,12 +117,6 @@ public class FriendPanel : MonoBehaviour
     //    return tmp;
     //}
 
-    public IDictionary<string, object> StringToIDictionary(string nickname, string UID)
-    {
-        IDictionary<string, object> tmp = new Dictionary<string, object>();
-        tmp.Add(nickname, UID);
-        return tmp;
-    }
 
 
     #region Get Friend data in Firebase  
@@ -149,14 +141,16 @@ public class FriendPanel : MonoBehaviour
                 DataSnapshot snapshot = task.Result;
 
                 DataSnapshot dataSnapshotFriendList = (DataSnapshot)snapshot
-                                .Child(AuthManager.instance.GetAuthUID())
+                                .Child(AuthManager.instance.GetCurrentUID())
                                 .Child(DBFriend.Friend)
                                 .Child(DBFriend.FriendLists);
 
                 DataSnapshot dataSnapshotRequestList = (DataSnapshot)snapshot
-                                                                .Child(AuthManager.instance.GetAuthUID())
+                                                                .Child(AuthManager.instance.GetCurrentUID())
                                                                 .Child(DBFriend.Friend)
                                                                 .Child(DBFriend.FriendRequests);
+
+
 
                 
                 friendNickname = (IDictionary)dataSnapshotFriendList.Value;
@@ -186,7 +180,7 @@ public class FriendPanel : MonoBehaviour
                 DataSnapshot snapshot = task.Result;
 
                 DataSnapshot dataSnapshotRequestList = (DataSnapshot)snapshot
-                                                                .Child(AuthManager.instance.GetAuthUID())
+                                                                .Child(AuthManager.instance.GetCurrentUID())
                                                                 .Child(DBFriend.Friend)
                                                                 .Child(DBFriend.FriendRequests);
                 requestNickname = (IDictionary)dataSnapshotRequestList.Value;
@@ -302,10 +296,10 @@ public class FriendPanel : MonoBehaviour
         //내가 친구요청을 받으면 받은 아이디를 내 FriendList에 Nickname, UID넣어주고 
         DatabaseManager.instance.dbReference
             .Child("UserInfo")
-            .Child(AuthManager.instance.GetAuthUID()/*내 UID에*/)
+            .Child(AuthManager.instance.GetCurrentUID()/*내 UID에*/)
             .Child(DBFriend.Friend/*Friend*/)
             .Child(DBFriend.FriendLists /*DB Friend List에 넣어주기*/)
-            .UpdateChildrenAsync(StringToIDictionary(entry.GetRequestFriendName() ,entry.GetUID())/*넣을 데이터*/);
+            .UpdateChildrenAsync(FuncTool.ConvertToIDictionary(entry.GetRequestFriendName() ,entry.GetUID())/*넣을 데이터*/);
 
         //내가 받은 친구요청을 상대방에게도 추가해주고
         DatabaseManager.instance.dbReference
@@ -313,12 +307,12 @@ public class FriendPanel : MonoBehaviour
              .Child(entry.GetUID()/*상대방 UID넣어주고*/)
              .Child(DBFriend.Friend/*Friend*/)
              .Child(DBFriend.FriendLists /*DB Friend List에 넣어주기*/)
-             .UpdateChildrenAsync(StringToIDictionary(DatabaseManager.instance.dbData.DisplayNickname, AuthManager.instance.GetAuthUID())/*내정보*/);
+             .UpdateChildrenAsync(FuncTool.ConvertToIDictionary(DatabaseManager.instance.dbData.DisplayNickname, AuthManager.instance.GetCurrentUID())/*내정보*/);
 
         //내 request요청에 있는거 지워주고
         DatabaseManager.instance.dbReference
              .Child("UserInfo")
-             .Child(AuthManager.instance.GetAuthUID()/*내 UID에 있는거 지우고*/)
+             .Child(AuthManager.instance.GetCurrentUID()/*내 UID에 있는거 지우고*/)
              .Child(DBFriend.Friend/*Friend*/)
              .Child(DBFriend.FriendRequests /*DB Friend Request List에 있는 데이터 지워주기*/)
              .Child(entry.GetRequestFriendName()/*지울 데이터*/)
@@ -344,7 +338,7 @@ public class FriendPanel : MonoBehaviour
         Debug.Log(entry.GetRequestFriendName());
         DatabaseManager.instance.dbReference
              .Child("UserInfo")
-             .Child(AuthManager.instance.GetAuthUID()/*내 UID에 있는거 지우고*/)
+             .Child(AuthManager.instance.GetCurrentUID()/*내 UID에 있는거 지우고*/)
              .Child(DBFriend.Friend/*Friend*/)
              .Child(DBFriend.FriendRequests /*DB Friend Request List에 있는 데이터 지워주기*/)
              .Child(entry.GetRequestFriendName()/*지울 데이터*/)
@@ -388,9 +382,5 @@ public class FriendPanel : MonoBehaviour
 
     #endregion
 
-    
-    private void ReceiveMessage(object sender , ValueChangedEventArgs e)
-    {
 
-    }
 }
