@@ -8,38 +8,57 @@ namespace DH
     public class ObjScript : MonoBehaviourPun
     {
         public int objIndex;
-
+        int cnt;
 
         public void SetObjIndex(int index)
         {
-            photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered, index);
-            PhotonNetwork.Destroy(gameObject);
+            GameObject obj = ChildObjCreate(index);
+            cnt = obj.transform.childCount == 0 ? -1 : Random.Range(0, obj.transform.childCount);
+            if(cnt != -1)
+                obj.transform.GetChild(cnt).gameObject.SetActive(true);
+            photonView.RPC("ChildObjCreate", RpcTarget.OthersBuffered, index, cnt);
         }
 
-        public void SetObjIndex(string obj)
+        public void SetObjIndex(string objName)
         {
-            photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered, obj);
-
-            PhotonNetwork.Destroy(gameObject);
+            GameObject obj = ChildObjCreate(objName);
+            cnt = obj.transform.childCount == 0 ? -1 : Random.Range(0, obj.transform.childCount);
+            if (cnt != -1)
+                obj.transform.GetChild(cnt).gameObject.SetActive(true);
+            photonView.RPC("ChildObjCreate", RpcTarget.OthersBuffered, objName, cnt);
         }
 
         [PunRPC]
-        public void ChildObjCreate(int index)
+        public GameObject ChildObjCreate(int index, int childActiveCnt = -1)
         {
             objIndex = index;
-            GameObject gameObject =
+            GameObject obj =
             Instantiate(MapSettingMng.instance.mapObj[objIndex], MapSettingMng.instance.gameObject.transform, false);
-            gameObject.transform.position = transform.position;
-            gameObject.transform.rotation = transform.rotation;
+            obj.transform.position = transform.position;
+            obj.transform.rotation = transform.rotation;
+            if(childActiveCnt != -1)
+            {
+                obj.transform.GetChild(childActiveCnt).gameObject.SetActive(true);
+            }
+            gameObject.SetActive(false);
+            return obj;
         }
 
         [PunRPC]
-        public void ChildObjCreate(string obj)
+        public GameObject ChildObjCreate(string objName, int childActiveCnt = -1)
         {
-            GameObject gameObject =
-            (GameObject)Instantiate(Resources.Load(obj), MapSettingMng.instance.gameObject.transform, false);
-            gameObject.transform.position = transform.position;
-            gameObject.transform.rotation = transform.rotation;
+            GameObject obj =
+            (GameObject)Instantiate(Resources.Load(objName), MapSettingMng.instance.gameObject.transform, false);
+            obj.transform.position = transform.position;
+            obj.transform.rotation = transform.rotation;
+            if (childActiveCnt != -1)
+            {
+                obj.transform.GetChild(childActiveCnt).gameObject.SetActive(true);
+            }
+            gameObject.SetActive(false);
+            return obj;
         }
+
+
     }
 }

@@ -51,18 +51,14 @@ namespace DH
                 CameraMng.instance.PlayerCamSetting(transform.GetChild(0).gameObject);
         }
 
-        private void Start()
-        {           
+        public void ControllerSetting()
+        {
             taggerAnim = transform.GetChild(2).GetComponent<Animator>() == null ? null : transform.GetChild(2).GetComponent<Animator>();
             runnerAnim = taggerAnim != null ? null : transform.GetComponent<Animator>();
             if (runnerAnim != null)
                 runnerAnim.enabled = true;
             if (photonView.IsMine)
                 ownerID = PhotonNetwork.LocalPlayer.GetPlayerNumber();
-        }
-
-        public void ControllerSetting()
-        {
             charactorBody = transform.GetChild(2).transform;
             control = GetComponent<Controller>();
             control.Setting(rigid, taggerAnim);
@@ -71,9 +67,11 @@ namespace DH
 
         private void Update()
         {
+            if (!isSettingComplete)
+                return;
             if (!photonView.IsMine)
             {
-                if(isSettingComplete && null == charactorBody)
+                if(null == charactorBody)
                     charactorBody = transform.GetChild(2).transform;
                 return;
             }
