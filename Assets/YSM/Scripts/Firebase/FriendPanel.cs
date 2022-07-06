@@ -13,6 +13,7 @@ public class FriendPanel : MonoBehaviour
 
   
     bool isExistNickname;
+    bool alreadyFriend;
     [SerializeField] private InputField requestNicknameField;
     [SerializeField] private string requestFriendUID;
 
@@ -21,7 +22,7 @@ public class FriendPanel : MonoBehaviour
     [SerializeField] GameObject friendPanel;
     [SerializeField] GameObject requestPanel;
 
-    [SerializeField] GameObject userNameWrong;
+    [SerializeField] GameObject checkPanel;
 
 
 
@@ -40,52 +41,85 @@ public class FriendPanel : MonoBehaviour
     #region Client Friend request
     public void FriendRequestClicked()
     {
-
-        FindUserNickname(FriendRequestCheck);
-
+        if(requestNicknameField.text == "")
+        {
+            return;
+        }
+        StartCoroutine("FindUserNickname");
     }
 
-    public void FindUserNickname(UnityAction OnCheck)
+    IEnumerator FindUserNickname()
     {
+        bool isFinish = false;
+        isExistNickname = false;
+        alreadyFriend = false;
+        requestFriendUID = null;
+
         DatabaseManager.instance.reference = FirebaseDatabase.DefaultInstance.GetReference("UserInfo");
 
         DatabaseManager.instance.reference.GetValueAsync().ContinueWith(task =>
         {
             if (task.IsCompleted)
             {
-                DataSnapshot snapshot = task.Result;
-                isExistNickname = false;
-                requestFriendUID = null;
-                foreach (DataSnapshot data in snapshot.Children)
-                {
 
-                    IDictionary userInfo = (IDictionary)data.Value;
-                    if ((string)userInfo["DisplayNickname"] == requestNicknameField.text)
+                DataSnapshot snapshot = task.Result;
+
+                DataSnapshot dataSnapshot = (DataSnapshot)snapshot.Child(AuthManager.instance.GetAuthUID()).Child(DBFriend.Friend).Child(DBFriend.FriendLists);
+                IDictionary id = (IDictionary)dataSnapshot.Value;
+                alreadyFriend = id.Contains(requestNicknameField.text);
+
+                if (true == alreadyFriend) //이미 친구인지
+                { }
+                else if(DatabaseManager.instance.dbData.DisplayNickname == requestNicknameField.text) //내 닉네임인지..?
+                { }
+                else
+                {
+                    foreach (DataSnapshot data in snapshot.Children) //있는 닉네임인지 체크
                     {
-                        requestFriendUID = data.Key;
-                        Debug.Log(requestFriendUID);
-                        isExistNickname = true;
-                        break;
+
+                        IDictionary userInfo = (IDictionary)data.Value;
+                        if ((string)userInfo["DisplayNickname"] == requestNicknameField.text)
+                        {
+                            requestFriendUID = data.Key;
+                            Debug.Log(requestFriendUID);
+                            isExistNickname = true;
+                            break;
+                        }
                     }
                 }
-                OnCheck.Invoke();
+                isFinish = true;
             }
         });
+        while(!isFinish)
+        {
+            yield return null;
+        }
+        FriendRequestCheck();
     }
 
     public void FriendRequestCheck()
     {
+
         if (isExistNickname)
         {
             Debug.Log("요청 성공");
+            checkPanel.GetComponent<CheckPanel>().RequestSuccese(requestNicknameField.text);
+            checkPanel.SetActive(true);
             RequestFriend();
+        }
+        else if(alreadyFriend)
+        {
+            checkPanel.GetComponent<CheckPanel>().AlreadyFriend(requestNicknameField.text);
+            checkPanel.SetActive(true);
+            Debug.Log("이미 친구입니다.");
         }
         else
         {
-            userNameWrong.SetActive(true);
-            Debug.Log("없는사람");
+            checkPanel.GetComponent<CheckPanel>().WrongNickname(requestNicknameField.text);
+            checkPanel.SetActive(true);
+            Debug.Log("잘못된 사용자");
         }
-
+        requestNicknameField.text = "";
     }
 
     #endregion

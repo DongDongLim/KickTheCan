@@ -28,4 +28,19 @@ public class CheckPanel : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public void WrongNickname(string name)
+    {
+        text.text = "\"" + name + "\"\n" + "사용자이름이 잘못되었습니다";
+    }
+
+    public void AlreadyFriend(string name)
+    {
+        text.text = "\"" + name + "\"\n" + "이미 친구입니다";
+    }
+    
+    public void RequestSuccese(string name)
+    {
+        text.text = "\"" + name + "\"\n" + "요청 성공";
+    }
+
 }

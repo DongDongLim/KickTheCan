@@ -144,7 +144,6 @@ namespace YSM
                 typeButtonText.text = curCharacterType.ToString();
                 curChatType = GameChatType.DEAD;
                 typeButton.interactable = false;
-
             }
             else
             {
