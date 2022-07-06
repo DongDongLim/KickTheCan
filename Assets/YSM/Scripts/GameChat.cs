@@ -144,7 +144,6 @@ namespace YSM
                 typeButtonText.text = curCharacterType.ToString();
                 curChatType = GameChatType.DEAD;
                 typeButton.interactable = false;
-
             }
             else
             {
@@ -255,11 +254,11 @@ namespace YSM
             if (receiveChatType == GameChatType.TEAM)
             {
                 GameObject tmpEntry = Instantiate(entry);
-                tmpEntry.transform.localScale = Vector3.one;
+                //tmpEntry.transform.localScale = Vector3.one;
                 tmpEntry.transform.SetParent(teamChatContent.transform);
             }
 
-            entry.transform.localScale = Vector3.one;
+            //entry.transform.localScale = Vector3.one;
             //entry.transform.SetParent(allChatContent.transform);
 
         }
