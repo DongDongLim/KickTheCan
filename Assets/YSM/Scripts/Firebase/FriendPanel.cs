@@ -21,6 +21,8 @@ public class FriendPanel : MonoBehaviour
     [SerializeField] GameObject friendPanel;
     [SerializeField] GameObject requestPanel;
 
+    [SerializeField] GameObject userNameWrong;
+
 
 
     public void RequestFriend()
@@ -80,6 +82,7 @@ public class FriendPanel : MonoBehaviour
         }
         else
         {
+            userNameWrong.SetActive(true);
             Debug.Log("없는사람");
         }
 
