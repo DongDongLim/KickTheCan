@@ -100,6 +100,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate01
       objectReference: {fileID: 0}
+    - target: {fileID: 6410723537546190768, guid: 916053fc43fda8141b8fc395a626cfb1,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.026166381
+      objectReference: {fileID: 0}
+    - target: {fileID: 6410723537546190768, guid: 916053fc43fda8141b8fc395a626cfb1,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 2.1063327e-19
+      objectReference: {fileID: 0}
+    - target: {fileID: 6410723537546190768, guid: 916053fc43fda8141b8fc395a626cfb1,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -0.000012648105
+      objectReference: {fileID: 0}
+    - target: {fileID: 6410723537546190768, guid: 916053fc43fda8141b8fc395a626cfb1,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.0085415365
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 916053fc43fda8141b8fc395a626cfb1, type: 3}
 --- !u!4 &8022476015458681732 stripped
@@ -175,7 +195,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate01
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6410723537546190768, guid: 916053fc43fda8141b8fc395a626cfb1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 916053fc43fda8141b8fc395a626cfb1, type: 3}
 --- !u!4 &8880975407333425266 stripped
 Transform:
@@ -250,7 +271,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate01
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6410723537546190768, guid: 916053fc43fda8141b8fc395a626cfb1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 916053fc43fda8141b8fc395a626cfb1, type: 3}
 --- !u!4 &2675672658413279376 stripped
 Transform:

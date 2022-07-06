@@ -100,6 +100,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8483698675665414707, guid: 4776e717a617f2c4db4757fd71f205de,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.020083455
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483698675665414707, guid: 4776e717a617f2c4db4757fd71f205de,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.026158132
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483698675665414707, guid: 4776e717a617f2c4db4757fd71f205de,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0.00089525216
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483698675665414707, guid: 4776e717a617f2c4db4757fd71f205de,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -0.0008974874
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483698675665414707, guid: 4776e717a617f2c4db4757fd71f205de,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.008537414
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4776e717a617f2c4db4757fd71f205de, type: 3}
 --- !u!4 &2718528776322963869 stripped
@@ -175,7 +200,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8483698675665414707, guid: 4776e717a617f2c4db4757fd71f205de, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4776e717a617f2c4db4757fd71f205de, type: 3}
 --- !u!4 &8537703929438938840 stripped
 Transform:
@@ -250,7 +276,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8483698675665414707, guid: 4776e717a617f2c4db4757fd71f205de, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4776e717a617f2c4db4757fd71f205de, type: 3}
 --- !u!4 &6021533348233379128 stripped
 Transform:
