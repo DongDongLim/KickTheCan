@@ -4,23 +4,27 @@ using UnityEngine;
 
 public class ObjectScript : MonoBehaviour
 {
-        [SerializeField]
-        GameObject[] list;
+    //[SerializeField]
+    //GameObject[] list;
 
-        private int count;
-        private int random;
+    //private int count;
+    //private int random;
 
-        private void Awake() {
-            count = transform.childCount;
-            list = new GameObject[count];
-            
-            for (int i = 0; i < count; i++)
-            {
-                list[i] = transform.GetChild(i).gameObject;
-            }
+    public void ActiveChild(int index)
+    {
+        //count = transform.childCount;
+        //list = new GameObject[count];
 
-            random = Random.Range(0,count);
+        //for (int i = 0; i < count; i++)
+        //{
+        //    list[i] = transform.GetChild(i).gameObject;
+        //}
 
-            list[random].SetActive(true);
-        }
+        //random = Random.Range(0, count);
+
+        //list[random].SetActive(true);
+        transform.GetChild(index).gameObject.SetActive(true);
+    }
+
+
 }
