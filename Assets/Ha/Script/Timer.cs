@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    public Text minutesText;
-    public Text secondsText;
-    public GameObject timeOut;   
+    public TextMeshProUGUI minutesText;
+    public TextMeshProUGUI secondsText;
+    public GameObject timeOut;
+    public GameObject stopWatch;
 
     public int totalSeconds = 0;
     public int minutes;
@@ -23,7 +25,7 @@ public class Timer : MonoBehaviour
         
         if (10 > minutes)
         {
-            minutesText.text =  "0" + minutes + " : ";
+            minutesText.text =  "0" + minutes;
         }
 
         if (10 > sec)
@@ -51,6 +53,7 @@ public class Timer : MonoBehaviour
         {
             minutesText.enabled = false;
             secondsText.enabled = false;
+            stopWatch.SetActive(false);
             timeOut.SetActive(true);
 
             StopAllCoroutines();
@@ -83,11 +86,11 @@ public class Timer : MonoBehaviour
 
         if (10 > minutes)
         {
-            minutesText.text = "0" + minutes + " : ";
+            minutesText.text = "0" + minutes;
         }
         else
         {
-            minutesText.text = minutes + " : ";
+            minutesText.text = minutes.ToString();
         }
 
         if (10 > sec)
