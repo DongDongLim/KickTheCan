@@ -28,6 +28,7 @@ public class AuthManager : MonoBehaviour
     bool isFinishGoogleLogFunction;
     bool isWrong;
     [SerializeField] GameObject IDPasswordMismatchPanel;
+
     void Awake()
     {
         // 객체 초기화
