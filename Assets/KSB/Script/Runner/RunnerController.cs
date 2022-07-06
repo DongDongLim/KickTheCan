@@ -26,6 +26,7 @@ namespace DH
 
         public override void ControlUpdate()
         {
+            move.BorderChecker();
             move.GroundChecker();
         }
 
