@@ -10,6 +10,8 @@ using Firebase.Database;
 #if UNITY_ANDROID
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
+using UnityEngine.SocialPlatforms;
+using System.Threading.Tasks;
 #endif
 
 public class AuthManager : MonoBehaviour
@@ -157,8 +159,9 @@ public class AuthManager : MonoBehaviour
             return;
 
         PlayGamesPlatform.InitializeInstance(new PlayGamesClientConfiguration.Builder()
-            .RequestIdToken()
+            .RequestServerAuthCode(false)
             .RequestEmail()
+            .RequestIdToken()
             .Build());
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();

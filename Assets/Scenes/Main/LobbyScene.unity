@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10894,6 +10894,7 @@ MonoBehaviour:
   emailField: {fileID: 1306940195}
   passwordField: {fileID: 352224611}
   IDPasswordMismatchPanel: {fileID: 2011309765}
+  isNickName: 0
 --- !u!114 &1133326891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13849,6 +13850,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c1f7c8bddb645949a9ae2cbfdfb4c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayNickName: {fileID: 476639686}
+  displayNicknameCheckButton: {fileID: 2093782002}
+  checkPanel: {fileID: 1585281950}
 --- !u!222 &1417617099
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16393,7 +16397,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -15.9, y: -14.6}
+  m_AnchoredPosition: {x: -15.899994, y: -14.600006}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1631320234
