@@ -21,7 +21,6 @@ namespace DH
 
         public void BeCaught(GameObject player)
         {
-            UIDataMng.Instance.SetRunner(UIDataMng.Instance.RUNNER_LIFE - 1);
             PhotonNetwork.Destroy(player);
             isRunnerBeCaught = true;
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.DEAD);

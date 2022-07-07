@@ -57,7 +57,8 @@ public class Timer : MonoBehaviour
             timeOut.SetActive(true);
 
             StopAllCoroutines();
-            GameManager.Instance.GameOver();
+            StartCoroutine("GameManager.Instance.WhoIsWinner()");
+            // TODO : 게임 종료 기능 작동
         }
     }
 
@@ -68,8 +69,8 @@ public class Timer : MonoBehaviour
 
         if (30 >= totalSeconds)
         {
-            minutesText.color = Color.red;
-            secondsText.color = Color.red;
+            GetComponent<Text>().color = Color.red;
+            secondsText.GetComponent<Text>().color = Color.red;
         }
 
         if (sec > 0)

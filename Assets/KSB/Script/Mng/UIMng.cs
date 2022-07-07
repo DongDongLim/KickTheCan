@@ -19,6 +19,7 @@ namespace DH
         public GameObject taggerUI;
         public GameObject taggerMoveJoystick;
         public GameObject taggerRotateJoystick;
+        public GameObject[] attackCount;
 
         public Button jumpBtn;
         public Button actionBtn;
@@ -42,6 +43,21 @@ namespace DH
         protected override void OnAwake()
         {
 
+        }
+
+        public void SetAttackCount(int count)
+        {
+            for (int i = 1; i < attackCount.Length+1; i++)
+            {
+                if (count >= i)
+                {
+                    attackCount[i-1].SetActive(true);
+                }
+                else
+                {
+                    attackCount[i-1].SetActive(false);
+                }
+            }
         }
 
         public void SetUI(string who) 

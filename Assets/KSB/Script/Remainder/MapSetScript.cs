@@ -62,7 +62,6 @@ namespace DH
                 }
                 PhotonNetwork.Instantiate
                    ("Can", mapObject.GetComponent<MapSetting>().CanSpqwnPos(), Quaternion.identity, 0).GetComponent<CanSetScript>().SetObjIndex();
-                
             }
             gameObject.SetActive(false);
 

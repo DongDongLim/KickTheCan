@@ -11,8 +11,6 @@ public class StartTimer : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI startTimer;
 
-    public GameObject playTimer;
-
     public int timer;
 
     private void Start() {
@@ -56,7 +54,6 @@ public class StartTimer : MonoBehaviour
         startTimer.color = Color.white;
         StartCoroutine(TimerStopCoroutine());
 
-        playTimer.GetComponent<Timer>().enabled = true;
     }
 
     IEnumerator TimerStopCoroutine()

@@ -19,11 +19,12 @@ public class GameManager : MonoBehaviourPunCallbacks
     public GameObject canCheckObj;
     public UnityAction canCheckActionTrue;
     public UnityAction canCheckActionFalse;
-    public Transform[] spawnPos;  
+    public Transform[] spawnPos;
+    public GameObject timer;
     public List<GameObject> playerObjList;
     public GameObject runnerWinUI;
     public GameObject taggerWinUI;
- 
+
     private bool isTagger;
     private bool isPlaying = false;
 
@@ -151,7 +152,9 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         int playerNumber = PhotonNetwork.LocalPlayer.GetPlayerNumber();
 
-        CreatePlayer();        
+        CreatePlayer();
+
+        timer.SetActive(true);
     }
 
     private bool CheckAllPlayerLoadLevel()
@@ -239,6 +242,9 @@ public class GameManager : MonoBehaviourPunCallbacks
         // TODO : (Test) StartSetting / DH
         StartCoroutine("GameIsOn");
 
+        Debug.Log(playerList.Count - m_maxTagger);
+        Debug.Log(m_maxTagger);
+
         // 테스트용 tagger설정 코드
         int minPlayer = 3;
 
@@ -313,7 +319,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void ObserverMode()
     {
-        Debug.Log("ObserverMode 호출");
+        Debug.Log("ReEntry Mode 호출");
         Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
               
         DH.MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);        
@@ -343,6 +349,11 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("room에 입장");
         Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
+
+        m_maxTagger = PhotonNetwork.PlayerList.Length / 4;
+        m_maxTagger = (int)Mathf.Clamp(m_maxTagger, 1, 5);
+
+        SetPlayerCounting(playerList.Count - m_maxTagger, m_maxTagger);
     }
 
     private bool IsAdditionalPlayer()
@@ -365,27 +376,29 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void GameOver()
     {
-        StartCoroutine(WhoIsWinner());
+        // 게임 종료 조건 체크 -> true -> 승자 UI 표시 -> 모두 룸으로 가기           
+       
 
+        // TODO : 모두 로비로
         if (PhotonNetwork.IsMasterClient)
         {
-            foreach (Player p in PhotonNetwork.PlayerList)
-            {
-                Hashtable props = new Hashtable() { { GameData.PLAYER_LOAD, false } };
-                p.SetCustomProperties(props);
-            }
+            //PhotonNetwork.LeaveRoom();
+            //PhotonNetwork.LoadLevel(1);
+            // Test 같이 시작하는 방으로 돌아가기
         }
 
-        Debug.Log("모든 유저 Load -> false");
-        PhotonNetwork.LeaveRoom();
+        Debug.Log("게임 종료");
+        Debug.Log("Go to Lobby");
+        
+        // TODO : 모든 플레이어 load, ready -> false로 바꾸기
 
         return;
     }
 
-    IEnumerator WhoIsWinner()
+    public void WhoIsWinner()
     {
-        yield return new WaitForSeconds(5f);
-
+        //yield return new WaitForSeconds(2f);
+        
         playerObjList = Instance.GetComponent<MapSettingMng>().playerObjList;
 
         foreach (GameObject player in playerObjList)
@@ -396,13 +409,12 @@ public class GameManager : MonoBehaviourPunCallbacks
                 Debug.Log("러너 승리");
                 runnerWinUI.SetActive(true);
                 StopAllCoroutines();
-            }
+            }            
         }
 
         // 술래 승리
         Debug.Log("술래 승리");
         taggerWinUI.SetActive(true);
-
     }
 
     public void CountDeath()
@@ -422,7 +434,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             taggerWinUI.SetActive(true);
             StartCoroutine(TaggerWin());
-        }         
+        }
+        SetPlayerCounting(m_iRunner - m_deathCount,m_maxTagger);
     }
 
     IEnumerator TaggerWin()
@@ -441,6 +454,16 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
         Debug.Log("모든 유저 Load -> false");
         PhotonNetwork.LeaveRoom();
+    }
+
+    public void SetPlayerCounting(int runner,int tagger)
+    {
+        // 태거 러너 인원 체크
+        UIDataMng.Instance.RunnerCounting(runner);
+        UIDataMng.Instance.TaggerCounting(tagger);
+
+        Debug.Log("러너 인원 : "+runner);
+        Debug.Log("태거 인원 : " + tagger);
     }
 }
 
