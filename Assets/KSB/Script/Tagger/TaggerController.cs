@@ -16,15 +16,17 @@ namespace DH
         private int attackCurCount;
 
         // 공격 횟수가 차는 시간
-        private static float attackCool = 10f;
+        private static float attackCool = 5f;
         private float attackCurCool;
 
 
         private void Awake() {
-            attackCurCount = attackMaxCount;
             CameraMng.instance.TaggerCamSetting();
 
             UIMng.instance.SetUI("Tagger");
+
+            attackCurCount = attackMaxCount;
+            UIMng.instance.SetAttackCount(attackCurCount);
         }
         public override void ControlUpdate()
         {
@@ -41,6 +43,7 @@ namespace DH
             if (attackCurCool >= attackCool){
                 attackCurCool = 0;
                 attackCurCount++;
+                UIMng.instance.SetAttackCount(attackCurCount);
                 return;
             }
             attackCurCool += Time.deltaTime;
@@ -49,6 +52,7 @@ namespace DH
         public void AttackComplete()
         {
             attackCurCount--;
+            UIMng.instance.SetAttackCount(attackCurCount);
         }
 
         public override void ControllerAction()
