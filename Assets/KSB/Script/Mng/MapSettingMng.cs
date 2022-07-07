@@ -58,7 +58,6 @@ namespace DH
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.TAGGER);
 
-            UIDataMng.Instance.SetTagger(UIDataMng.Instance.TAGGER_LIFE + 1);
             UISetting(true);
 
             // TODO : (Test) GameOver / SH          

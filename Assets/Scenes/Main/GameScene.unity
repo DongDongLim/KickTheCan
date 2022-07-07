@@ -1150,7 +1150,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 358601539}
-  m_LocalRotation: {x: 0.57357645, y: 3e-45, z: 1e-45, w: 0.8191521}
+  m_LocalRotation: {x: 0.57357645, y: -1e-45, z: -1e-45, w: 0.8191521}
   m_LocalPosition: {x: 0, y: 18.793852, z: -6.8404055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4292,7 +4292,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 940741985}
-  m_LocalRotation: {x: 0.57357645, y: 3e-45, z: 1e-45, w: 0.8191521}
+  m_LocalRotation: {x: 0.57357645, y: -1e-45, z: -1e-45, w: 0.8191521}
   m_LocalPosition: {x: 0, y: 18.793852, z: -6.8404055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5971,8 +5971,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RunnerCount: {fileID: 1992214012}
   TaggerCount: {fileID: 759223191}
-  RUNNER_LIFE: 0
-  TAGGER_LIFE: 0
+  RUNNER_LIVE: 0
+  TAGGER_LIVE: 0
 --- !u!114 &1405825247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9533,6 +9533,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7173730520898674815, guid: e8245370c4afb6245bfbcc56bd61a500,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4675194306750873510, guid: e8245370c4afb6245bfbcc56bd61a500,
         type: 3}
       propertyPath: m_RootOrder

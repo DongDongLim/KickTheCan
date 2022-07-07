@@ -18,18 +18,18 @@ public class UIDataMng : MonoBehaviourPunCallbacks
     public TextMeshProUGUI RunnerCount;
     public TextMeshProUGUI TaggerCount;
 
-    public int RUNNER_LIFE = 0;
-    public int TAGGER_LIFE = 0;
+    int RUNNER_LIVE = 0;
+    int TAGGER_LIVE = 0;
 
-    public void SetRunner(int count)
+    public void RunnerCounting(int count)
     {
-        RUNNER_LIFE = count;
-        RunnerCount.text = RUNNER_LIFE.ToString();
+        RUNNER_LIVE = count;
+        RunnerCount.text = RUNNER_LIVE.ToString();
     }
 
-    public void SetTagger(int count)
+    public void TaggerCounting(int count)
     {
-        TAGGER_LIFE = count;
-        TaggerCount.text = TAGGER_LIFE.ToString();
+        TAGGER_LIVE = count;
+        TaggerCount.text = TAGGER_LIVE.ToString();
     }
 }

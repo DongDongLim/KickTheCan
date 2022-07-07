@@ -240,6 +240,10 @@ public class GameManager : MonoBehaviourPunCallbacks
         // TODO : (Test) StartSetting / DH
         StartCoroutine("GameIsOn");
 
+        Debug.Log(playerList.Count - m_maxTagger);
+        Debug.Log(m_maxTagger);
+        SetPlayerCounting(playerList.Count - m_maxTagger, m_maxTagger);
+
         // 테스트용 tagger설정 코드
         int minPlayer = 3;
 
@@ -426,7 +430,18 @@ public class GameManager : MonoBehaviourPunCallbacks
             // 게임 종료 UI Set
             Debug.Log("게임종료");
             GameOver();
-        }         
+        }
+        SetPlayerCounting(m_iRunner - m_deathCount,m_maxTagger);
+    }
+
+    public void SetPlayerCounting(int runner,int tagger)
+    {
+        // 태거 러너 인원 체크
+        UIDataMng.Instance.RunnerCounting(runner);
+        UIDataMng.Instance.TaggerCounting(tagger);
+
+        Debug.Log("러너 인원 : "+runner);
+        Debug.Log("태거 인원 : " + tagger);
     }
 }
 
