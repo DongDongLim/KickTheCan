@@ -242,7 +242,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         Debug.Log(playerList.Count - m_maxTagger);
         Debug.Log(m_maxTagger);
-        SetPlayerCounting(playerList.Count - m_maxTagger, m_maxTagger);
 
         // 테스트용 tagger설정 코드
         int minPlayer = 3;
@@ -348,6 +347,11 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("room에 입장");
         Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
+
+        m_maxTagger = PhotonNetwork.PlayerList.Length / 4;
+        m_maxTagger = (int)Mathf.Clamp(m_maxTagger, 1, 5);
+
+        SetPlayerCounting(playerList.Count - m_maxTagger, m_maxTagger);
     }
 
     private bool IsAdditionalPlayer()
