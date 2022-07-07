@@ -61,7 +61,7 @@ namespace DH
                 ownerID = PhotonNetwork.LocalPlayer.GetPlayerNumber();
             charactorBody = transform.GetChild(2).transform;
             control = GetComponent<Controller>();
-            control.Setting(rigid, taggerAnim);
+            control.Setting(rigid);
             isSettingComplete = true;
         }
 
@@ -107,7 +107,6 @@ namespace DH
 
         IEnumerator Die()
         {
-           
             yield return new WaitForSeconds(0.5f);
             if(photonView.IsMine)
             {
