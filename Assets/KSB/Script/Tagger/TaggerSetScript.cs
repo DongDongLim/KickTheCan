@@ -9,7 +9,7 @@ namespace DH
     {
         public void SetObj()
         {
-            photonView.RPC("ChildObjCreate", RpcTarget.All);
+            photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered);
         }
 
         [PunRPC]
