@@ -35,7 +35,13 @@ namespace DH
         Vector3 rayStatePos;
         Vector2 boxCastSize;
 
-        float maxRayDistance;
+        float maxGroundRayDistance;
+
+        // 벽 체크
+        bool isborder;
+
+        float maxBorderRayDistance;
+
 
         private void Start()
         {
@@ -47,7 +53,8 @@ namespace DH
             UIMng.instance.jumpAction += Jump;
             owner = GetComponent<PlayerScript>();
             charactorBody = transform.GetChild(2).transform;
-            maxRayDistance = charactorBody.GetComponent<Collider>().bounds.size.y * 0.5f;
+            maxGroundRayDistance = charactorBody.GetComponent<Collider>().bounds.size.y * 0.5f;
+            maxBorderRayDistance = charactorBody.GetComponent<Collider>().bounds.size.x;
             rigid = r;
         }
 
@@ -55,6 +62,11 @@ namespace DH
         {
             if (UIMng.instance != null)
                 UIMng.instance.jumpAction -= Jump;
+        }
+
+        public void BorderChecker()
+        {
+            isborder = Physics.Raycast(charactorBody.position,charactorBody.forward,maxBorderRayDistance,LayerMask.GetMask("Wall"));
         }
 
         public void Move(Vector2 inputDirection)
@@ -73,7 +85,12 @@ namespace DH
                 return;
 
             charactorBody.forward = moveDir;
+
+            if (isborder)
+                return;
+
             rigid.MovePosition(transform.position + moveDir * Time.fixedDeltaTime * moveSpeed);
+            //rigid.velocity = new Vector3(moveDir.x,rigid.velocity.y,moveDir.z);
         }
         public void LookAround(Vector2 inputDirection)
         {
@@ -116,10 +133,10 @@ namespace DH
 
         public void GroundChecker()
         {
-            rayStatePos = new Vector3(transform.position.x, transform.position.y + maxRayDistance, transform.position.z);
+            rayStatePos = new Vector3(transform.position.x, transform.position.y + maxGroundRayDistance, transform.position.z);
             boxCastSize = new Vector2(charactorBody.GetComponent<Collider>().bounds.size.x,charactorBody.GetComponent<Collider>().bounds.size.z);
             RaycastHit hit;
-            if (Physics.SphereCast(rayStatePos + (Vector3.up * maxRayDistance),boxCastSize.x * 0.5f,Vector3.down,out hit,maxRayDistance + 0.5f,LayerMask.GetMask("Ground","Object")))
+            if (Physics.SphereCast(rayStatePos + (Vector3.up * maxGroundRayDistance),boxCastSize.x * 0.5f,Vector3.down,out hit,maxGroundRayDistance + 0.5f,LayerMask.GetMask("Ground","Object")))
             {
                 isJump = false;
                 owner?.JumpAnim(isJump);
