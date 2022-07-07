@@ -19,8 +19,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public GameObject canCheckObj;
     public UnityAction canCheckActionTrue;
     public UnityAction canCheckActionFalse;
-    public Transform[] spawnPos;
-    public GameObject timer;
+    public Transform[] spawnPos;  
     public List<GameObject> playerObjList;
     public GameObject runnerWinUI;
     public GameObject taggerWinUI;

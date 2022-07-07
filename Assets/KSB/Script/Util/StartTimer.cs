@@ -56,8 +56,7 @@ public class StartTimer : MonoBehaviour
         startTimer.color = Color.white;
         StartCoroutine(TimerStopCoroutine());
 
-        playTimer.SetActive(true);
-
+        playTimer.GetComponent<Timer>().enabled = true;
     }
 
     IEnumerator TimerStopCoroutine()
