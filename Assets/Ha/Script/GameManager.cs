@@ -315,6 +315,13 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         Hashtable props = new Hashtable() { { GameData.MASTER_PLAY, isPlaying } };
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+
+        m_maxTagger = PhotonNetwork.PlayerList.Length / 4;
+        m_maxTagger = (int)Mathf.Clamp(m_maxTagger, 1, 5);
+
+        SetPlayerCounting(PhotonNetwork.PlayerList.Length - m_maxTagger, m_maxTagger);
+        Debug.Log(PhotonNetwork.PlayerList.Length);
+        Debug.Log(m_maxTagger);
     }
 
     private void ObserverMode()
@@ -349,11 +356,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("room에 입장");
         Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
-
-        m_maxTagger = PhotonNetwork.PlayerList.Length / 4;
-        m_maxTagger = (int)Mathf.Clamp(m_maxTagger, 1, 5);
-
-        SetPlayerCounting(playerList.Count - m_maxTagger, m_maxTagger);
     }
 
     private bool IsAdditionalPlayer()
@@ -462,7 +464,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         UIDataMng.Instance.RunnerCounting(runner);
         UIDataMng.Instance.TaggerCounting(tagger);
 
-        Debug.Log("러너 인원 : "+runner);
+        Debug.Log("러너 인원 : " + runner);
         Debug.Log("태거 인원 : " + tagger);
     }
 }

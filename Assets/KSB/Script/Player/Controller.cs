@@ -16,7 +16,7 @@ namespace DH
         [SerializeField]
         protected PlayerMove move;
 
-        public void Setting(Rigidbody r, Animator animator)
+        public void Setting(Rigidbody r)
         {
             owner = GetComponent<PlayerScript>();
             move = GetComponent<PlayerMove>();
