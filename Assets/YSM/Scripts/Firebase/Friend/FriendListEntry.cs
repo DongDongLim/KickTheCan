@@ -6,17 +6,23 @@ using UnityEngine.UI;
 
 public class FriendListEntry : MonoBehaviour
 {
-    [SerializeField] private Text friendName;
+    string friendName;
+    [SerializeField] private Text friendNameText;
     [SerializeField] private Image loginImage;
     [SerializeField] private bool loginState;
 
     [SerializeField] private Button openBtn;
     private FriendPanel friendPanel;
 
-    private string UID;
+    public string UID { get; set; }
 
     DatabaseReference eachReference;
 
+
+    public string GetName()
+    {
+        return friendName;
+    }
 
     private void Start()
     {
@@ -27,7 +33,8 @@ public class FriendListEntry : MonoBehaviour
 
     public void SetData(string name, string UID)
     {
-        this.friendName.text = name;
+        this.friendNameText.text = name;
+        friendName = name;
         this.UID = UID;
         eachReference = FirebaseDatabase.DefaultInstance.GetReference("UserInfo").Child(UID).Child(DBData.KeyIsLogin);
 
@@ -81,14 +88,12 @@ public class FriendListEntry : MonoBehaviour
         if(loginState == true)
         {
             //로그인중
-            openBtn.interactable = true;
             loginImage.color = Color.green;
 
         }
         else
         {
             //로그아웃 
-            openBtn.interactable = false;
             loginImage.color = Color.black;
 
         }
@@ -101,7 +106,7 @@ public class FriendListEntry : MonoBehaviour
 
     public string GetRequestFriendName()
     {
-        return friendName.text;
+        return friendNameText.text;
     }
     private void OnDestroy()
     {

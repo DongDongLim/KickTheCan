@@ -25,4 +25,16 @@ public class FuncTool
         tmp.Add(key, integerData);
         return tmp;
     }
+
+    static public string CompareStrings(string str1 ,string str2)
+    {
+        switch (string.Compare(str1, str2))
+        {
+            case -1:
+                return str1 + str2;
+            case 1:
+                return str2 + str1;
+            default: return "Error";
+        }
+    }
 }

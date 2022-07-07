@@ -23,6 +23,7 @@ public class FriendPanel : MonoBehaviour
     [SerializeField] GameObject requestPanel;
 
     [SerializeField] GameObject checkPanel;
+    [SerializeField] GameObject friendInfo;
 
 
 
@@ -43,6 +44,7 @@ public class FriendPanel : MonoBehaviour
     {
         if(requestNicknameField.text == "")
         {
+            Debug.Log(">?");
             return;
         }
         StartCoroutine("FindUserNickname");
@@ -153,6 +155,13 @@ public class FriendPanel : MonoBehaviour
              .Child(DBFriend.FriendRequests /*DB Friend Request List에 있는 데이터 지워주기*/)
              .Child(entry.GetRequestFriendName()/*지울 데이터*/)
              .RemoveValueAsync();
+        DBData dbData = new DBData("Aaa", "bbb", 123, true);
+        string json = JsonUtility.ToJson(dbData);
+
+        DatabaseManager.instance.chatReference
+             .Child("FriendChat")
+             .Child(FuncTool.CompareStrings(AuthManager.instance.GetCurrentUID(), entry.GetUID())/*내 UID에 있는거 지우고*/)
+             .SetPriorityAsync(dbData);
 
         Destroy(entry.gameObject);
     }
@@ -172,7 +181,10 @@ public class FriendPanel : MonoBehaviour
 
     public void OpenFriendInfo(FriendListEntry entry)
     {
-        Debug.Log("OpenClicked");
+        
+
+        friendInfo.SetActive(true);
+        friendInfo.GetComponent<FriendInfo>().SetUID(ref entry);
     }
 
 

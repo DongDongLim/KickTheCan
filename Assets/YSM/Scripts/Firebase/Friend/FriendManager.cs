@@ -15,10 +15,11 @@ public class FriendManager : MonoBehaviour
     [SerializeField] GameObject requestFriendprefab;
     [SerializeField] GameObject RequestContent;
 
-
+    Dictionary<string, GameObject> myfriendDictionary;
     private void Start()
     {
         instance = this;
+        myfriendDictionary = new Dictionary<string, GameObject>();
     }
 
 
@@ -30,22 +31,30 @@ public class FriendManager : MonoBehaviour
             .Child(AuthManager.instance.GetAuthUID())
             .Child(DBFriend.Friend)
             .Child(DBFriend.FriendLists)
-            .ChildAdded += friendTest;
+            .ChildAdded += FriendListAdd;
 
         FirebaseDatabase.DefaultInstance
             .GetReference("UserInfo")
             .Child(AuthManager.instance.GetAuthUID())
             .Child(DBFriend.Friend)
             .Child(DBFriend.FriendRequests)
-            .ChildAdded += RequestTest;
+            .ChildAdded += RequestListAdd;
+
+        FirebaseDatabase.DefaultInstance
+            .GetReference("UserInfo")
+            .Child(AuthManager.instance.GetAuthUID())
+            .Child(DBFriend.Friend)
+            .Child(DBFriend.FriendLists)
+            .ChildRemoved += FriendRemove;
     }
 
 
-    private void friendTest(object sender, ChildChangedEventArgs e)
+    private void FriendListAdd(object sender, ChildChangedEventArgs e)
     {
         Debug.Log("내 친구 데이터 가져옴");
         Debug.Log(e.Snapshot.Key);
         Debug.Log(e.Snapshot.Value.ToString());
+
 
         GameObject entry = Instantiate(friendListprefab);
         entry.GetComponent<FriendListEntry>().SetData(
@@ -54,10 +63,12 @@ public class FriendManager : MonoBehaviour
             );
         entry.transform.localScale = Vector3.one;
         entry.transform.SetParent(friendContent.transform);
+        myfriendDictionary.Add(e.Snapshot.Key, entry);
+        Debug.Log(myfriendDictionary.Count);
     }
 
 
-    private void RequestTest(object sender, ChildChangedEventArgs e)
+    private void RequestListAdd(object sender, ChildChangedEventArgs e)
     {
         Debug.Log("친구요청옴");
         Debug.Log(e.Snapshot.Key);
@@ -71,6 +82,16 @@ public class FriendManager : MonoBehaviour
         entry.transform.SetParent(RequestContent.transform);
     }
 
+    private void FriendRemove(object sender, ChildChangedEventArgs e)
+    {
+        Debug.Log("내 친구 삭제됨");
+        Debug.Log(e.Snapshot.Key);
+        Debug.Log(e.Snapshot.Value.ToString());
+
+        Destroy(myfriendDictionary[e.Snapshot.Key]);
+
+
+    }
 
 
 
