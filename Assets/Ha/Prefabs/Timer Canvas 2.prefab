@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3774411346104400405}
   - component: {fileID: 208894596408872816}
   m_Layer: 5
-  m_Name: Timer Canvas 1
+  m_Name: Timer Canvas 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,7 +135,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 16.4, y: -15}
+  m_AnchoredPosition: {x: 16.4, y: -85}
   m_SizeDelta: {x: 91.73865, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3582191782983442045
@@ -213,7 +213,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 39.1, y: -15}
+  m_AnchoredPosition: {x: 39.1, y: -85}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3582191784567598997
@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 8554590710087451153}
   - component: {fileID: 9153966872475080584}
   - component: {fileID: 4781687232345436848}
-  - component: {fileID: 3582191784440857528}
+  - component: {fileID: 7050331507790603531}
   m_Layer: 5
   m_Name: Minutes
   m_TagString: Untagged
@@ -292,7 +292,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -16.7, y: -15}
+  m_AnchoredPosition: {x: -16.7, y: -85}
   m_SizeDelta: {x: 91.73865, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9153966872475080584
@@ -336,7 +336,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: '00 :'
---- !u!114 &3582191784440857528
+--- !u!114 &7050331507790603531
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -345,11 +345,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8810724186237038444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c33c83c0641e6f84a9e47617dc0703a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a194df0eb82fa2438da8db4a84d96bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   minutesText: {fileID: 4781687232345436848}
   secondsText: {fileID: 3582191782983442044}
   timeOut: {fileID: 3582191784567598998}
+  totalSeconds: 0
   minutes: 5
   sec: 0

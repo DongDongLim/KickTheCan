@@ -21,7 +21,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     public UnityAction canCheckActionFalse;
     public Transform[] spawnPos;
     public GameObject timer;
-    public List<GameObject> playerObjList;  
+    public List<GameObject> playerObjList;
+    public GameObject runnerWinUI;
+    public GameObject taggerWinUI;
  
     private bool isTagger;
     private bool isPlaying = false;
@@ -150,9 +152,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         int playerNumber = PhotonNetwork.LocalPlayer.GetPlayerNumber();
 
-        CreatePlayer();
-
-        timer.SetActive(true);
+        CreatePlayer();        
     }
 
     private bool CheckAllPlayerLoadLevel()
@@ -314,7 +314,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void ObserverMode()
     {
-        Debug.Log("ReEntry Mode 호출");
+        Debug.Log("ObserverMode 호출");
         Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
               
         DH.MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);        
@@ -366,29 +366,27 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void GameOver()
     {
-        // 게임 종료 조건 체크 -> true -> 승자 UI 표시 -> 모두 룸으로 가기           
-       
+        StartCoroutine(WhoIsWinner());
 
-        // TODO : 모두 로비로
         if (PhotonNetwork.IsMasterClient)
         {
-            //PhotonNetwork.LeaveRoom();
-            //PhotonNetwork.LoadLevel(1);
-            // Test 같이 시작하는 방으로 돌아가기
+            foreach (Player p in PhotonNetwork.PlayerList)
+            {
+                Hashtable props = new Hashtable() { { GameData.PLAYER_LOAD, false } };
+                p.SetCustomProperties(props);
+            }
         }
 
-        Debug.Log("게임 종료");
-        Debug.Log("Go to Lobby");
-        
-        // TODO : 모든 플레이어 load, ready -> false로 바꾸기
+        Debug.Log("모든 유저 Load -> false");
+        PhotonNetwork.LeaveRoom();
 
         return;
     }
 
-    public void WhoIsWinner()
+    IEnumerator WhoIsWinner()
     {
-        //yield return new WaitForSeconds(2f);
-        
+        yield return new WaitForSeconds(5f);
+
         playerObjList = Instance.GetComponent<MapSettingMng>().playerObjList;
 
         foreach (GameObject player in playerObjList)
@@ -396,15 +394,16 @@ public class GameManager : MonoBehaviourPunCallbacks
             if (!player.GetComponent<PlayerScript>().isDead)
             {
                 // 러너 승리
-
                 Debug.Log("러너 승리");
-                GameOver();
-            }            
+                runnerWinUI.SetActive(true);
+                StopAllCoroutines();
+            }
         }
 
         // 술래 승리
         Debug.Log("술래 승리");
-        GameOver();
+        taggerWinUI.SetActive(true);
+
     }
 
     public void CountDeath()
@@ -422,11 +421,27 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         if (m_iRunner == m_deathCount)
         {
-            // TODO : winner UI Set 
-            // 게임 종료 UI Set
-            Debug.Log("게임종료");
-            GameOver();
+            taggerWinUI.SetActive(true);
+            StartCoroutine(TaggerWin());
         }         
+    }
+
+    IEnumerator TaggerWin()
+    {
+        yield return new WaitForSeconds(5f);
+
+        Debug.Log("술래 승리, 게임종료");
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            foreach (Player p in PhotonNetwork.PlayerList)
+            {
+                Hashtable props = new Hashtable() { { GameData.PLAYER_LOAD, false } };
+                p.SetCustomProperties(props);
+            }
+        }
+        Debug.Log("모든 유저 Load -> false");
+        PhotonNetwork.LeaveRoom();
     }
 }
 
