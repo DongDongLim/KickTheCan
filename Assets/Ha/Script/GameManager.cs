@@ -21,8 +21,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     public UnityAction canCheckActionFalse;
     public Transform[] spawnPos;
     public GameObject timer;
-    public List<GameObject> playerObjList;  
- 
+    public List<GameObject> playerObjList;
+    public GameObject runnerWinUI;
+    public GameObject taggerWinUI;
+
     private bool isTagger;
     private bool isPlaying = false;
 
@@ -404,15 +406,15 @@ public class GameManager : MonoBehaviourPunCallbacks
             if (!player.GetComponent<PlayerScript>().isDead)
             {
                 // 러너 승리
-
                 Debug.Log("러너 승리");
-                GameOver();
+                runnerWinUI.SetActive(true);
+                StopAllCoroutines();
             }            
         }
 
         // 술래 승리
         Debug.Log("술래 승리");
-        GameOver();
+        taggerWinUI.SetActive(true);
     }
 
     public void CountDeath()
@@ -430,12 +432,28 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         if (m_iRunner == m_deathCount)
         {
-            // TODO : winner UI Set 
-            // 게임 종료 UI Set
-            Debug.Log("게임종료");
-            GameOver();
+            taggerWinUI.SetActive(true);
+            StartCoroutine(TaggerWin());
         }
         SetPlayerCounting(m_iRunner - m_deathCount,m_maxTagger);
+    }
+
+    IEnumerator TaggerWin()
+    {
+        yield return new WaitForSeconds(5f);
+
+        Debug.Log("술래 승리, 게임종료");
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            foreach (Player p in PhotonNetwork.PlayerList)
+            {
+                Hashtable props = new Hashtable() { { GameData.PLAYER_LOAD, false } };
+                p.SetCustomProperties(props);
+            }
+        }
+        Debug.Log("모든 유저 Load -> false");
+        PhotonNetwork.LeaveRoom();
     }
 
     public void SetPlayerCounting(int runner,int tagger)

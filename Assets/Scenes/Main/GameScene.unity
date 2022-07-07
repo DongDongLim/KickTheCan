@@ -1394,7 +1394,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 358601539}
-  m_LocalRotation: {x: 0.57357645, y: -1e-45, z: -1e-45, w: 0.8191521}
+  m_LocalRotation: {x: 0.57357645, y: 3e-45, z: 1e-45, w: 0.8191521}
   m_LocalPosition: {x: 0, y: 18.793852, z: -6.8404055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5210,7 +5210,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 940741985}
-  m_LocalRotation: {x: 0.57357645, y: -1e-45, z: -1e-45, w: 0.8191521}
+  m_LocalRotation: {x: 0.57357645, y: 3e-45, z: 1e-45, w: 0.8191521}
   m_LocalPosition: {x: 0, y: 18.793852, z: -6.8404055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -7012,6 +7012,10 @@ MonoBehaviour:
   spawnPos: []
   timer: {fileID: 1005038123}
   playerObjList: []
+  runnerWinUI: {fileID: 7756907784897594747, guid: c7551a4490c058c419ca7f555297793f,
+    type: 3}
+  taggerWinUI: {fileID: 4703042654904573859, guid: 74ec7299f88b7404c9fca512843a5e5c,
+    type: 3}
 --- !u!114 &1405825244
 MonoBehaviour:
   m_ObjectHideFlags: 0
