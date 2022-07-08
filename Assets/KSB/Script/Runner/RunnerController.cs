@@ -11,12 +11,25 @@ namespace DH
     public class RunnerController : Controller, IDamaged
     {
 
+        ChangeLayer change;
+
         private void Awake()
         {
             
             CameraMng.instance.RunnerCamSetting();
-
+            GameManager.Instance.canCheckActionTrue += ChangeLayer;
             UIMng.instance.SetUI("Runner");
+        }
+
+        private void OnDisable()
+        {
+            if (GameManager.Instance != null)
+                GameManager.Instance.canCheckActionTrue -= ChangeLayer;
+        }
+
+        public void ChangeLayer()
+        {
+            GetComponent<RunnerSetScript>().photonView.RPC("ChildObjCreate", RpcTarget.All, -1, "Default");
         }
 
         public override void ControllerAction()
@@ -67,8 +80,10 @@ namespace DH
         {
             if(collision.gameObject.layer == LayerMask.NameToLayer("Can"))
             {
-                //PlayMng.instance.KickTheCan(Vector3.Normalize(collision.gameObject.transform.position - transform.position));
-                PlayMng.instance.photonView.RPC("KickTheCan", RpcTarget.All, Vector3.Normalize(collision.gameObject.transform.position - transform.position));
+                collision.gameObject.layer = LayerMask.NameToLayer("Default");
+                Hashtable hashtable = new Hashtable { { GameData.PLAYER_ISKICK, true } };
+                PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);                
+                PlayMng.instance.photonView.RPC("KickTheCan", RpcTarget.All, Vector3.Normalize(collision.gameObject.transform.position - transform.position), PhotonNetwork.LocalPlayer);
             }
         }
 
