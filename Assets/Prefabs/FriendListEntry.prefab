@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a02ea3607172ad94eb8516f65d8c87a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  friendName: {fileID: 645300184248035791}
+  friendNameText: {fileID: 645300184248035791}
   loginImage: {fileID: 1986483410419333647}
   loginState: 0
   openBtn: {fileID: 4521384978112917777}

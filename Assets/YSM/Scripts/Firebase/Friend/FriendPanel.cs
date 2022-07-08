@@ -13,7 +13,7 @@ public class FriendPanel : MonoBehaviour
 
   
     bool isExistNickname;
-    bool alreadyFriend;
+    bool? alreadyFriend;
     [SerializeField] private InputField requestNicknameField;
     [SerializeField] private string requestFriendUID;
 
@@ -23,6 +23,7 @@ public class FriendPanel : MonoBehaviour
     [SerializeField] GameObject requestPanel;
 
     [SerializeField] GameObject checkPanel;
+    [SerializeField] GameObject friendInfo;
 
 
 
@@ -37,14 +38,13 @@ public class FriendPanel : MonoBehaviour
             .UpdateChildrenAsync(FuncTool.ConvertToIDictionary(DatabaseManager.instance.dbData.DisplayNickname, AuthManager.instance.GetCurrentUID())); /*내정보*/
         
     }
-
     #region Client Friend request
     public void FriendRequestClicked()
     {
-        if(requestNicknameField.text == "")
-        {
+
+        if (requestNicknameField.text == "")
             return;
-        }
+
         StartCoroutine("FindUserNickname");
     }
 
@@ -57,6 +57,7 @@ public class FriendPanel : MonoBehaviour
 
         DatabaseManager.instance.reference = FirebaseDatabase.DefaultInstance.GetReference("UserInfo");
 
+
         DatabaseManager.instance.reference.GetValueAsync().ContinueWith(task =>
         {
             if (task.IsCompleted)
@@ -65,8 +66,11 @@ public class FriendPanel : MonoBehaviour
                 DataSnapshot snapshot = task.Result;
 
                 DataSnapshot dataSnapshot = (DataSnapshot)snapshot.Child(AuthManager.instance.GetAuthUID()).Child(DBFriend.Friend).Child(DBFriend.FriendLists);
+
                 IDictionary id = (IDictionary)dataSnapshot.Value;
-                alreadyFriend = id.Contains(requestNicknameField.text);
+
+                alreadyFriend = id?.Contains(requestNicknameField.text);
+
 
                 if (true == alreadyFriend) //이미 친구인지
                 { }
@@ -107,7 +111,7 @@ public class FriendPanel : MonoBehaviour
             checkPanel.SetActive(true);
             RequestFriend();
         }
-        else if(alreadyFriend)
+        else if(alreadyFriend == true)
         {
             checkPanel.GetComponent<CheckPanel>().AlreadyFriend(requestNicknameField.text);
             checkPanel.SetActive(true);
@@ -172,7 +176,12 @@ public class FriendPanel : MonoBehaviour
 
     public void OpenFriendInfo(FriendListEntry entry)
     {
-        Debug.Log("OpenClicked");
+        
+
+        friendInfo.SetActive(true);
+        Debug.Log(entry.UID);
+        friendInfo.GetComponent<FriendInfo>().SetUID(ref entry);
+        Debug.Log("??!!");
     }
 
 

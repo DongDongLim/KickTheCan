@@ -17,6 +17,7 @@ public class DatabaseManager : MonoBehaviour
 
     public DatabaseReference dbReference;
     public DatabaseReference reference; //데이터 가져오기용
+    public DatabaseReference chatReference; //데이터 가져오기용
 
     public DBData dbData;
     public DBData dbDataGoogle;
@@ -29,6 +30,7 @@ public class DatabaseManager : MonoBehaviour
         instance = this;
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
         reference = FirebaseDatabase.DefaultInstance.GetReference("UserInfo");
+        chatReference = FirebaseDatabase.DefaultInstance.GetReference("FriendChat");
         //reference.Child("")
         // 사용하고자 하는 데이터를 reference가 가리킴
         // 여기선 rank 데이터 셋에 접근
@@ -46,6 +48,7 @@ public class DatabaseManager : MonoBehaviour
 
     public void GetMyData()
     {
+        reference = FirebaseDatabase.DefaultInstance.GetReference("UserInfo");
         reference.GetValueAsync().ContinueWith(task =>
         {
             if (task.IsCompleted)
@@ -74,6 +77,7 @@ public class DatabaseManager : MonoBehaviour
         bool isFinish = true;
         bool isNickName = false;
         testTxt.text = "0";
+        reference = FirebaseDatabase.DefaultInstance.GetReference("UserInfo");
         reference.GetValueAsync().ContinueWith(task =>
         {
             if (task.IsCompleted)
