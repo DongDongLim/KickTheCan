@@ -133,6 +133,13 @@ public class GameManager : MonoBehaviourPunCallbacks
                 CountDeath();
             }          
         }
+        if(changedProps.TryGetValue(GameData.MASTER_PLAY, out value))
+        {
+            if(!(bool)value)
+            {
+                PhotonNetwork.LoadLevel(1);
+            }
+        }
     }
 
     #endregion PHOTON CALLBACK
@@ -379,19 +386,21 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void GameOver()
     {
         StartCoroutine(WhoIsWinner());
-
+        Hashtable props;
         if (PhotonNetwork.IsMasterClient)
         {
             foreach (Player p in PhotonNetwork.PlayerList)
             {
-                Hashtable props = new Hashtable() { { GameData.PLAYER_LOAD, false } };
+                props = new Hashtable() { { GameData.PLAYER_LOAD, false } };
                 p.SetCustomProperties(props);
+
             }
+            props = new Hashtable() { { GameData.MASTER_PLAY, false } };
+            PhotonNetwork.LocalPlayer.SetCustomProperties(props);
         }
 
         Debug.Log("모든 유저 Load -> false");
         //PhotonNetwork.LeaveRoom();
-        PhotonNetwork.LoadLevel(1);
 
         return;
     }
