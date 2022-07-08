@@ -17,7 +17,7 @@ namespace DH
 
         protected override void OnAwake()
         {
-
+            GameManager.Instance.canCheckActionFalse += Release;
         }
 
         public void BeCaught(GameObject player)

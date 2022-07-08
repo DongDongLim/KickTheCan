@@ -67,7 +67,7 @@ namespace DH
         public void RunnerSetting(string layerName)
         {
             Debug.Log("러너 생성");
-            randIndex = Random.Range(0, 11);//mapObj.Length + objectSpawnPos.Length);
+            randIndex = Random.Range(0, mapObj.Length);//mapObj.Length + objectSpawnPos.Length);
             GameObject playerObj = PhotonNetwork.Instantiate
                 (GameData.PLAYER_OBJECT, runnerSpawnPos + Vector3.up * 3, Quaternion.identity, 0);
             playerObj.AddComponent<RunnerController>();
