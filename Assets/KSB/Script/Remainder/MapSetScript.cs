@@ -12,6 +12,7 @@ namespace DH
         public int objIndex;
         ChanceAddon chanceAddon;
         private int randomResult;
+        GameObject mapObject;
 
         int randIndex;
 
@@ -19,6 +20,7 @@ namespace DH
         public void SetObjIndex(int index)
         {
             chanceAddon = new ChanceAddon();
+            GameManager.Instance.canCheckActionFalse += CanSpawn;
             photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered, index);
         }
 
@@ -26,7 +28,7 @@ namespace DH
         public void ChildObjCreate(int index)
         {
             objIndex = index;
-            GameObject mapObject = Instantiate(MapSettingMng.instance.mapBG[objIndex], MapSettingMng.instance.gameObject.transform, false);
+            mapObject = Instantiate(MapSettingMng.instance.mapBG[objIndex], MapSettingMng.instance.gameObject.transform, false);
             mapObject.transform.position = transform.position;
             MapSettingMng.instance.curMap = mapObject;
             ref Transform[] objectSpawnPos = ref MapSettingMng.instance.objectSpawnPos;
@@ -65,6 +67,12 @@ namespace DH
             }
             gameObject.SetActive(false);
 
+        }
+
+        public void CanSpawn()
+        {
+            PhotonNetwork.Instantiate
+               ("Can", mapObject.GetComponent<MapSetting>().CanSpqwnPos(), Quaternion.identity, 0).GetComponent<CanSetScript>().SetObjIndex();
         }
     }
 }

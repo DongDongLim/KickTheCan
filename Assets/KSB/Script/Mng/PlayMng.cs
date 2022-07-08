@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
 namespace DH
 {
@@ -38,9 +39,9 @@ namespace DH
         }
 
         [PunRPC]
-        public void KickTheCan(Vector3 canTargetVector)
+        public void KickTheCan(Vector3 canTargetVector, Player p)
         {
-            StartCoroutine(can.GetComponent<CanMoveScript>().CanMove(canTargetVector));
+            StartCoroutine(can.GetComponent<CanMoveScript>().CanMove(canTargetVector, p));
         }
 
         [PunRPC]
