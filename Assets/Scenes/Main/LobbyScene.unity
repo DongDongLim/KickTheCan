@@ -12826,6 +12826,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emailField: {fileID: 1306940195}
   passwordField: {fileID: 352224611}
+  loginBtn: {fileID: 1934509488}
   IDPasswordMismatchPanel: {fileID: 2011309765}
   canvas: {fileID: 2143759624}
   isNickName: 0
@@ -17288,9 +17289,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c1f7c8bddb645949a9ae2cbfdfb4c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayNickName: {fileID: 0}
-  displayNicknameCheckButton: {fileID: 0}
-  checkPanel: {fileID: 0}
+  displayNickName: {fileID: 476639686}
+  displayNicknameCheckButton: {fileID: 2093782002}
+  checkPanel: {fileID: 1585281950}
 --- !u!222 &1417617099
 CanvasRenderer:
   m_ObjectHideFlags: 0

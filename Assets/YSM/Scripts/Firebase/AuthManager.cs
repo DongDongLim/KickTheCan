@@ -17,6 +17,7 @@ public class AuthManager : Singleton<AuthManager>
 
     [SerializeField] private InputField emailField;
     [SerializeField] private InputField passwordField;
+    [SerializeField] private Button loginBtn;
 
     // 인증을 관리할 객체
     FirebaseAuth auth;
@@ -49,6 +50,7 @@ public class AuthManager : Singleton<AuthManager>
 
     public void OnClickLogin()
     {
+        loginBtn.interactable = false;
         StartCoroutine("ShowLogInMessage");
         login(emailField.text, passwordField.text, DatabaseManager.instance.GetMyData);
     }
@@ -111,6 +113,8 @@ public class AuthManager : Singleton<AuthManager>
         {
             IDPasswordMismatchPanel.SetActive(true);
         }
+        loginBtn.interactable = true;
+
         isFinishLogFunction = false;
         yield return null;
     }
