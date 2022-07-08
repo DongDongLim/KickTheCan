@@ -454,18 +454,20 @@ public class GameManager : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(5f);
 
         Debug.Log("술래 승리, 게임종료");
-
+        Hashtable props;
         if (PhotonNetwork.IsMasterClient)
         {
             foreach (Player p in PhotonNetwork.PlayerList)
             {
-                Hashtable props = new Hashtable() { { GameData.PLAYER_LOAD, false } };
+                props = new Hashtable() { { GameData.PLAYER_LOAD, false } };
                 p.SetCustomProperties(props);
             }
+            props = new Hashtable() { { GameData.MASTER_PLAY, false } };
+            PhotonNetwork.LocalPlayer.SetCustomProperties(props);
         }
         Debug.Log("모든 유저 Load -> false");
         //PhotonNetwork.LeaveRoom();
-        PhotonNetwork.LoadLevel(1);
+        //PhotonNetwork.LoadLevel(1);
     }
 
     public void SetPlayerCounting(int runner,int tagger)

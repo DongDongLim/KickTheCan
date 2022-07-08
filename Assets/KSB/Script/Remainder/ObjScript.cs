@@ -59,6 +59,11 @@ namespace DH
             return obj;
         }
 
+        private void OnDestroy()
+        {
+            if (photonView.IsMine)
+                PhotonNetwork.OpCleanRpcBuffer(GetComponent<PhotonView>());
+        }
 
     }
 }

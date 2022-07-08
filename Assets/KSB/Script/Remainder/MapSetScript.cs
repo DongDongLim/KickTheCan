@@ -74,5 +74,11 @@ namespace DH
             PhotonNetwork.Instantiate
                ("Can", mapObject.GetComponent<MapSetting>().CanSpqwnPos(), Quaternion.identity, 0).GetComponent<CanSetScript>().SetObjIndex();
         }
+
+        private void OnDestroy()
+        {
+            if (photonView.IsMine)
+                PhotonNetwork.OpCleanRpcBuffer(GetComponent<PhotonView>());
+        }
     }
 }
