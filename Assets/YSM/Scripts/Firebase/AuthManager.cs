@@ -12,7 +12,7 @@ using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 #endif
 
-public class AuthManager : MonoBehaviour
+public class AuthManager : Singleton<AuthManager>
 {
 
     [SerializeField] private InputField emailField;
@@ -22,26 +22,30 @@ public class AuthManager : MonoBehaviour
     FirebaseAuth auth;
     FirebaseUser user;
 
-    static public AuthManager instance { get; private set; }
 
     bool isFinishLogFunction;
     bool isFinishGoogleLogFunction;
     bool isWrong;
+
     [SerializeField] GameObject IDPasswordMismatchPanel;
 
-    void Awake()
+    [SerializeField] GameObject canvas;
+    protected override void OnAwake()
     {
-        // 객체 초기화
-        instance = this;
+        SceneManager.sceneLoaded += OnSceneLoaded;
         auth = FirebaseAuth.DefaultInstance;
         user = null;
         isFinishLogFunction = false;
     }
 
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "LobbyScene")
+            canvas.gameObject.SetActive(true);
+        else
+            canvas.gameObject.SetActive(false);
 
-
-
-
+    }
 
     public void OnClickLogin()
     {
@@ -256,6 +260,7 @@ public class AuthManager : MonoBehaviour
             .Child(GetCurrentUID())
             .UpdateChildrenAsync(FuncTool.ConvertToIDictionary(DBData.KeyIsLogin, isLogin)); //로그인 로그아웃
     }
+
 
 }
 

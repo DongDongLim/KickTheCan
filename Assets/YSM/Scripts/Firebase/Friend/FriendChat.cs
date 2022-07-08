@@ -1,4 +1,5 @@
 ﻿using Firebase.Database;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,20 @@ public class FriendChat : MonoBehaviour
 {
 
     [SerializeField] private InputField messageField;
+    [SerializeField] private GameObject friendChatPrefab;
+    [SerializeField] private GameObject friendChatContentPanel;
+    [SerializeField] private ScrollRect test;
 
-    IDictionary chatData;
+
+    DataSnapshot dataSnapshot;
+
+    bool dataGetSuccese;
+
+
+    private void Awake()
+    {
+        test = GetComponent<ScrollRect>();
+    }
 
     private string _friendUID;
     public string friendUID
@@ -17,46 +30,24 @@ public class FriendChat : MonoBehaviour
         private get
         {
             return _friendUID;
+
         }
         set
         {
-            Debug.Log("알ㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹ라ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
+            int i = 0;
             _friendUID = value;
-            StartCoroutine("FriendMessageGet");
+            FriendManager.instance.SetCurrentPanel(_friendUID);
+            test.content = FriendManager.instance.CurContentPanel.GetComponent<RectTransform>();
+            test.content.anchoredPosition = Vector3.zero;
+            test.content.position = Vector3.zero;
+            test.content.transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 0);
+            test.content.transform.localScale = Vector3.one;
+            test.content.offsetMin = new Vector2(0, test.content.offsetMin.y);
+
+
         }
     }
 
-
-    IEnumerator FriendMessageGet()
-    {
-        bool isFinish = false;    
-
-        DatabaseManager.instance.chatReference = FirebaseDatabase.DefaultInstance.GetReference("FriendChat");
-        DatabaseManager.instance.chatReference.GetValueAsync().ContinueWith(task =>
-        {
-            if (task.IsCompleted)
-            {//,AuthManager.instance.GetAuthUID()
-                DataSnapshot snapshot = task.Result;
-                DataSnapshot dataSnapshot = snapshot.Child(FuncTool.CompareStrings(_friendUID, "123"));
-                chatData = (IDictionary)dataSnapshot.Value;
-            }
-            else
-            {
-                Debug.Log("데이터 가져오기 실패");
-            }
-            isFinish = true;
-            Debug.Log("끝남");
-        });
-
-        while (!isFinish) { yield return null; }
-        
-        //가져온 데이터 처리
-
-
-
-        yield return null;
-
-    }  
 
 
     public void FriendMessageSendClicked()
@@ -66,28 +57,31 @@ public class FriendChat : MonoBehaviour
             return;
 
 
-        //DatabaseManager.instance.dbReference
-        //    .Child("UserInfo")
-        //    .Child("18JdkaumF6RSztkhYmUx3yQ7VQ02"/*상대방 UID넣어주고*/)
-        //    .Child(DBFriend.Friend/*Friend*/)
-        //    .Child(DBFriend.FriendLists /*DB Friend List에 넣어주기*/)
-        //    .Child(DatabaseManager.instance.dbData.DisplayNickname)
-        //    .Child("Chat");
-        ////  .UpdateChildrenAsync(FuncTool.ConvertToIDictionary(DatabaseManager.instance.dbData.DisplayNickname, AuthManager.instance.GetCurrentUID())/*내정보*/);
+        string key = DatabaseManager.instance.chatReference.Push().Key;
+
+        Dictionary<string, object> msgDic = new Dictionary<string, object>();
+
+        msgDic.Add("username", DatabaseManager.instance.dbData.DisplayNickname);
+        msgDic.Add("message", messageField.text);
+        msgDic.Add("timestamp", DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"));
+        msgDic.Add("parent", FuncTool.CompareStrings(AuthManager.instance.GetAuthUID(), _friendUID));
+
+        Dictionary<string, object> updateMsg = new Dictionary<string, object>();
+        updateMsg.Add(key, msgDic);
+
+        DatabaseManager.instance.chatReference.Child(FuncTool.CompareStrings(AuthManager.instance.GetAuthUID(), _friendUID)).UpdateChildrenAsync(updateMsg);
+        messageField.text = "";
+    }
 
 
-        DBData dbData = new DBData("Aaa", "bbb", 123, true);
-        string json = JsonUtility.ToJson(dbData);
-        FirebaseDatabase.DefaultInstance
-            .GetReference("FriendChat")
-            .Child(AuthManager.instance.GetAuthUID()+"18JdkaumF6RSztkhYmUx3yQ7VQ02")
-            .SetRawJsonValueAsync(json);
+    public void FriendChatOpenClicked()
+    {
+        this.gameObject.SetActive(true);
+    }
 
-        //    //        dbReference.Child("UserInfo").Child(AuthManager.instance.GetAuthUID()).SetRawJsonValueAsync(json);
-        //    //.Child(FuncTool.CompareStrings(_friendUID, AuthManager.instance.GetAuthUID())/* chat UID 만들고*/)
-        //    //.Child(ServerValue.Timestamp.ToString()/*Friend*/)
-        //    //.UpdateChildrenAsync(FuncTool.ConvertToIDictionary(DatabaseManager.instance.dbData.DisplayNickname, messageField.text)/*넣을 데이터*/);
-        //messageField.text = "";
+    public void FriendChatCloseBtnClicked()
+    {
+        this.gameObject.SetActive(false);
     }
 
 }

@@ -18,16 +18,19 @@ public class FriendInfo : MonoBehaviour
     public void SetUID(ref FriendListEntry entry)
     {
         if (UID == entry.UID)
+        {
+            chatPanel.GetComponent<FriendChat>().friendUID = UID;
             return;
-
+        }
+        FriendManager.instance.SetCurrentPanel(entry.GetUID());
         this.UID = entry.UID;
         Debug.Log(UID);
         tmpEntry = entry;
         chatPanel.GetComponent<FriendChat>().friendUID = UID;
-
         friendName.text = entry.GetName();
         StartCoroutine("GetUserInfo");
     }
+
 
     IEnumerator GetUserInfo()
     {
@@ -48,11 +51,9 @@ public class FriendInfo : MonoBehaviour
                 Debug.Log("데이터 가져오기 실패");
             }
             isFinish = true;
-            Debug.Log("끝남");
         });
         
         while (!isFinish){ yield return null; }
-        Debug.Log(id["Score"].ToString());
         score.text = id["Score"].ToString();
         yield return null;
 
@@ -69,6 +70,7 @@ public class FriendInfo : MonoBehaviour
     {
         //Destroy(tmpEntry.gameObject); FriendInfoCloseBtnClicked();
 
+
         DatabaseManager.instance.dbReference
              .Child("UserInfo")
              .Child(AuthManager.instance.GetCurrentUID()/*내 UID에 있는거 지우고*/)
@@ -79,7 +81,7 @@ public class FriendInfo : MonoBehaviour
 
         DatabaseManager.instance.dbReference
              .Child("UserInfo")
-             .Child(UID/*내 UID에 있는거 지우고*/)
+             .Child(UID/*친구 UID에 있는 내정보 지우고*/)
              .Child(DBFriend.Friend/*Friend*/)
              .Child(DBFriend.FriendLists /*DB Friend List에 있는 데이터 지워주기*/)
              .Child(DatabaseManager.instance.dbData.DisplayNickname/*지울 데이터*/)
@@ -92,6 +94,16 @@ public class FriendInfo : MonoBehaviour
     public void FriendChatBtnClicked()
     {
         chatPanel.SetActive(true);
+    }
+
+    public void SetNull(string UID)
+    {
+        if(this.UID == UID)
+        {
+            this.UID = null;
+            friendName.text = "UNKNOWN";
+            score.text = "UNKNOWN";
+        }
     }
 
 }
