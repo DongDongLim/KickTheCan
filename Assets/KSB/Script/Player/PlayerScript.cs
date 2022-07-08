@@ -53,6 +53,8 @@ namespace DH
 
         public void ControllerSetting()
         {
+            control = GetComponent<Controller>();
+            control.Setting(rigid);
             photonView.RPC("MyObjectsSetting", RpcTarget.AllBuffered);
         }
 
@@ -66,8 +68,6 @@ namespace DH
             if (photonView.IsMine)
                 ownerID = PhotonNetwork.LocalPlayer.GetPlayerNumber();
             charactorBody = transform.GetChild(2).transform;
-            control = GetComponent<Controller>();
-            control.Setting(rigid);
             isSettingComplete = true;
         }
 
