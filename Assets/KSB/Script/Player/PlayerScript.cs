@@ -53,6 +53,12 @@ namespace DH
 
         public void ControllerSetting()
         {
+            photonView.RPC("MyObjectsSetting", RpcTarget.AllBuffered);
+        }
+
+        [PunRPC]
+        public void MyObjectsSetting()
+        {
             taggerAnim = transform.GetChild(2).GetComponent<Animator>() == null ? null : transform.GetChild(2).GetComponent<Animator>();
             runnerAnim = taggerAnim != null ? null : transform.GetComponent<Animator>();
             if (runnerAnim != null)
