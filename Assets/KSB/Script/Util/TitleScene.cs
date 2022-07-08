@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class TitleScene : MonoBehaviour
 {
+    bool isTrue = true;
     private void FixedUpdate()
     {
         Button();
@@ -14,7 +15,11 @@ public class TitleScene : MonoBehaviour
     {
         if (Input.anyKeyDown)
         {
-            SceneManager.LoadScene(1);
+            if (isTrue)
+            {
+                SceneManager.LoadScene(1);
+                isTrue = false;
+            }
         }
     }
 }
