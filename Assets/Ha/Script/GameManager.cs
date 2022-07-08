@@ -159,9 +159,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         int playerNumber = PhotonNetwork.LocalPlayer.GetPlayerNumber();
 
-        CreatePlayer();
-
-        timer.SetActive(true);
+        CreatePlayer();        
     }
 
     private bool CheckAllPlayerLoadLevel()

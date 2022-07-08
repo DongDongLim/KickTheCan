@@ -20,5 +20,10 @@ namespace DH
             GameObject canObj = Instantiate(can, transform, false);
             PlayMng.instance.can = gameObject;
         }
+        private void OnDestroy()
+        {
+            if (photonView.IsMine)
+                PhotonNetwork.OpCleanRpcBuffer(GetComponent<PhotonView>());
+        }
     }
 }
