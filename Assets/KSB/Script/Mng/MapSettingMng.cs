@@ -79,7 +79,7 @@ namespace DH
             {
                 Debug.Log("생성");
                 playerObj.GetComponent<RunnerSetScript>().SetObjIndex(randIndex,
-                    Path.Combine("Sports", objectSpawnPos[randIndex - mapObj.Length].name), layerName);
+                    Path.Combine("RnnerObj", objectSpawnPos[randIndex - mapObj.Length].name), layerName);
             }
             playerObj.GetComponent<PlayerScript>().ControllerSetting();
             PlayMng.instance.gameChat.SetCharacterType(YSM.GameCharacterType.RUNNER);

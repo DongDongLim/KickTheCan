@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
+using Photon.Pun;
 
 public class Timer : MonoBehaviour
 {
@@ -57,8 +58,12 @@ public class Timer : MonoBehaviour
             timeOut.SetActive(true);
 
             StopAllCoroutines();
-            GameManager.Instance.GameOver();
-            // TODO : 게임 종료 기능 작동
+             
+            if (PhotonNetwork.IsMasterClient)
+            {
+                GameManager.Instance.GameOver();
+            }
+
         }
     }
 

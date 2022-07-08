@@ -82,8 +82,8 @@ namespace DH
             {
                 collision.gameObject.layer = LayerMask.NameToLayer("Default");
                 Hashtable hashtable = new Hashtable { { GameData.PLAYER_ISKICK, true } };
-                PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);                
-                PlayMng.instance.photonView.RPC("KickTheCan", RpcTarget.All, Vector3.Normalize(collision.gameObject.transform.position - transform.position), PhotonNetwork.LocalPlayer);
+                PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
+                owner.photonView.RPC("KickTheCan", RpcTarget.All, Vector3.Normalize(collision.gameObject.transform.position - transform.position), PhotonNetwork.LocalPlayer);
             }
         }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
+using Photon.Realtime;
 
 namespace DH
 {
@@ -109,6 +110,12 @@ namespace DH
             charactorBody.gameObject.SetActive(false);
             dieVFX.SetActive(true);
             StartCoroutine(Die());
+        }
+
+        [PunRPC]
+        public void KickTheCan(Vector3 vec, Player p)
+        {
+            PlayMng.instance.KickTheCan(vec, p);
         }
 
         IEnumerator Die()

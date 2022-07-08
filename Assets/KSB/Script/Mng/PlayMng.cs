@@ -38,7 +38,6 @@ namespace DH
             }
         }
 
-        [PunRPC]
         public void KickTheCan(Vector3 canTargetVector, Player p)
         {
             StartCoroutine(can.GetComponent<CanMoveScript>().CanMove(canTargetVector, p));
