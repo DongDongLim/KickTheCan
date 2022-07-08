@@ -31,6 +31,7 @@ public class FriendManager : MonoBehaviour
 
     public GameObject CurContentPanel;
     Dictionary<string, GameObject> friendChatcontentPanel;
+    Dictionary<string, DatabaseReference> friendEvnetDictionary;
 
     [SerializeField] FriendInfo friendInfoPanel;
 
@@ -43,6 +44,7 @@ public class FriendManager : MonoBehaviour
         instance = this;
         myfriendDictionary = new Dictionary<string, GameObject>();
         friendChatcontentPanel = new Dictionary<string, GameObject>();
+        friendEvnetDictionary = new Dictionary<string, DatabaseReference>();
     }
 
     public void SetEventListener()
@@ -97,19 +99,25 @@ public class FriendManager : MonoBehaviour
         panel.transform.SetParent(friendChatContentPanelParent.transform);
         friendChatcontentPanel.Add(FuncTool.CompareStrings(e.Snapshot.Value.ToString(), AuthManager.instance.GetAuthUID()), panel);
 
-        //FirebaseDatabase.DefaultInstance
+
+
+
+        //친구 채팅 이벤트 등록
+
+        friendEvnetDictionary.Add(FuncTool.CompareStrings(e.Snapshot.Value.ToString(), AuthManager.instance.GetAuthUID()), 
+            FirebaseDatabase.DefaultInstance.GetReference("FriendChat").Child(FuncTool.CompareStrings(e.Snapshot.Value.ToString(), AuthManager.instance.GetAuthUID())));
+
+        friendEvnetDictionary[FuncTool.CompareStrings(e.Snapshot.Value.ToString(), AuthManager.instance.GetAuthUID())].ChildAdded += ChatAdd;
+
+
+
+
+        //var childRef =FirebaseDatabase.DefaultInstance
         //    .GetReference("FriendChat")
-        //    .Child(FuncTool.CompareStrings(e.Snapshot.Value.ToString(), AuthManager.instance.GetAuthUID()))
-        //    .ChildAdded += ChatAdd;
+        //    .Child(FuncTool.CompareStrings(e.Snapshot.Value.ToString(), AuthManager.instance.GetAuthUID()));
+        //childRef.ChildAdded += ChatAdd;
 
-
-
-        var childRef =FirebaseDatabase.DefaultInstance
-            .GetReference("FriendChat")
-            .Child(FuncTool.CompareStrings(e.Snapshot.Value.ToString(), AuthManager.instance.GetAuthUID()));
-        childRef.ChildAdded += ChatAdd;
-
-        Debug.Log(FuncTool.CompareStrings(e.Snapshot.Value.ToString(), AuthManager.instance.GetAuthUID()) + "추가됨 친구 추가 채팅");
+        //Debug.Log(FuncTool.CompareStrings(e.Snapshot.Value.ToString(), AuthManager.instance.GetAuthUID()) + "추가됨 친구 추가 채팅");
     }
 
 
@@ -146,14 +154,25 @@ public class FriendManager : MonoBehaviour
         Destroy(myfriendDictionary[e.Snapshot.Key]);
 
 
-        DatabaseManager.instance.chatReference = FirebaseDatabase.DefaultInstance.GetReference("FriendChat");
-        Debug.Log(FuncTool.CompareStrings(e.Snapshot.Value.ToString(), AuthManager.instance.GetAuthUID()) + "제거됨 친구 추가 채팅");
+        //DatabaseManager.instance.chatReference = FirebaseDatabase.DefaultInstance.GetReference("FriendChat");
+        //Debug.Log(FuncTool.CompareStrings(e.Snapshot.Value.ToString(), AuthManager.instance.GetAuthUID()) + "제거됨 친구 추가 채팅");
 
 
-        var childRef = FirebaseDatabase.DefaultInstance
-            .GetReference("FriendChat")
-            .Child(FuncTool.CompareStrings(e.Snapshot.Value.ToString(), AuthManager.instance.GetAuthUID()));
-            childRef.ChildAdded -= ChatAdd;
+        //var childRef = FirebaseDatabase.DefaultInstance
+        //    .GetReference("FriendChat")
+        //    .Child(FuncTool.CompareStrings(e.Snapshot.Value.ToString(), AuthManager.instance.GetAuthUID()));
+        //    childRef.ChildAdded -= ChatAdd;
+
+
+        //친구 채팅 이벤트 등록
+
+
+        friendEvnetDictionary[FuncTool.CompareStrings(e.Snapshot.Value.ToString(), AuthManager.instance.GetAuthUID())].ChildAdded -= ChatAdd;
+        friendEvnetDictionary.Remove(FuncTool.CompareStrings(e.Snapshot.Value.ToString(), AuthManager.instance.GetAuthUID()));
+
+
+
+
 
         DatabaseManager.instance.chatReference
             .Child(FuncTool.CompareStrings(AuthManager.instance.GetAuthUID(), e.Snapshot.Value.ToString()))
