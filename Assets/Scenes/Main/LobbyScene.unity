@@ -12825,7 +12825,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emailField: {fileID: 1306940195}
-  passwordField: {fileID: 0}
+  passwordField: {fileID: 352224611}
   loginBtn: {fileID: 1934509488}
   IDPasswordMismatchPanel: {fileID: 2011309765}
   canvas: {fileID: 2143759624}
