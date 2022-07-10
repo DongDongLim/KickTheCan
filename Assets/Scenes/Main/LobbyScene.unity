@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -912,7 +912,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 98911062}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -3783,8 +3783,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 352224613}
   m_TextComponent: {fileID: 139912286}
   m_Placeholder: {fileID: 0}
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
@@ -7033,7 +7033,7 @@ MonoBehaviour:
   emailCheckImage02: {fileID: 1020556662}
   passwordInputField: {fileID: 1362007142}
   passwordMessage: {fileID: 1103137788}
-  passwordConfirmInputField: {fileID: 1848212508}
+  passwordConfirmInputField: {fileID: 1362007142}
   passwordConfirmMessage: {fileID: 665084504}
   displayNickName: {fileID: 1754740826}
   nicknameMessage: {fileID: 1159285649}
@@ -12825,7 +12825,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emailField: {fileID: 1306940195}
-  passwordField: {fileID: 352224611}
+  passwordField: {fileID: 0}
   loginBtn: {fileID: 1934509488}
   IDPasswordMismatchPanel: {fileID: 2011309765}
   canvas: {fileID: 2143759624}
@@ -16192,8 +16192,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1362007143}
   m_TextComponent: {fileID: 1502611857}
   m_Placeholder: {fileID: 1451782788}
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
@@ -18586,7 +18586,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -22869,8 +22869,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1848212509}
   m_TextComponent: {fileID: 1349915775}
   m_Placeholder: {fileID: 969490604}
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0

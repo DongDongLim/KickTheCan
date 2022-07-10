@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     private bool isTagger;
     private bool isPlaying = false;
 
-    int m_maxTagger = 0;
+    int maxTagger = 0;
     int m_deathCount = 0;
 
 
@@ -42,12 +42,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void Start()
     {                        
-        if (PhotonNetwork.LocalPlayer.HasRejoined)
-        {         
-            Debug.Log("재 참가");                
-            RejoinMode();            
-        }
-        else if (IsAdditionalPlayer())
+        if (IsAdditionalPlayer())
         {
             Debug.Log("추가 참가");            
             ObserverMode();         
@@ -231,24 +226,22 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             return;
         }
-
-        // TODO : Text 예정
+       
         StartCoroutine(DH.MapSettingMng.instance.Setting());
 
-        m_maxTagger = PhotonNetwork.PlayerList.Length / 4;
-        m_maxTagger = (int)Mathf.Clamp(m_maxTagger, 1, 5);
+        maxTagger = PhotonNetwork.PlayerList.Length / 4;
+        maxTagger = (int)Mathf.Clamp(maxTagger, 1, 5);
 
         foreach (Player player in PhotonNetwork.PlayerList)
         {
             playerList.Add(player);
         }
 
-        Shuffle_List(playerList);
-        // TODO : (Test) StartSetting / DH
+        Shuffle_List(playerList);        
         StartCoroutine("GameIsOn");
 
-        Debug.Log(playerList.Count - m_maxTagger);
-        Debug.Log(m_maxTagger);
+        Debug.Log(playerList.Count - maxTagger);
+        Debug.Log(maxTagger);
 
         // 테스트용 tagger설정 코드
         int minPlayer = 3;
@@ -281,7 +274,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         for (int i = 0; i < playerList.Count; i++)
         {
-            if (index < m_maxTagger)
+            if (index < maxTagger)
             {
                 isTagger = true;
                 Hashtable props = new Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
@@ -321,26 +314,20 @@ public class GameManager : MonoBehaviourPunCallbacks
         Hashtable props = new Hashtable() { { GameData.MASTER_PLAY, isPlaying } };
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
 
-        m_maxTagger = PhotonNetwork.PlayerList.Length / 4;
-        m_maxTagger = (int)Mathf.Clamp(m_maxTagger, 1, 5);
+        maxTagger = PhotonNetwork.PlayerList.Length / 4;
+        maxTagger = (int)Mathf.Clamp(maxTagger, 1, 5);
 
-        SetPlayerCounting(PhotonNetwork.PlayerList.Length - m_maxTagger, m_maxTagger);
+        SetPlayerCounting(PhotonNetwork.PlayerList.Length - maxTagger, maxTagger);
         Debug.Log(PhotonNetwork.PlayerList.Length);
-        Debug.Log(m_maxTagger);
+        Debug.Log(maxTagger);
     }
 
     private void ObserverMode()
     {
-        Debug.Log("ReEntry Mode 호출");
+        Debug.Log("ObserverMode 호출");
         Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
               
         DH.MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);        
-    }
-
-    private void RejoinMode()
-    {
-        Debug.Log("ReJoiner Mode 호출");     
-        DH.MapSettingMng.instance.RunnerSetting("Default");
     }
 
     IEnumerator GameIsOn()
@@ -351,10 +338,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         isPlaying = true;
 
         Hashtable props = new Hashtable() { { GameData.MASTER_PLAY, isPlaying } };
-        PhotonNetwork.MasterClient.SetCustomProperties(props);  
-        
-        // TODO : 모든플레이어가 준비가 되었을 시에 게임을 시작한다.
-        // 정해진 시간안에 참가하지 못한 플레이어는 추방하고 게임을 시작한다.
+        PhotonNetwork.MasterClient.SetCustomProperties(props);    
     }
 
     public override void OnJoinedRoom()
@@ -403,21 +387,19 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     IEnumerator WhoIsWinner()
     {
-        yield return new WaitForSeconds(5f);
-
-        int alivePlayer = PhotonNetwork.CurrentRoom.PlayerCount - m_deathCount - m_maxTagger;
+        int alivePlayer = PhotonNetwork.CurrentRoom.PlayerCount - m_deathCount - maxTagger;
 
         if (alivePlayer > 0)
         {
             Debug.Log("러너 승리");
             runnerWinUI.SetActive(true);
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(6f);
         }
         else
         {
             Debug.Log("술래 승리");
             taggerWinUI.SetActive(true);
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(6f);
         }
 
         if (PhotonNetwork.IsMasterClient)
@@ -427,11 +409,10 @@ public class GameManager : MonoBehaviourPunCallbacks
                 Hashtable props = new Hashtable() { { GameData.PLAYER_LOAD, false } };
                 p.SetCustomProperties(props);
                 props = new Hashtable() { { GameData.MASTER_PLAY, false } };
-                PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+                PhotonNetwork.LocalPlayer.SetCustomProperties(props);                
             }
         }
-
-        yield return new WaitForSeconds(3f);
+      
         Debug.Log("모든 유저 Load -> false");
         //PhotonNetwork.LeaveRoom();
 
@@ -439,23 +420,23 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void CountDeath()
     {
-        m_maxTagger = PhotonNetwork.PlayerList.Length / 4;
-        m_maxTagger = (int)Mathf.Clamp(m_maxTagger, 1, 5);
+        maxTagger = PhotonNetwork.PlayerList.Length / 4;
+        maxTagger = (int)Mathf.Clamp(maxTagger, 1, 5);
 
-        int m_iRunner = PhotonNetwork.CurrentRoom.PlayerCount - m_maxTagger;
+        int m_iRunner = PhotonNetwork.CurrentRoom.PlayerCount - maxTagger;
 
         m_deathCount++;
         Debug.Log("현재 방에 있는 사람 수 : " + PhotonNetwork.CurrentRoom.PlayerCount);
         Debug.Log("죽은 러너 수 : " + m_deathCount);
         Debug.Log("러너 : " + m_iRunner);
-        Debug.Log("술래 총 인원 : " + m_maxTagger);
+        Debug.Log("술래 총 인원 : " + maxTagger);
 
         if (m_iRunner == m_deathCount)
         {
             taggerWinUI.SetActive(true);
             StartCoroutine(TaggerWin());
         }
-        SetPlayerCounting(m_iRunner - m_deathCount,m_maxTagger);
+        SetPlayerCounting(m_iRunner - m_deathCount,maxTagger);
     }
 
     IEnumerator TaggerWin()

@@ -10389,10 +10389,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minutesText: {fileID: 1966185763}
   secondsText: {fileID: 833733584}
+  colonText: {fileID: 307875298}
   timeOut: {fileID: 216856521}
   stopWatch: {fileID: 1226752346}
+  runnerWinUI: {fileID: 833576874}
+  taggerWinUI: {fileID: 2037469085}
   totalSeconds: 0
-  minutes: 2
+  minutes: 1
   sec: 30
 --- !u!1 &1854498620
 GameObject:
