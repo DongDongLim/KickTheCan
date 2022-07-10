@@ -11,6 +11,8 @@ public class Timer : MonoBehaviour
     public TextMeshProUGUI colonText;
     public GameObject timeOut;
     public GameObject stopWatch;
+    public GameObject runnerWinUI;
+    public GameObject taggerWinUI;
 
     public int totalSeconds = 0;
     public int minutes;
@@ -62,10 +64,12 @@ public class Timer : MonoBehaviour
             {
                 GameManager.Instance.GameOver();
             }
-
+            else
+            {
+                runnerWinUI.SetActive(true);
+            }
         }
-    }
-
+    }   
 
     IEnumerator second()
     {
