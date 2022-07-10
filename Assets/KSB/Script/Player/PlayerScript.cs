@@ -115,7 +115,6 @@ namespace DH
         [PunRPC]
         public void KickTheCan(Vector3 vec, Player p)
         {
-            Debug.Log(vec);
             PlayMng.instance.KickTheCan(vec, p);
         }
 
