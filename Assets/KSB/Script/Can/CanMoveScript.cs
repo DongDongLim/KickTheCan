@@ -12,13 +12,12 @@ namespace DH
     {
         [SerializeField]
         float kickPower = 10;
-
+        [SerializeField]
         Rigidbody rigid;
         bool isMove;
 
         private void Start()
         {
-            rigid = GetComponent<Rigidbody>();
             isMove = false;
         }
 
@@ -48,6 +47,7 @@ namespace DH
         {
             if (collision.gameObject.layer == LayerMask.NameToLayer("Tagger") && !isMove && !GameManager.Instance.isAttack && photonView.IsMine)
             {
+                Debug.Log("먹음");
                 isMove = true;
                 int taggerId = collision.transform.gameObject.GetComponent<PlayerScript>().ownerID;
                 foreach (Player p in PhotonNetwork.PlayerList)

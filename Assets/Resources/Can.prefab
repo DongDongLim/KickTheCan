@@ -63,6 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kickPower: 10
+  rigid: {fileID: 1123194149743947344}
 --- !u!96 &3634226448234584312
 TrailRenderer:
   serializedVersion: 2

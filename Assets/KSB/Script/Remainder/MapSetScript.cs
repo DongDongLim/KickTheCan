@@ -42,28 +42,23 @@ namespace DH
 
                 foreach (Transform obj in objectSpawnPos)
                 {
-                    Debug.Log("포이치지롱");
                     randomResult = chanceAddon.ChanceThree(10, 10, 80);
                     randIndex = Random.Range(0, MapSettingMng.instance.mapObj.Length);
                     switch (randomResult)
                     {
                         case 0:
-                            Debug.Log("안생겼지롱");
                             break;
                         case 1:
                             PhotonNetwork.Instantiate("Obj", obj.position, obj.rotation, 0)
                             .GetComponent<ObjScript>().SetObjIndex(randIndex);
-                            Debug.Log("랜덤이지롱");
                             break;
                         case 2:
                             PhotonNetwork.Instantiate("Obj", obj.position, obj.rotation, 0)
                             .GetComponent<ObjScript>().SetObjIndex(Path.Combine("Sports", obj.name));
-                            Debug.Log("생겼지롱");
                             break;
                     }
                 }
-                PhotonNetwork.Instantiate
-                   ("Can", mapObject.GetComponent<MapSetting>().CanSpqwnPos(), Quaternion.identity, 0).GetComponent<CanSetScript>().SetObjIndex();
+                CanSpawn();
             }
             gameObject.SetActive(false);
 
@@ -71,8 +66,9 @@ namespace DH
 
         public void CanSpawn()
         {
-            PhotonNetwork.Instantiate
-               ("Can", mapObject.GetComponent<MapSetting>().CanSpqwnPos(), Quaternion.identity, 0).GetComponent<CanSetScript>().SetObjIndex();
+            if (PhotonNetwork.LocalPlayer == PhotonNetwork.MasterClient)
+                PhotonNetwork.Instantiate
+                   ("Can", mapObject.GetComponent<MapSetting>().CanSpqwnPos(), Quaternion.identity, 0);
         }
 
         private void OnDestroy()
