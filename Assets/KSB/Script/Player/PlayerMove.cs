@@ -42,6 +42,7 @@ namespace DH
 
         float maxBorderRayDistance;
 
+        float runnerOffset;
 
 
         private void Start()
@@ -57,6 +58,14 @@ namespace DH
             maxGroundRayDistance = charactorBody.GetComponent<Collider>().bounds.size.y * 0.5f;
             maxBorderRayDistance = charactorBody.GetComponent<Collider>().bounds.size.x;
             rigid = r;
+            if (owner.gameObject.layer == LayerMask.NameToLayer("Tagger"))
+            {
+                runnerOffset = 0;
+            }
+            else
+            {
+                runnerOffset = maxGroundRayDistance * 2;
+            }
         }
 
         private void OnDestroy()
@@ -140,7 +149,7 @@ namespace DH
             rayStatePos = new Vector3(transform.position.x, transform.position.y + maxGroundRayDistance, transform.position.z);
             boxCastSize = new Vector2(charactorBody.GetComponent<Collider>().bounds.size.x,charactorBody.GetComponent<Collider>().bounds.size.z);
             RaycastHit hit;
-            if (Physics.SphereCast(rayStatePos + (Vector3.up * maxGroundRayDistance),boxCastSize.x * 0.5f,Vector3.down,out hit,maxGroundRayDistance + 0.5f,LayerMask.GetMask("Ground","Object")))
+            if (Physics.SphereCast(rayStatePos + (Vector3.up * maxGroundRayDistance),boxCastSize.x * 0.5f,Vector3.down,out hit,maxGroundRayDistance + runnerOffset + 0.5f,LayerMask.GetMask("Ground","Object")))
             {
                 isJump = false;
                 owner?.JumpAnim(isJump);
