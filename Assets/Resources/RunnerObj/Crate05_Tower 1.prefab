@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1499641572193604500}
   - component: {fileID: 6458322969979290659}
-  - component: {fileID: 2818304309295876877}
   m_Layer: 12
   m_Name: Crate05_Tower 1
   m_TagString: Untagged
@@ -48,19 +47,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5828912, y: 2.4749613, z: 2.0185773}
   m_Center: {x: -0.0063279867, y: 1.2510862, z: 0.009145856}
---- !u!65 &2818304309295876877
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2101872757853677162}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.7, y: 2.5, z: 1.7}
-  m_Center: {x: 0, y: 1.2, z: 0}
 --- !u!1 &5066266244939191805
 GameObject:
   m_ObjectHideFlags: 0

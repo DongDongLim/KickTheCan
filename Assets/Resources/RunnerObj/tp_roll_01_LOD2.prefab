@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2706344828221507577}
   - component: {fileID: 2706344828222801883}
   - component: {fileID: 2706344828223800603}
+  - component: {fileID: 4591363130662299660}
   m_Layer: 17
   m_Name: tp_roll_01_LOD2
   m_TagString: Untagged
@@ -79,3 +80,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &4591363130662299660
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2706344828221545433}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0692788, y: 1.0007991, z: 1.0703849}
+  m_Center: {x: -0.00000023841858, y: 0.00039952993, z: 0.0005376935}

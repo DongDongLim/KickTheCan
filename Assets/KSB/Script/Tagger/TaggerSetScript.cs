@@ -18,7 +18,7 @@ namespace DH
         {
             Instantiate(MapSettingMng.instance.taggerObj, transform, false);
             change = new ChangeLayer();
-            change.CangeTransformLayer(transform, "Tagger", true);
+            change.CangeTransformLayer(transform, "Tagger", false);
         }
     }
 }
