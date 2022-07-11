@@ -63,7 +63,7 @@ public class FriendChat : MonoBehaviour
 
         msgDic.Add("username", DatabaseManager.instance.dbData.DisplayNickname);
         msgDic.Add("message", messageField.text);
-        msgDic.Add("timestamp", DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"));
+        msgDic.Add("timestamp", DateTime.Now.ToString("MM.dd hh:mm"));
         msgDic.Add("parent", FuncTool.CompareStrings(AuthManager.instance.GetAuthUID(), _friendUID));
 
         Dictionary<string, object> updateMsg = new Dictionary<string, object>();
