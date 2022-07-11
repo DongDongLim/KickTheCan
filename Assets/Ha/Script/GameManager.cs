@@ -113,6 +113,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             else
             {
                 canCheckActionFalse?.Invoke();
+                Debug.Log("여기 혹시 불리나?");
             }
         }
         if (changedProps.TryGetValue(DH.GameData.PLAYER_TAGGER, out value))
@@ -121,6 +122,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 // TODO : 술래가 깡통을 먹음
                 canCheckObj.transform.position = DH.MapSettingMng.instance.canTransform;
+                Debug.Log(canCheckObj.transform.position);
                 canCheckObj.SetActive(true);
             }
 

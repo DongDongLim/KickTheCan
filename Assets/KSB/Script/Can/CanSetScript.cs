@@ -9,21 +9,16 @@ namespace DH
     {
         [SerializeField]
         GameObject can;
-        public void SetObjIndex()
+
+        private void OnEnable()
         {
-            photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered);
+            ChildObjCreate();
         }
 
-        [PunRPC]
         public void ChildObjCreate()
         {
-            GameObject canObj = Instantiate(can, transform, false);
+            Instantiate(can, transform, false);
             PlayMng.instance.can = gameObject;
-        }
-        private void OnDestroy()
-        {
-            if (photonView.IsMine)
-                PhotonNetwork.OpCleanRpcBuffer(GetComponent<PhotonView>());
         }
     }
 }

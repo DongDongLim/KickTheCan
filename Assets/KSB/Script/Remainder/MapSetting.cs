@@ -54,6 +54,7 @@ public class MapSetting : MonoBehaviour
     {
         int rand = Random.Range(0, canSpqwnPosList.Length);
         DH.MapSettingMng.instance.canTransform = canSpqwnPosList[rand].position;
+        Debug.Log(canSpqwnPosList[rand].position);
         return canSpqwnPosList[rand].position;
     }
 
