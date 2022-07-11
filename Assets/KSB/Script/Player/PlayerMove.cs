@@ -43,6 +43,7 @@ namespace DH
         float maxBorderRayDistance;
 
 
+
         private void Start()
         {
             cameraArm = transform.GetChild(0).transform;
@@ -87,6 +88,9 @@ namespace DH
             charactorBody.forward = moveDir;
 
             if (isborder)
+                return;
+
+            if (owner.isFreeze)
                 return;
 
             rigid.MovePosition(transform.position + moveDir * Time.fixedDeltaTime * moveSpeed);
