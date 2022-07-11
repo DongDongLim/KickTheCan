@@ -11,7 +11,7 @@ namespace DH
     public class CanMoveScript : MonoBehaviourPun
     {
         [SerializeField]
-        float kickPower = 10;
+        float kickPower = 50;
         [SerializeField]
         Rigidbody rigid;
         bool isMove;

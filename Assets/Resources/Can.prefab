@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 394441fa53595004090840953b9d1ebf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kickPower: 10
+  kickPower: 50
   rigid: {fileID: 1123194149743947344}
 --- !u!96 &3634226448234584312
 TrailRenderer:

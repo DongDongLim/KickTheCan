@@ -20,7 +20,7 @@ namespace DH
         public void SetObjIndex(int index)
         {
             chanceAddon = new ChanceAddon();
-            GameManager.Instance.canCheckActionFalse += CanSpawn;
+            GameManager.Instance.canCheckActionTrue += CanSpawn;
             photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered, index);
         }
 
@@ -35,7 +35,6 @@ namespace DH
             mapObject.GetComponent<MapSetting>().SetObjectSpawnPosList(ref objectSpawnPos);
             if (PhotonNetwork.IsMasterClient)
             {
-
                 if (objectSpawnPos.Length == 0)
                     return;
 
@@ -67,8 +66,12 @@ namespace DH
         public void CanSpawn()
         {
             if (PhotonNetwork.LocalPlayer == PhotonNetwork.MasterClient)
+            {
+                GameObject obj =
                 PhotonNetwork.Instantiate
                    ("Can", mapObject.GetComponent<MapSetting>().CanSpqwnPos(), Quaternion.identity, 0);
+                Debug.Log("obj" + obj.transform.position);
+            }
         }
 
         private void OnDestroy()
