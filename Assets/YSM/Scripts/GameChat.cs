@@ -91,6 +91,8 @@ namespace YSM
             typeButtonText.text = "All";
             chatEntry = chatEntryPrefab.GetComponent<ChatEntry>();
 
+            OnClickAllPanel();
+
             Transform[] allChatchildList = allChatContent.GetComponentsInChildren<Transform>();
             if(allChatchildList != null)
             {
@@ -469,7 +471,14 @@ namespace YSM
         }
         #endregion
 
-
+        public void CloseBtnClicked()
+        {
+            this.gameObject.SetActive(false);
+        }
+        public void OpenBtnClicked()
+        {
+            this.gameObject.SetActive(true);
+        }
 
     }
 }

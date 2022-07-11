@@ -88,6 +88,7 @@ public class FriendInfo : MonoBehaviour
              .RemoveValueAsync();
 
         //삭제 코드 추가
+        this.gameObject.SetActive(false);
 
     }
 
