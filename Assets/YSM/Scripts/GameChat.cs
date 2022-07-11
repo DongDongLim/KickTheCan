@@ -93,35 +93,35 @@ namespace YSM
 
             OnClickAllPanel();
 
-            Transform[] allChatchildList = allChatContent.GetComponentsInChildren<Transform>();
-            if(allChatchildList != null)
-            {
-                for(int i = 1; i < allChatchildList.Length;i++)
-                {
-                    if (allChatchildList[i] != transform)
-                        Destroy(allChatchildList[i].gameObject);
-                }
-            }
+            //Transform[] allChatchildList = allChatContent.GetComponentsInChildren<Transform>();
+            //if(allChatchildList != null)
+            //{
+            //    for(int i = 1; i < allChatchildList.Length;i++)
+            //    {
+            //        if (allChatchildList[i] != transform)
+            //            Destroy(allChatchildList[i].gameObject);
+            //    }
+            //}
 
-            Transform[] teamChatchildList = allChatContent.GetComponentsInChildren<Transform>();
-            if(teamChatchildList != null)
-            {
-                for(int i = 1; i < teamChatchildList.Length;i++)
-                {
-                    if (teamChatchildList[i] != transform)
-                        Destroy(teamChatchildList[i].gameObject);
-                }
-            }
+            //Transform[] teamChatchildList = allChatContent.GetComponentsInChildren<Transform>();
+            //if(teamChatchildList != null)
+            //{
+            //    for(int i = 1; i < teamChatchildList.Length;i++)
+            //    {
+            //        if (teamChatchildList[i] != transform)
+            //            Destroy(teamChatchildList[i].gameObject);
+            //    }
+            //}
             
-            Transform[] systemChatchildList = allChatContent.GetComponentsInChildren<Transform>();
-            if(systemChatchildList != null)
-            {
-                for(int i = 1; i < systemChatchildList.Length;i++)
-                {
-                    if (systemChatchildList[i] != transform)
-                        Destroy(systemChatchildList[i].gameObject);
-                }
-            }
+            //Transform[] systemChatchildList = allChatContent.GetComponentsInChildren<Transform>();
+            //if(systemChatchildList != null)
+            //{
+            //    for(int i = 1; i < systemChatchildList.Length;i++)
+            //    {
+            //        if (systemChatchildList[i] != transform)
+            //            Destroy(systemChatchildList[i].gameObject);
+            //    }
+            //}
 
             
         }
