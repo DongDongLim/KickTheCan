@@ -29,10 +29,8 @@ public class PlayerSceneManager : MonoBehaviour
     public void OnLobbyButton()
     {            
         sceneInfo.roomName = PhotonNetwork.CurrentRoom.Name;
-        Debug.Log(sceneInfo.roomName);
-        //sceneInfo.isLeaver = true;      
-        // PhotonNetwork.LeaveRoom();
-        PhotonNetwork.LoadLevel(1);
+        Debug.Log(sceneInfo.roomName);                     
+        PhotonNetwork.LoadLevel(1);       
         Debug.Log("Go to Lobby");
     }
 
