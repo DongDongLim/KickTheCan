@@ -94,7 +94,9 @@ public class GameManager : MonoBehaviourPunCallbacks
             // 일단 사용하지 않고 나중에 다시 수정하겠습니다.
 
             if (PlayersReadyLevel() == playerList.Count)
+            {
                 StartCoroutine(StartCountDown());
+            }
         }
         // 러너가 킥을 찼을 때 술래의 공격불가
         object value;
