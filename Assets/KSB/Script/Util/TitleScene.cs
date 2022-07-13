@@ -6,20 +6,12 @@ using UnityEngine.SceneManagement;
 public class TitleScene : MonoBehaviour
 {
     bool isTrue = true;
-    private void FixedUpdate()
+    public void Button()
     {
-        Button();
-    }
-
-    private void Button()
-    {
-        if (Input.anyKeyDown)
+        if (isTrue)
         {
-            if (isTrue)
-            {
-                SceneManager.LoadScene(1);
-                isTrue = false;
-            }
+            SceneManager.LoadScene(1);
+            isTrue = false;
         }
     }
 }
