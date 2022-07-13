@@ -326,7 +326,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("ObserverMode 호출");
         Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
-              
+       
         DH.MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);        
     }
 
