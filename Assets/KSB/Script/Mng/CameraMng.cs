@@ -42,6 +42,7 @@ namespace DH
 
             if (playerCam.gameObject.activeSelf)
             {
+                Debug.Log("여기 옵저버자리");
                 UIMng.instance.SetMoveUI(observerObject.GetComponent<PlayerMove>());
                 observerObject.transform.position = playerObject == null ? observerObject.transform.position : playerObject.transform.position;
                 skyCam.gameObject.SetActive(true);

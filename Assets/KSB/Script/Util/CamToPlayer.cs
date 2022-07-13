@@ -73,8 +73,6 @@ public class CamToPlayer : MonoBehaviour
 
             if (objectRender != null)
             {
-                Debug.Log("렌더러 받아옴1");
-                Debug.Log(tempc.Count);
                 transparentMaterial = objectRender.material;
                 transparentMaterial.SetColor("_Color", new Color(1f,1f,1f,0f));
             }
@@ -83,15 +81,12 @@ public class CamToPlayer : MonoBehaviour
         for (int i = 1; i < extraPos.Length; i++)
         {
             extraRayHits = Physics.RaycastAll(extraPos[i].transform.position, Direction, Distance, layerMask);
-            Debug.DrawRay(extraPos[i].transform.position, Distance * Direction, Color.yellow, 0.1f);
-            Debug.Log(extraRayHits.Length);
             for (int j = 0; j < extraRayHits.Length; j++)
             {
                 RaycastHit extrahits = extraRayHits[j];
 
                 if (tempc.Contains(extrahits.collider) == true)
                 {
-                    Debug.Log("tempc continue");
                     continue;
                 }  
 
@@ -99,7 +94,6 @@ public class CamToPlayer : MonoBehaviour
 
                 if (objectRender != null)
                 {
-                    Debug.Log("렌더러 받아옴2");
                     transparentMaterial = objectRender.material;
                     transparentMaterial.SetColor("_Color", new Color(1f, 1f, 1f, 1f));
                 }

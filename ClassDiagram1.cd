@@ -1,0 +1,1340 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="JoystickPlayerExample" Collapsed="true">
+    <Position X="24.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAEAAAAAAAAAAAAAQAAAAAAAAAEAAA=</HashCode>
+      <FileName>Assets\ExResource\Joystick Pack\Examples\JoystickPlayerExample.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JoystickSetterExample" Collapsed="true">
+    <Position X="26.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAEAAAAAAAAAAAAAAAACAAAAAQAQAQAACAAEIAA=</HashCode>
+      <FileName>Assets\ExResource\Joystick Pack\Examples\JoystickSetterExample.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Joystick" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACABACIACRICAAEACBAASICAAEAADAKAQQCCAEAIAA=</HashCode>
+      <FileName>Assets\ExResource\Joystick Pack\Scripts\Base\Joystick.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DynamicJoystick" Collapsed="true">
+    <Position X="0.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAACAACAIAAAAAAAAAAAAAAAAAgAAAAIAAAAAAAA=</HashCode>
+      <FileName>Assets\ExResource\Joystick Pack\Scripts\Joysticks\DynamicJoystick.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FixedJoystick" Collapsed="true">
+    <Position X="3" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\ExResource\Joystick Pack\Scripts\Joysticks\FixedJoystick.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FloatingJoystick" Collapsed="true">
+    <Position X="5.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAACAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\ExResource\Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VariableJoystick" Collapsed="true">
+    <Position X="7.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAKAACAIAgAAAAAAAAAAAAAAAgAAACIAAAAAAAA=</HashCode>
+      <FileName>Assets\ExResource\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GPGSIds" Collapsed="true">
+    <Position X="33.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\GPGSIds.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DontDestroyObject" Collapsed="true">
+    <Position X="17.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Ha\Script\DontDestroyObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameManager" Collapsed="true">
+    <Position X="29.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgCOBAGAAAIAAAUQAAGAkFAAAAMCmUQCAwBgABEo=</HashCode>
+      <FileName>Assets\Ha\Script\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerSceneInfo" Collapsed="true">
+    <Position X="26.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Ha\Script\PlayerSceneInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerSceneManager" Collapsed="true">
+    <Position X="28" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACAABAAAAAAABAAQAAAAAACAAAAQAAAAAAAEEA=</HashCode>
+      <FileName>Assets\Ha\Script\PlayerSceneManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Timer" Collapsed="true">
+    <Position X="31.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACBAAAAAAgQCAABAAAAAAQAAAAgAAAEAAAA=</HashCode>
+      <FileName>Assets\Ha\Script\Timer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data" Collapsed="true">
+    <Position X="28" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Assets\KSB\Script\DataScript\Data.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleNickNamePanel" Collapsed="true">
+    <Position X="31.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAACAAAAAABAACAgAAAAIAEAACAAwAAAIAA=</HashCode>
+      <FileName>Assets\KSB\Script\Lobby\GoogleNickNamePanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SceneMng" Collapsed="true">
+    <Position X="8.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AwBAAAAARAAAIAAIAAAAAAAAAABBAoAAAAAACCAAAAA=</HashCode>
+      <FileName>Assets\KSB\Script\Mng\SceneMng.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoundMng" Collapsed="true">
+    <Position X="11" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAQAgAAQAAAAEAAAAAQAAAAAECIAAABAAAAAA=</HashCode>
+      <FileName>Assets\KSB\Script\Mng\SoundMng.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UIDataMng" Collapsed="true">
+    <Position X="15.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAABAAACYAAAAAAAAAAAAAAAAAAAAEQAAAAAAAAEA=</HashCode>
+      <FileName>Assets\KSB\Script\Mng\UIDataMng.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapSetting" Collapsed="true">
+    <Position X="19.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAABAAEAABIAAAAAAAAAAACAGAAAAAIAAAEA=</HashCode>
+      <FileName>Assets\KSB\Script\Remainder\MapSetting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObjectScript" Collapsed="true">
+    <Position X="31.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\KSB\Script\Remainder\ObjectScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TaggerAttack" Collapsed="true">
+    <Position X="24.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAEAAAAAAAAAEIAAAAAAACAAAAAAEEA=</HashCode>
+      <FileName>Assets\KSB\Script\Tagger\TaggerAttack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CreatedUI" Collapsed="true">
+    <Position X="24.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\KSB\Script\UI\CreatedUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CameraResolution" Collapsed="true">
+    <Position X="17.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\KSB\Script\Util\CameraResolution.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CamToPlayer" Collapsed="true">
+    <Position X="19.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACCAgQAAAyAAABIAAAAAAAAAAAAAABABAEQAAAABAAA=</HashCode>
+      <FileName>Assets\KSB\Script\Util\CamToPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChanceAddon" Collapsed="true">
+    <Position X="26.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABQAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\KSB\Script\Util\ChanceAddon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChangeLayer" Collapsed="true">
+    <Position X="28" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\KSB\Script\Util\ChangeLayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObjectPooing" Collapsed="true">
+    <Position X="29.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAICAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Assets\KSB\Script\Util\ObjectPooing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Query" Collapsed="true">
+    <Position X="26.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAACAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\KSB\Script\Util\Query.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Singleton&lt;T&gt;" Collapsed="true">
+    <Position X="11" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAQAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\KSB\Script\Util\Singleton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SingletonMini&lt;T&gt;" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAFAAAAQAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\KSB\Script\Util\SingletonMini.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StartTimer" Collapsed="true">
+    <Position X="21" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAAAAAAGAACAAAAAAAAAAAAAQQgAACAAABAAAAAAA=</HashCode>
+      <FileName>Assets\KSB\Script\Util\StartTimer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TitleScene" Collapsed="true">
+    <Position X="33.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAACgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\KSB\Script\Util\TitleScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Missile" Collapsed="true">
+    <Position X="22.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAECAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\Missile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerController" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAAFAECAAAACAAAIAQAAAAABEAQAAAQAAAAAAAEw=</HashCode>
+      <FileName>Assets\Scripts\Game\PlayerController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GameData" Collapsed="true">
+    <Position X="24.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAEBAAUAAAAAACAAAAAAAIQAAA=</HashCode>
+      <FileName>Assets\Scripts\GameData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CreateRoomPanel" Collapsed="true">
+    <Position X="26.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAgAAAAAAAAAAAEAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Lobby\CreateRoomPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InConnectPanel" Collapsed="true">
+    <Position X="17.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAiAAAAAIAAAAAAAAAAAAAASAAAAAAAAACAA=</HashCode>
+      <FileName>Assets\Scripts\Lobby\InConnectPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InfoPanel" Collapsed="true">
+    <Position X="19.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAQAAAAAAAAgAAAEAAAAAIgAAAA=</HashCode>
+      <FileName>Assets\Scripts\Lobby\InfoPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InLobbyPanel" Collapsed="true">
+    <Position X="21" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAgAQAACAAAAEAACAAAAAAAUAAAAAICgAAAIAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Lobby\InLobbyPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InRoomPanel" Collapsed="true">
+    <Position X="22.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BECIAhAEAECAgAkACARCAAAQAAACAFCJAgAEAQhACNA=</HashCode>
+      <FileName>Assets\Scripts\Lobby\InRoomPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LobbyManager" Collapsed="true">
+    <Position X="29.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gQSAIFAAAGAAAAgAAEQAIIgAAAFAAAAEEAAEgAgASMA=</HashCode>
+      <FileName>Assets\Scripts\Lobby\LobbyManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoginPanel" Collapsed="true">
+    <Position X="33.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAACAAAAAAAAAAgAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Lobby\LoginPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainPanel" Collapsed="true">
+    <Position X="15.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gQSIgFQAAmCAgAEAAGRAIAgAEUEAABSEGAAEgIhAWMA=</HashCode>
+      <FileName>Assets\Scripts\Lobby\MainPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PhotonTest" Collapsed="true">
+    <Position X="17.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Lobby\PhotonTest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerEntry" Collapsed="true">
+    <Position X="22.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAgCAAAQAAAEgBAiAAAAABAAACCAAIAQBAAAA=</HashCode>
+      <FileName>Assets\Scripts\Lobby\PlayerEntry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RoomEntry" Collapsed="true">
+    <Position X="29.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EgAAAAAAAAAAAQAAAAAAAAAAgAAAAAAAAAACAAAQAAA=</HashCode>
+      <FileName>Assets\Scripts\Lobby\RoomEntry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StatePanel" Collapsed="true">
+    <Position X="22.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAA=</HashCode>
+      <FileName>Assets\Scripts\Lobby\StatePanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChatEntry" Collapsed="true">
+    <Position X="33.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABgAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Assets\YSM\Scripts\ChatEntry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AuthManager" Collapsed="true">
+    <Position X="13.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAxBAwABAAAACAAIIAAACAAQIBBIEEQhIABAAEQA=</HashCode>
+      <FileName>Assets\YSM\Scripts\Firebase\AuthManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CheckPanel" Collapsed="true">
+    <Position X="17.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEwAAAAAAAAAAAEAAQAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\YSM\Scripts\Firebase\CheckPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseManager" Collapsed="true">
+    <Position X="29.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAggAAAQIAACAAAAABAASCAAAABQAAAAAA=</HashCode>
+      <FileName>Assets\YSM\Scripts\Firebase\DatabaseManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DBData" Collapsed="true">
+    <Position X="31.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIQABCAEAAgAAAAAAAAEAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Assets\YSM\Scripts\Firebase\DBData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DBFriend" Collapsed="true">
+    <Position X="33.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAIAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Assets\YSM\Scripts\Firebase\Friend\DBFriend.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DBFriendChat" Collapsed="true">
+    <Position X="15.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Assets\YSM\Scripts\Firebase\Friend\DBFriend.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FriendChat" Collapsed="true">
+    <Position X="26.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAEAQAAAAAAEAAAAAgAAAAQICAAAggAABEA=</HashCode>
+      <FileName>Assets\YSM\Scripts\Firebase\Friend\FriendChat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FriendChatEntry" Collapsed="true">
+    <Position X="28" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Assets\YSM\Scripts\Firebase\Friend\FriendChatEntry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FriendInfo" Collapsed="true">
+    <Position X="29.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAEAAAAAAAAIBAIAAAAAABAAACAACAAAEyA=</HashCode>
+      <FileName>Assets\YSM\Scripts\Firebase\Friend\FriendInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FriendListEntry" Collapsed="true">
+    <Position X="33.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAABACAAAgAAgoAAgBAEAAAAAAAAACAAiAAAFAA=</HashCode>
+      <FileName>Assets\YSM\Scripts\Firebase\Friend\FriendListEntry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FriendManager" Collapsed="true">
+    <Position X="15.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BABAEARAkCABAAAAAQFAAAAAAADAoBAAAAAIAwAAAAA=</HashCode>
+      <FileName>Assets\YSM\Scripts\Firebase\Friend\FriendManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FriendPanel" Collapsed="true">
+    <Position X="17.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BCQAAAAIEABAAkAAAAEAQAAgAIAACAUAAAAIAgAAAAA=</HashCode>
+      <FileName>Assets\YSM\Scripts\Firebase\Friend\FriendPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FriendRequestEntry" Collapsed="true">
+    <Position X="19.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABACAAAgAAgAAAABAAAAAAAAgAAAIAQAAAEAA=</HashCode>
+      <FileName>Assets\YSM\Scripts\Firebase\Friend\FriendRequestEntry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SignUpComplete" Collapsed="true">
+    <Position X="17.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAAAAIAAAAAAAEAAA=</HashCode>
+      <FileName>Assets\YSM\Scripts\Firebase\SignUpComplete.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SignUpPanel" Collapsed="true">
+    <Position X="19.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQAGEgAQAESCkQAEAABAgKggFABCIBMAAKBQ4wBwKgU=</HashCode>
+      <FileName>Assets\YSM\Scripts\Firebase\SignUpPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FuncTool" Collapsed="true">
+    <Position X="21" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAABAAAAAAA=</HashCode>
+      <FileName>Assets\YSM\Scripts\FuncTool.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Photon.Chat.UtilityScripts.EventSystemSpawner" Collapsed="true">
+    <Position X="24.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Assets\ExResource\Photon\PhotonChat\Demos\Common\EventSystemSpawner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Photon.Chat.UtilityScripts.OnStartDelete" Collapsed="true">
+    <Position X="15.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\ExResource\Photon\PhotonChat\Demos\Common\OnStartDelete.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Photon.Chat.UtilityScripts.TextButtonTransition" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="28" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAABAAAAAAAAAAAAAAAAAgAAAIAAAAAQAACEI=</HashCode>
+      <FileName>Assets\ExResource\Photon\PhotonChat\Demos\Common\TextButtonTransition.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Photon.Chat.UtilityScripts.TextToggleIsOnTransition" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="29.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAADAAggAEIAAAQAQAAKAA=</HashCode>
+      <FileName>Assets\ExResource\Photon\PhotonChat\Demos\Common\TextToggleIsOnTransition.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Photon.Chat.Demo.AppSettingsExtensions" Collapsed="true">
+    <Position X="15.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\ExResource\Photon\PhotonChat\Demos\DemoChat\AppSettingsExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Photon.Chat.Demo.ChannelSelector" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="29.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAgAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\ExResource\Photon\PhotonChat\Demos\DemoChat\ChannelSelector.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Photon.Chat.Demo.ChatAppIdCheckerUI" Collapsed="true">
+    <Position X="31.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\ExResource\Photon\PhotonChat\Demos\DemoChat\ChatAppIdCheckerUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Photon.Chat.Demo.ChatGui" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CGQBAFoQQCqDGEQAABCAAICUAEBggYIYCRAwTAAQAJA=</HashCode>
+      <FileName>Assets\ExResource\Photon\PhotonChat\Demos\DemoChat\ChatGui.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Photon.Chat.Demo.FriendItem" Collapsed="true">
+    <Position X="31.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAIAAAAAAABAAAAEAAAAQAAAEA=</HashCode>
+      <FileName>Assets\ExResource\Photon\PhotonChat\Demos\DemoChat\FriendItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Photon.Chat.Demo.IgnoreUiRaycastWhenInactive" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\ExResource\Photon\PhotonChat\Demos\DemoChat\IgnoreUiRaycastWhenInactive.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Photon.Chat.Demo.NamePickGui" Collapsed="true">
+    <Position X="24.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAACAAACAACAAAAAAAAAAAAAAAACAAAAAAAAgAAAA=</HashCode>
+      <FileName>Assets\ExResource\Photon\PhotonChat\Demos\DemoChat\NamePickGui.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Photon.Realtime.Demo.ConnectAndJoinRandomLb" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gEaAAEIAACAAEQAAAEACAIEAAAGBAAIEEAJAAAAAQIA=</HashCode>
+      <FileName>Assets\ExResource\Photon\PhotonRealtime\Demos\DemoLoadBalancing\ConnectAndJoinRandomLb.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GooglePlayGames.BasicApi.Achievement" Collapsed="true">
+    <Position X="15.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAKMAIQAQAhkUAEAAABAQQAAAUAAgwCAAgAAEAAQAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\Achievement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayGames.BasicApi.CommonTypesUtil" Collapsed="true">
+    <Position X="21" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\CommonTypes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayGames.BasicApi.DummyClient" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgBALBJAAYSYARAAAACAAIsAACAgAICAEIAAKRAogM=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\DummyClient.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GooglePlayGames.BasicApi.LeaderboardScoreData" Collapsed="true">
+    <Position X="28" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACACEAAGAAAQAUwEEQAgAAAAAAAAAAABAIAABAAAAIA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\LeaderboardScoreData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayGames.BasicApi.Player" Collapsed="true">
+    <Position X="3" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayGames.BasicApi.PlayerProfile" Collapsed="true">
+    <Position X="5.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\PlayerProfile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayGames.BasicApi.PlayerStats" Collapsed="true">
+    <Position X="31.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ADAAIiAQCCEQAQAABAIAhEkAYAEAMEAQAAABBIgAAQA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\PlayerStats.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayGames.BasicApi.ScorePageToken" Collapsed="true">
+    <Position X="33.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAEBAAAAQAAIACAAAAAAAAAAAAAAAgQAAAAAAEA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\ScorePageToken.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayGames.BasicApi.SignInHelper" Collapsed="true">
+    <Position X="15.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAABAAGAAAAAAAAAAAAAAAAAAAAAAAgAACAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\SignInHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayGames.BasicApi.Events.Event" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEACUACQAAEgAAAAAAAAAgQAAAAAAAAAAAgAAAAgAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\Events\Event.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GooglePlayGames.BasicApi.Nearby.DummyNearbyConnectionClient" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IEAAAEAggAAAgAAAACAAAIAgAACEEAAAgAgACIAAgAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\Nearby\DummyNearbyConnectionClient.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GooglePlayGames.BasicApi.Video.VideoCapabilities" Collapsed="true">
+    <Position X="17.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAIAAAAAAAEqAAAAAAgAAAAEAAAAAAAABASAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\Video\VideoCapabilities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayGames.BasicApi.Video.VideoCaptureState" Collapsed="true">
+    <Position X="19.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAIAAIAAAAEAAAAAJAAgQAAgAAAAAAoAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\Video\VideoCaptureState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayGames.GameInfo" Collapsed="true">
+    <Position X="28" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAABEAAAAAgkAAYQAAABAAAAAAAACEAgAAAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\GameInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayGames.PlayGamesAchievement" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="33.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AyEAEACQS0ABEIAAAAAAFBAAFAAAAgwCIwQAAAAAAgA=</HashCode>
+      <FileName>Assets\GooglePlayGames\ISocialPlatform\PlayGamesAchievement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GooglePlayGames.PlayGamesLeaderboard" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAEAgtUgAAAAAQACAIAgAAEACABAgBAAYAAEEEAgo=</HashCode>
+      <FileName>Assets\GooglePlayGames\ISocialPlatform\PlayGamesLeaderboard.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GooglePlayGames.PlayGamesLocalUser" Collapsed="true">
+    <Position X="0.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAEAAAACGAAAAAIAAAAAAIIAAAAAgAGAAAAAAUBAgA=</HashCode>
+      <FileName>Assets\GooglePlayGames\ISocialPlatform\PlayGamesLocalUser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GooglePlayGames.PlayGamesPlatform" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgRADhBAQJyYAREAAQCEAJoEgCQqAoCQloIAKTgogs=</HashCode>
+      <FileName>Assets\GooglePlayGames\ISocialPlatform\PlayGamesPlatform.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GooglePlayGames.PlayGamesScore" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAQAAABAACAAkQAAAQAAEACAAAgAEAQAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\ISocialPlatform\PlayGamesScore.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GooglePlayGames.PlayGamesUserProfile" Collapsed="true">
+    <Position X="3" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IQACAAAAAAAAABEEgAAAAIABGAgAAoAEAQAAAAEAAgA=</HashCode>
+      <FileName>Assets\GooglePlayGames\ISocialPlatform\PlayGamesUserProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GooglePlayGames.NearbyConnectionClientFactory" Collapsed="true">
+    <Position X="26.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\Platforms\NearbyConnectionClientFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayGames.PlayGamesClientFactory" Collapsed="true">
+    <Position X="15.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\Platforms\PlayGamesClientFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayGames.PluginVersion" Collapsed="true">
+    <Position X="24.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQgAAAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\PluginVersion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayGames.OurUtils.Logger" Collapsed="true">
+    <Position X="31.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAACAAEAAAAAAAAAAAgAEAAIAAGAAgAAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\OurUtils\Logger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayGames.OurUtils.Misc" Collapsed="true">
+    <Position X="21" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAIAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\OurUtils\Misc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayGames.OurUtils.NearbyHelperObject" Collapsed="true">
+    <Position X="28" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACAAAAAAAAAAAAAAAAACAAARQIgCIAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\GooglePlayGames\OurUtils\NearbyHelperObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayGames.OurUtils.PlatformUtils" Collapsed="true">
+    <Position X="19.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\OurUtils\PlatformUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayGames.OurUtils.PlayGamesHelperObject" Collapsed="true">
+    <Position X="17.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAAAAQAAAAAAAAIIAAEAAAAJAAxKIAABAAAAAJEQ=</HashCode>
+      <FileName>Assets\GooglePlayGames\OurUtils\PlayGamesHelperObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayGames.Android.AndroidClient" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAopgHBJAAZSYAxCQFAKAAIsCAiAgAoCBGIAAqTCqkM=</HashCode>
+      <FileName>Assets\GooglePlayGames\Platforms\Android\AndroidClient.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GooglePlayGames.Android.AndroidEventsClient" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAABAgAAhAIAAAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\Platforms\Android\AndroidEventsClient.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GooglePlayGames.Android.AndroidHelperFragment" Collapsed="true">
+    <Position X="21" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAJAAAQgQAAAQAACAQAAAAAAAAAAAAAAAIBAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\Platforms\Android\AndroidHelperFragment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayGames.Android.AndroidJavaConverter" Collapsed="true">
+    <Position X="22.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAABAAAAgAAAAAAgAAAAAEQEAQAAQAAE=</HashCode>
+      <FileName>Assets\GooglePlayGames\Platforms\Android\AndroidJavaConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayGames.Android.AndroidNearbyConnectionClient" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="24.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IEAAAGAAgAABgAAAACAAEEAgEACUkAAAhAhACIABgAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\Platforms\Android\AndroidNearbyConnectionClient.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GooglePlayGames.Android.AndroidSavedGameClient" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="26.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAQAAQAgAAAIAUAUAgAAAAEBEAAABAEA=</HashCode>
+      <FileName>Assets\GooglePlayGames\Platforms\Android\AndroidSavedGameClient.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GooglePlayGames.Android.AndroidSnapshotMetadata" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="28" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAggAAAAgwAAEAAAABAAAAAAAgAAAAAAAACAACAQ=</HashCode>
+      <FileName>Assets\GooglePlayGames\Platforms\Android\AndroidSnapshotMetadata.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GooglePlayGames.Android.AndroidTaskUtils" Collapsed="true">
+    <Position X="29.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAACAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\Platforms\Android\AndroidTaskUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayGames.Android.AndroidTokenClient" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="31.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEEAABEBCBIAABAgKEAAQSAIABACAAIACAACwEBMQAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\Platforms\Android\AndroidTokenClient.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GooglePlayGames.Android.AndroidVideoClient" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="33.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAEAEAEAgAAAEAAAwAwAgAAAAAAIAADAQ=</HashCode>
+      <FileName>Assets\GooglePlayGames\Platforms\Android\AndroidVideoClient.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DH.CanMoveScript" Collapsed="true">
+    <Position X="21" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAACCAACAAAAAAAAAAIAAAAABAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\KSB\Script\Can\CanMoveScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DH.CanRespawnCheck" Collapsed="true">
+    <Position X="22.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\KSB\Script\Can\CanRespawnCheck.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DH.CanSetScript" Collapsed="true">
+    <Position X="24.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Assets\KSB\Script\Can\CanSetScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DH.CameraMng" Collapsed="true">
+    <Position X="0.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAHAAEAQQAABAACAAAAAAABAAAAAAAAAFAAAAAAAAA=</HashCode>
+      <FileName>Assets\KSB\Script\Mng\CameraMng.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DH.MapSettingMng" Collapsed="true">
+    <Position X="3" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABABQACQMCIAEAAAIIAACAAAAABAAAAAAQAAIBAAAg=</HashCode>
+      <FileName>Assets\KSB\Script\Mng\MapSettingMng.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DH.PlayMng" Collapsed="true">
+    <Position X="7.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIBCAAQAAAAAAAgAAAAAAAAAAACABAAAAAABAAAAA=</HashCode>
+      <FileName>Assets\KSB\Script\Mng\PlayMng.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DH.UIMng" Collapsed="true">
+    <Position X="9.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QACAQAMIQLABAAIAAAgASAgAKAASiAABAgACAEFAARA=</HashCode>
+      <FileName>Assets\KSB\Script\Mng\UIMng.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DH.Controller" Collapsed="true">
+    <Position X="1.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAgACAAAAAAAAAAABAAAAAAAAACARAAAA=</HashCode>
+      <FileName>Assets\KSB\Script\Player\Controller.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DH.PlayerMove" Collapsed="true">
+    <Position X="24.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ggBJAAJAEqgAgIAgAhAIIAAAAADACAAAAQAAAABAAAA=</HashCode>
+      <FileName>Assets\KSB\Script\Player\PlayerMove.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DH.PlayerScript" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="29.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QBQBEAAgAEAABIAoAAAAwAAAgNBACIAgAAAECACIAEI=</HashCode>
+      <FileName>Assets\KSB\Script\Player\PlayerScript.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DH.MapSetScript" Collapsed="true">
+    <Position X="17.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAABAAAAAIAIAAAAAAAAACQAAAAAAAAEAAAAABAAAAg=</HashCode>
+      <FileName>Assets\KSB\Script\Remainder\MapSetScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DH.ObjScript" Collapsed="true">
+    <Position X="33.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAABAAgAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Assets\KSB\Script\Remainder\ObjScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DH.RunnerController" Collapsed="true">
+    <Position X="0.5" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAEAAAAAIQAAICAQAAEI=</HashCode>
+      <FileName>Assets\KSB\Script\Runner\RunnerController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DH.RunnerSetScript" Collapsed="true">
+    <Position X="31.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAEAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Assets\KSB\Script\Runner\RunnerSetScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DH.TaggerController" Collapsed="true">
+    <Position X="2.75" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAgAAIAQAAAAAAAAAAgAgAAAAAACAQAAEA=</HashCode>
+      <FileName>Assets\KSB\Script\Tagger\TaggerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DH.TaggerSetScript" Collapsed="true">
+    <Position X="26.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Assets\KSB\Script\Tagger\TaggerSetScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DH.VirtualJoyStick" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAEABAAAgAABAEAAABAEAAAAAAAgCEAQIAQAAAAEEA=</HashCode>
+      <FileName>Assets\KSB\Script\Util\VirtualJoyStick.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DH.GameData" Collapsed="true">
+    <Position X="26.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Assets\Scripts\GameData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KSB.VFXMng" Collapsed="true">
+    <Position X="5.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAACAAAAAAAAACAAA=</HashCode>
+      <FileName>Assets\KSB\Script\Mng\VFXMng.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YSM.ColorTransform" Collapsed="true">
+    <Position X="19.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAASEAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\YSM\Scripts\ColorTransform.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YSM.GameChat" Collapsed="true">
+    <Position X="22.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAIBlQEoglEAAABAIAAoAAAoAgMwhAgAEjQAIEICAE=</HashCode>
+      <FileName>Assets\YSM\Scripts\GameChat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YSM.RoomChat" Collapsed="true">
+    <Position X="28" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAEAAAAAAAAAAAAAAAAAAAAAAAIAAAQAAAACAA=</HashCode>
+      <FileName>Assets\YSM\Scripts\RoomChat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YSM.YSMGameManager" Collapsed="true">
+    <Position X="22.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAQACAAAAAABAAAAEABAAAAAAAEA=</HashCode>
+      <FileName>Assets\YSM\Scripts\YSMGameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="GooglePlayGames.BasicApi.PlayGamesClientConfiguration" Collapsed="true">
+    <Position X="24.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>REAEAAAAQQAEACIAgAQgAQAEEAAEAIAAAAQAAABAAiA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\PlayGamesClientConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="GooglePlayGames.BasicApi.Nearby.AdvertisingResult" Collapsed="true">
+    <Position X="15.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAQAAAAAAAAAAAAAAAAAAAAAAAAgAAAAYA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\Nearby\AdvertisingResult.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="GooglePlayGames.BasicApi.Nearby.ConnectionRequest" Collapsed="true">
+    <Position X="17.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAQAAEAAAAAAAAIA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\Nearby\ConnectionRequest.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="GooglePlayGames.BasicApi.Nearby.ConnectionResponse" Collapsed="true">
+    <Position X="19.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAQAAAgAIAAwBAQAAAICAEAAgAgAAAAQAIA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\Nearby\ConnectionResponse.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="GooglePlayGames.BasicApi.Nearby.EndpointDetails" Collapsed="true">
+    <Position X="21" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAQAAAAAAAQAAAAAAEAAAAgAAAAAQAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\Nearby\EndpointDetails.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="GooglePlayGames.BasicApi.Nearby.NearbyConnectionConfiguration" Collapsed="true">
+    <Position X="22.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAEAAAAgACgAAgAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\Nearby\NearbyConnectionConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="GooglePlayGames.BasicApi.SavedGame.SavedGameMetadataUpdate" Collapsed="true">
+    <Position X="26.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAFAACACAAQAAgAAAAAAAAAAAAAIAAAEAEgAAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\SavedGame\SavedGameMetadataUpdate.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="GooglePlayGames.BasicApi.IPlayGamesClient" Collapsed="true">
+    <Position X="29.75" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgBADBJAAYSYARAAAACAAIsAACAgAICAEIAAKRAogM=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\IPlayGamesClient.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GooglePlayGames.BasicApi.Events.IEvent" Collapsed="true">
+    <Position X="22.75" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEACQAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\Events\IEvent.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GooglePlayGames.BasicApi.Events.IEventsClient" Collapsed="true">
+    <Position X="24.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAhAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\Events\IEventsClient.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GooglePlayGames.BasicApi.Nearby.INearbyConnectionClient" Collapsed="true">
+    <Position X="28" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IEAAAEAAgAAAgAAAACAAAAAgAACEEAAAgAgACIAAgAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\Nearby\INearbyConnectionClient.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GooglePlayGames.BasicApi.Nearby.IMessageListener" Collapsed="true">
+    <Position X="26.25" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\Nearby\INearbyConnectionClient.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GooglePlayGames.BasicApi.Nearby.IDiscoveryListener" Collapsed="true">
+    <Position X="21" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\Nearby\INearbyConnectionClient.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GooglePlayGames.BasicApi.SavedGame.ISavedGameClient" Collapsed="true">
+    <Position X="31.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAUAEAAAAAAABEAAAAAEA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\SavedGame\ISavedGameClient.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GooglePlayGames.BasicApi.SavedGame.IConflictResolver" Collapsed="true">
+    <Position X="17.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\SavedGame\ISavedGameClient.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GooglePlayGames.BasicApi.SavedGame.ISavedGameMetadata" Collapsed="true">
+    <Position X="33.25" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAgAAAAgQAAEAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\SavedGame\ISavedGameMetadata.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GooglePlayGames.BasicApi.Video.CaptureOverlayStateListener" Collapsed="true">
+    <Position X="15.75" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\Video\CaptureOverlayStateListener.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GooglePlayGames.BasicApi.Video.IVideoClient" Collapsed="true">
+    <Position X="15.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAEAAAAAEAAAQAAAAAAAAAAAAADAQ=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\Video\IVideoClient.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GooglePlayGames.TokenClient" Collapsed="true">
+    <Position X="17.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAABEACAIAABAACEAAACAIABAAAAIACAACgAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\Platforms\TokenClient.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="DH.IDamaged" Collapsed="true">
+    <Position X="19.25" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Assets\KSB\Script\Interface\IDamaged.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="AxisOptions" Collapsed="true">
+    <Position X="15.75" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAgAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\ExResource\Joystick Pack\Scripts\Base\Joystick.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="JoystickType" Collapsed="true">
+    <Position X="15.75" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAEAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Assets\ExResource\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GooglePlayGames.BasicApi.CommonStatusCodes" Collapsed="true">
+    <Position X="17.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASgBAAACAAAAQAApAAgEBABAgAACAYCIBAIAAAkABA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\CommonStatusCodes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GooglePlayGames.BasicApi.DataSource" Collapsed="true">
+    <Position X="21" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\CommonTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GooglePlayGames.BasicApi.ResponseStatus" Collapsed="true">
+    <Position X="26.25" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAgFgAAAgAAAAIAAAAAAAAAABA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\CommonTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GooglePlayGames.BasicApi.UIStatus" Collapsed="true">
+    <Position X="19.25" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAABAAgAgAAAAABAAIAAAAABQAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\CommonTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GooglePlayGames.BasicApi.LeaderboardStart" Collapsed="true">
+    <Position X="19.25" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAEAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\CommonTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GooglePlayGames.BasicApi.LeaderboardTimeSpan" Collapsed="true">
+    <Position X="21" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAggAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\CommonTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GooglePlayGames.BasicApi.LeaderboardCollection" Collapsed="true">
+    <Position X="17.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEQAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\CommonTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GooglePlayGames.BasicApi.FriendsListVisibilityStatus" Collapsed="true">
+    <Position X="24.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAACAAAABAAAAAAAAAAAAAAIAAAAAAAAABA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\CommonTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GooglePlayGames.BasicApi.LoadFriendsStatus" Collapsed="true">
+    <Position X="22.75" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAIABAAgAAACAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\CommonTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GooglePlayGames.BasicApi.VideoCaptureMode" Collapsed="true">
+    <Position X="21" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\CommonTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GooglePlayGames.BasicApi.VideoQualityLevel" Collapsed="true">
+    <Position X="24.5" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAgQAAAAAAAQAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\CommonTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GooglePlayGames.BasicApi.VideoCaptureOverlayState" Collapsed="true">
+    <Position X="22.75" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAICAAAAAAAAAAAAAAIAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\CommonTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GooglePlayGames.BasicApi.Gravity" Collapsed="true">
+    <Position X="31.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAgAAABAAAAAAAAAAAAAgAAACAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\CommonTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GooglePlayGames.BasicApi.ScorePageDirection" Collapsed="true">
+    <Position X="31.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\ScorePageToken.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GooglePlayGames.BasicApi.SignInInteractivity" Collapsed="true">
+    <Position X="15.75" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAGAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\SignInInteractivity.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GooglePlayGames.BasicApi.SignInStatus" Collapsed="true">
+    <Position X="17.5" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAABAAAhAAgAAAAAgAACAAAABAAAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\SignInStatus.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GooglePlayGames.BasicApi.Events.EventVisibility" Collapsed="true">
+    <Position X="22.75" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAEAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\Events\IEvent.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GooglePlayGames.BasicApi.Nearby.InitializationStatus" Collapsed="true">
+    <Position X="33.25" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAgAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\Nearby\NearbyConnectionConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GooglePlayGames.BasicApi.SavedGame.ConflictResolutionStrategy" Collapsed="true">
+    <Position X="19.25" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAABIAAEAAAAAAAAAAAAAAAAAAAAAAAAgAAIAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\SavedGame\ISavedGameClient.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GooglePlayGames.BasicApi.SavedGame.SavedGameRequestStatus" Collapsed="true">
+    <Position X="29.75" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAgAAAgAAAAAAgAAAAAQ=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\SavedGame\ISavedGameClient.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GooglePlayGames.BasicApi.SavedGame.SelectUIStatus" Collapsed="true">
+    <Position X="33.25" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAABAgAAAAAAgQAQAAQ=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\SavedGame\ISavedGameClient.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="YSM.PlayerColorType" Collapsed="true">
+    <Position X="24.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QIAEAAAAEokAUKAAAAAAAABAAkEAABABEAAAAAAgAAQ=</HashCode>
+      <FileName>Assets\YSM\Scripts\ColorTransform.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="YSM.GameCharacterType" Collapsed="true">
+    <Position X="26.25" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAgAAAAAAAAAAiAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\YSM\Scripts\GameChat.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="YSM.GameChatType" Collapsed="true">
+    <Position X="29.75" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAgAAAAAAAAAAiAgAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\YSM\Scripts\GameChat.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="YSM.GameChatPanelChange" Collapsed="true">
+    <Position X="28" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAgAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\YSM\Scripts\GameChat.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="YSM.RoomChatType" Collapsed="true">
+    <Position X="28" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\YSM\Scripts\RoomChat.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="GooglePlayGames.BasicApi.SavedGame.ConflictCallback" Collapsed="true">
+    <Position X="15.75" Y="17.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAABAAEAAAAAAE=</HashCode>
+      <FileName>Assets\GooglePlayGames\BasicApi\SavedGame\ISavedGameClient.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="GooglePlayGames.ReportProgress" Collapsed="true">
+    <Position X="17.5" Y="17.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACACAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\GooglePlayGames\ISocialPlatform\PlayGamesAchievement.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>

@@ -52,6 +52,7 @@ public class Timer : MonoBehaviour
     {
         if (sec == 0 && minutes == 0)
         {
+            minutes = -1;
             minutesText.enabled = false;
             secondsText.enabled = false;
             colonText.enabled = false;

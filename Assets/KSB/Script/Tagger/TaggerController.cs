@@ -33,7 +33,6 @@ namespace DH
             move.BorderChecker();
             move.GroundChecker();
             AttackCool();
-            Debug.Log("남은 공격 횟수 : " + attackCurCount);
         }
 
         public void AttackCool(){

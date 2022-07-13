@@ -116,6 +116,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 // TODO : 술래가 깡통을 먹음
                 canCheckObj.transform.position = DH.MapSettingMng.instance.canTransform;
+                Debug.Log(canCheckObj.transform.position);
                 canCheckObj.SetActive(true);
             }
 
@@ -130,7 +131,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
         if(changedProps.TryGetValue(GameData.MASTER_PLAY, out value))
         {
-            if(!(bool)value)
+            if(!(bool)value && PhotonNetwork.IsMasterClient)
             {
                 PhotonNetwork.LoadLevel(1);
             }
@@ -138,6 +139,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
 
     #endregion PHOTON CALLBACK
+
 
     private IEnumerator StartCountDown()
     {
@@ -367,19 +369,19 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void GameOver()
     {
+        //Hashtable props;
+        //if (PhotonNetwork.IsMasterClient)
+        //{
+        //    foreach (Player p in PhotonNetwork.PlayerList)
+        //    {
+        //        props = new Hashtable() { { GameData.PLAYER_LOAD, false } };
+        //        p.SetCustomProperties(props);
+
+        //    }
+        //}
+
+        //Debug.Log("모든 유저 Load -> false");
         StartCoroutine(WhoIsWinner());
-        Hashtable props;
-        if (PhotonNetwork.IsMasterClient)
-        {
-            foreach (Player p in PhotonNetwork.PlayerList)
-            {
-                props = new Hashtable() { { GameData.PLAYER_LOAD, false } };
-                p.SetCustomProperties(props);
-
-            }
-        }
-
-        Debug.Log("모든 유저 Load -> false");
         //PhotonNetwork.LeaveRoom();
 
         return;

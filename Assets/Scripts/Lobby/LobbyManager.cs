@@ -15,7 +15,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public CreateRoomPanel createRoomPanel;
     public InLobbyPanel inLobbyPanel;
     public InRoomPanel inRoomPanel;
-    public InfoPanel infoPanel;
+    //public InfoPanel infoPanel;
     public GoogleNickNamePanel nickNamePanel;
 
     #region UNITY
@@ -49,7 +49,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void ShowError(string error)
     {
-        infoPanel.ShowError(error);
+        //infoPanel.ShowError(error);
     }
 
     #endregion UNITY
@@ -90,13 +90,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         SetActivePanel(PANEL.Connect);
-        infoPanel.ShowError("Create Room Failed with Error(" + returnCode + ") : " + message);
+        //infoPanel.ShowError("Create Room Failed with Error(" + returnCode + ") : " + message);
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         SetActivePanel(PANEL.Connect);
-        infoPanel.ShowError("Join Room Failed with Error(" + returnCode + ") : " + message);
+        //infoPanel.ShowError("Join Room Failed with Error(" + returnCode + ") : " + message);
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
@@ -115,6 +115,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
+        Debug.Log("∑Î¿ª ∂∞≥≤");
         SetActivePanel(PANEL.Connect);
     }
 

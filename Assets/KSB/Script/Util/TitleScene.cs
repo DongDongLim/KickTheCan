@@ -6,20 +6,21 @@ using UnityEngine.SceneManagement;
 public class TitleScene : MonoBehaviour
 {
     bool isTrue = true;
-    private void FixedUpdate()
+    public void Button()
     {
-        Button();
+        if (isTrue)
+        {
+            StartCoroutine(LoadYourAsyncScene(1));
+            isTrue = false;
+        }
     }
 
-    private void Button()
+    IEnumerator LoadYourAsyncScene(int sceneNum)
     {
-        if (Input.anyKeyDown)
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneNum, LoadSceneMode.Single);
+        while (!asyncLoad.isDone)
         {
-            if (isTrue)
-            {
-                SceneManager.LoadScene(1);
-                isTrue = false;
-            }
+            yield return null;
         }
     }
 }

@@ -80,7 +80,7 @@ public class FriendListEntry : MonoBehaviour
         {
             return;
         }
-
+       
         LoginStateUI();
     }
     private void LoginStateUI()
@@ -94,7 +94,7 @@ public class FriendListEntry : MonoBehaviour
         else
         {
             //로그아웃 
-            loginImage.color = Color.black;
+            loginImage.color = Color.gray;
 
         }
     }

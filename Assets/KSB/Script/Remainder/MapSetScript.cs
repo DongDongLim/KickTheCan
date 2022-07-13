@@ -20,7 +20,7 @@ namespace DH
         public void SetObjIndex(int index)
         {
             chanceAddon = new ChanceAddon();
-            GameManager.Instance.canCheckActionFalse += CanSpawn;
+            GameManager.Instance.canCheckActionTrue += CanSpawn;
             photonView.RPC("ChildObjCreate", RpcTarget.AllBuffered, index);
         }
 
@@ -35,35 +35,29 @@ namespace DH
             mapObject.GetComponent<MapSetting>().SetObjectSpawnPosList(ref objectSpawnPos);
             if (PhotonNetwork.IsMasterClient)
             {
-
                 if (objectSpawnPos.Length == 0)
                     return;
 
 
                 foreach (Transform obj in objectSpawnPos)
                 {
-                    Debug.Log("포이치지롱");
                     randomResult = chanceAddon.ChanceThree(10, 10, 80);
                     randIndex = Random.Range(0, MapSettingMng.instance.mapObj.Length);
                     switch (randomResult)
                     {
                         case 0:
-                            Debug.Log("안생겼지롱");
                             break;
                         case 1:
                             PhotonNetwork.Instantiate("Obj", obj.position, obj.rotation, 0)
                             .GetComponent<ObjScript>().SetObjIndex(randIndex);
-                            Debug.Log("랜덤이지롱");
                             break;
                         case 2:
                             PhotonNetwork.Instantiate("Obj", obj.position, obj.rotation, 0)
                             .GetComponent<ObjScript>().SetObjIndex(Path.Combine("Sports", obj.name));
-                            Debug.Log("생겼지롱");
                             break;
                     }
                 }
-                PhotonNetwork.Instantiate
-                   ("Can", mapObject.GetComponent<MapSetting>().CanSpqwnPos(), Quaternion.identity, 0).GetComponent<CanSetScript>().SetObjIndex();
+                CanSpawn();
             }
             gameObject.SetActive(false);
 
@@ -71,14 +65,20 @@ namespace DH
 
         public void CanSpawn()
         {
-            PhotonNetwork.Instantiate
-               ("Can", mapObject.GetComponent<MapSetting>().CanSpqwnPos(), Quaternion.identity, 0).GetComponent<CanSetScript>().SetObjIndex();
+            if (PhotonNetwork.LocalPlayer == PhotonNetwork.MasterClient)
+            {
+                GameObject obj =
+                PhotonNetwork.Instantiate
+                   ("Can", mapObject.GetComponent<MapSetting>().CanSpqwnPos(), Quaternion.identity, 0);
+                Debug.Log("obj" + obj.transform.position);
+            }
         }
 
         private void OnDestroy()
         {
             if (photonView.IsMine)
-                PhotonNetwork.OpCleanRpcBuffer(GetComponent<PhotonView>());
+                PhotonNetwork.RemoveRPCs(GetComponent<PhotonView>());
+            //PhotonNetwork.OpCleanRpcBuffer(GetComponent<PhotonView>());
         }
     }
 }

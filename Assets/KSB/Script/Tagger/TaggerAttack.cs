@@ -17,7 +17,7 @@ public class TaggerAttack : MonoBehaviour
 
     public void AttackDiminish()
     {
-        controller.AttackComplete();
+        controller?.AttackComplete();
     }
 
     public void JumpStart()
