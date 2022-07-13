@@ -137,7 +137,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
         if(changedProps.TryGetValue(GameData.MASTER_PLAY, out value))
         {
-            if(!(bool)value)
+            if(!(bool)value && PhotonNetwork.IsMasterClient)
             {
                 PhotonNetwork.LoadLevel(1);
             }
@@ -145,6 +145,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
 
     #endregion PHOTON CALLBACK
+
 
     private IEnumerator StartCountDown()
     {
@@ -385,19 +386,19 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void GameOver()
     {
+        //Hashtable props;
+        //if (PhotonNetwork.IsMasterClient)
+        //{
+        //    foreach (Player p in PhotonNetwork.PlayerList)
+        //    {
+        //        props = new Hashtable() { { GameData.PLAYER_LOAD, false } };
+        //        p.SetCustomProperties(props);
+
+        //    }
+        //}
+
+        //Debug.Log("모든 유저 Load -> false");
         StartCoroutine(WhoIsWinner());
-        Hashtable props;
-        if (PhotonNetwork.IsMasterClient)
-        {
-            foreach (Player p in PhotonNetwork.PlayerList)
-            {
-                props = new Hashtable() { { GameData.PLAYER_LOAD, false } };
-                p.SetCustomProperties(props);
-
-            }
-        }
-
-        Debug.Log("모든 유저 Load -> false");
         //PhotonNetwork.LeaveRoom();
 
         return;
@@ -405,8 +406,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     IEnumerator WhoIsWinner()
     {
-        yield return new WaitForSeconds(5f);
-
         int alivePlayer = PhotonNetwork.CurrentRoom.PlayerCount - m_deathCount - m_maxTagger;
 
         if (alivePlayer > 0)
