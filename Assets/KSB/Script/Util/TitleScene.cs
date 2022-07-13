@@ -10,8 +10,17 @@ public class TitleScene : MonoBehaviour
     {
         if (isTrue)
         {
-            SceneManager.LoadScene(1);
+            StartCoroutine(LoadYourAsyncScene(1));
             isTrue = false;
+        }
+    }
+
+    IEnumerator LoadYourAsyncScene(int sceneNum)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneNum, LoadSceneMode.Single);
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
         }
     }
 }
