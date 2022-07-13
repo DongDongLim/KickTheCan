@@ -30,7 +30,7 @@ public class AuthManager : Singleton<AuthManager>
 
     [SerializeField] GameObject IDPasswordMismatchPanel;
 
-    [SerializeField] GameObject canvas;
+    [SerializeField] GameObject[] canvas;
     protected override void OnAwake()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -42,9 +42,11 @@ public class AuthManager : Singleton<AuthManager>
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "LobbyScene")
-            canvas.gameObject.SetActive(true);
+            foreach (GameObject obj in canvas)
+                obj.SetActive(true);
         else
-            canvas.gameObject.SetActive(false);
+            foreach (GameObject obj in canvas)
+                obj.SetActive(false);
 
     }
 
