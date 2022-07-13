@@ -113,7 +113,6 @@ public class GameManager : MonoBehaviourPunCallbacks
             else
             {
                 canCheckActionFalse?.Invoke();
-                Debug.Log("여기 혹시 불리나?");
             }
         }
         if (changedProps.TryGetValue(DH.GameData.PLAYER_TAGGER, out value))
