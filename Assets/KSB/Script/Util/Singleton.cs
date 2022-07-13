@@ -28,6 +28,8 @@ public abstract class Singleton<T> : MonoBehaviourPunCallbacks
             DontDestroyOnLoad(this);
             OnAwake();
         }
+        else
+            Destroy(gameObject);
     }
 
     protected abstract void OnAwake();

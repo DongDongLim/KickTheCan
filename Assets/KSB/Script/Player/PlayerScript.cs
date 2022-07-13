@@ -177,7 +177,8 @@ namespace DH
         private void OnDestroy()
         {
             if (photonView.IsMine)
-                PhotonNetwork.OpCleanRpcBuffer(GetComponent<PhotonView>());
+                PhotonNetwork.RemoveRPCs(GetComponent<PhotonView>());
+                //PhotonNetwork.OpCleanRpcBuffer(GetComponent<PhotonView>());
         }
     }
 }
