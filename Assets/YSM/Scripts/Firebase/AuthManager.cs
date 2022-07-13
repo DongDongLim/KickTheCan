@@ -266,8 +266,6 @@ public class AuthManager : Singleton<AuthManager>
             .Child(GetCurrentUID())
             .UpdateChildrenAsync(FuncTool.ConvertToIDictionary(DBData.KeyIsLogin, isLogin)); //로그인 로그아웃
     }
-
-
 }
 
 

@@ -45,11 +45,9 @@ namespace DH
 
         public void Damaged()
         {
-            owner?.DieAnim();
-            // (Test) GameOver / SH
+            owner?.DieAnim();           
             Hashtable props = new Hashtable() { { global::GameData.PLAYER_DEAD, true } };
-            PhotonNetwork.LocalPlayer.SetCustomProperties(props);            
-            // ======================
+            PhotonNetwork.LocalPlayer.SetCustomProperties(props);       
         }
 
         void Freeze()

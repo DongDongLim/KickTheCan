@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Events;
 using TMPro;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class Timer : MonoBehaviour
 {
     public TextMeshProUGUI minutesText;
     public TextMeshProUGUI secondsText;
+    public TextMeshProUGUI colonText;
     public GameObject timeOut;
     public GameObject stopWatch;
+    public GameObject runnerWinUI;
+    public GameObject taggerWinUI;
 
     public int totalSeconds = 0;
     public int minutes;
@@ -55,6 +55,7 @@ public class Timer : MonoBehaviour
             minutes = -1;
             minutesText.enabled = false;
             secondsText.enabled = false;
+            colonText.enabled = false;
             stopWatch.SetActive(false);
             timeOut.SetActive(true);
 
@@ -64,9 +65,12 @@ public class Timer : MonoBehaviour
             {
                 GameManager.Instance.GameOver();
             }
-
+            else
+            {
+                runnerWinUI.SetActive(true);
+            }
         }
-    }
+    }   
 
     IEnumerator second()
     {
