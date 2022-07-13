@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 namespace DH
 {
@@ -50,6 +51,12 @@ namespace DH
             rigid = GetComponent<Rigidbody>();
             if (photonView.IsMine)
                 CameraMng.instance.PlayerCamSetting(transform.GetChild(0).gameObject);
+        }
+
+        private void OnEnable()
+        {
+            if (SceneManager.GetActiveScene().name == "LobbyScene")
+                Destroy(gameObject);
         }
 
         public void ControllerSetting()

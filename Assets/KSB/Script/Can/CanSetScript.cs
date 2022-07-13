@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Photon.Pun;
 
 namespace DH
@@ -12,7 +13,10 @@ namespace DH
 
         private void OnEnable()
         {
-            ChildObjCreate();
+            if (SceneManager.GetActiveScene().name == "LobbyScene")
+                Destroy(gameObject);
+            else
+                ChildObjCreate();
         }
 
         public void ChildObjCreate()

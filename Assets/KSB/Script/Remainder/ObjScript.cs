@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Photon.Pun;
 
 namespace DH
@@ -9,6 +10,12 @@ namespace DH
     {
         public int objIndex;
         int cnt;
+
+        private void OnEnable()
+        {
+            if (SceneManager.GetActiveScene().name == "LobbyScene")
+                Destroy(gameObject);
+        }
 
         public void SetObjIndex(int index)
         {

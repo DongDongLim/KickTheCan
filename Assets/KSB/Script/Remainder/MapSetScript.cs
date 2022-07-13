@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using System.IO;
+using UnityEngine.SceneManagement;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 namespace DH
@@ -16,6 +17,12 @@ namespace DH
 
         int randIndex;
 
+
+        private void OnEnable()
+        {
+            if (SceneManager.GetActiveScene().name == "LobbyScene")
+                Destroy(gameObject);
+        }
 
         public void SetObjIndex(int index)
         {
