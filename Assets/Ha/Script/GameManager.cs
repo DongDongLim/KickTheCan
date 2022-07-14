@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 {
     public static GameManager Instance { get; private set; }
 
-    public Text infoText;
+    //public Text infoText;
     public bool isAttack = true;
     public GameObject canCheckObj;
     public UnityAction canCheckActionTrue;
@@ -207,7 +207,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void PrintInfo(string info)
     {
         Debug.Log(info);
-        infoText.text = info;
+        //infoText.text = info;
     }
 
     public static void Shuffle_List<T>(List<T> list)
