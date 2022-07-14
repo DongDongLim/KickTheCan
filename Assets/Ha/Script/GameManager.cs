@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 {
     public static GameManager Instance { get; private set; }
 
-    public Text infoText;
+    //public Text infoText;
     public bool isAttack = true;
     public GameObject canCheckObj;
     public UnityAction canCheckActionTrue;
@@ -98,7 +98,9 @@ public class GameManager : MonoBehaviourPunCallbacks
             // 일단 사용하지 않고 나중에 다시 수정하겠습니다.
 
             if (PlayersReadyLevel() == playerList.Count)
+            {
                 StartCoroutine(StartCountDown());
+            }
         }
         // 러너가 킥을 찼을 때 술래의 공격불가
         object value;
@@ -213,7 +215,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void PrintInfo(string info)
     {
         Debug.Log(info);
-        infoText.text = info;
+        //infoText.text = info;
     }
 
     public static void Shuffle_List<T>(List<T> list)

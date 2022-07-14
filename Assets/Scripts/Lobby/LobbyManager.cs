@@ -22,7 +22,17 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
+
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        if(PhotonNetwork.InRoom)
+            SetActivePanel(PANEL.Room);
     }
 
     private void Start()
