@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using TMPro;
 
 namespace DH
 {
@@ -34,6 +35,8 @@ namespace DH
         public GameObject runnerCaption;
         public GameObject startCount;
 
+        public TextMeshProUGUI runnerCount;
+        public TextMeshProUGUI taggerCount;
 
         private void Start()
         {
