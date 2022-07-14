@@ -30,8 +30,13 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     int maxTagger = 0;
     int m_deathCount = 0;
+    float readyTime = 5;
+    float startTime;
+
 
     public UIData uiData;
+
+
 
 
     List<Player> playerList = new List<Player>() { };
@@ -58,9 +63,12 @@ public class GameManager : MonoBehaviourPunCallbacks
             SoundMng.instance.PlayBGM(SoundMng.BGM_CLIP.BGM_Game1);
         else
             SoundMng.instance.PlayBGM(SoundMng.BGM_CLIP.BGM_Game2);
-        
+
         if (PhotonNetwork.IsMasterClient)
+        {
             PhotonNetwork.Instantiate("UIData", Vector3.zero, Quaternion.identity, 0);
+            startTime = Time.time;
+        }
     }
 
     #region PHOTON CALLBACK
@@ -81,14 +89,14 @@ public class GameManager : MonoBehaviourPunCallbacks
         Debug.Log("propertiesUpdate access");
         if (changedProps.ContainsKey(GameData.PLAYER_LOAD))
         {
-            if (CheckAllPlayerLoadLevel())
+            if (CheckAllPlayerLoadLevel() || (Time.time >= startTime + readyTime))
             {
                 SetTagger();
                 StartCoroutine(StartCountDown());
             }
             else
             {
-                PrintInfo("wait players " + PlayersLoadLevel() + " / " + PhotonNetwork.PlayerList.Length);
+                PrintInfo("wait players " + PlayersLoadLevel() + " / " + PhotonNetwork.PlayerList.Length);                
             }
         }
         if (changedProps.ContainsKey(GameData.PLAYER_TAGGER))
@@ -320,9 +328,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
 
         isPlaying = true;
-
-        Hashtable props = new Hashtable() { { GameData.MASTER_PLAY, isPlaying } };
-        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
 
         maxTagger = playerList.Count / 4;
         maxTagger = (int)Mathf.Clamp(maxTagger, 1, 5);
