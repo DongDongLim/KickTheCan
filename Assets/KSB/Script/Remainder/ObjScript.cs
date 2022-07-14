@@ -9,6 +9,7 @@ namespace DH
     public class ObjScript : MonoBehaviourPun
     {
         public int objIndex;
+        PhotonView view;
         int cnt;
 
         private void OnEnable()
@@ -24,6 +25,8 @@ namespace DH
             if(cnt != -1)
                 obj.transform.GetChild(cnt).gameObject.SetActive(true);
             photonView.RPC("ChildObjCreate", RpcTarget.OthersBuffered, index, cnt);
+            view = GetComponent<PhotonView>();
+            Destroy(view);
         }
 
         public void SetObjIndex(string objName)
@@ -69,7 +72,7 @@ namespace DH
         private void OnDestroy()
         {
             if (photonView.IsMine)
-                PhotonNetwork.RemoveRPCs(GetComponent<PhotonView>());
+                PhotonNetwork.RemoveRPCs(view);
             //PhotonNetwork.OpCleanRpcBuffer(GetComponent<PhotonView>());
         }
 

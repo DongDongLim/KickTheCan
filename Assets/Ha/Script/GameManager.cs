@@ -156,8 +156,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         PrintInfo("Start Game!");
 
-        int playerNumber = PhotonNetwork.LocalPlayer.GetPlayerNumber();
-
         CreatePlayer();        
     }
 
