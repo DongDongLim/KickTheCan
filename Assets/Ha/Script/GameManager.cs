@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     int maxTagger = 0;
     int m_deathCount = 0;
 
+    public UIData uiData;
 
 
     List<Player> playerList = new List<Player>() { };
@@ -57,6 +58,9 @@ public class GameManager : MonoBehaviourPunCallbacks
             SoundMng.instance.PlayBGM(SoundMng.BGM_CLIP.BGM_Game1);
         else
             SoundMng.instance.PlayBGM(SoundMng.BGM_CLIP.BGM_Game2);
+        
+        if (PhotonNetwork.IsMasterClient)
+            PhotonNetwork.Instantiate("UIData", Vector3.zero, Quaternion.identity, 0);
     }
 
     #region PHOTON CALLBACK
@@ -110,6 +114,10 @@ public class GameManager : MonoBehaviourPunCallbacks
             else
             {
                 canCheckActionFalse?.Invoke();
+                maxTagger = playerList.Count / 4;
+                maxTagger = (int)Mathf.Clamp(maxTagger, 1, 5);
+
+                SetPlayerCounting(playerList.Count - maxTagger, maxTagger);
             }
         }
         if (changedProps.TryGetValue(DH.GameData.PLAYER_TAGGER, out value))
@@ -318,20 +326,18 @@ public class GameManager : MonoBehaviourPunCallbacks
         Hashtable props = new Hashtable() { { GameData.MASTER_PLAY, isPlaying } };
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
 
-        maxTagger = PhotonNetwork.PlayerList.Length / 4;
+        maxTagger = playerList.Count / 4;
         maxTagger = (int)Mathf.Clamp(maxTagger, 1, 5);
 
-        SetPlayerCounting(PhotonNetwork.PlayerList.Length - maxTagger, maxTagger);
-        Debug.Log(PhotonNetwork.PlayerList.Length);
-        Debug.Log(maxTagger);
+        SetPlayerCounting(playerList.Count - maxTagger, maxTagger);
     }
 
     private void ObserverMode()
     {
         Debug.Log("ObserverMode 호출");
         Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
-       
-        DH.MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);        
+
+        DH.MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);
     }
 
     IEnumerator GameIsOn()
@@ -347,8 +353,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("room에 입장");
-        Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
     }
 
     private bool IsAdditionalPlayer()
@@ -466,12 +470,14 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void SetPlayerCounting(int runner,int tagger)
     {
-        // 태거 러너 인원 체크
-        UIDataMng.Instance.RunnerCounting(runner);
-        UIDataMng.Instance.TaggerCounting(tagger);
 
-        Debug.Log("러너 인원 : " + runner);
-        Debug.Log("태거 인원 : " + tagger);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            uiData.RunnerCounting(runner);
+            uiData.TaggerCounting(tagger);
+        }
+            
+        uiData.SetCounting();
     }
 }
 

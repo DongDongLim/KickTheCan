@@ -5900,6 +5900,8 @@ MonoBehaviour:
   taggerCaption: {fileID: 51990801}
   runnerCaption: {fileID: 337477496}
   startCount: {fileID: 1244112546}
+  runnerCount: {fileID: 1992214012}
+  taggerCount: {fileID: 759223191}
 --- !u!1 &904447967
 GameObject:
   m_ObjectHideFlags: 0
@@ -6169,8 +6171,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 940741985}
-  m_LocalRotation: {x: 0.57357645, y: 3e-45, z: 1e-45, w: 0.8191521}
-  m_LocalPosition: {x: 0, y: 18.793852, z: -6.8404055}
+  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
+  m_LocalPosition: {x: 0, y: 5.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 636500905}
@@ -8179,7 +8181,6 @@ GameObject:
   - component: {fileID: 1405825243}
   - component: {fileID: 1405825244}
   - component: {fileID: 1405825245}
-  - component: {fileID: 1405825246}
   - component: {fileID: 1405825247}
   m_Layer: 0
   m_Name: GameMng
@@ -8269,6 +8270,7 @@ MonoBehaviour:
   playerObjList: []
   runnerWinUI: {fileID: 833576874}
   taggerWinUI: {fileID: 2037469085}
+  uiData: {fileID: 0}
 --- !u!114 &1405825244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8302,20 +8304,6 @@ MonoBehaviour:
   isRunnerBeCaught: 0
   gameChat: {fileID: 966585996}
   can: {fileID: 0}
---- !u!114 &1405825246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1405825240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c6c12517cef30a4d893cef16bc1f23d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RunnerCount: {fileID: 1992214012}
-  TaggerCount: {fileID: 759223191}
 --- !u!114 &1405825247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10904,7 +10892,7 @@ MonoBehaviour:
   taggerWinUI: {fileID: 2037469085}
   totalSeconds: 0
   minutes: 1
-  sec: 30
+  sec: 0
 --- !u!1 &1854498620
 GameObject:
   m_ObjectHideFlags: 0
