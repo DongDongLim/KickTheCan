@@ -61,10 +61,12 @@ namespace DH
             if (owner.gameObject.layer == LayerMask.NameToLayer("Tagger"))
             {
                 runnerOffset = 0;
+                moveSpeed = 12;
             }
             else
             {
                 runnerOffset = maxGroundRayDistance * 2;
+                moveSpeed = 8;
             }
         }
 
