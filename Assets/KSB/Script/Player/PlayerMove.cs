@@ -89,21 +89,21 @@ namespace DH
             Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
             moveDir = moveDir.normalized;
 
-            if (owner != null)
-            {
-                owner.MoveAnim(isMove);
+            owner?.MoveAnim(isMove);
 
-                if (owner.isFreeze)
-                    return;
-            }
             if (!isMove)
                 return;
 
             charactorBody.forward = moveDir;
 
+            if (owner != null)
+            {
+                if (owner.isFreeze)
+                    return;
+            }
+
             if (isborder)
                 return;
-
 
             rigid.MovePosition(transform.position + moveDir * Time.fixedDeltaTime * moveSpeed);
             //rigid.velocity = new Vector3(moveDir.x,rigid.velocity.y,moveDir.z);
