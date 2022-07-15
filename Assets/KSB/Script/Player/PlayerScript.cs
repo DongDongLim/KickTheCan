@@ -180,11 +180,13 @@ namespace DH
                     quaternion = (Quaternion)stream.ReceiveNext();
             }
         }
-
-        private void OnDestroy()
+        private void OnDisable()
         {
             if (photonView.IsMine)
+            {
                 PhotonNetwork.RemoveRPCs(GetComponent<PhotonView>());
+                PhotonNetwork.Destroy(GetComponent<PhotonView>());
+            }
                 //PhotonNetwork.OpCleanRpcBuffer(GetComponent<PhotonView>());
         }
     }

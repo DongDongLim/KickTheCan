@@ -47,7 +47,7 @@ namespace DH
             {
                 obj.transform.GetChild(childActiveCnt).gameObject.SetActive(true);
             }
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
             return obj;
         }
 
@@ -62,14 +62,17 @@ namespace DH
             {
                 obj.transform.GetChild(childActiveCnt).gameObject.SetActive(true);
             }
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
             return obj;
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             if (photonView.IsMine)
+            {
                 PhotonNetwork.RemoveRPCs(GetComponent<PhotonView>());
+                PhotonNetwork.Destroy(GetComponent<PhotonView>());
+            }
             //PhotonNetwork.OpCleanRpcBuffer(GetComponent<PhotonView>());
         }
 
