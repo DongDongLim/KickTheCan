@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public List<GameObject> playerObjList;
     public GameObject runnerWinUI;
     public GameObject taggerWinUI;
+    public float startTime;
 
     private bool isTagger;
     private bool isPlaying = false;

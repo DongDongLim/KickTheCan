@@ -39,5 +39,6 @@ namespace DH
         public const string PLAYER_ISKICK = "KickCan";
         public const string PLAYER_TAGGER = "Catch";
         public const string WARMUP_TIME = "WarmupTime";
+        public const string START_TIME = "StartTime";
     }
 }
