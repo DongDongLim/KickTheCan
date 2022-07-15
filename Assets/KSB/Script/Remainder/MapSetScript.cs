@@ -66,7 +66,7 @@ namespace DH
                 }
                 CanSpawn();
             }
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
 
         }
 
@@ -81,7 +81,7 @@ namespace DH
             }
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             if (photonView.IsMine)
             {

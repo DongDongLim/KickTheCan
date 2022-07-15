@@ -62,7 +62,7 @@ namespace DH
             }
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             if (photonView.IsMine)
             {

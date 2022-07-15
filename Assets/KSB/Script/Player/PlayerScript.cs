@@ -180,8 +180,7 @@ namespace DH
                     quaternion = (Quaternion)stream.ReceiveNext();
             }
         }
-
-        private void OnDestroy()
+        private void OnDisable()
         {
             if (photonView.IsMine)
             {
