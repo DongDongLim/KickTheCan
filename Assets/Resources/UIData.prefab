@@ -48,6 +48,10 @@ MonoBehaviour:
   TaggerCount: {fileID: 0}
   RUNNER_LIVE: 0
   TAGGER_LIVE: 0
+  totalSeconds: 0
+  minutes: 0
+  seconds: 0
+  isStart: 0
 --- !u!114 &1141449928385980349
 MonoBehaviour:
   m_ObjectHideFlags: 0
