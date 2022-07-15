@@ -66,7 +66,7 @@ namespace DH
                 }
                 CanSpawn();
             }
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
 
         }
 
@@ -81,10 +81,13 @@ namespace DH
             }
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             if (photonView.IsMine)
+            {
                 PhotonNetwork.RemoveRPCs(GetComponent<PhotonView>());
+                PhotonNetwork.Destroy(GetComponent<PhotonView>());
+            }
             //PhotonNetwork.OpCleanRpcBuffer(GetComponent<PhotonView>());
         }
     }
