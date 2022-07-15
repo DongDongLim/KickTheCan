@@ -14,6 +14,7 @@ public class UIData : MonoBehaviourPun, IPunObservable
         GameManager.Instance.uiData = this;
         RunnerCount = DH.UIMng.instance.runnerCount;
         TaggerCount = DH.UIMng.instance.taggerCount;
+        view = GetComponent<PhotonView>();
     }
 
     public TextMeshProUGUI RunnerCount;
@@ -23,6 +24,8 @@ public class UIData : MonoBehaviourPun, IPunObservable
     int RUNNER_LIVE = 0;
     [SerializeField]
     int TAGGER_LIVE = 0;
+
+    PhotonView view;
 
     public void SetCounting()
     {
@@ -52,6 +55,14 @@ public class UIData : MonoBehaviourPun, IPunObservable
             RUNNER_LIVE = (int)stream.ReceiveNext();
             TAGGER_LIVE = (int)stream.ReceiveNext();
             SetCounting();
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (photonView.IsMine)
+        {
+            PhotonNetwork.Destroy(view);
         }
     }
 }

@@ -17,7 +17,6 @@ namespace DH
         private Animator taggerAnim = null;
         [SerializeField]
         private Animator runnerAnim = null;
-        private PlayerSceneInfo playerSceneInfo;
 
         [SerializeField]
         Transform charactorBody = null;
@@ -26,7 +25,7 @@ namespace DH
         GameObject dieVFX;
 
         Controller control = null;
-
+        PhotonView view;
 
         bool isSettingComplete = false;
 
@@ -45,16 +44,15 @@ namespace DH
         
         #endregion
 
-        private void Awake()
-        {
-            playerSceneInfo = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<PlayerSceneInfo>();
-            rigid = GetComponent<Rigidbody>();
-            if (photonView.IsMine)
-                CameraMng.instance.PlayerCamSetting(transform.GetChild(0).gameObject);
-        }
 
         private void OnEnable()
         {
+            rigid = GetComponent<Rigidbody>();
+            if (photonView.IsMine)
+            {
+                CameraMng.instance.PlayerCamSetting(transform.GetChild(0).gameObject);
+                view = GetComponent<PhotonView>();
+            }
             if (SceneManager.GetActiveScene().name == "LobbyScene")
                 Destroy(gameObject);
         }
@@ -184,8 +182,8 @@ namespace DH
         {
             if (photonView.IsMine)
             {
-                PhotonNetwork.RemoveRPCs(GetComponent<PhotonView>());
-                PhotonNetwork.Destroy(GetComponent<PhotonView>());
+                PhotonNetwork.RemoveRPCs(view);
+                PhotonNetwork.Destroy(view);
             }
                 //PhotonNetwork.OpCleanRpcBuffer(GetComponent<PhotonView>());
         }

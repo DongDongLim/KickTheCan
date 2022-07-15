@@ -40,5 +40,7 @@ namespace DH
         public const string PLAYER_TAGGER = "Catch";
         public const string WARMUP_TIME = "WarmupTime";
         public const string START_TIME = "StartTime";
+        public const string PLAYER_CNT = "PlayerCnt";
+        public const string DEATH_CNT = "DeathCnt";
     }
 }

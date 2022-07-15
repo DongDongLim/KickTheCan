@@ -36,8 +36,8 @@ public class Timer : MonoBehaviour
     public void SetZero()
     {
         StopAllCoroutines();
-        minutesText.text = "0";
-        secondsText.text = "0";
+        minutesText.text = "00";
+        secondsText.text = "00";
         minutesText.color = Color.red;
         secondsText.color = Color.red;
         StartCoroutine(GameManager.Instance.TaggerWin());

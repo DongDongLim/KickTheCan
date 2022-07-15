@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     private bool isSetTagger = false;
     private bool isStart = false;
 
+    int playerCnt = 0;
     int maxTagger = 0;
     int m_deathCount = 0;
     float readyTime = 5;
@@ -50,10 +51,12 @@ public class GameManager : MonoBehaviourPunCallbacks
         Instance = this;
         if (PhotonNetwork.IsMasterClient)
         {
-            Hashtable prop = new Hashtable { { DH.GameData.WARMUP_TIME, Time.time} };
-            PhotonNetwork.LocalPlayer.SetCustomProperties(prop);
+            Hashtable props = new Hashtable { { DH.GameData.WARMUP_TIME, Time.time } };
+            PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+            props = new Hashtable() { { DH.GameData.DEATH_CNT, m_deathCount } };
+            PhotonNetwork.MasterClient.SetCustomProperties(props);
             PhotonNetwork.Instantiate("UIData", Vector3.zero, Quaternion.identity, 0);
-        }   
+        }
     }
 
     public void Start()
@@ -118,6 +121,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 isStart = true;
                 StartCoroutine(StartCountDown());
+                playerCnt = (int)PhotonNetwork.MasterClient.CustomProperties[DH.GameData.PLAYER_CNT];
             }
         }
         // 러너가 킥을 찼을 때 술래의 공격불가
@@ -209,24 +213,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         return count;
     }
 
-    private int PlayersReadyLevel()
-    {
-        int count = 0;
-        foreach (Player p in PhotonNetwork.PlayerList)
-        {
-            object playerReadyLevel;
-
-            if (p.CustomProperties.TryGetValue(GameData.PLAYER_READY, out playerReadyLevel))
-            {
-                if ((bool)playerReadyLevel)
-                {
-                    count++;
-                }
-            }
-        }
-
-        return count;
-    }
 
     private void PrintInfo(string info)
     {
@@ -268,21 +254,19 @@ public class GameManager : MonoBehaviourPunCallbacks
             playerList.Add(player);
         }
 
+
         isPlaying = true;
 
         Hashtable props = new Hashtable() { { GameData.MASTER_PLAY, isPlaying } };
         PhotonNetwork.MasterClient.SetCustomProperties(props);
-
+        props = new Hashtable { { DH.GameData.PLAYER_CNT, playerList.Count } };
+        PhotonNetwork.MasterClient.SetCustomProperties(props);
         Shuffle_List(playerList);
-        Debug.Log(playerList.Count - maxTagger);
-        Debug.Log(maxTagger);
-
         // 테스트용 tagger설정 코드
         int minPlayer = 3;
 
         if (minPlayer >= PhotonNetwork.PlayerList.Length)
         {
-            Debug.Log("참가 인원 : " + PhotonNetwork.PlayerList.Length);
             foreach (Player p in PhotonNetwork.PlayerList)
             {
                 if (p.IsMasterClient)
@@ -290,14 +274,12 @@ public class GameManager : MonoBehaviourPunCallbacks
                     isTagger = true;
                     props = new Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
                     p.SetCustomProperties(props);
-                    Debug.Log("플레이어 3명 이하! 호스트 tagger 자동설정");
                 }
                 else
                 {
                     isTagger = false;
                     props = new Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
                     p.SetCustomProperties(props);
-                    Debug.Log("runner 설정");
                 }
             }
 
@@ -313,7 +295,6 @@ public class GameManager : MonoBehaviourPunCallbacks
                 isTagger = true;
                 props = new Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
                 playerList[i].SetCustomProperties(props);
-                Debug.Log("tagger 설정");
                 index++;
             }
             else
@@ -321,7 +302,6 @@ public class GameManager : MonoBehaviourPunCallbacks
                 isTagger = false;
                 props = new Hashtable() { { GameData.PLAYER_TAGGER, isTagger } };
                 playerList[i].SetCustomProperties(props);
-                Debug.Log("runner 설정");
             }
         }
     }
@@ -353,22 +333,9 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void ObserverMode()
     {
-        Debug.Log("ObserverMode 호출");
-        Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
-
+        m_deathCount = (int)PhotonNetwork.MasterClient.CustomProperties[DH.GameData.DEATH_CNT];
         DH.MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);
     }
-
-    //IEnumerator GameIsOn()
-    //{
-    //    yield return new WaitForSeconds(10f);
-
-    //    Debug.Log("MasterClient : Game is On");
-    //    isPlaying = true;
-
-    //    Hashtable props = new Hashtable() { { GameData.MASTER_PLAY, isPlaying } };
-    //    PhotonNetwork.MasterClient.SetCustomProperties(props);    
-    //}
 
     public override void OnJoinedRoom()
     {
@@ -394,21 +361,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void GameOver()
     {
-        //Hashtable props;
-        //if (PhotonNetwork.IsMasterClient)
-        //{
-        //    foreach (Player p in PhotonNetwork.PlayerList)
-        //    {
-        //        props = new Hashtable() { { GameData.PLAYER_LOAD, false } };
-        //        p.SetCustomProperties(props);
-
-        //    }
-        //}
-
-        //Debug.Log("모든 유저 Load -> false");
         StartCoroutine(WhoIsWinner());
-        //PhotonNetwork.LeaveRoom();
-
         return;
     }
 
@@ -450,14 +403,15 @@ public class GameManager : MonoBehaviourPunCallbacks
         maxTagger = PhotonNetwork.PlayerList.Length / 4;
         maxTagger = (int)Mathf.Clamp(maxTagger, 1, 5);
 
-        int m_iRunner = PhotonNetwork.CurrentRoom.PlayerCount - maxTagger;
-
+        int m_iRunner = playerCnt - maxTagger;
+        
         m_deathCount++;
-        Debug.Log("현재 방에 있는 사람 수 : " + PhotonNetwork.CurrentRoom.PlayerCount);
-        Debug.Log("죽은 러너 수 : " + m_deathCount);
-        Debug.Log("러너 : " + m_iRunner);
-        Debug.Log("술래 총 인원 : " + maxTagger);
-
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Hashtable props = new Hashtable() { { DH.GameData.DEATH_CNT, m_deathCount } };
+            PhotonNetwork.MasterClient.SetCustomProperties(props);
+        }
+        Debug.Log(m_deathCount + "," + m_iRunner);
         if (m_iRunner == m_deathCount)
         {
             taggerWinUI.SetActive(true);
