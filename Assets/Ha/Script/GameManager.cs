@@ -127,6 +127,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             if (isAttack)
             {
                 canCheckActionTrue?.Invoke();
+                m_deathCount = 0;
             }
             else
             {
