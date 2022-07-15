@@ -145,6 +145,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             if ((bool)value)
             {
                 CountDeath();
+                timer.GetComponent<Timer>().StopTimer();
             }          
         }
         if(changedProps.TryGetValue(GameData.MASTER_PLAY, out value))
@@ -377,21 +378,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     }   
 
     public void GameOver()
-    {
-        //Hashtable props;
-        //if (PhotonNetwork.IsMasterClient)
-        //{
-        //    foreach (Player p in PhotonNetwork.PlayerList)
-        //    {
-        //        props = new Hashtable() { { GameData.PLAYER_LOAD, false } };
-        //        p.SetCustomProperties(props);
-
-        //    }
-        //}
-
-        //Debug.Log("모든 유저 Load -> false");
-        StartCoroutine(WhoIsWinner());
-        //PhotonNetwork.LeaveRoom();
+    {  
+        StartCoroutine(WhoIsWinner());      
 
         return;
     }
@@ -403,13 +391,13 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (alivePlayer > 0)
         {
             Debug.Log("러너 승리");
-            runnerWinUI.SetActive(true);
+            runnerWinUI.SetActive(true);            
             yield return new WaitForSeconds(6f);
         }
         else
         {
             Debug.Log("술래 승리");
-            taggerWinUI.SetActive(true);
+            taggerWinUI.SetActive(true);            
             yield return new WaitForSeconds(6f);
         }
 
@@ -424,8 +412,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             }
         }
       
-        Debug.Log("모든 유저 Load -> false");
-        //PhotonNetwork.LeaveRoom();
+        Debug.Log("모든 유저 Load -> false");  
 
     }
 
@@ -445,6 +432,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (m_iRunner == m_deathCount)
         {
             taggerWinUI.SetActive(true);
+            timer.GetComponent<Timer>().StopTimer();
             StartCoroutine(TaggerWin());
         }
         SetPlayerCounting(m_iRunner - m_deathCount,maxTagger);
@@ -466,9 +454,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             props = new Hashtable() { { GameData.MASTER_PLAY, false } };
             PhotonNetwork.LocalPlayer.SetCustomProperties(props);
         }
-        Debug.Log("모든 유저 Load -> false");
-        //PhotonNetwork.LeaveRoom();
-        //PhotonNetwork.LoadLevel(1);
+        Debug.Log("모든 유저 Load -> false");  
     }
 
     public void SetPlayerCounting(int runner,int tagger)

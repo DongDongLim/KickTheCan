@@ -17,10 +17,13 @@ public class Timer : MonoBehaviour
     public int totalSeconds = 0;
     public int minutes;
     public int sec;
+
+    bool isGameOver = false;
         
 
     private void Start()
     {
+        StartCoroutine(TimeOver());
         minutesText.text = minutes.ToString();
         secondsText.text = sec.ToString();
         
@@ -46,31 +49,38 @@ public class Timer : MonoBehaviour
 
         StartCoroutine(second());
 
-    }
+    }  
 
-    private void Update()
+    IEnumerator TimeOver()
     {
-        if (sec == 0 && minutes == 0)
+        while (!isGameOver)
         {
-            minutes = -1;
-            minutesText.enabled = false;
-            secondsText.enabled = false;
-            colonText.enabled = false;
-            stopWatch.SetActive(false);
-            timeOut.SetActive(true);
+            if (sec == 0 && minutes == 0)
+            {
 
-            StopAllCoroutines();
-             
-            if (PhotonNetwork.IsMasterClient)
-            {
-                GameManager.Instance.GameOver();
+                minutes = -1;
+                minutesText.enabled = false;
+                secondsText.enabled = false;
+                colonText.enabled = false;
+                stopWatch.SetActive(false);
+                timeOut.SetActive(true);
+
+                StopAllCoroutines();
+
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    GameManager.Instance.GameOver();
+                }
+                else
+                {
+                    runnerWinUI.SetActive(true);
+                }
             }
-            else
-            {
-                runnerWinUI.SetActive(true);
-            }
+            yield return new WaitForSeconds(0.1f);
         }
-    }   
+
+        StopAllCoroutines();
+    }
 
     IEnumerator second()
     {
@@ -114,4 +124,22 @@ public class Timer : MonoBehaviour
 
         StartCoroutine(second());
     }    
+
+    public void StopTimer()
+    {
+        StopAllCoroutines();
+
+        Debug.Log("Game Over 시간 멈춰!");
+        isGameOver = true;
+
+        sec = 0;
+        minutes = 0;
+
+        secondsText.text = "0" + sec;
+        minutesText.text = "0" + minutes;
+
+        minutesText.color = Color.red;
+        secondsText.color = Color.red;
+        colonText.color = Color.red;
+    }
 }
