@@ -29,9 +29,9 @@ public class PlayerSceneManager : MonoBehaviour
     public void OnLobbyButton()
     {            
         sceneInfo.roomName = PhotonNetwork.CurrentRoom.Name;
-        Debug.Log(sceneInfo.roomName);                     
-        PhotonNetwork.LoadLevel(1);       
-        Debug.Log("Go to Lobby");
+        GameManager.Instance.playerList.Remove(PhotonNetwork.LocalPlayer);
+        PhotonNetwork.LoadLevel(1);
+        PhotonNetwork.LeaveRoom();
     }
 
     public void OnExitButton()

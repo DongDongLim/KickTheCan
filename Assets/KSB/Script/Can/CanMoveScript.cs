@@ -36,14 +36,19 @@ namespace DH
             {
                 yield return null;
             }
-            isMove = false;
-            photonView.RPC("SetLayer", RpcTarget.All, "Can");
+            //photonView.RPC("SetLayer", RpcTarget.All, "Can");
+            photonView.RPC("SetKinematic", RpcTarget.All);
         }
 
         [PunRPC]
         public void SetLayer(string name)
         {
             gameObject.layer = LayerMask.NameToLayer(name);
+        }
+        [PunRPC]
+        public void SetKinematic()
+        {
+            rigid.isKinematic = false;
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -65,12 +70,12 @@ namespace DH
             }
         }
 
-        private void OnDisable()
+        private void OnApplicationQuit()
         {
             if (photonView.IsMine)
             {
                 PhotonNetwork.RemoveRPCs(view);
-                PhotonNetwork.Destroy(view);
+                //PhotonNetwork.Destroy(view);
             }
         }
 

@@ -58,11 +58,11 @@ public class UIData : MonoBehaviourPun, IPunObservable
         }
     }
 
-    private void OnDisable()
+    private void OnApplicationQuit()
     {
         if (photonView.IsMine)
         {
-            PhotonNetwork.Destroy(view);
+            //PhotonNetwork.Destroy(view);
         }
     }
 }

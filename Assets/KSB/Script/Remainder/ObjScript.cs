@@ -71,13 +71,12 @@ namespace DH
             //gameObject.SetActive(false);
             return obj;
         }
-
-        private void OnDisable()
+        private void OnApplicationQuit()
         {
             if (photonView.IsMine)
             {
                 PhotonNetwork.RemoveRPCs(view);
-                PhotonNetwork.Destroy(view);
+                //PhotonNetwork.Destroy(view);
             }
             //PhotonNetwork.OpCleanRpcBuffer(GetComponent<PhotonView>());
         }

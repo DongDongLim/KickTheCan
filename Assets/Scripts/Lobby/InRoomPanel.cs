@@ -109,12 +109,6 @@ public class InRoomPanel : MonoBehaviour
     {        
         PhotonNetwork.CurrentRoom.IsOpen = true;
         PhotonNetwork.CurrentRoom.IsVisible = true;
-        Hashtable props;
-        foreach (Player p in PhotonNetwork.PlayerList)
-        {
-            props = new Hashtable() { { GameData.PLAYER_READY, false } };
-            p.SetCustomProperties(props);
-        }
         PhotonNetwork.LoadLevel(2);
     }
 
