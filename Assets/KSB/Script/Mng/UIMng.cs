@@ -24,9 +24,7 @@ namespace DH
 
         public Button jumpBtn;
         public Button actionBtn;
-        public Button testHideBtn;
-
-        public UnityAction testHideAction;
+        
         public UnityAction jumpAction;
         public UnityAction actionAction;
 
@@ -35,8 +33,13 @@ namespace DH
         public GameObject runnerCaption;
         public GameObject startCount;
 
+        // 인게임 플레이어 수 동기화
         public TextMeshProUGUI runnerCount;
         public TextMeshProUGUI taggerCount;
+
+        // 인게임 타이머 동기화
+        public Timer timer;
+        public UIData UIData;
 
         private void Start()
         {
@@ -45,7 +48,6 @@ namespace DH
 
         protected override void OnAwake()
         {
-
         }
 
         public void SetAttackCount(int count)
@@ -95,11 +97,6 @@ namespace DH
 
             observerMoveJoystick.GetComponent<VirtualJoyStick>().controller = move;
             observerRotateJoystick.GetComponent<VirtualJoyStick>().controller = move;
-        }
-
-        public void OnTestHideButton()
-        {
-            testHideAction?.Invoke();
         }
 
         public void OnJumpButton()

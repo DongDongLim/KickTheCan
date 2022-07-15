@@ -1881,8 +1881,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 358601539}
-  m_LocalRotation: {x: 0.57357633, y: 7.268319e-15, z: 5.0893327e-15, w: 0.8191522}
-  m_LocalPosition: {x: 0, y: 18.793852, z: -6.8404083}
+  m_LocalRotation: {x: 0.57357645, y: -1e-45, z: -1e-45, w: 0.8191521}
+  m_LocalPosition: {x: 0, y: 18.793852, z: -6.8404055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 933830353}
@@ -4127,7 +4127,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722871897}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14, y: 0, z: 80}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1520362974}
@@ -5895,13 +5895,14 @@ MonoBehaviour:
   - {fileID: 1094120735}
   jumpBtn: {fileID: 225838095}
   actionBtn: {fileID: 416146475}
-  testHideBtn: {fileID: 0}
   loadingScreen: {fileID: 423910425}
   taggerCaption: {fileID: 51990801}
   runnerCaption: {fileID: 337477496}
   startCount: {fileID: 1244112546}
   runnerCount: {fileID: 1992214012}
   taggerCount: {fileID: 759223191}
+  timer: {fileID: 1849223143}
+  UIData: {fileID: 0}
 --- !u!1 &904447967
 GameObject:
   m_ObjectHideFlags: 0
@@ -6171,8 +6172,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 940741985}
-  m_LocalRotation: {x: 0.57357633, y: 7.268319e-15, z: 5.0893327e-15, w: 0.8191522}
-  m_LocalPosition: {x: 14, y: 18.793852, z: 73.15959}
+  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
+  m_LocalPosition: {x: 0, y: 5.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 636500905}
@@ -7532,7 +7533,6 @@ MonoBehaviour:
   runnerCaption: {fileID: 337477496}
   taggerCaption: {fileID: 51990801}
   startTimer: {fileID: 1549265593}
-  playTimer: {fileID: 1849223141}
   timer: 10
 --- !u!1 &1307466983
 GameObject:
@@ -10889,9 +10889,6 @@ MonoBehaviour:
   stopWatch: {fileID: 1226752346}
   runnerWinUI: {fileID: 833576874}
   taggerWinUI: {fileID: 2037469085}
-  totalSeconds: 0
-  minutes: 1
-  sec: 0
 --- !u!1 &1854498620
 GameObject:
   m_ObjectHideFlags: 0
