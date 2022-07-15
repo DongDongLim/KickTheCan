@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     public GameObject runnerWinUI;
     public GameObject taggerWinUI;
     public float startTime;
+    [SerializeField]
+    Timer timerScript;
 
     private bool isTagger;
     private bool isPlaying = false;
@@ -458,12 +460,12 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (m_iRunner == m_deathCount)
         {
             taggerWinUI.SetActive(true);
-            StartCoroutine(TaggerWin());
+            timerScript.SetZero();
         }
         SetPlayerCounting(m_iRunner - m_deathCount, maxTagger);
     }
 
-    IEnumerator TaggerWin()
+    public IEnumerator TaggerWin()
     {
         yield return new WaitForSeconds(5f);
 

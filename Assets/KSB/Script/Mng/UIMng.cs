@@ -38,8 +38,6 @@ namespace DH
         public TextMeshProUGUI runnerCount;
         public TextMeshProUGUI taggerCount;
 
-        [SerializeField]
-        Timer timer;
 
         private void Start()
         {
