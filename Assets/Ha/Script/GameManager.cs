@@ -124,6 +124,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             if (isAttack)
             {
                 canCheckActionTrue?.Invoke();
+                m_deathCount = 0;
             }
             else
             {
@@ -443,19 +444,16 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void CountDeath()
     {
-        maxTagger = PhotonNetwork.PlayerList.Length / 4;
+        maxTagger = playerList.Count / 4;
         maxTagger = (int)Mathf.Clamp(maxTagger, 1, 5);
 
-        int m_iRunner = PhotonNetwork.CurrentRoom.PlayerCount - maxTagger;
+        int m_iRunner = playerList.Count - maxTagger;
 
         m_deathCount++;
-        Debug.Log("현재 방에 있는 사람 수 : " + PhotonNetwork.CurrentRoom.PlayerCount);
-        Debug.Log("죽은 러너 수 : " + m_deathCount);
-        Debug.Log("러너 : " + m_iRunner);
-        Debug.Log("술래 총 인원 : " + maxTagger);
 
         if (m_iRunner == m_deathCount)
         {
+            Debug.Log("SetZero");
             taggerWinUI.SetActive(true);
             timer.GetComponent<Timer>().SetZero();
         }

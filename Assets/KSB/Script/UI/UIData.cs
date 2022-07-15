@@ -131,7 +131,7 @@ public class UIData : MonoBehaviourPun, IPunObservable
             DH.UIMng.instance.timer.colonText.enabled = false;
             DH.UIMng.instance.timer.stopWatch.SetActive(false);
             DH.UIMng.instance.timer.timeOut.SetActive(true);
-
+            Debug.Log("TimeOut");
             StopAllCoroutines();
 
             if (PhotonNetwork.IsMasterClient)
