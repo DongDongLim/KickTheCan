@@ -62,5 +62,14 @@ namespace DH
             }
         }
 
+        private void OnDisable()
+        {
+            if (photonView.IsMine)
+            {
+                PhotonNetwork.RemoveRPCs(GetComponent<PhotonView>());
+                PhotonNetwork.Destroy(GetComponent<PhotonView>());
+            }
+        }
+
     }
 }
