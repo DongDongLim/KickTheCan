@@ -5,6 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
 using UnityEngine.SceneManagement;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class PlayerSceneManager : MonoBehaviour
 {  
@@ -29,7 +30,8 @@ public class PlayerSceneManager : MonoBehaviour
     public void OnLobbyButton()
     {            
         sceneInfo.roomName = PhotonNetwork.CurrentRoom.Name;
-        GameManager.Instance.playerList.Remove(PhotonNetwork.LocalPlayer);
+        Hashtable props = new Hashtable() { { GameData.PLAYER_LOAD, false } };
+        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
         PhotonNetwork.LoadLevel(1);
         PhotonNetwork.LeaveRoom();
     }

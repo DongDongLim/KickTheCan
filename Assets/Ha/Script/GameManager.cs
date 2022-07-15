@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public GameObject runnerWinUI;
     public GameObject taggerWinUI;
     public float startTime;
+    public int playerCnt = 0;
     [SerializeField]
     Timer timerScript;
 
@@ -33,7 +34,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     private bool isSetTagger = false;
     private bool isStart = false;
 
-    int playerCnt = 0;
     int maxTagger = 0;
     int m_deathCount = 0;
     float readyTime = 5;
@@ -89,12 +89,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
-        maxTagger = TaggerCnt();
-        if(PhotonNetwork.IsMasterClient)
-        {       
-            Hashtable props = new Hashtable() { { DH.GameData.PLAYER_CNT, playerList.Count } };
-            PhotonNetwork.LocalPlayer.SetCustomProperties(props);
-        }
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
@@ -103,21 +97,33 @@ public class GameManager : MonoBehaviourPunCallbacks
         Debug.Log("propertiesUpdate access");
         if (changedProps.ContainsKey(GameData.PLAYER_LOAD))
         {
-            if (CheckAllPlayerLoadLevel() || ((Time.time >=
-                (float)PhotonNetwork.MasterClient.CustomProperties[DH.GameData.WARMUP_TIME] + readyTime) && !isStart))
+            if ((bool)changedProps[GameData.PLAYER_LOAD])
             {
-                if (IsAdditionalPlayer())
+                if (CheckAllPlayerLoadLevel() || ((Time.time >=
+                    (float)PhotonNetwork.MasterClient.CustomProperties[DH.GameData.WARMUP_TIME] + readyTime) && !isStart))
                 {
-                    isStart = true;
-                    ObserverMode();
+                    if (IsAdditionalPlayer())
+                    {
+                        isStart = true;
+                        ObserverMode();
+                    }
+                    else
+                        SetTagger();
+                    //StartCoroutine(StartCountDown());
                 }
                 else
-                    SetTagger();
-                //StartCoroutine(StartCountDown());
+                {
+                    PrintInfo("wait players " + PlayersLoadLevel() + " / " + PhotonNetwork.PlayerList.Length);
+                }
             }
             else
             {
-                PrintInfo("wait players " + PlayersLoadLevel() + " / " + PhotonNetwork.PlayerList.Length);
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    playerList.Remove(targetPlayer);
+                    Hashtable props = new Hashtable() { { DH.GameData.PLAYER_CNT, playerList.Count } };
+                    PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+                }
             }
         }
         if (changedProps.ContainsKey(GameData.PLAYER_TAGGER))
@@ -131,7 +137,9 @@ public class GameManager : MonoBehaviourPunCallbacks
         if(changedProps.ContainsKey(DH.GameData.PLAYER_CNT))
         {
             playerCnt = (int)PhotonNetwork.MasterClient.CustomProperties[DH.GameData.PLAYER_CNT];
-            SetPlayerCounting(playerList.Count - maxTagger, maxTagger);
+            maxTagger = TaggerCnt();
+            Debug.Log(playerCnt);
+            SetPlayerCounting(playerCnt - maxTagger, maxTagger);
         }
         // 러너가 킥을 찼을 때 술래의 공격불가
         if (changedProps.TryGetValue(DH.GameData.PLAYER_ISKICK, out value))
@@ -226,9 +234,12 @@ public class GameManager : MonoBehaviourPunCallbacks
         int count = 0;
         foreach (Player p in PhotonNetwork.PlayerList)
         {
-            if ((bool)p.CustomProperties[GameData.PLAYER_TAGGER])
+            if (p.CustomProperties.ContainsKey(GameData.PLAYER_TAGGER))
             {
-                ++count;
+                if ((bool)p.CustomProperties[GameData.PLAYER_TAGGER])
+                {
+                    ++count;
+                }
             }
         }
         return count;
