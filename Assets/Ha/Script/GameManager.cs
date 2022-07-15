@@ -457,12 +457,12 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (m_iRunner == m_deathCount)
         {
             taggerWinUI.SetActive(true);
-            StartCoroutine(TaggerWin());
+            timer.GetComponent<Timer>().SetZero();
         }
         SetPlayerCounting(m_iRunner - m_deathCount, maxTagger);
     }
 
-    IEnumerator TaggerWin()
+    public IEnumerator TaggerWin()
     {
         yield return new WaitForSeconds(5f);
 

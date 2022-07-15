@@ -13,4 +13,14 @@ public class Timer : MonoBehaviour
     public GameObject stopWatch;
     public GameObject runnerWinUI;
     public GameObject taggerWinUI;
+
+    public void SetZero()
+    {
+        StopAllCoroutines();
+        minutesText.text = "0";
+        secondsText.text = "0";
+        minutesText.color = Color.red;
+        secondsText.color = Color.red;
+        StartCoroutine(GameManager.Instance.TaggerWin());
+    }
 }
