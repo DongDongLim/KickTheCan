@@ -1881,7 +1881,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 358601539}
-  m_LocalRotation: {x: 0.57357645, y: 3e-45, z: 1e-45, w: 0.8191521}
+  m_LocalRotation: {x: 0.57357645, y: -1e-45, z: -1e-45, w: 0.8191521}
   m_LocalPosition: {x: 0, y: 18.793852, z: -6.8404055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3840,7 +3840,7 @@ RectTransform:
   - {fileID: 609604322}
   - {fileID: 51990802}
   m_Father: {fileID: 903384505}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5104,7 +5104,7 @@ PrefabInstance:
     - target: {fileID: 7756907784897594724, guid: c7551a4490c058c419ca7f555297793f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7756907784897594724, guid: c7551a4490c058c419ca7f555297793f,
         type: 3}
@@ -5851,8 +5851,8 @@ RectTransform:
   - {fileID: 255900085}
   - {fileID: 68167179}
   - {fileID: 891005226}
-  - {fileID: 1661105199}
   - {fileID: 636163812}
+  - {fileID: 1661105199}
   - {fileID: 1244112547}
   - {fileID: 423910426}
   - {fileID: 1849223142}
@@ -5895,13 +5895,14 @@ MonoBehaviour:
   - {fileID: 1094120735}
   jumpBtn: {fileID: 225838095}
   actionBtn: {fileID: 416146475}
-  testHideBtn: {fileID: 0}
   loadingScreen: {fileID: 423910425}
   taggerCaption: {fileID: 51990801}
   runnerCaption: {fileID: 337477496}
   startCount: {fileID: 1244112546}
   runnerCount: {fileID: 1992214012}
   taggerCount: {fileID: 759223191}
+  timer: {fileID: 1849223143}
+  UIData: {fileID: 0}
 --- !u!1 &904447967
 GameObject:
   m_ObjectHideFlags: 0
@@ -7532,7 +7533,6 @@ MonoBehaviour:
   runnerCaption: {fileID: 337477496}
   taggerCaption: {fileID: 51990801}
   startTimer: {fileID: 1549265593}
-  playTimer: {fileID: 1849223141}
   timer: 10
 --- !u!1 &1307466983
 GameObject:
@@ -8262,7 +8262,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2f3cebd03229bc45b61fd135a42def4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infoText: {fileID: 0}
   isAttack: 1
   canCheckObj: {fileID: 1325389007}
   spawnPos: []
@@ -10890,9 +10889,6 @@ MonoBehaviour:
   stopWatch: {fileID: 1226752346}
   runnerWinUI: {fileID: 833576874}
   taggerWinUI: {fileID: 2037469085}
-  totalSeconds: 0
-  minutes: 1
-  sec: 0
 --- !u!1 &1854498620
 GameObject:
   m_ObjectHideFlags: 0
@@ -11889,7 +11885,7 @@ PrefabInstance:
     - target: {fileID: 4703042654904573868, guid: 74ec7299f88b7404c9fca512843a5e5c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4703042654904573868, guid: 74ec7299f88b7404c9fca512843a5e5c,
         type: 3}
