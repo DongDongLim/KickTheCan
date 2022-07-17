@@ -126,6 +126,12 @@ namespace YSM
             
         }
 
+        // SceneBugFix / DH
+        private void Start()
+        {
+            CloseBtnClicked();
+        }
+
 
         public void SetCharacterType(GameCharacterType characterType)
         {

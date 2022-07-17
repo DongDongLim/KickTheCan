@@ -369,11 +369,11 @@ public class GameManager : MonoBehaviourPunCallbacks
         DH.MapSettingMng.instance.ObserverSetting(PhotonNetwork.LocalPlayer);
     }
 
-    public override void OnJoinedRoom()
-    {
-        Hashtable props = new Hashtable() { { GameData.PLAYER_READY, false } };
-        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
-    }
+    //public override void OnJoinedRoom()
+    //{
+    //    Hashtable props = new Hashtable() { { GameData.PLAYER_READY, false } };
+    //    PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+    //}
 
     private bool IsAdditionalPlayer()
     {

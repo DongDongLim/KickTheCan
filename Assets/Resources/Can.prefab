@@ -64,6 +64,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kickPower: 50
   rigid: {fileID: 1123194149743947344}
+  isMove: 0
 --- !u!96 &3634226448234584312
 TrailRenderer:
   serializedVersion: 2

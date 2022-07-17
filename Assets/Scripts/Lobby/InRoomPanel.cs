@@ -35,6 +35,8 @@ public class InRoomPanel : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
+        Hashtable props = new Hashtable() { { GameData.PLAYER_READY, false } };
+        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
         playerEntry = playerEntryPrefab.GetComponent<PlayerEntry>();
         photonView = GetComponent<PhotonView>();
 
@@ -69,7 +71,7 @@ public class InRoomPanel : MonoBehaviour
 
         startGameButton.interactable = CheckPlayersReady();
 
-        Hashtable props = new Hashtable
+        props = new Hashtable
         {
             {GameData.PLAYER_LOAD, false}
         };

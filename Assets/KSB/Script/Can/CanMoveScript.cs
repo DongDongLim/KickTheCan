@@ -14,6 +14,7 @@ namespace DH
         float kickPower = 50;
         [SerializeField]
         Rigidbody rigid;
+        [SerializeField]
         bool isMove;
         PhotonView view;
 
@@ -32,10 +33,12 @@ namespace DH
             isMove = true;
             PlayMng.instance.gameChat.SystemCanKickLog(p);
             rigid.AddForce(target * kickPower, ForceMode.Impulse);
+            yield return null;
             while (rigid.velocity != Vector3.zero)
             {
                 yield return null;
             }
+            isMove = false;
             //photonView.RPC("SetLayer", RpcTarget.All, "Can");
             photonView.RPC("SetKinematic", RpcTarget.All);
         }
@@ -48,15 +51,14 @@ namespace DH
         [PunRPC]
         public void SetKinematic()
         {
-            rigid.isKinematic = false;
+            rigid.isKinematic = true;
         }
 
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.layer == LayerMask.NameToLayer("Tagger") && !isMove && !GameManager.Instance.isAttack && photonView.IsMine)
             {
-                Debug.Log("먹음");
-                isMove = true;
+                Debug.Log("캔참");
                 int taggerId = collision.transform.gameObject.GetComponent<PlayerScript>().ownerID;
                 foreach (Player p in PhotonNetwork.PlayerList)
                 {
