@@ -3491,6 +3491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 673bb8dd8ca8b354cb2165b934bb8f70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBlack: 1
 --- !u!1 &585418022
 GameObject:
   m_ObjectHideFlags: 0
@@ -6381,6 +6382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 673bb8dd8ca8b354cb2165b934bb8f70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBlack: 0
 --- !u!114 &940741991
 MonoBehaviour:
   m_ObjectHideFlags: 0

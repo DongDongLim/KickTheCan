@@ -190,6 +190,7 @@ public class FriendManager : MonoBehaviour
         if (CurContentPanel == friendChatcontentPanel[FuncTool.CompareStrings(AuthManager.instance.GetAuthUID(), e.Snapshot.Value.ToString())])
         {
             Destroy(CurContentPanel);
+            friendInfoPanel.gameObject.SetActive(false);
             CurContentPanel = null;
         }
         else

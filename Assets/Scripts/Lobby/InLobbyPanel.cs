@@ -22,6 +22,13 @@ public class InLobbyPanel : MonoBehaviour
     {
         cachedRoomList.Clear();
         roomListEntries.Clear();
+
+        Transform[] childList = roomContent.GetComponentsInChildren<Transform>();
+
+        for (int i = 1; i < childList.Length; ++i)
+        {
+            Destroy(childList[i].gameObject);
+        }
     }
 
     public void OnBackButtonClicked()
