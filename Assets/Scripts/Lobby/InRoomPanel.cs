@@ -52,7 +52,7 @@ public class InRoomPanel : MonoBehaviour
             GameObject entry = Instantiate(playerEntryPrefab);
             
             PlayerEntry playerEntry = entry.GetComponent<PlayerEntry>();  //ysm
-            playerEntry.playerColor.color = YSM.ColorTransform.EnumToColor((YSM.PlayerColorType)p.GetPlayerNumber()); //ysm
+            playerEntry.playerFace.color = playerEntry.playerColor.color = YSM.ColorTransform.EnumToColor((YSM.PlayerColorType)p.GetPlayerNumber()); //ysm
             playerEntry.SetNumbering(p.GetPlayerNumber()); //ysm
 
 
@@ -292,7 +292,7 @@ public class InRoomPanel : MonoBehaviour
             if (playerListEntries.TryGetValue(player.ActorNumber, out entry))
             {
                 PlayerEntry playerEntry = entry.GetComponent<PlayerEntry>();
-                playerEntry.playerColor.color = YSM.ColorTransform.EnumToColor((YSM.PlayerColorType)player.GetPlayerNumber());
+                playerEntry.playerFace.color = playerEntry.playerColor.color = YSM.ColorTransform.EnumToColor((YSM.PlayerColorType)player.GetPlayerNumber());
                 playerEntry.SetNumbering(player.GetPlayerNumber());
 
                 Button kickButton = entry.GetComponent<Button>();
