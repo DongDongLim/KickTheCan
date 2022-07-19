@@ -76,7 +76,7 @@ public class Timer : MonoBehaviour
         {
             GameManager.Instance.startTime = (float)PhotonNetwork.MasterClient.CustomProperties[DH.GameData.START_TIME];
         }
-        minutes = 5 - (int)((PhotonNetwork.Time - GameManager.Instance.startTime) / 60);
+        minutes = 4 - (int)((PhotonNetwork.Time - GameManager.Instance.startTime) / 60);
         sec = 60 - (int)((PhotonNetwork.Time - GameManager.Instance.startTime) % 60);
         minutesText.text = minutes.ToString();
         secondsText.text = sec.ToString();

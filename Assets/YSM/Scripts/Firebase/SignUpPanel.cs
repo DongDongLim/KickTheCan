@@ -99,8 +99,9 @@ public class SignUpPanel : MonoBehaviour
 
     public void IsEmailDuplication(UnityAction OnCheck)
     {
-
         DatabaseManager.instance.reference = FirebaseDatabase.DefaultInstance.GetReference("UserInfo");
+        //isFinishEmailCheckFunction = true;
+        //OnCheck.Invoke();
 
         DatabaseManager.instance.reference.GetValueAsync().ContinueWith(task =>
         {
@@ -141,6 +142,7 @@ public class SignUpPanel : MonoBehaviour
 
     public void EmailCheckClick()
     {
+        Debug.Log(isFinishEmailCheckFunction);
         if (isEmailDuplication)
         {
             Debug.Log("중복된 이메일 입니다");
@@ -277,6 +279,9 @@ public class SignUpPanel : MonoBehaviour
     public void IsDisplayNickNameDuplication(UnityAction OnCheck)
     {
         DatabaseManager.instance.reference = FirebaseDatabase.DefaultInstance.GetReference("UserInfo");
+
+        //isFinishDisplaynicknameCheckFunction = true;
+        //OnCheck.Invoke();
 
         DatabaseManager.instance.reference.GetValueAsync().ContinueWith(task =>
         {

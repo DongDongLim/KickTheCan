@@ -27,6 +27,8 @@ public class GoogleNickNamePanel : MonoBehaviour
     public void IsDisplayNickNameDuplication(UnityAction OnCheck)
     {
         DatabaseManager.instance.reference = FirebaseDatabase.DefaultInstance.GetReference("UserInfo");
+        //isFinishDisplaynicknameCheckFunction = true;
+        //OnCheck.Invoke();
 
         DatabaseManager.instance.reference.GetValueAsync().ContinueWith(task =>
         {

@@ -192,6 +192,7 @@ public class FriendPanel : MonoBehaviour
     public void OnFriendListOpenBtnClicked()
     {
         friendPanel.SetActive(true);
+        friendInfo.SetActive(false);
     }
 
     public void OnFriendListCloseBtnClicked()

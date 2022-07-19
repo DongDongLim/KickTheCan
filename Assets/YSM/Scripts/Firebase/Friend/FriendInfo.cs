@@ -15,6 +15,11 @@ public class FriendInfo : MonoBehaviour
 
     [SerializeField] private GameObject chatPanel;
 
+    private void OnEnable()
+    {
+        chatPanel.SetActive(false);
+    }
+
     public void SetUID(ref FriendListEntry entry)
     {
         if (UID == entry.UID)
