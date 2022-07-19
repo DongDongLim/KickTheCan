@@ -140,12 +140,6 @@ public class FriendManager : MonoBehaviour
 
     private void FriendRemove(object sender, ChildChangedEventArgs e)
     {
-        //FirebaseDatabase.DefaultInstance
-        //    .GetReference("UserInfo")
-        //    .Child(AuthManager.instance.GetAuthUID())
-        //    .Child(DBFriend.Friend)
-        //    .Child(e.Snapshot.Key)
-        //    .ChildRemoved -= FriendRemove;
 
 
         Debug.Log("내 친구 삭제됨");
@@ -154,23 +148,8 @@ public class FriendManager : MonoBehaviour
         Destroy(myfriendDictionary[e.Snapshot.Key]);
 
 
-        //DatabaseManager.instance.chatReference = FirebaseDatabase.DefaultInstance.GetReference("FriendChat");
-        //Debug.Log(FuncTool.CompareStrings(e.Snapshot.Value.ToString(), AuthManager.instance.GetAuthUID()) + "제거됨 친구 추가 채팅");
-
-
-        //var childRef = FirebaseDatabase.DefaultInstance
-        //    .GetReference("FriendChat")
-        //    .Child(FuncTool.CompareStrings(e.Snapshot.Value.ToString(), AuthManager.instance.GetAuthUID()));
-        //    childRef.ChildAdded -= ChatAdd;
-
-
-        //친구 채팅 이벤트 등록
-
-
         friendEvnetDictionary[FuncTool.CompareStrings(e.Snapshot.Value.ToString(), AuthManager.instance.GetAuthUID())].ChildAdded -= ChatAdd;
         friendEvnetDictionary.Remove(FuncTool.CompareStrings(e.Snapshot.Value.ToString(), AuthManager.instance.GetAuthUID()));
-
-
 
 
 
@@ -178,18 +157,13 @@ public class FriendManager : MonoBehaviour
             .Child(FuncTool.CompareStrings(AuthManager.instance.GetAuthUID(), e.Snapshot.Value.ToString()))
             .RemoveValueAsync();
 
-        //FirebaseDatabase.DefaultInstance
-        //    .GetReference("UserInfo")
-        //    .Child(AuthManager.instance.GetAuthUID())
-        //    .Child(DBFriend.Friend)
-        //    .Child(DBFriend.FriendLists)
-        //    .ChildAdded -= FriendListAdd;
 
 
 
         if (CurContentPanel == friendChatcontentPanel[FuncTool.CompareStrings(AuthManager.instance.GetAuthUID(), e.Snapshot.Value.ToString())])
         {
             Destroy(CurContentPanel);
+            friendInfoPanel.gameObject.SetActive(false);
             CurContentPanel = null;
         }
         else
