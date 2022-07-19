@@ -365,7 +365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &48812976
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10969,7 +10969,7 @@ MonoBehaviour:
   friendChatContentPanelPrefab: {fileID: 5671801241896756800, guid: 4cd96c04d3d0af440b5a8757ffdf80ee,
     type: 3}
   CurContentPanel: {fileID: 0}
-  friendInfoPanel: {fileID: 0}
+  friendInfoPanel: {fileID: 1587049058}
 --- !u!1 &1133391328
 GameObject:
   m_ObjectHideFlags: 0
@@ -18703,7 +18703,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1752283858
 RectTransform:
   m_ObjectHideFlags: 0
