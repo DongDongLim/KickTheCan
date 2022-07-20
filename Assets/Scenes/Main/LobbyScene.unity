@@ -5869,7 +5869,7 @@ MonoBehaviour:
   emailCheckImage02: {fileID: 1020556662}
   passwordInputField: {fileID: 1362007142}
   passwordMessage: {fileID: 1103137788}
-  passwordConfirmInputField: {fileID: 1362007142}
+  passwordConfirmInputField: {fileID: 1848212508}
   passwordConfirmMessage: {fileID: 665084504}
   displayNickName: {fileID: 1754740826}
   nicknameMessage: {fileID: 1159285649}
